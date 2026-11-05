@@ -1,0 +1,5 @@
+[ICM STAGE 1 OF 3: MULTI-FORMAT LOCAL DOCUMENT FIXTURE GENERATION] Read CONTEXT.md, invariants.md, rules.md, and references.md first, applying the preloaded markitdown skill. Keep active context under 4,200 tokens.
+1. Create mkdir -p output/fixtures output/ingested.
+2. Generate output/fixtures/substrate_report.html containing <h1>Hermes Substrate Report</h1> and an HTML <table> listing our certified telemetry (4303 and 4311 MiB active VRAM, 5800 MiB ceiling, 38.83 t/s decoding speed, Port 8138).
+3. Generate output/fixtures/vram_ledger.csv (CSV table of 4303, 4751, 5800, 38.83, 46.20) and output/fixtures/phase55_summary.zip (or .docx) summarizing the 15 passed Phase 55 assertions.
+4. Write output/stage1_fixtures_receipt.json and stop immediately.

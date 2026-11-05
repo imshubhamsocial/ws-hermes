@@ -1,0 +1,4 @@
+[ICM STAGE 2 OF 3: OFFLINE MARKITDOWN CLI & CONVERT_LOCAL INGESTION] Read CONTEXT.md, invariants.md, rules.md, references.md, and output/stage1_fixtures_receipt.json.
+1. Convert output/fixtures/substrate_report.html via the markitdown CLI: markitdown output/fixtures/substrate_report.html -o output/ingested/substrate_report.md.
+2. Execute a Python script using MarkItDown(enable_plugins=False).convert_local(...) to convert all fixtures in output/fixtures/ into output/ingested/ and synthesize the consolidated Layer 3 reference digest at output/ingested/consolidated_digest.md preserving # Hermes Substrate Report, pipe | GFM tables, and metrics 4303, 5800, and 38.83.
+3. Write output/stage2_ingestion_receipt.json and stop immediately.

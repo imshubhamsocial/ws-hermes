@@ -1,0 +1,3 @@
+[ICM STAGE 3 OF 3: MARKITDOWN CONTRACT VERIFICATION & SEALING] Read CONTEXT.md, invariants.md, and output/stage2_ingestion_receipt.json.
+1. Execute bash ./contract.sh to verify output/ingested/substrate_report.md, output/ingested/consolidated_digest.md, GFM table preservation (|), ground-truth metrics (4303, 38.83), and Python MarkItDown(enable_plugins=False).convert_local() compliance.
+2. Write output/status.json with "status": "VERIFIED_AND_SEALED" and "contract_exit_code": 0, then conclude.

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Hermes Agent OS v45 Production Architecture</title>
+  <style>
+    body { margin: 0; padding: 24px; background: #f5f5f5; font-family: system-ui, -apple-system, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    svg { max-width: 100%; height: auto; }
+  </style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600">
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="8" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 8 4 L 0 8 z" fill="#2d3142"/>
+    </marker>
+  </defs>
+
+  <!-- Admin Band Scope: Fedora Kinoite 44 Host -->
+  <rect x="32" y="32" width="896" height="536" rx="4" ry="4" fill="#ebebeb" stroke="#64748b" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="56" y="60" font-family="ui-monospace, monospace" font-size="12" font-weight="bold" fill="#64748b">FEDORA KINOITE 44 (ATOMIC HOST)</text>
+
+  <!-- Admin Band Scope: ws-hermes Distrobox Container -->
+  <rect x="56" y="80" width="600" height="464" rx="4" ry="4" fill="#f5f5f5" stroke="#64748b" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="80" y="108" font-family="ui-monospace, monospace" font-size="12" font-weight="bold" fill="#64748b">CONTAINER (WS-HERMES DISTROBOX)</text>
+
+  <!-- Node 1: Hermes Gateway (Focal Node 1) -->
+  <rect class="node" x="80" y="140" width="224" height="64" rx="8" ry="8" fill="#ffffff" stroke="#bf4520" stroke-width="2"/>
+  <text x="192" y="168" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#2d3142">Hermes Gateway</text>
+  <text x="192" y="188" text-anchor="middle" font-family="ui-monospace, monospace" font-size="11" fill="#64748b">PORT 8642</text>
+
+  <!-- Node 2: Nemotron 3.5 Bolt (Focal Node 2) -->
+  <rect class="node" x="384" y="140" width="240" height="64" rx="8" ry="8" fill="#ffffff" stroke="#bf4520" stroke-width="2"/>
+  <text x="504" y="168" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#2d3142">Nemotron 3.5 Bolt</text>
+  <text x="504" y="188" text-anchor="middle" font-family="ui-monospace, monospace" font-size="11" fill="#64748b">PORT 8138 (4285 MiB)</text>
+
+  <!-- Node 3: OpenViking Memory -->
+  <rect class="node" x="80" y="300" width="224" height="64" rx="8" ry="8" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+  <text x="192" y="328" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#2d3142">OpenViking TrieHI</text>
+  <text x="192" y="348" text-anchor="middle" font-family="ui-monospace, monospace" font-size="11" fill="#64748b">PORT 1933 (CPU RAM)</text>
+
+  <!-- Node 4: EmbeddingGemma2 -->
+  <rect class="node" x="384" y="300" width="240" height="64" rx="8" ry="8" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+  <text x="504" y="328" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#2d3142">EmbeddingGemma2</text>
+  <text x="504" y="348" text-anchor="middle" font-family="ui-monospace, monospace" font-size="11" fill="#64748b">PORT 8139 (CPU RAM)</text>
+
+  <!-- Node 5: Host Chrome Dev -->
+  <rect class="node" x="688" y="220" width="216" height="64" rx="8" ry="8" fill="#ffffff" stroke="#2d3142" stroke-width="1"/>
+  <text x="796" y="248" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#2d3142">Chrome Dev Flatpak</text>
+  <text x="796" y="268" text-anchor="middle" font-family="ui-monospace, monospace" font-size="11" fill="#64748b">PORT 9222 (CDP)</text>
+
+  <!-- Connector 1: Gateway -> Nemotron (Orthogonal with r=8) -->
+  <path class="connector" d="M 304 172 L 376 172" fill="none" stroke="#2d3142" stroke-width="1" marker-end="url(#arrow)"/>
+  <rect x="316" y="160" width="48" height="20" fill="#f5f5f5"/>
+  <text x="340" y="174" text-anchor="middle" font-family="ui-monospace, monospace" font-size="10" fill="#2d3142">INFER</text>
+
+  <!-- Connector 2: Gateway -> OpenViking -->
+  <path class="connector" d="M 192 204 L 192 292" fill="none" stroke="#2d3142" stroke-width="1" marker-end="url(#arrow)"/>
+  <rect x="168" y="240" width="48" height="20" fill="#f5f5f5"/>
+  <text x="192" y="254" text-anchor="middle" font-family="ui-monospace, monospace" font-size="10" fill="#2d3142">STATE</text>
+
+  <!-- Connector 3: Gateway -> Chrome Dev (Cross-Boundary Orthogonal r=8 Elbow) -->
+  <path class="connector" d="M 304 184 L 348 184 A 8 8 0 0 1 356 192 L 356 244 A 8 8 0 0 0 364 252 L 680 252" fill="none" stroke="#2d3142" stroke-width="1" marker-end="url(#arrow)"/>
+  <rect x="480" y="240" width="80" height="20" fill="#ebebeb"/>
+  <text x="520" y="254" text-anchor="middle" font-family="ui-monospace, monospace" font-size="10" fill="#2d3142">CDP BRIDGE</text>
+
+  <!-- Connector 4: OpenViking -> EmbeddingGemma2 -->
+  <path class="connector" d="M 304 332 L 376 332" fill="none" stroke="#2d3142" stroke-width="1" marker-end="url(#arrow)"/>
+  <rect x="316" y="320" width="48" height="20" fill="#f5f5f5"/>
+  <text x="340" y="334" text-anchor="middle" font-family="ui-monospace, monospace" font-size="10" fill="#2d3142">EMBED</text>
+</svg>
+</body>
+</html>

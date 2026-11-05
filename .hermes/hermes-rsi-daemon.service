@@ -1,0 +1,46 @@
+[Unit]
+Description=Hermes Agent OS Dream-RSI Evolving Worlds & Counterfactual Replay Daemon (arXiv:2609.14858)
+Documentation=https://github.com/zhengkid/Dream-RSI
+After=network.target hermes-llama-server.service hermes-openviking.service
+Wants=hermes-openviking.service
+
+[Service]
+Type=simple
+# Hard GPU Isolation: 0 MiB VRAM impact on RTX 3050
+Environment="CUDA_VISIBLE_DEVICES="
+Environment="GGML_VK_VISIBLE_DEVICES="
+Environment="HERMES_WORKSPACE=/var/home/imshubhamsocial/Projects/Workspace/Personal/hermes"
+Environment="DREAM_RSI_WORLD_DIR=/var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/.hermes/cache/dream_worlds"
+Environment="DREAM_RSI_OPENVIKING_URL=http://127.0.0.1:1933"
+Environment="DREAM_RSI_EMBEDDING_URL=http://127.0.0.1:8139/v1"
+Environment="DREAM_RSI_CANDIDATE_POLICIES=64"
+Environment="DREAM_RSI_INCUMBENT_LOCK=1"
+Environment="PYTHONUNBUFFERED=1"
+
+WorkingDirectory=/var/home/imshubhamsocial/Projects/Workspace/Personal/hermes
+
+# Ensure Evolving Worlds directory exists before daemon start
+ExecStartPre=/usr/bin/mkdir -p /var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/.hermes/cache/dream_worlds
+
+# Direct host Python 3.13 execution for clean signal handling and strict cgroup CPU/RAM limits
+ExecStart=/usr/bin/python3 -u /var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/.hermes/hermes_rsi_daemon.py \
+  --world-pool /var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/.hermes/cache/dream_worlds \
+  --estimator doubly-robust \
+  --include-incumbent \
+  --sync-openviking
+
+# Support on-demand consolidation trigger via SIGUSR1
+ExecReload=/bin/kill -USR1 $MAINPID
+
+# Resource & Scheduler Isolation (Never contend with llama-server on cores 0-5)
+CPUSchedulingPolicy=idle
+Nice=19
+IOSchedulingClass=idle
+IOSchedulingPriority=7
+MemoryMax=2G
+MemoryHigh=1536M
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target

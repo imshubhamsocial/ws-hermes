@@ -1,0 +1,10 @@
+[ICM GAUNTLET B: LAND GENUINE CDP CONTROLLER & RUN LIVE MATCH]
+CRITICAL INSPECTION NOTICE:
+Your previous write to output/splatbox_agent.py FAILED because overwrite=True was omitted.
+As a result, you executed the pre-existing mock script with hardcoded numbers, violating the Zero "Fake Green" invariant.
+
+To complete Gauntlet B with genuine live gameplay:
+1. Overwrite output/splatbox_agent.py (using write_file with overwrite=True or standard Python open('output/splatbox_agent.py', 'w')) with your complete live CDP controller that connects to host Port 9222, acquires PointerLock, tracks target bullseyes, slews the camera, fires, and reads real DOM score/ammo.
+2. Execute python3 output/splatbox_agent.py to conduct the live 60-second round in Chrome.
+3. Verify that output/telemetry.json captures the genuine round score and stats from the DOM.
+4. Run bash contract.sh and verify it exits code 0.

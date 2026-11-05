@@ -1,0 +1,4 @@
+[ICM STAGE 1 OF 3: SPEC INSPECTION, SYNTHETIC 1080P SOURCE & PROBE] Read CONTEXT.md, invariants.md, rules.md, and references.md first, using the preloaded ffmpeg-skill. Keep active context under 4,800 tokens.
+1. Create mkdir -p output and inspect the SPEC header via python3 ~/.hermes/skills/ffmpeg-skill/scripts/_contract.py --json | head -n 30.
+2. Generate the 10-second 1920x1080 30fps H.264 + AAC stereo test clip at output/raw_source.mp4 using local ffmpeg (-f lavfi -i testsrc2=size=1920x1080:rate=30:duration=10 -f lavfi -i sine=frequency=440:sample_rate=48000:duration=10 -c:v libx264 -pix_fmt yuv420p -c:a aac -ac 2 output/raw_source.mp4 -y).
+3. Run python3 ~/.hermes/skills/ffmpeg-skill/scripts/probe.py output/raw_source.mp4 --json > output/stage1_probe.json and record sha256sum output/raw_source.mp4, then stop immediately.

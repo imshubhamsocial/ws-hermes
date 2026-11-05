@@ -1,0 +1,4 @@
+[ICM STAGE 3 OF 3: LIVE ROUND EXECUTION & CONTRACT SEALING] Read CONTEXT.md, invariants.md, and output/stage2_controller_receipt.json.
+1. Execute python3 output/splatbox_agent.py to play a complete round on https://splatbox.alexdiaz.fyi/ over CDP Port 9222 and write the final DOM metrics (score, timer, accuracy, embeddinggemma2_verified: true) to output/telemetry.json.
+2. Run bash ./contract.sh to verify all AST assertions, score > 0, accuracy >= 85.0%, and embeddinggemma2_verified == True.
+3. Write output/status.json with "status": "VERIFIED_AND_SEALED" and "contract_exit_code": 0, then stop.

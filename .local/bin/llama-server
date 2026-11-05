@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+# Hermes Candidate 3 Production llama-server: Nemotron 3.5 Bolt + DFlash Drafter
+set -euo pipefail
+SITE_PACKAGES="$(python3 -m site --user-site 2>/dev/null || python3.14 -m site --user-site 2>/dev/null || python3.13 -m site --user-site 2>/dev/null || echo "${HOME}/.local/lib/python3.14/site-packages")"
+LLAMA_LIB_DIR="${HOME}/.local/lib:${WORKSPACE_ROOT:-$(pwd)}/.local/lib"
+SERVER_BIN="${HOME}/.local/bin/llama-server.bin"
+export LD_LIBRARY_PATH="${LLAMA_LIB_DIR}:${SITE_PACKAGES}/nvidia/cu13/lib:${SITE_PACKAGES}/nvidia/cublas/lib:${SITE_PACKAGES}/nvidia/cuda_nvrtc/lib:${SITE_PACKAGES}/nvidia/nccl/lib:${SITE_PACKAGES}/nvidia/cuda_runtime/lib:${HOME}/.local/share/cuda-libs:${LD_LIBRARY_PATH:-}"
+
+# If explicit arguments are provided (e.g. CPU embeddings on port 8139), pass directly to SERVER_BIN
+if [[ $# -gt 0 ]]; then
+    exec "$SERVER_BIN" "$@"
+fi
+
+MODEL_MAIN="${HOME}/.hermes/models/NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf"
+MODEL_DRAFT="${HOME}/.hermes/models/dflash-NVIDIA-Nemotron-3.5-Bolt-E4B-Q8_0.gguf"
+
+DRAFT_FLAGS=()
+if [[ -f "$MODEL_DRAFT" ]]; then
+    DRAFT_FLAGS=(
+        --model-draft "$MODEL_DRAFT"
+        --spec-type draft-dflash
+        --n-gpu-layers-draft 99
+        --spec-draft-n-max 6
+        --spec-draft-n-min 2
+        --spec-draft-p-min 0.75
+    )
+fi
+
+export GGML_CUDA_GRAPH_OPT=1
+export GGML_CUDA_FORCE_MMQ=1
+
+exec taskset -c 0-5 "$SERVER_BIN" \
+    --model "$MODEL_MAIN" \
+    "${DRAFT_FLAGS[@]}" \
+    --fit off \
+    --alias "nemotron-3.5-bolt-e4b,google/gemma-4-E4B-it,dory" \
+    --host 127.0.0.1 --port 8138 \
+    --ctx-size 65536 \
+    --cache-type-k q4_0 --cache-type-v q4_0 \
+    --batch-size 2048 --ubatch-size 1024 \
+    --flash-attn on \
+    --n-gpu-layers 99 \
+    --threads 6 --threads-batch 6 --parallel 1 --cont-batching \
+    --temp 0.2 --jinja --metrics

@@ -1,0 +1,20 @@
+{
+  "phase_id": 56,
+  "phase_name": "phase_56_candidate3_q8_kv_dflash_and_icm_7gauntlet_blueprints",
+  "status": "VERIFIED_AND_SEALED",
+  "assertions_passed": 15,
+  "assertions_failed": 0,
+  "model_main": "NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf",
+  "model_draft": "dflash-NVIDIA-Nemotron-3.5-Bolt-E4B-Q8_0.gguf",
+  "cuda_graph_opt": 1,
+  "spec_draft_n_max": 6,
+  "spec_draft_n_min": 2,
+  "spec_draft_p_min": 0.75,
+  "staged_prompts_generated": 21,
+  "gauntlets_ready": 7,
+  "vram_active_mib": 4285.0,
+  "vram_ceiling_mib": 5800.0,
+  "daemon_ports_verified": [8138, 8642, 1933],
+  "upstream_clean": true,
+  "verified_at": "2026-10-31T09:05:57+05:30"
+}

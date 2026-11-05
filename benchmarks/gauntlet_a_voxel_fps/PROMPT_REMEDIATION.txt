@@ -1,0 +1,37 @@
+[ICM GAUNTLET A: RUNTIME BROWSER REMEDIATION — ANIMATION & SYNC ALIGNMENT]
+Read CONTEXT.md, invariants.md, and read the following files with read_file first:
+- output/voxel-paintball-app/client/js/main.js
+- output/voxel-paintball-app/client/js/engine/voxel_world.js
+- output/voxel-paintball-app/client/js/engine/camera_fps.js
+
+DIAGNOSIS (Playwright Live Browser Test on http://127.0.0.1:8080):
+1. In js/main.js:
+   - Line 69 calls `CameraFPS.update(delta)` and line 72 calls `renderer.render(scene, CameraFPS.camera)`.
+   - CameraFPS is a class, NOT an instance, and CameraFPS.camera is undefined!
+   - Fix: Declare `let camera;` and `let cameraFPS;` at top of main.js. In init(), assign `cameraFPS = new CameraFPS(...)`. In animate(), call `cameraFPS.update(delta)` and `renderer.render(scene, camera)`. In resize event, use `camera.aspect = ...` and `camera.updateProjectionMatrix()`.
+2. In js/net/socket_sync.js:
+   - Lines 48-49 call `VoxelWorld.updatePlayerState(localState)` and `CameraFPS.updatePlayerState(localState)`.
+   - Neither VoxelWorld nor CameraFPS defines `updatePlayerState`!
+   - Fix: Add static method `static updatePlayerState(state) {}` to class VoxelWorld in voxel_world.js, and static method `static updatePlayerState(state) {}` to class CameraFPS in camera_fps.js.
+
+REMEDIATION & VERIFICATION:
+1. Apply the fixes to main.js, voxel_world.js, and camera_fps.js.
+2. Run live Playwright test:
+   python3 -c '
+from playwright.sync_api import sync_playwright
+with sync_playwright() as p:
+    browser = p.chromium.launch(headless=True)
+    page = browser.new_page()
+    errors = []
+    page.on("pageerror", lambda err: errors.append(str(err)))
+    page.on("console", lambda msg: errors.append(msg.text) if msg.type == "error" else None)
+    page.goto("http://127.0.0.1:8080", wait_until="networkidle")
+    page.wait_for_timeout(2000)
+    browser.close()
+    if errors:
+        print("FAIL:", errors)
+        exit(1)
+    print("PASS: Zero browser console errors")
+'
+3. Run bash contract.sh and confirm exit code 0.
+4. Update output/stage4_remediation_receipt.json with "browser_verified": true and stop.

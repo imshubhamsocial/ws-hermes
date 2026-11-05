@@ -1,0 +1,12 @@
+{
+  "pointer_lock_active": true,
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "hud": {
+    "score": "0",
+    "timer": "60",
+    "ammo": "40 / 40"
+  }
+}

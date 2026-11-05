@@ -1,0 +1,7 @@
+[ICM STAGE 2 OF 3: MODULAR CLIENT & THREE.JS VOXEL ENGINE] Read CONTEXT.md, invariants.md, rules.md, references.md, and the Stage 1 handoff receipt output/stage1_spec_receipt.json. Do NOT re-run npm install or rewrite server/server.js. Implement the complete, 100% stub-free client application grounded in Sunwood-ai-labs/threejs-voxel-frontier and mrdoob/three.js:
+1. output/voxel-paintball-app/client/index.html & output/voxel-paintball-app/client/css/style.css: Mount viewport canvas, center #crosshair, #score, #ammo, #fps counter, weapon hotbar slots 1-5, and click-to-play #overlay.
+2. output/voxel-paintball-app/client/js/engine/voxel_world.js: Build the 32x16x32 voxel arena with cover bunkers using THREE.InstancedMesh and dynamic per-instance color updates (instanceColor.needsUpdate = true) via splatVoxel(instanceId, hexColor).
+3. output/voxel-paintball-app/client/js/engine/camera_fps.js: Implement PointerLockControls mouse look, WASD movement, Space jump, gravity (g = -24.0 m/s^2), and AABB voxel collision detection.
+4. output/voxel-paintball-app/client/js/engine/paintball.js: Implement parabolic projectile stepping and splat decals with polygonOffset: true (polygonOffsetFactor: -1).
+5. output/voxel-paintball-app/client/js/net/socket_sync.js & output/voxel-paintball-app/client/js/main.js: Connect to ws://127.0.0.1:8080, synchronize JOIN_ROOM/input/shoot/STATE_SNAPSHOT/splat packets, and run the 60 FPS render loop.
+6. Write output/stage2_client_receipt.json confirming all 7 client files are written with zero TODO/FIXME strings, then stop immediately.

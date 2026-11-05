@@ -1,0 +1,4 @@
+[ICM STAGE 3 OF 3: FRESH VERIFICATION GATE & STATUS SEALING] Read CONTEXT.md, invariants.md, output/stage1_spec_receipt.json, and output/stage2_client_receipt.json.
+1. Execute bash ./contract.sh to run the deterministic AST checks, line-cap assertions, live 2-client WebSocket handshake on Port 8080, and NVML VRAM ceiling check (<= 5800 MiB).
+2. If any assertion in contract.sh fails, apply a surgical patch to the specific failing file under the Two-Strike Tabu rule and re-run bash ./contract.sh until it exits with code 0.
+3. Write the final signed verification receipt to output/status.json with "status": "VERIFIED_AND_SEALED", "contract_exit_code": 0, and live VRAM telemetry, then conclude.

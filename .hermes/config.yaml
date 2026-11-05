@@ -1,0 +1,133 @@
+# ~/.hermes/config.yaml — Certified GDR31 Production Configuration
+_config_version: 52
+
+model:
+  provider: local-llama
+  default: gemma-4-E4B-it-qat-exact
+  base_url: http://127.0.0.1:8138/v1
+  context_length: 131072
+
+providers:
+  local-llama:
+    api: http://127.0.0.1:8138/v1
+    api_key_env: LOCAL_LLAMA_API_KEY
+    stale_timeout_seconds: 120
+    models:
+      nemotron-3.5-bolt-e4b:
+        context_length: 65536
+        max_output_tokens: 4096
+      gemma-4-E4B-it-qat-exact:
+        context_length: 131072
+        max_output_tokens: 4096
+  local-embedding-cpu:
+    api: http://127.0.0.1:8139/v1
+    api_key_env: LOCAL_EMBEDDING_API_KEY
+    models:
+      embeddinggemma-2-q8_0:
+        context_length: 8192
+        dimensions: 768
+
+# Declarative Fix for Upstream Issues #56360 & #81670:
+# Eliminates 7.2 KB of boilerplate prompt bloat and prevents raw-text tool leaks on Port 8642.
+# Stage behavioral constraints are supplied by ICM Layer 1/2 markdown files (AGENTS.md / CONTEXT.md).
+agent:
+  tool_use_enforcement: false
+  execution_guidance: false
+  task_completion_guidance: false
+  parallel_tool_call_guidance: false
+  max_turns: 40
+
+# Display Configuration (Upstream Defaults):
+display:
+  interface: tui
+  tool_progress: all
+  friendly_tool_labels: true
+  show_reasoning: true
+  reasoning_full: false
+
+# Declarative Gateway & Zero-Code Stage Model Routing (Port 8642)
+gateway:
+  host: 127.0.0.1
+  port: 8642
+  platforms:
+    api_server:
+      enabled: true
+      extra:
+        direct_model_requests: true
+      model_routes:
+        hermes-agent:
+          provider: local-llama
+          model: gemma-4-E4B-it-qat-exact
+        icm-tier1b-policy:
+          provider: local-llama
+          model: nemotron-3.5-bolt-e4b
+        icm-tier1a-coding:
+          provider: local-llama
+          model: gemma-4-E4B-it-qat-exact
+
+# Core tools are always eager; keeping tool_search "off" preserves 99.8% KV prefix cache hits
+# across the 7 lightweight OpenViking/Jev plugin tools without extra tool_describe round-trips.
+  multiplex_profiles: true
+tools:
+  tool_search:
+    enabled: "off"
+    threshold_pct: 4
+    listing_max_tokens: 1200
+
+lsp:
+  enabled: true
+  servers:
+    pyright:
+      disabled: false
+
+# Official OpenViking Hierarchical Memory Plugin (Port 1933, CPU Embeddings on Port 8139)
+memory:
+  provider: openviking
+  openviking:
+    url: http://127.0.0.1:1933
+    embedding_provider: local-embedding-cpu
+    embedding_model: embeddinggemma-2-q8_0
+    matryoshka_dim: 256
+
+approvals:
+  mode: "off"
+
+skills:
+  ledger: true
+  ledger_max_bytes: 5242880
+  write_approval: false
+  external_dirs:
+    - ~/.agents/skills
+    - ~/.hermes/skills
+
+curator:
+  enabled: true
+  interval_hours: 168
+  min_idle_hours: 2
+  stale_after_days: 14
+  archive_after_days: 30
+  consolidate: true
+  prune_builtins: false
+  archive_ttl_days: 180
+
+auxiliary:
+  curator:
+    provider: local-llama
+    model: nemotron-3.5-bolt-e4b
+    timeout: 600
+
+# Upstream Semantic Skill Governance (anpicasso/hermes-jev-curator)
+plugins:
+  enabled:
+    - openviking
+    - jev-curator
+  entries:
+    jev-curator:
+      settings:
+        mode: guard
+        provider: custom
+        allow_content_egress: false
+        timeout_seconds: 25
+        max_requests: 50
+        max_pairs: 100
+        top_k: 5

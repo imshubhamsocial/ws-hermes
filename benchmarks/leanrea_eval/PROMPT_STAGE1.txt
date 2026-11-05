@@ -1,0 +1,4 @@
+[ICM STAGE 1 OF 3: STRIPPED ELF TARGET GENERATION & WORKING COPY ISOLATION] Read CONTEXT.md, invariants.md, rules.md, and references.md first, applying the preloaded leanrea skill. Keep active context under 4,500 tokens.
+1. Create mkdir -p output/targets output/work_copy.
+2. Write a compact C source file /tmp/addon_src.c that exports int init_hermes_lock(int pid), checks getenv("HERMES_TCC_AUTH"), and formats a UNIX domain socket path "/tmp/hermes_addon_v2_%d.sock" using snprintf. Compile it as a stripped shared object via gcc -shared -fPIC -O2 -s /tmp/addon_src.c -o output/targets/addon.so and remove /tmp/addon_src.c.
+3. Compute sha256sum output/targets/addon.so, copy output/targets/addon.so to output/work_copy/addon.so, and write output/stage1_target_manifest.json recording the original SHA-256 hash, then stop immediately.

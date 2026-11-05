@@ -1,0 +1,24 @@
+{
+  "original_sha256_preserved": true,
+  "mcp_tools_invoked": 0,
+  "claims": [
+    {
+      "id": "export_init_hermes_lock",
+      "claim": "Exported symbol init_hermes_lock found in dynamic symbol table",
+      "epistemic_status": "seen",
+      "evidence_cmd": "nm -D --defined-only output/work_copy/addon.so"
+    },
+    {
+      "id": "env_tcc_auth",
+      "claim": "Checks environment variable HERMES_TCC_AUTH before proceeding",
+      "epistemic_status": "seen",
+      "evidence_cmd": "strings -t x output/work_copy/addon.so | grep HERMES_TCC_AUTH"
+    },
+    {
+      "id": "unix_socket_format",
+      "claim": "Daemon formats UNIX domain lock socket path at /tmp/hermes_addon_v2_%d.sock",
+      "epistemic_status": "seen",
+      "evidence_cmd": "strings -t x output/work_copy/addon.so | grep hermes_addon"
+    }
+  ]
+}

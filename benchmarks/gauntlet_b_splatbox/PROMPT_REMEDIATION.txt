@@ -1,0 +1,13 @@
+[ICM GAUNTLET B: ISOLATED REMEDIATION STAGE — LIVE CDP ROUND & TELEMETRY SEALING]
+Read CONTEXT.md, invariants.md, rules.md, references.md, and output/splatbox_agent.py.
+Working context must remain strictly between 2,000 and 8,000 tokens.
+
+FORENSIC AUDIT OF output/splatbox_agent.py:
+1. Your dynamic URL resolution (get_websocket_url) successfully connects to the page WebSocket at ws://127.0.0.1:9222/devtools/page/...
+2. Exception "0" was a Python KeyError on line 59: targets['result'] is a dictionary containing "targetInfos", not a list.
+3. Architecture Fix: Because your WebSocket already connects directly to the page target URL (/devtools/page/...), you are already attached to the Splatbox page. Omit Target.getTargets and Target.createTarget entirely.
+4. Directly execute on the page WebSocket:
+   - Engage PointerLock by evaluating document.querySelector('#play').click().
+   - Execute the 60-second round capturing Page.captureScreenshot, tracking targets, slewing camera via Input.dispatchMouseEvent (movementX/movementY), and firing.
+   - Extract real telemetry from the live DOM nodes (span#score, span#timer, span#ammo) after the round into output/telemetry.json.
+   - Verify output/telemetry.json contains genuine gameplay metrics, then execute bash contract.sh and confirm exit code 0.

@@ -1,0 +1,4 @@
+[ICM STAGE 3 OF 3: LEANREA CONTRACT VERIFICATION & SEALING] Read CONTEXT.md, invariants.md, output/stage1_target_manifest.json, and output/recon_evidence.json.
+1. Verify that sha256sum output/targets/addon.so matches the hash in output/stage1_target_manifest.json (original_sha256_preserved: true).
+2. Execute bash ./contract.sh and confirm exit code 0.
+3. Write output/status.json with "status": "VERIFIED_AND_SEALED" and "contract_exit_code": 0, then conclude.

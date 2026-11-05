@@ -1,0 +1,20 @@
+[
+  {
+    "pid": 844889,
+    "create_time": 1793474553.6,
+    "purpose": "mcp-helper",
+    "install": "7952bffdd88e",
+    "spawner_pid": 673169,
+    "spawner_create": 1793465917.21,
+    "registered_at": 1793474553.649369,
+    "argv": "/usr/bin/python3.13 /var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/.hermes/mcp_openjev.py",
+    "host": "",
+    "port": null,
+    "profile": "",
+    "hermes_home": "",
+    "isolated": false,
+    "boot_start": 59234.6,
+    "spawner_boot": 50598.21,
+    "boot_id": "687fcab0-6a14-476b-885b-2a32fe2010ef"
+  }
+]

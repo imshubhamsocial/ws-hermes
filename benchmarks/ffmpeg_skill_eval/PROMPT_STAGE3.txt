@@ -1,0 +1,4 @@
+[ICM STAGE 3 OF 3: CHECK, LOOK CONTACT SHEET, CONTRACT & 5-LINE REPORT] Read CONTEXT.md, invariants.md, references.md, and output/stage2_edit_receipt.json.
+1. Run python3 ~/.hermes/skills/ffmpeg-skill/scripts/check.py output/final_reels.mp4 --platform reels --json and save the verified receipt ("verified": true) to output/contract_receipt.json.
+2. Run python3 ~/.hermes/skills/ffmpeg-skill/scripts/look.py output/final_reels.mp4 --tiles 3x2 -o output/final_sheet.png --json.
+3. Execute bash ./contract.sh to verify H.264 1080x1920 stream metadata and SPEC receipt compliance, write output/status.json, and conclude with the exact 5-line Done: / Steps: / Check: / Look: / Notes: report defined in references.md.

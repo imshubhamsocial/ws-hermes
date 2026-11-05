@@ -1,0 +1,12 @@
+[
+  {
+    "task_id": 0,
+    "reward": 0.0,
+    "info": {
+      "error": "unsupported operand type(s) for +=: 'float' and 'NoneType'",
+      "traceback": "Traceback (most recent call last):\n  File \"/var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/.cache/uv/archive-v0/mt0HqDc5dZkZW9nK/lib/python3.11/site-packages/tau_bench/run.py\", line 78, in _run\n    res = agent.solve(\n          ^^^^^^^^^^^^\n  File \"/var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/.cache/uv/archive-v0/mt0HqDc5dZkZW9nK/lib/python3.11/site-packages/tau_bench/agents/chat_react_agent.py\", line 86, in solve\n    total_cost += cost\nTypeError: unsupported operand type(s) for +=: 'float' and 'NoneType'\n"
+    },
+    "traj": [],
+    "trial": 0
+  }
+]

@@ -1,0 +1,3 @@
+[ICM STAGE 3 OF 3: XML DOM & 4PX GRID GEOMETRY VERIFICATION] Read CONTEXT.md, invariants.md, and output/stage2_svg_receipt.json.
+1. Execute bash ./contract.sh to validate xml.etree.ElementTree SVG parsing, complexity budgets (4..9 nodes, 3..12 connectors, 1..2 #bf4520 accents), orthogonal line checks, and val % 4 == 0 grid alignment on every <rect>.
+2. Write output/status.json with "status": "VERIFIED_AND_SEALED" and "contract_exit_code": 0, then conclude.

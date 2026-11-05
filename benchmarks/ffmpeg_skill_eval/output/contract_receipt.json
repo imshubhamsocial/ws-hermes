@@ -1,0 +1,10 @@
+{
+  "verified": true,
+  "platform": "reels",
+  "streams": {
+    "codec": "h264",
+    "resolution": "1080x1920",
+    "fps": 30,
+    "duration": 6.0
+  }
+}

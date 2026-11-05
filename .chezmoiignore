@@ -110,3 +110,8 @@ build/**
 !dot_local/bin/llama-server
 !.local/bin/openviking-server
 !dot_local/bin/openviking-server
+
+# Ignore heavy archive backups
+*.tar.gz
+**/*.tar.gz
+

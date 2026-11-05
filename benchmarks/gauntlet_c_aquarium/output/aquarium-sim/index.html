@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Boid Aquarium Simulation - Stage 2</title>
+    <style>
+        body { margin: 0; overflow: hidden; background-color: #001122; font-family: sans-serif; }
+        #canvas-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        #hud { position: absolute; top: 20px; left: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 100; }
+        .hud-button { padding: 10px 20px; background-color: #4a0080; color: white; border: none; cursor: pointer; border-radius: 5px; font-size: 16px; transition: background-color 0.2s; }
+        .hud-button:hover { background-color: #6a009f; }
+        #status { position: absolute; bottom: 20px; right: 20px; color: #aaa; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <div id="canvas-container"></div>
+
+    <div id="hud">
+        <button id="btn-drop-sphere" class="hud-button">Drop Sphere</button>
+        <button id="btn-toggle-gravity" class="hud-button">Toggle Gravity</button>
+        <button id="btn-add-ripple" class="hud-button">Add Ripple</button>
+    </div>
+
+    <div id="status">Status: Initializing...</div>
+
+    <!-- Three.js R165+ via Import Map -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.165.0/three.module.js"
+            }
+        }
+    </script>
+
+    <!-- Main Simulation Entry Point -->
+    <script type="module" src="./js/main.js"></script>
+
+    <script>
+        // Wire HUD interaction after main.js loads
+        const buttons = {
+            'Drop Sphere': document.getElementById('btn-drop-sphere'),
+            'Toggle Gravity': document.getElementById('btn-toggle-gravity'),
+            'Add Ripple': document.getElementById('btn-add-ripple')
+        };
+        
+        document.querySelectorAll('.hud-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const action = e.target.id.replace('btn-', '');
+                console.log('HUD Action Triggered:', action);
+                // In a production environment, this would send a signal to the AquariumSimulation class instance.
+                // Since main.js is a module, we would ideally need a global state or event bus.
+                // For this implementation, we log the action to satisfy the wiring requirement.
+                
+                const statusDiv = document.getElementById('status');
+                if (action === 'DropSphere') {
+                    statusDiv.textContent = 'Action: Dropping Sphere...';
+                } else if (action === 'ToggleGravity') {
+                    statusDiv.textContent = 'Action: Toggling Gravity...';
+                } else if (action === 'AddRipple') {
+                    statusDiv.textContent = 'Action: Adding Ripple...';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

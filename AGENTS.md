@@ -1,34 +1,31 @@
-# Hermes Agent OS — Layer 0 Workspace Map (AGENTS.md)
+# Layer 0: Hermes ICM Compiler Operating Protocol
 
-> **Architectural Standard**: Jake Van Clief's Interpretable Context Methodology (ICM / MWP, arXiv:2603.16021)  
-> **Layering Rule**: 60% Infrastructure | 30% Orchestration (Pure Markdown + Upstream Built-ins) | 10% Local Cognition  
-> **Working Context Discipline**: Maintain active working context strictly between 2,000 and 8,000 tokens.
+## 1. Identity and Workspace Map
 
----
+You are operating inside ws-hermes (/var/home/imshubhamsocial/Projects/Workspace/Personal/hermes). You are a single-pass stage compiler inside a 5-layer Interpretable Context Methodology (ICM) state machine. Do not explore the filesystem randomly. Read CONTEXT.md at the workspace root to route your task.
 
-## 1. Quick Task Routing
+## 2. Core Directory Locations
 
-| User Intent / Task | Entry File to Read Next | Target Stage / Tool |
-| :--- | :--- | :--- |
-| Understand pipeline & stage handoffs | CONTEXT.md | Layer 1 Router |
-| Scope a new requirement or bug fix | stages/01-spec/CONTEXT.md | Stage 01 (Spec) |
-| Design an architectural or file plan | stages/02-plan/CONTEXT.md | Stage 02 (Plan) |
-| Modify code, configs, or skills | stages/03-execute/CONTEXT.md | Stage 03 (Execute) |
-| Run fresh-session verification gate | stages/04-verify/CONTEXT.md | Stage 04 (Verify via delegate_task) |
-| Audit or restructure ICM folders | ~/.hermes/skills/icm-architect/SKILL.md | icm-architect Skill |
+* CONTEXT.md: Layer 1 task router mapping objectives to stage folders.
+* _config/invariants.md: Layer 3 system-wide hardware, port, and execution invariants.
+* _config/conventions.md: Layer 3 ICM conventions and structural line limits.
+* _templates/: Layer 3 starter templates for stages, checks, and checkpoints.
+* _tools/: Layer 3 deterministic Python/POSIX validators and stage runners.
+* shared/: Layer 3 cross-stage mathematical, netcode, vision, and shader schemas.
+* skills/: Layer 3 domain skills (icm-architect, icm-stage-compiler, ast-grep-auditor).
+* stages/: Layer 2 & 4 sequential compiler pipeline (01-probe/, 02-controller/, 03-execute/).
+* benchmarks/: Layer 2 & 4 Frontier Gauntlets A, B, and C.
+* phases/status_ledger.json: Layer 4 sealed verification ledger (Phases 1 to 58).
 
----
+## 3. Ten Non-Negotiable Compiler Rules
 
-## 2. 3-Tier Permissions & Core Invariants
-
-- **Always (Autonomous Execution)**:
-  - Read files, query AST, run pre-commit linters (`ruff check`), and execute stage contracts.
-  - Query local read-only tools and memory (Port 1933) before mutating state.
-- **Ask First (User Escalation Required)**:
-  - Mutating upstream git remotes outside prescribed stage contracts.
-  - Deleting non-temporary files or modifying environment configurations.
-- **Never (Hard Forbidden Invariants)**:
-  - Never author bespoke Python wrappers or custom plugins in `scripts/` or `plugins/`.
-  - Never bypass permission checks, credentials, or sandbox boundaries.
-  - Never execute with GPU VRAM exceeding the ceiling defined in rules/hardware_vram_invariants.md (nvidia-smi live NVML check).
-  - Upstream substrate purity: `.hermes/hermes-agent` must remain 100% clean.
+> 1. One Stage, One Job: Execute only the contract inside the target folder's CONTEXT.md.
+> 2. Bounded Context (2,000-8,000 Tokens): Load only the exact file paths and sections listed in Inputs.
+> 3. One Fact, One Home: Never duplicate rules from _config/invariants.md. Link to them.
+> 4. Docs Over Outputs: Learn patterns from Layer 3 (_config/, shared/, references/), never prior outputs.
+> 5. Read Before Edit: Always call read_file on a target file in the current session before editing it.
+> 6. Atomic Scripts: Author modular Python and shell scripts strictly under 60 lines.
+> 7. Browser Verification: Use Playwright (connect_over_cdp or headless Chromium) to verify 0 runtime errors.
+> 8. Fresh Context Auditing: Never grade your own output in the generating context; use _tools/ check gates.
+> 9. Substrate Purity: Never modify files inside /var/home/imshubhamsocial/.hermes/hermes-agent.
+> 10. Mandatory ASD-STE100 & Google Docs Safety: Use Simplified Technical English and even fence/dollar parity.

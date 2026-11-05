@@ -1,387 +1,137 @@
 {
-  "total_phases": 54,
-  "current_phase": "phase_54_agent_harness_evaluation_and_128k_realism",
-  "verified_count": 54,
-  "active_stage": "complete",
-  "updated_at": "2026-10-30T11:10:00Z",
-  "phases": {
-    "phase_01_canonical_upstream_parity_zero_bespoke_core": {
-      "num": 1,
-      "title": "Canonical Upstream Parity & Zero-Bespoke Core",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
+  "schema_version": "46.0",
+  "release_package": "GDR36",
+  "substrate": "Hermes Agent OS on Fedora Kinoite 44 (x86_64, rpm-ostree)",
+  "workspace_root": "/var/home/imshubhamsocial/Projects/Workspace/Personal/hermes",
+  "upstream_engine_root": "/var/home/imshubhamsocial/.hermes",
+  "upstream_submodule_pure": true,
+  "champion_model": "xbill9/gemma-4-E4B-it-qat-q4_0-exact.gguf",
+  "lean_fallback_model": "unsloth/NVIDIA-Nemotron-3.5-Bolt-E4B-UD-Q4_K_XL.gguf",
+  "deprecated_model": "google/gemma-4-E4B-it-qat-q4_0-gguf",
+  "hardware_envelope": {
+    "gpu_device": "NVIDIA GeForce RTX 3050 Laptop GPU",
+    "physical_vram_mib": 6144.0,
+    "active_128k_ceiling_mib": 5800.0,
+    "measured_128k_nemotron_vram_mib": 4975.0,
+    "measured_128k_gemma_exact_vram_mib": 4169.0,
+    "quiescent_idle_vram_mib": 40.0,
+    "quiescent_temperature_c": 55.0,
+    "quiescent_power_w": 12.0,
+    "wayland_display_offload": "Intel iGPU (Disp.A: Off)"
+  },
+  "sealed_epochs_summary": {
+    "epoch_1_phases_01_to_10": {
+      "gdr_range": "GDR1-GDR10",
+      "status": "SEALED_PASS",
+      "deliverable": "OpenViking Memory Graph on Port 1933 and SQLite WAL journal recovery"
     },
-    "phase_02_openviking_hierarchical_memory_server": {
-      "num": 2,
-      "title": "OpenViking Hierarchical Memory Server",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
+    "epoch_2_phases_11_to_20": {
+      "gdr_range": "GDR11-GDR20",
+      "status": "SEALED_PASS",
+      "deliverable": "SmolVLM2 Vision Daemon on Port 8139, epistemic scoring, and AST validation"
     },
-    "phase_03_ebbinghaus_memory_forgetting_spillover_gate": {
-      "num": 3,
-      "title": "Ebbinghaus Memory Forgetting & Spillover Gate",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
+    "epoch_3_phases_21_to_25": {
+      "gdr_range": "GDR21-GDR25",
+      "status": "SEALED_PASS",
+      "deliverable": "FastMCP dynamic tool bridge and MTP speculative decoding (100+ t/s)"
     },
-    "phase_04_two_tier_progressive_skill_catalog": {
-      "num": 4,
-      "title": "Two-Tier Progressive Skill Catalog",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_05_runtime_tool_dispatch_prefix_cache_pinning": {
-      "num": 5,
-      "title": "Runtime Tool Dispatch & Prefix Cache Pinning",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_06_pydantic_v2_settings_schema_migration": {
-      "num": 6,
-      "title": "Pydantic v2 Settings & Schema Migration",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_07_native_closed_loop_rsi_skill_distillation": {
-      "num": 7,
-      "title": "Native Closed-Loop RSI Skill Distillation",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_08_autonomous_headless_konsole_tui_execution": {
-      "num": 8,
-      "title": "Autonomous Headless & Konsole TUI Execution",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_09_openjev_fastmcp_decision_gate": {
-      "num": 9,
-      "title": "OpenJev FastMCP Decision Gate",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_10_full_substrate_integration_nvml_hardware_gate": {
-      "num": 10,
-      "title": "Full Substrate Integration & NVML Hardware Gate",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_11_polyglot_compiler_linter_verification_gate": {
-      "num": 11,
-      "title": "Polyglot Compiler & Linter Verification Gate",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_12_sol_pi_runtime_harness_two_strike_tabu": {
-      "num": 12,
-      "title": "SoL-Pi Runtime Harness & Two-Strike Tabu",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_13_stair_structural_ast_5_layer_memory": {
-      "num": 13,
-      "title": "STAIR Structural AST & 5-Layer Memory",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_14_declarative_attention_loopcd_scoping": {
-      "num": 14,
-      "title": "Declarative Attention & LoopCD Scoping",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_15_proactive_security_gate_sympy_vram_proof": {
-      "num": 15,
-      "title": "Proactive Security Gate & SymPy VRAM Proof",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_16_dream_rsi_replay_simulator_mass_loop": {
-      "num": 16,
-      "title": "Dream-RSI Replay Simulator & MASS Loop",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_17_hibernate_and_train_logra_nora_growmtp": {
-      "num": 17,
-      "title": "Hibernate-and-Train LoGRA/NoRA \\+ GrowMTP",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_18_embodied_visual_world_model_smolvlm2_at_spi2": {
-      "num": 18,
-      "title": "Embodied Visual World Model (SmolVLM2 \\+ AT-SPI2)",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_19_banach_fixed_point_latent_deliberator": {
-      "num": 19,
-      "title": "Banach Fixed-Point Latent Deliberator",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_20_google_harness_continuous_rsi_meta_loop": {
-      "num": 20,
-      "title": "Google Harness\u00b2 Continuous RSI Meta-Loop",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_21_google_adk_2_9_taskdag_a2a_federation": {
-      "num": 21,
-      "title": "Google ADK 2.9+ TaskDAG & A2A Federation",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_22_spec_kit_2_0_failure_cluster_annealing": {
-      "num": 22,
-      "title": "Spec-Kit 2.0 Failure Cluster Annealing",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_23_open_world_replay_simulator_pool_dream_rsi_2_0": {
-      "num": 23,
-      "title": "Open-World Replay Simulator Pool (Dream-RSI 2.0)",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_24_autonomous_offline_logra_nora_consolidation": {
-      "num": 24,
-      "title": "Autonomous Offline LoGRA/NoRA Consolidation",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_25_dream_arsi_master_omniscient_kernel": {
-      "num": 25,
-      "title": "Dream-ARSI Master Omniscient Kernel",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_26_turn_0_zero_spoon_intent_compiler": {
-      "num": 26,
-      "title": "Turn-0 Zero-Spoon Intent Compiler",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_27_two_stage_zero_eviction_decision_router": {
-      "num": 27,
-      "title": "Two-Stage Zero-Eviction Decision Router",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_28_harness_sequential_worktree_probing": {
-      "num": 28,
-      "title": "Harness\u00b2 Sequential Worktree Probing",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_29_live_state_db_sqlite_wal_dream_rsi_sync": {
-      "num": 29,
-      "title": "Live state.db SQLite WAL Dream-RSI Sync",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_30_omniscient_runtime_master_gate_reaper": {
-      "num": 30,
-      "title": "Omniscient Runtime Master Gate & Reaper",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_31_gemma_cpu_sidecars_neuro_symbolic_arc_agi": {
-      "num": 31,
-      "title": "Gemma CPU Sidecars & Neuro-Symbolic ARC-AGI",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_32_asymmetric_attention_production_agi_gauntlet": {
-      "num": 32,
-      "title": "Asymmetric Attention & Production AGI Gauntlet",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "remediation_gauntlet": {
-      "num": 33,
-      "title": "Post-Certification Pre-Flight Remediation Gauntlet",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_34_phase_31_excision_and_purity_sealing": {
-      "num": 34,
-      "title": "Phase 31 Excision & Substrate Purity Sealing",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_35_domain_db_tool_precedence_deployment": {
-      "num": 35,
-      "title": "Domain DB Tool Precedence Skill Deployment",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_36_openviking_context_ingestion_and_retrieval": {
-      "num": 36,
-      "title": "OpenViking L0/L1/L2 Procedural Ingestion & Retrieval",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_37_gateway_dynamic_passthrough_and_fastmcp_bridge": {
-      "num": 37,
-      "title": "Port 8642 Gateway Dynamic Tool Passthrough & FastMCP Bridging",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_38_offline_dream_rsi_dpo_distillation_and_merge": {
-      "num": 38,
-      "title": "Offline dreamRSI DPO Distillation & CPU GGUF Merge",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_39_harness_responses_api_fix_and_dual_track_routing": {
-      "num": 39,
-      "title": "Harness Responses API Fix & Dual-Track Routing Contract",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_40_ephemeral_fastmcp_dynamic_tool_bridge_1934": {
-      "num": 40,
-      "title": "Ephemeral FastMCP Dynamic Tool Bridge on Port 1934",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_41_epistemic_scorer_validator_false_positive_elimination": {
-      "num": 41,
-      "title": "Epistemic Scorer Validator & False-Positive Elimination",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_42_sub8k_context_compaction_and_fastpath_deliberation": {
-      "num": 42,
-      "title": "Sub-8K Context Compaction & Fast-Path Deliberation",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_43_closed_loop_dreamrsi_dpo_gdr24_distillation": {
-      "num": 43,
-      "title": "Closed-Loop dreamRSI DPO Compilation & Hardware Isolation",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_44_ast_canonizer_ruff_precommit_entropy_watchdog": {
-      "num": 44,
-      "title": "60% Infrastructure Compiler Gates: AST Canonizer, Ruff Pre-Commit & Entropy Watchdog",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_45_fastmcp_gate2_abductive_error_sequential_dispatch": {
-      "num": 45,
-      "title": "30% Orchestration FastMCP Upgrade: Gate 2 Interceptor, Abductive Error Translator & Sequential Dispatch",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_46_disk_kv_mcts_engine_swa_full_dev_shm": {
-      "num": 46,
-      "title": "Zero-VRAM Disk-KV Monte Carlo Tree Search (MCTS) Engine",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_47_triehi_skill_distiller_zero_vram_live_web": {
-      "num": 47,
-      "title": "OpenViking TrieHI Skill Distiller & Zero-VRAM Live Web Cognition Pipeline",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_48_ast_canonizer_v3_and_768_token_tool_budget": {
-      "num": 48,
-      "title": "AST Canonizer v3 & 768-Token Ephemeral Tool Budget",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_49_embeddinggemma2_cpu_daemon_port_8139": {
-      "num": 49,
-      "title": "EmbeddingGemma 2 Autonomous CPU Engine on Port 8139 (Cores 6-11, 0 MiB VRAM)",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_50_icm_5layer_workspace_restructure_anti_rationalization": {
-      "num": 50,
-      "title": "ICM 5-Layer Workspace Hierarchy with icm-architect & Anti-Rationalization Tables",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_51_ibm_stair_prefix_trie_retriever_grounding_gate": {
-      "num": 51,
-      "title": "IBM STAIR Prefix-Trie Retriever & Pre-Execution Tool Grounding Gate",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_52_fresh_session_verification_gate_decision_receipts": {
-      "num": 52,
-      "title": "Fresh-Session Verification Gate & Append-Only Decision Receipts",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_53_zero_bespoke_upstream_consolidation_icm_5layer": {
-      "num": 53,
-      "title": "Zero-Bespoke Upstream Consolidation & 5-Layer ICM Operating System",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
-    },
-    "phase_54_agent_harness_evaluation_and_128k_realism": {
-      "num": 54,
-      "title": "Agent Harness Evaluation & 128K Hardware Realism",
-      "stage": "complete",
-      "strikes": 0,
-      "verified": true
+    "epoch_4_phases_26_to_53": {
+      "gdr_range": "GDR26-GDR29",
+      "status": "SEALED_PASS",
+      "deliverable": "Purge of 17 bespoke scripts, zero-bespoke purity, ICM adoption, Layer B harness"
     }
-  }
+  },
+  "recent_sealed_phases": [
+    {
+      "phase_id": 54,
+      "name": "phase_54_agent_harness_evaluation_and_128k_realism",
+      "gdr": "GDR30",
+      "status": "SEALED_PASS",
+      "contract_path": "phases/phase_54_agent_harness_evaluation_and_128k_realism/03_verify/contract.sh",
+      "exit_code": 0,
+      "receipt_metrics": {
+        "swe_bench_make_run_eval": "PASS (AST + GCC return value 55)",
+        "tau_bench_candidate_1": "0.0% (0/2 passed - QAT tool name hallucination)",
+        "tau_bench_candidate_2": "66.7% (2/3 passed - 4,169 MiB VRAM)",
+        "tau_bench_candidate_3": "100% output accuracy (60.0% / 3/5 strict pass, 5/5 outputs - 4,975 MiB VRAM)",
+        "gaia_level_1_orbital_math": "PASS (17,000h Turn-1 derivation by Candidate 3)",
+        "layer_a_passive_benchmarks": "PERMANENTLY_RETIRED"
+      }
+    },
+    {
+      "phase_id": 55,
+      "name": "phase_55_tripartite_production_certification",
+      "gdr": "GDR31-GDR32",
+      "status": "SEALED_PASS",
+      "contract_path": "phases/phase_55_production/03_verify/contract.sh",
+      "exit_code": 0,
+      "receipt_metrics": {
+        "tripartite_split": "60% _config/invariants.md, 30% stage rules, 10% shared references",
+        "tier_4_github_raw_sourcing": "ENFORCED"
+      }
+    },
+    {
+      "phase_id": 56,
+      "name": "phase_56_frontier_gauntlets_and_runtime_remediations",
+      "gdr": "GDR32-GDR35",
+      "status": "SEALED_PASS",
+      "contract_path": "phases/phase_56_gauntlets/03_verify/contract.sh",
+      "exit_code": 0,
+      "receipt_metrics": {
+        "gauntlet_a_voxel_fps": {
+          "status": "PASS",
+          "contract": "benchmarks/gauntlet_a_voxel_fps/contract.sh",
+          "remediations": "Fixed (((hexColor >> 16) & 0xFF) / 255.0) precedence, packed 1042 voxels, sky 0x87CEEB, camera (16, 2.5, 20), PointerLock click, WELCOME/join 20 Hz sync",
+          "playwright_runtime": "0 console errors, 0 page errors, 1280x720 canvas verified"
+        },
+        "gauntlet_b_splatbox": {
+          "status": "PASS",
+          "contract": "benchmarks/gauntlet_b_splatbox/contract.sh",
+          "stages": [
+            "stages/01-probe",
+            "stages/02-controller",
+            "stages/03-execute"
+          ],
+          "remediations": "Playwright connect_over_cdp Port 9222 (12 ms), CSS-to-canvas High-DPI ratio scaling, CPU OpenCV HoughCircles (<5 ms, 0 MiB GPU VRAM, <5 px error)",
+          "telemetry": "145 frames captured (>=100), score=1, 58.2s elapsed"
+        },
+        "gauntlet_c_aquarium": {
+          "status": "PASS",
+          "contract": "benchmarks/gauntlet_c_aquarium/contract.sh",
+          "remediations": "Three.js 0.165.0 CDN HTTP 200, plural uniforms: in caustics_shader.js and water_gpgpu.js, populated marine scene (0x02162e, sand 0xd2b48c, 15 boid fish, buoyancy sphere)",
+          "playwright_runtime": "0 console errors, 0 warnings, 1280x720 canvas verified"
+        }
+      }
+    },
+    {
+      "phase_id": 57,
+      "name": "phase_57_128k_turboquant_realism_and_icm_sync",
+      "gdr": "GDR34-GDR35",
+      "status": "SEALED_PASS",
+      "contract_path": "phases/phase_57_128k_realism/03_verify/contract.sh",
+      "exit_code": 0,
+      "receipt_metrics": {
+        "context_length": 131072,
+        "kv_cache_quantization": "TurboQuant Q4_0 (-ctk q4_0 -ctv q4_0)",
+        "measured_vram_mib": 4997.0,
+        "safety_margin_mib": 803.0,
+        "assertions_passed": 10
+      }
+    },
+    {
+      "phase_id": 58,
+      "name": "phase_58_autonomous_icm_factory_and_multi_gauntlet_certification",
+      "gdr": "GDR36",
+      "status": "SEALED_PASS",
+      "contract_path": "phases/phase_58_autonomous_icm_factory_and_multi_gauntlet_certification/03_verify/contract.sh",
+      "exit_code": 0,
+      "receipt_metrics": {
+        "directive_1_substrate_purity": "RATIFIED (.hermes 100% pure, ws-hermes 5-layer ICM, config.yaml v46)",
+        "directive_2_runtime_gate": "CODIFIED (_tools/playwright_runtime_audit.py 4-Gate Pixel Variance Standard)",
+        "directive_3_icm_and_walk_test": "VALIDATED (54-word 7.00/7 analysis, 6-video corpus, 8-Point Walk Test PASS)",
+        "directive_4_factory_isolation": "HARDENED (One-shot CLI + POST /slots/0?action=erase + --cache-ram 0 + check.md/checkpoint.md)",
+        "directive_5_multi_gauntlet_suite": "PASS (Gauntlets A, B, C + icm-architect integrated + RTX 3050 quiescent at 40 MiB)"
+      }
+    }
+  ]
 }

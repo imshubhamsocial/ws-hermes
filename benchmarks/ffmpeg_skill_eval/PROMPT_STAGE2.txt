@@ -1,0 +1,6 @@
+[ICM STAGE 2 OF 3: DETERMINISTIC EDIT CHAIN (CUT -> FIT -> LOUDNESS -> EXPORT)] Read CONTEXT.md, invariants.md, rules.md, references.md, and output/stage1_probe.json. Never mutate output/raw_source.mp4. Execute the canonical kajisho5/ffmpeg-skill step-chain in order:
+1. Cut 0:01-0:07: python3 ~/.hermes/skills/ffmpeg-skill/scripts/cut.py output/raw_source.mp4 --segments 0:01-0:07 --accurate -o output/step1_cut.mp4 --json
+2. Reframe to 9:16 vertical (1080x1920): python3 ~/.hermes/skills/ffmpeg-skill/scripts/fit.py output/step1_cut.mp4 --aspect 9:16 --fit crop -o output/step2_fit.mp4 --json
+3. Normalize loudness to EBU R128 (-14 LUFS, -1 dBTP): python3 ~/.hermes/skills/ffmpeg-skill/scripts/loudness.py output/step2_fit.mp4 -I -14 --tp -1 -o output/step3_loud.mp4 --json
+4. Export for reels: python3 ~/.hermes/skills/ffmpeg-skill/scripts/export.py output/step3_loud.mp4 --preset reels -o output/final_reels.mp4 --json
+5. Write output/stage2_edit_receipt.json confirming output/final_reels.mp4 exists, then stop immediately.

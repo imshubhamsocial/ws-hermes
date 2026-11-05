@@ -1,0 +1,13 @@
+{
+  "phase_id": 55,
+  "phase_name": "phase_55_icm_tripartite_scaffolding_and_v45_sealing",
+  "status": "VERIFIED_AND_SEALED",
+  "assertions_passed": 15,
+  "assertions_failed": 0,
+  "config_version": 52,
+  "default_model": "nemotron-3.5-bolt-e4b",
+  "max_turns": 40,
+  "normalized_output_rule_enforced": true,
+  "vram_ceiling_mib": 5800.0,
+  "verified_at": "2026-10-31T09:17:59+05:30"
+}

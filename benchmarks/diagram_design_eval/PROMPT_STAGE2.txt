@@ -1,0 +1,4 @@
+[ICM STAGE 2 OF 3: EDITORIAL HTML + INLINE SVG SYNTHESIS] Read CONTEXT.md, invariants.md, rules.md, references.md, and output/stage1_grid_layout.json. Generate the complete, self-contained single-file HTML + inline SVG diagram at output/hermes_v45_architecture.html using the exact coordinates from output/stage1_grid_layout.json:
+1. Use editorial palette tokens (--paper: #f5f5f5, --paper-2: #ebebeb, --ink: #2d3142, --muted: #64748b, --accent: #bf4520, --hairline: #cbd5e1) with zero box-shadow, zero drop-shadow, zero Mermaid, and zero external CDN links.
+2. Ensure every <rect> has x, y, width, and height divisible by 4 (val % 4 == 0), 5 <rect class="node" .../> elements (2 with stroke="#bf4520"), and 5 orthogonal <path class="connector" .../> elements with masked ALL CAPS labels.
+3. Write output/stage2_svg_receipt.json and stop immediately.

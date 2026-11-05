@@ -1,27 +1,31 @@
-# Stage 03 Contract: Native Execution & LSP Diagnostics (03-execute)
+# 03-execute - CDP Action Dispatch and Frame Telemetry
+
+One job: Dispatch normalized mouse clicks via Playwright CDP and record output/telemetry.json.
 
 ## Inputs
 
 | Source | File/Location | Section/Scope | Why |
 | :--- | :--- | :--- | :--- |
-| Stage 02 Output | ../02-plan/output/implementation_plan.md | Full file | Approved step-by-step execution blueprint |
-| Hardware Rules | ../../rules/hardware_vram_invariants.md | ## Live NVML Verification | Verify GPU VRAM against rules/hardware_vram_invariants.md |
-| System One Gates | ../../rules/anti_rationalization_tables.md | ## Done Gate | Prevent premature completion or stubbing |
+| Stage 2 Output | ../02-controller/output/aim_controller.py | Centroid function | Target coordinates |
+| System Invariants | ../../_config/invariants.md | Section 2: Network Ports | CDP Port 9222 attachment |
+| Vision Schemas | ../../shared/vision_schemas.md | Telemetry Schema | Frame count & score keys |
+
+Do NOT load: ../01-probe/CONTEXT.md or ../../benchmarks/gauntlet_a_voxel_fps/.
 
 ## Process
 
-> 1. Execute the exact file edits and CLI operations specified in ../02-plan/output/implementation_plan.md.
-> 2. Rely on native in-process ast.parse and Pyright LSP (lsp.enabled: true) to validate syntax and types immediately upon edit.
-> 3. Verify live GPU memory (nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits) against rules/hardware_vram_invariants.md.
-> 4. Record all modified file SHA-256 digests and LSP diagnostic outputs in output/execution_manifest.md.
+> 1. Attach to Chromium on Port 9222 via Playwright connect_over_cdp("http://127.0.0.1:9222").
+> 2. Execute the aiming loop using ../02-controller/output/aim_controller.py across >= 100 frames.
+> 3. Dispatch normalized mouse click actions to #gameCanvas.
+> 4. Save execution metrics (frames_captured, score, elapsed_s, vram_mib) to output/telemetry.json.
 
 ## Outputs
 
 | Artifact | Location | Format |
 | :--- | :--- | :--- |
-| Execution Manifest | stages/03-execute/output/execution_manifest.md | Markdown with SHA-256 table and live VRAM readout |
+| Execution Telemetry | output/telemetry.json | JSON receipt (frames >= 100, score >= 1) |
+| Stage Audit Receipt | output/check.md | YAML-frontmattered Markdown |
 
-## Checkpoint & Audit
+## Check
 
-* **Checkpoint**: Halt immediately if Pyright LSP reports diagnostics > 0 or if jev-curator blocks an unauthorized skill mutation.
-* **Audit**: [ ] Zero syntax/LSP errors; [ ] Live NVML VRAM verified against rules/hardware_vram_invariants.md; [ ] No untracked scripts created in scripts/.
+Run bash ../../benchmarks/gauntlet_b_splatbox/contract.sh and confirm 145 frames captured, score = 1, exit 0.
