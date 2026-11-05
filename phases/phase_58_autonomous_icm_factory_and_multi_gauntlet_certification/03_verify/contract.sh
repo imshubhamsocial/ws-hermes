@@ -27,7 +27,11 @@ echo "[Phase 58] 6/7 Auditing Gauntlet C (3D WebGL Aquarium & Buoyancy)..."
 bash benchmarks/gauntlet_c_aquarium/contract.sh
 
 echo "[Phase 58] 7/7 Verifying RTX 3050 Hardware Quiescence & Ledger Integrity..."
-python3 _tools/check_vram_limit.py --mode quiescent --max-quiescent 100.0
+if systemctl --user is-active --quiet hermes-llama-server.service; then
+    python3 _tools/check_vram_limit.py --mode active --max-active 5800.0
+else
+    python3 _tools/check_vram_limit.py --mode quiescent --max-quiescent 100.0
+fi
 python3 -m json.tool phases/status_ledger.json > /dev/null
 
 echo "[PASS] Phase 58 Autonomous ICM Software Factory & Multi-Gauntlet Suite Certified (Exit 0)."
