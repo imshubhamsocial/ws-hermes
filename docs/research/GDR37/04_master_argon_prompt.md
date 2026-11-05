@@ -1,3 +1,14 @@
+# Master Prompt for Lead Architect Argon (GDR37 Autonomous ICM Reorganization)
+
+> **Instructions for User**:  
+> 1. Open [gemini.google.com](https://gemini.google.com) in your browser.  
+> 2. Select the **Chat** tab and enable **Thinking Process: High**.  
+> 3. Click the **+** (**Add file**) icon $\to$ **More Uploads** $\to$ **Import code**.  
+> 4. Paste the repository URL: `https://github.com/imshubhamsocial/ws-hermes` and click **Import**.  
+> 5. Copy the markdown content below, paste it into the message box, and submit.  
+
+---
+
 # GDR37 Master Architectural Directive & Lead Architect Consultation
 
 > **Release Package**: GDR37  
@@ -20,12 +31,10 @@ The full repository snapshot (`ws-hermes`) is already loaded in your context via
 
 All historical research packages and GDR specifications are present in your loaded workspace under `docs/research/`:
 - **GDR30**: `docs/research/GDR30 - Golden Benchmark State (GAIA, TAU-2)/` (Golden foundation)
-- **GDR31 to GDR34**: `docs/research/GDR31/` through `docs/research/GDR34/` (Evolutionary phases)
-- **GDR35 Original Inputs & Issues**: `docs/research/GDR37/01_doc1_gdr35_original_inputs_and_issues.md` (Raw inputs, historical research, and issue forensics)
-- **GDR36 Certification Blueprint & Analysis**: `docs/research/GDR37/02_doc2_gdr36_certification_blueprint_and_forensic_analysis.md` (Blueprint synthesis, 4-tier skill precedence, 8-Point Walk Test)
-- **Physical Implementation & Verification**: `docs/research/GDR37/03_doc3_physical_implementation_and_verification_report.md` (Gauntlets A/B/C repairs, Gemma 4 daemon flags, and test receipts)
-- **Jake ICM Tooling Specifications**: `docs/research/GDR37/04_doc4_jake_icm_commands_and_workspace_reorganization_spec.md` (ICM tooling, Keep-Out Inventory, and 4-category triage)
-- **Migrated Files Catalog**: `docs/research/GDR37/CHEZMOI_MIGRATION_INVENTORY.md` (Catalog of all 1,288 files migrated to native Git)
+- **GDR31 to GDR36**: `docs/research/GDR31/` through `docs/research/GDR36/` (Evolutionary phases)
+- **GDR37 Briefing**: `docs/research/GDR37/01_master_argon_consultation_brief.md` (Consultation brief and mandates)
+- **Physical Implementation & Verification**: `docs/research/GDR37/02_doc1_physical_implementation_and_verification_report.md` (Gauntlets A/B/C repairs, Gemma 4 daemon flags, and test receipts)
+- **Jake ICM Tooling Specifications**: `docs/research/GDR37/03_doc2_jake_icm_commands_and_workspace_reorganization_spec.md` (ICM tooling, Keep-Out Inventory, and 4-category triage)
 
 You do NOT need the user to upload additional files. Inspect the files already present in your imported repository.
 
@@ -58,7 +67,7 @@ You must analyze and protect these critical system components:
    - Gauntlet C (WebGL Three.js aquarium shader with `uniforms: {}` dictionary syntax).
 
 ### Directive 2: Comprehensive Repository Triage & Classification
-You must inspect every item listed in `CHEZMOI_MIGRATION_INVENTORY.md` and the workspace root.
+You must inspect the full repository directory tree in `ws-hermes`.
 You must classify each path into one of four triage categories:
 - **Category A (Retain In Place)**: Core substrate files, Layer 0 map (`AGENTS.md`), Layer 1 router (`CONTEXT.md`), build files (`Makefile`), and systemd units.
 - **Category B (Consolidate to ICM Factory)**: Move domain rules to `_config/`, schemas to `shared/`, and audit scripts to `_tools/`.

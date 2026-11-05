@@ -29,12 +29,10 @@
 
 | Document Number | Document Title | Path | Description |
 | :--- | :--- | :--- | :--- |
-| **Document 01** | GDR35 Input Files, Research Context, and Issues | `docs/research/GDR37/01_doc1_gdr35_original_inputs_and_issues.md` | Full raw contents of GDR35 inputs and issues identified during research. |
-| **Document 02** | GDR36 Certification Blueprint & Forensic Analysis | `docs/research/GDR37/02_doc2_gdr36_certification_blueprint_and_forensic_analysis.md` | Full synthesis of GDR36 certification blueprint and verified analytical findings. |
-| **Document 03** | Physical Implementation, Telemetry, and Audit Report | `docs/research/GDR37/03_doc3_physical_implementation_and_verification_report.md` | Implementation records, Gauntlets A/B/C repairs, Gemma 4 daemon flags, and test receipts. |
-| **Document 04** | Jake Van Clief ICM Specifications & Tooling | `docs/research/GDR37/04_doc4_jake_icm_commands_and_workspace_reorganization_spec.md` | ICM tool commands, Keep-Out Inventory, 4-category triage, and non-breaking migration rules. |
-| **Document 05** | Master Consultation Directive for Gemini Argon | `docs/research/GDR37/05_master_argon_consultation_prompt.md` | Executive prompt for Gemini Argon with exhaustive pre-migration safety directives. |
-| **Inventory** | Chezmoi Migration Inventory | `docs/research/GDR37/CHEZMOI_MIGRATION_INVENTORY.md` | Exhaustive catalog of all 1,288 files tracked prior to native Git migration. |
+| **Briefing** | Master Argon Consultation Brief | `docs/research/GDR37/01_master_argon_consultation_brief.md` | Executive briefing for Gemini Argon on repository reorganization and Keep-Out constraints. |
+| **Document 01** | Physical Implementation, Telemetry, and Audit Report | `docs/research/GDR37/02_doc1_physical_implementation_and_verification_report.md` | Implementation records, Gauntlets A/B/C repairs, Gemma 4 daemon flags, and test receipts. |
+| **Document 02** | Jake Van Clief ICM Specifications & Tooling | `docs/research/GDR37/03_doc2_jake_icm_commands_and_workspace_reorganization_spec.md` | ICM tool commands, Keep-Out Inventory, 4-category triage, and non-breaking migration rules. |
+| **Master Prompt** | Master Consultation Prompt for Gemini Argon | `docs/research/GDR37/04_master_argon_prompt.md` | Final prompt to copy and paste into Gemini Argon with High Thinking enabled. |
 
 ---
 
@@ -57,6 +55,6 @@
 
 1. **Verify Implementation**: Review the physical deployment of Phase 58 and the 5-layer ICM structure.
 2. **Execute Non-Breaking Safety Audit**: Enforce the Keep-Out Inventory to protect daemons (Ports 8138, 1933, 8642, 9222), upstream purity (`.hermes/hermes-agent`), and the 58 sealed phases.
-3. **Classify All Repository Files**: Apply the 4-Category Triage framework (Retain, Consolidate, Archive, Prune) to all 1,288 cataloged files.
+3. **Classify All Repository Files**: Apply the 4-Category Triage framework (Retain, Consolidate, Archive, Prune) to all repository files.
 4. **Deliver Structured Migration Table**: Provide an actionable mapping table (`Source -> Destination | Rationale | Exact Git Command | Verification | Rollback`).
 5. **Output Standard**: Deliver instructions in strict ASD-STE100 format with zero Google Docs export errors.
