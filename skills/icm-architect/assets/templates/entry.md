@@ -19,7 +19,7 @@
 | starting a new run | [01_{name}](stages/01_{name}/CONTEXT.md) | the stage's check |
 | {previous stage} passed its check | next numbered stage | the stage's check |
 | asked for status | scan `stages/*/output/` and any `check.md` | report what exists |
-| setting up for a new user | [questionnaire](setup/questionnaire.md) | answers written to `_shared/` |
+| setting up for a new user | [questionnaire](questionnaire.md) | answers written to `_shared/` |
 
 ## The one rule
 
