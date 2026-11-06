@@ -131,3 +131,8 @@ plugins:
         max_requests: 50
         max_pairs: 100
         top_k: 5
+telemetry:
+  shared_metrics:
+    enabled: false
+    send: false
+    offer_version: 2

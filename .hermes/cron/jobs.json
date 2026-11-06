@@ -30,34 +30,38 @@
       "schedule_display": "0 3 * * *",
       "repeat": {
         "times": null,
-        "completed": 8
+        "completed": 9
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-10-20T01:16:55.717856+05:30",
-      "next_run_at": "2026-11-01T03:00:00+05:30",
-      "last_run_at": "2026-10-31T03:10:16.191867+05:30",
-      "last_status": "ok",
-      "last_error": null,
+      "next_run_at": "2026-11-07T03:00:00+05:30",
+      "last_run_at": "2026-11-07T02:38:23.311315+05:30",
+      "last_status": "error",
+      "last_error": "RuntimeError: Connection error.",
       "last_delivery_error": null,
       "last_delivery_unverified": null,
-      "failure_streak": 0,
+      "failure_streak": 1,
       "deliver": "local",
       "origin": null,
       "enabled_toolsets": null,
       "workdir": null,
       "last_dispatch": {
-        "scheduled_at": "2026-10-31T03:00:00+05:30",
-        "dispatched_at": "2026-10-31T03:00:50.246513+05:30",
-        "lateness_seconds": 50.2,
-        "kind": "on_time"
+        "scheduled_at": "2026-11-01T03:00:00+05:30",
+        "dispatched_at": "2026-11-07T02:33:05.786713+05:30",
+        "lateness_seconds": 516785.8,
+        "kind": "catch_up"
       },
       "fire_claim": null,
       "canonical_completions": [
-        "46d83f3aeaf94812a8be47dc58545cfc"
-      ]
+        "71aa6f6fec0c4d69b6c53d953a058542"
+      ],
+      "last_failure": {
+        "at": "2026-11-07T02:38:23.311315+05:30",
+        "detail": "RuntimeError: Connection error."
+      }
     },
     {
       "id": "62a3816baf8f",
@@ -86,35 +90,39 @@
       "schedule_display": "0 3 * * *",
       "repeat": {
         "times": null,
-        "completed": 2
+        "completed": 3
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-10-29T23:18:47.219868+05:30",
-      "next_run_at": "2026-11-01T03:00:00+05:30",
-      "last_run_at": "2026-10-31T03:03:27.028392+05:30",
-      "last_status": "ok",
-      "last_error": null,
+      "next_run_at": "2026-11-07T03:00:00+05:30",
+      "last_run_at": "2026-11-07T02:38:19.334488+05:30",
+      "last_status": "error",
+      "last_error": "RuntimeError: Connection error.",
       "last_delivery_error": null,
       "last_delivery_unverified": null,
-      "failure_streak": 0,
+      "failure_streak": 1,
       "deliver": "local",
       "origin": null,
       "enabled_toolsets": null,
       "workdir": null,
       "last_dispatch": {
-        "scheduled_at": "2026-10-31T03:00:00+05:30",
-        "dispatched_at": "2026-10-31T03:00:50.246513+05:30",
-        "lateness_seconds": 50.2,
-        "kind": "on_time"
+        "scheduled_at": "2026-11-01T03:00:00+05:30",
+        "dispatched_at": "2026-11-07T02:33:05.786713+05:30",
+        "lateness_seconds": 516785.8,
+        "kind": "catch_up"
       },
       "fire_claim": null,
       "canonical_completions": [
-        "7088a8aaf3844e61b74ef02622710baf"
-      ]
+        "3b9f4376e93c46b88b588a21fcb81ac1"
+      ],
+      "last_failure": {
+        "at": "2026-11-07T02:38:19.334488+05:30",
+        "detail": "RuntimeError: Connection error."
+      }
     }
   ],
-  "updated_at": "2026-10-31T03:10:16.241090+05:30"
+  "updated_at": "2026-11-07T02:38:23.311880+05:30"
 }

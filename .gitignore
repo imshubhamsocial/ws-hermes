@@ -91,6 +91,8 @@ node_modules/**
 .hermes/*_cache*
 .hermes/.hermes_history
 .hermes/gateway.*
+.hermes/spawn-ledger.json
+.hermes/.hermes-update-*
 .hermes/processes.json*
 .hermes/channel_directory.json
 .hermes/.curator_backups/**
