@@ -8,11 +8,13 @@ set -euo pipefail
 PASS=0
 FAIL=0
 REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
-cd "$REPO_ROOT"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+cd "$PROJECT_ROOT"
 
-CONFIG_FILE=".hermes/config.yaml"
-if [[ ! -f "$CONFIG_FILE" && -f "private_dot_hermes/config.yaml" ]]; then
-  CONFIG_FILE="private_dot_hermes/config.yaml"
+CONFIG_FILE="$PROJECT_ROOT/.hermes/config.yaml"
+if [[ ! -f "$CONFIG_FILE" && -f "$REPO_ROOT/.hermes/config.yaml" ]]; then
+  CONFIG_FILE="$REPO_ROOT/.hermes/config.yaml"
 elif [[ ! -f "$CONFIG_FILE" && -f "$HOME/.hermes/config.yaml" ]]; then
   CONFIG_FILE="$HOME/.hermes/config.yaml"
 fi
@@ -39,15 +41,15 @@ assert_check "1. 5-Layer ICM structure exists (AGENTS.md, CONTEXT.md, stages 01-
 assert_check "2. All CONTEXT.md files are strictly <= 80 lines" \
   "awk 'FNR==1{if(lines>80) exit 1; lines=0} {lines++} END{if(lines>80) exit 1}' CONTEXT.md stages/*/CONTEXT.md"
 
-assert_check "3. All Layer 3 rules/*.md files are strictly <= 200 lines" \
-  "awk 'FNR==1{if(lines>200) exit 1; lines=0} {lines++} END{if(lines>200) exit 1}' rules/*.md"
+assert_check "3. All Layer 3 _config/*.md files are strictly <= 200 lines" \
+  "awk 'FNR==1{if(lines>200) exit 1; lines=0} {lines++} END{if(lines>200) exit 1}' _config/*.md"
 
 # Assertion 4: Walk Test Point 5 (Single Source of Truth — obsolete 5,400 MiB purged from routing files)
 assert_check "4. Obsolete 5,400 MiB cap purged from AGENTS.md, CONTEXT.md, and stages/" \
   "! grep -q '5,400' AGENTS.md CONTEXT.md stages/*/CONTEXT.md"
 
-assert_check "5. rules/hardware_vram_invariants.md establishes 5,800.0 MiB ceiling and 131072 context" \
-  "grep -q '5,800.0 MiB' rules/hardware_vram_invariants.md && grep -q '131072' rules/hardware_vram_invariants.md"
+assert_check "5. _config/hardware_vram_invariants.md establishes 5,800.0 MiB ceiling and 131072 context" \
+  "grep -q '5,800.0 MiB' _config/hardware_vram_invariants.md && grep -q '131072' _config/hardware_vram_invariants.md"
 
 # Assertion 6: 128K Context & All 3 Candidate Models Registered in config.yaml
 assert_check "6. config.yaml enforces context_length: 131072 and registers all 3 candidate models" \

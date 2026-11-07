@@ -8,11 +8,13 @@ set -euo pipefail
 PASS=0
 FAIL=0
 REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
-cd "$REPO_ROOT"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+cd "$PROJECT_ROOT"
 
-CONFIG_FILE=".hermes/config.yaml"
-if [[ ! -f "$CONFIG_FILE" && -f "private_dot_hermes/config.yaml" ]]; then
-  CONFIG_FILE="private_dot_hermes/config.yaml"
+CONFIG_FILE="$PROJECT_ROOT/.hermes/config.yaml"
+if [[ ! -f "$CONFIG_FILE" && -f "$REPO_ROOT/.hermes/config.yaml" ]]; then
+  CONFIG_FILE="$REPO_ROOT/.hermes/config.yaml"
 elif [[ ! -f "$CONFIG_FILE" && -f "$HOME/.hermes/config.yaml" ]]; then
   CONFIG_FILE="$HOME/.hermes/config.yaml"
 fi
@@ -43,13 +45,13 @@ assert_check "2. AGENTS.md operates as unified multi-agent entry point" \
 assert_check "3. Root CONTEXT.md exists and is strictly <= 80 lines" \
   "[[ -f CONTEXT.md ]] && [[ \$(wc -l < CONTEXT.md) -le 80 ]]"
 
-# Assertion 4: Root rules/invariants.md <= 80 lines & rules/rules.md <= 120 lines
-assert_check "4. Root rules/invariants.md <= 80 lines and rules/rules.md <= 120 lines" \
-  "[[ -f rules/invariants.md && \$(wc -l < rules/invariants.md) -le 80 ]] && [[ -f rules/rules.md && \$(wc -l < rules/rules.md) -le 120 ]]"
+# Assertion 4: _config/invariants.md <= 80 lines & _config/operational_rules.md <= 120 lines
+assert_check "4. _config/invariants.md <= 80 lines and _config/operational_rules.md <= 120 lines" \
+  "[[ -f _config/invariants.md && \$(wc -l < _config/invariants.md) -le 80 ]] && [[ -f _config/operational_rules.md && \$(wc -l < _config/operational_rules.md) -le 120 ]]"
 
-# Assertion 5: Root references/references.md <= 200 lines
-assert_check "5. Root references/references.md exists and is strictly <= 200 lines" \
-  "[[ -f references/references.md && \$(wc -l < references/references.md) -le 200 ]]"
+# Assertion 5: _config/references.md <= 200 lines
+assert_check "5. _config/references.md exists and is strictly <= 200 lines" \
+  "[[ -f _config/references.md && \$(wc -l < _config/references.md) -le 200 ]]"
 
 # Assertion 6: Pipeline Stages 01-04 Tripartite Scaffolding Presence
 assert_check "6. Stages 01-spec through 04-verify each contain CONTEXT.md, invariants.md, rules.md, references.md" \
