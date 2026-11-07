@@ -6,7 +6,7 @@
 | :--- | :--- | :--- | :--- |
 | Stage 01 Spec | ../01-spec/output/spec_packet.md | ## Acceptance Criteria | Original ground-truth requirements |
 | Stage 03 Manifest | ../03-execute/output/execution_manifest.md | Full file | Artifacts and hashes to verify |
-| System One Gates | `../../../../_config/anti_rationalization_tables.md` | ## Claims & Commit Guards | Block unverified claims before Git commit |
+| System One Gates | `../../_config/anti_rationalization_tables.md` | ## Claims & Commit Guards | Block unverified claims before Git commit |
 | ICM Walk Test | ~/.hermes/skills/icm-architect/SKILL.md | ## The Walk Test | 8-point cold-agent verification checklist |
 
 ## Process

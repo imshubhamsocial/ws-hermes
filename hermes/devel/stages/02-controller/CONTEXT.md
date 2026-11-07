@@ -7,8 +7,8 @@ One job: Compute target centroids on CPU from probe metadata and write output/ai
 | Source | File/Location | Section/Scope | Why |
 | :--- | :--- | :--- | :--- |
 | Stage 1 Output | ../01-probe/output/probe_state.json | Full JSON file | Canvas bounding rect & DPI ratio |
-| System Invariants | `../../../../_config/invariants.md` | Section 1: CPU Vision Offload | Enforce 0 MiB GPU VRAM & <5 ms |
-| Vision Schemas | `../../../../shared/vision_schemas.md` | HoughCircles Parameters | Coordinate scaling math |
+| System Invariants | `../../_config/invariants.md` | Section 1: CPU Vision Offload | Enforce 0 MiB GPU VRAM & <5 ms |
+| Vision Schemas | `../../shared/vision_schemas.md` | HoughCircles Parameters | Coordinate scaling math |
 
 Do NOT load: ../03-execute/, ../../benchmarks/, or ../../phases/.
 

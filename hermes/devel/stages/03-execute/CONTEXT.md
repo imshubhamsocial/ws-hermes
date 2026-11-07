@@ -7,8 +7,8 @@ One job: Dispatch normalized mouse clicks via Playwright CDP and record output/t
 | Source | File/Location | Section/Scope | Why |
 | :--- | :--- | :--- | :--- |
 | Stage 2 Output | ../02-controller/output/aim_controller.py | Centroid function | Target coordinates |
-| System Invariants | `../../../../_config/invariants.md` | Section 2: Network Ports | CDP Port 9222 attachment |
-| Vision Schemas | `../../../../shared/vision_schemas.md` | Telemetry Schema | Frame count & score keys |
+| System Invariants | `../../_config/invariants.md` | Section 2: Network Ports | CDP Port 9222 attachment |
+| Vision Schemas | `../../shared/vision_schemas.md` | Telemetry Schema | Frame count & score keys |
 
 Do NOT load: ../01-probe/CONTEXT.md or ../../benchmarks/gauntlet_a_voxel_fps/.
 

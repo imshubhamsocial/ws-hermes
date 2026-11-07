@@ -6,8 +6,8 @@ One job: Execute autonomous Splatbox gameplay via 3-stage compiler pipeline on C
 
 | Source | File/Location | Section/Scope | Why |
 | :--- | :--- | :--- | :--- |
-| System Invariants | `../../../../_config/invariants.md` | Network Ports | CDP Port 9222 connection |
-| Vision Schemas | `../../../../shared/vision_schemas.md` | Vision Invariants | Centroid detection math |
+| System Invariants | `../../_config/invariants.md` | Network Ports | CDP Port 9222 connection |
+| Vision Schemas | `../../shared/vision_schemas.md` | Vision Invariants | Centroid detection math |
 
 ## Process
 

@@ -5,9 +5,9 @@
 | Source | File/Location | Section/Scope | Why |
 | :--- | :--- | :--- | :--- |
 | User Task | Active Prompt / Issue | Full description | Primary problem statement |
-| Hardware Rules | `../../../../_config/hardware_vram_invariants.md` | ## Envelope Limits | Enforce hardware VRAM & zero-code bounds per rules/hardware_vram_invariants.md |
-| System One Gates | `../../../../_config/anti_rationalization_tables.md` | ## Intent & Scope Guards | Prevent scope creep and unrequested code |
-| Epistemic Rules | `../../../../_config/anti_sycophancy_directives.md` | ## Premise Validation | Reject flawed user assumptions early |
+| Hardware Rules | `../../_config/hardware_vram_invariants.md` | ## Envelope Limits | Enforce hardware VRAM & zero-code bounds per rules/hardware_vram_invariants.md |
+| System One Gates | `../../_config/anti_rationalization_tables.md` | ## Intent & Scope Guards | Prevent scope creep and unrequested code |
+| Epistemic Rules | `../../_config/anti_sycophancy_directives.md` | ## Premise Validation | Reject flawed user assumptions early |
 
 ## Process
 

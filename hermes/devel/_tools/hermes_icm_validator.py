@@ -27,9 +27,9 @@ def validate_workspace() -> int:
         p = os.path.join(ROOT, ptr)
         if os.path.isfile(p) and count_lines(p) > 5:
             errors.append(f"{ptr} must be a 1-line pointer to AGENTS.md (One Fact, One Home)")
-    stage_dirs = ["hermes/devel/stages/01-probe", "hermes/devel/stages/02-controller",
-                  "hermes/devel/stages/03-execute", "hermes/devel/benchmarks/gauntlet_a_voxel_fps",
-                  "hermes/devel/benchmarks/gauntlet_b_splatbox", "hermes/devel/benchmarks/gauntlet_c_aquarium"]
+    stage_dirs = ["stages/01-probe", "stages/02-controller", "stages/03-execute",
+                  "benchmarks/gauntlet_a_voxel_fps", "benchmarks/gauntlet_b_splatbox",
+                  "benchmarks/gauntlet_c_aquarium"]
     for sd in stage_dirs:
         cpath = os.path.join(ROOT, sd, "CONTEXT.md")
         if not os.path.isfile(cpath):

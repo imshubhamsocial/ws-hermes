@@ -6,8 +6,8 @@ One job: Probe the browser canvas and write target metadata to output/probe_stat
 
 | Source | File/Location | Section/Scope | Why |
 | :--- | :--- | :--- | :--- |
-| System Invariants | `../../../../_config/invariants.md` | Network Ports | Port 9222 connection |
-| Vision Schemas | `../../../../shared/vision_schemas.md` | Vision Invariants | Coordinate normalization |
+| System Invariants | `../../_config/invariants.md` | Network Ports | Port 9222 connection |
+| Vision Schemas | `../../shared/vision_schemas.md` | Vision Invariants | Coordinate normalization |
 
 Do NOT load: ../02-controller/, ../03-execute/, or ../../benchmarks/.
 

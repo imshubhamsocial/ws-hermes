@@ -12,9 +12,12 @@ This workspace contains the 3-stage sequential compiler pipeline, Frontier Gaunt
 * `benchmarks/`: Frontier Gauntlets A (3D FPS Netcode), B (Splatbox CV), and C (Aquarium WebGL).
 * `phases/`: Sealed verification registry and master ledger (Phases 1 to 58).
 * `docs/`: Historical GDR research corpus (GDR30 to GDR37).
-* `../../_config/`: Root system invariants, hardware ceilings, and port registries.
-* `../../_tools/`: Root deterministic Python/POSIX validators and stage runners.
-* `../../shared/`: Root cross-stage mathematical and vision schemas.
+* `_config/`: System invariants, conventions, hardware ceilings, and domain rules.
+* `_tools/`: Deterministic Python/POSIX validators and stage runners.
+* `shared/`: Cross-stage mathematical, netcode, and vision schemas.
+* `skills/`: Domain skills (icm-architect, icm-stage-compiler).
+* `_templates/`: Starter templates for stages, checks, and checkpoints.
+* `_archive/`: Historical vault for superseded logs, sessions, and legacy evaluations.
 
 ## 3. Project Directives
 

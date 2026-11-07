@@ -12,8 +12,8 @@ Hermes Agent OS project workspace and development tracks under ws-hermes.
 
 | Source | File/Location | Section/Scope | Why |
 | :--- | :--- | :--- | :--- |
-| System Invariants | `../_config/invariants.md` | Hardware & VRAM | Global hardware bounds apply to all tracks |
-| Templates | `../_templates/` | Full directory | Starter templates for new stages |
+| System Invariants | `devel/_config/invariants.md` | Hardware & VRAM | Global hardware bounds apply to all tracks |
+| Templates | `devel/_templates/` | Full directory | Starter templates for new stages |
 
 ## Process
 
@@ -31,4 +31,4 @@ Hermes Agent OS project workspace and development tracks under ws-hermes.
 
 ## Check
 
-Run python3 -I _tools/links.py . --skip docs --skip phases from the workspace root.
+Run python3 -I hermes/devel/_tools/links.py . --skip docs --skip phases from the workspace root.

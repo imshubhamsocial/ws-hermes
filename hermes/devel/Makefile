@@ -6,13 +6,13 @@
 all: walk-test run-all-gauntlets check-vram-quiescent
 
 walk-test:
-	python3 ../../_tools/hermes_icm_validator.py
+	python3 _tools/hermes_icm_validator.py
 
 check-vram-quiescent:
-	python3 ../../_tools/check_vram_limit.py --mode quiescent --max-quiescent 100.0
+	python3 _tools/check_vram_limit.py --mode quiescent --max-quiescent 100.0
 
 check-vram-active:
-	python3 ../../_tools/check_vram_limit.py --mode active --max-active 5800.0
+	python3 _tools/check_vram_limit.py --mode active --max-active 5800.0
 
 run-eval:
 	bash phases/phase_54_agent_harness_evaluation_and_128k_realism/03_verify/contract.sh
@@ -21,9 +21,9 @@ gauntlet-a:
 	bash benchmarks/gauntlet_a_voxel_fps/contract.sh
 
 gauntlet-b:
-	python3 ../../_tools/hermes_stage_runner.py --stage-dir stages/01-probe --gate-mode autonomous --verify-only
-	python3 ../../_tools/hermes_stage_runner.py --stage-dir stages/02-controller --gate-mode autonomous --verify-only
-	python3 ../../_tools/hermes_stage_runner.py --stage-dir stages/03-execute --gate-mode autonomous --verify-only
+	python3 _tools/hermes_stage_runner.py --stage-dir stages/01-probe --gate-mode autonomous --verify-only
+	python3 _tools/hermes_stage_runner.py --stage-dir stages/02-controller --gate-mode autonomous --verify-only
+	python3 _tools/hermes_stage_runner.py --stage-dir stages/03-execute --gate-mode autonomous --verify-only
 	bash benchmarks/gauntlet_b_splatbox/contract.sh
 
 gauntlet-c:

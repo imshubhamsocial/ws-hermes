@@ -5,8 +5,8 @@
 | Source | File/Location | Section/Scope | Why |
 | :--- | :--- | :--- | :--- |
 | Stage 01 Output | ../01-spec/output/spec_packet.md | Full file | Approved problem scope and invariants |
-| Substrate Map | `../../../../_config/substrate_ports.md` | ## Active Daemon Table | Verify native port & plugin endpoints |
-| System One Gates | `../../../../_config/anti_rationalization_tables.md` | ## Rule Guard | Verify compliance with ICM conventions |
+| Substrate Map | `../../_config/substrate_ports.md` | ## Active Daemon Table | Verify native port & plugin endpoints |
+| System One Gates | `../../_config/anti_rationalization_tables.md` | ## Rule Guard | Verify compliance with ICM conventions |
 | ICM Architect | ~/.hermes/skills/icm-architect/SKILL.md | ## Reference Integrity | Enumerate all inbound links before moving files |
 
 ## Process
