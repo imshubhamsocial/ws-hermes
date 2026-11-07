@@ -12,9 +12,10 @@
 
 | User Objective / Task Description | Target Directory | Entry Contract / Script | Layer / Scope |
 | :--- | :--- | :--- | :--- |
-| Execute Project 1 (Hermes) Stage 1 (Browser CDP Probe) | `stages/01-probe/` | `stages/01-probe/CONTEXT.md` | Layer 2 Stage |
-| Execute Project 1 (Hermes) Stage 2 (CPU HoughCircles Aim) | `stages/02-controller/` | `stages/02-controller/CONTEXT.md` | Layer 2 Stage |
-| Execute Project 1 (Hermes) Stage 3 (Action & Telemetry) | `stages/03-execute/` | `stages/03-execute/CONTEXT.md` | Layer 2 Stage |
+| Enter Project 1 (Hermes Agent OS) Workspace | `projects/hermes/` | `projects/hermes/CONTEXT.md` | Layer 2 Project |
+| Execute Project 1 Stage 1 (Browser CDP Probe) | `stages/01-probe/` | `stages/01-probe/CONTEXT.md` | Layer 2 Stage |
+| Execute Project 1 Stage 2 (CPU HoughCircles Aim) | `stages/02-controller/` | `stages/02-controller/CONTEXT.md` | Layer 2 Stage |
+| Execute Project 1 Stage 3 (Action & Telemetry) | `stages/03-execute/` | `stages/03-execute/CONTEXT.md` | Layer 2 Stage |
 | Run or audit Project 1 Gauntlet A (3D Voxel FPS) | `benchmarks/gauntlet_a_voxel_fps/` | `benchmarks/gauntlet_a_voxel_fps/contract.sh` | Layer 4 Gauntlet |
 | Run or audit Project 1 Gauntlet B (3D Splatbox CV) | `benchmarks/gauntlet_b_splatbox/` | `benchmarks/gauntlet_b_splatbox/contract.sh` | Layer 4 Gauntlet |
 | Run or audit Project 1 Gauntlet C (3D WebGL Aquarium) | `benchmarks/gauntlet_c_aquarium/` | `benchmarks/gauntlet_c_aquarium/contract.sh` | Layer 4 Gauntlet |

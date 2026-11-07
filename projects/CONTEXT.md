@@ -6,7 +6,7 @@ Shelf for independent, self-contained project workspaces under the ws-hermes umb
 
 | Project ID | Directory | Role / Domain | Entry Contract |
 | :--- | :--- | :--- | :--- |
-| `project1` | `..` | Hermes Agent OS (Compiler pipeline, gauntlets, ledger) | `../AGENTS.md` |
+| `project1` | `hermes/` | Hermes Agent OS (Compiler pipeline, gauntlets, ledger) | `hermes/AGENTS.md` |
 | `project2` | `project2/` | Reserved for auxiliary project workspace | `project2/AGENTS.md` |
 
 ## Inputs
@@ -18,7 +18,7 @@ Shelf for independent, self-contained project workspaces under the ws-hermes umb
 
 ## Process
 
-> 1. Keep Project 1 (Hermes) isolated. Project 1 code lives in root `stages/` and `benchmarks/`.
+> 1. Project 1 (Hermes) lives in `projects/hermes/` with root backward-compatibility symlinks.
 > 2. To add an auxiliary project (for example, `project2`):
 >    a. Create a self-contained folder under `projects/project2/`.
 >    b. Add a local `project2/AGENTS.md` and `project2/CONTEXT.md`.
