@@ -12,12 +12,13 @@
 
 | User Objective / Task Description | Target Directory | Entry Contract / Script | Layer / Scope |
 | :--- | :--- | :--- | :--- |
-| Execute Gauntlet B Stage 1 (Browser CDP Probe) | `stages/01-probe/` | `stages/01-probe/CONTEXT.md` | Layer 2 Stage |
-| Execute Gauntlet B Stage 2 (CPU HoughCircles Aim) | `stages/02-controller/` | `stages/02-controller/CONTEXT.md` | Layer 2 Stage |
-| Execute Gauntlet B Stage 3 (Action & Telemetry) | `stages/03-execute/` | `stages/03-execute/CONTEXT.md` | Layer 2 Stage |
-| Run or audit Frontier Gauntlet A (3D Voxel FPS) | `benchmarks/gauntlet_a_voxel_fps/` | `benchmarks/gauntlet_a_voxel_fps/contract.sh` | Layer 4 Gauntlet |
-| Run or audit Frontier Gauntlet B (3D Splatbox CV) | `benchmarks/gauntlet_b_splatbox/` | `benchmarks/gauntlet_b_splatbox/contract.sh` | Layer 4 Gauntlet |
-| Run or audit Frontier Gauntlet C (3D WebGL Aquarium) | `benchmarks/gauntlet_c_aquarium/` | `benchmarks/gauntlet_c_aquarium/contract.sh` | Layer 4 Gauntlet |
+| Execute Project 1 (Hermes) Stage 1 (Browser CDP Probe) | `stages/01-probe/` | `stages/01-probe/CONTEXT.md` | Layer 2 Stage |
+| Execute Project 1 (Hermes) Stage 2 (CPU HoughCircles Aim) | `stages/02-controller/` | `stages/02-controller/CONTEXT.md` | Layer 2 Stage |
+| Execute Project 1 (Hermes) Stage 3 (Action & Telemetry) | `stages/03-execute/` | `stages/03-execute/CONTEXT.md` | Layer 2 Stage |
+| Run or audit Project 1 Gauntlet A (3D Voxel FPS) | `benchmarks/gauntlet_a_voxel_fps/` | `benchmarks/gauntlet_a_voxel_fps/contract.sh` | Layer 4 Gauntlet |
+| Run or audit Project 1 Gauntlet B (3D Splatbox CV) | `benchmarks/gauntlet_b_splatbox/` | `benchmarks/gauntlet_b_splatbox/contract.sh` | Layer 4 Gauntlet |
+| Run or audit Project 1 Gauntlet C (3D WebGL Aquarium) | `benchmarks/gauntlet_c_aquarium/` | `benchmarks/gauntlet_c_aquarium/contract.sh` | Layer 4 Gauntlet |
+| Access Multi-Project Shelf (Project 2+) | `projects/` | `projects/CONTEXT.md` | Layer 2 Shelf |
 | Design or restructure a workspace using ICM | `skills/icm-architect/` | `skills/icm-architect/SKILL.md` | Layer 3 Skill |
 | Compile a single ICM stage with KV cache isolation | `_tools/` | `_tools/hermes_stage_runner.py` | Layer 3 Tool |
 | Audit Phase 58 and seal the master status ledger | `phases/phase_58_autonomous_icm_factory_and_multi_gauntlet_certification/` | `03_verify/contract.sh` | Layer 4 Gate |
