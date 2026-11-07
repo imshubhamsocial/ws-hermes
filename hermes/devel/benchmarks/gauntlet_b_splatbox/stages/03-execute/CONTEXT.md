@@ -6,11 +6,11 @@
 | :--- | :--- | :--- | :--- |
 | Stage 1 Receipt | ../01-probe/output/probe_state.json | Lines 1–20 | Verified viewport dimensions |
 | Stage 2 Module | ../02-controller/output/vision_tracker.py | Lines 1–55 | Certified target centroid detector |
-| Layer 3 Blueprint | ../../references/splatbox_dom_cdp.md | Lines 111–160 | Closed-loop PD mouse delta actuation & telemetry logger |
+| Layer 3 Blueprint | ../../references/splatbox_dom_cdp.md | Lines 85–131 | Closed-loop PD mouse delta actuation & telemetry logger |
 
 ## 2. Process (Single Job: Execute Match & Pass Contract)
 
-> 1. Read Lines 111–160 of ../../references/splatbox_dom_cdp.md.  
+> 1. Read Lines 85–131 of ../../references/splatbox_dom_cdp.md.  
 > 2. Write output/run_match.py (under 55 lines) that imports find_nearest_target from ../02-controller/output/vision_tracker.py, attaches to Port 9222 via Playwright CDP, ensures PointerLock is active, and runs a 60-second closed-loop control cycle:  
    * Capture viewport JPEG buffer via CDP Page.captureScreenshot.  
    * Compute (dx, dy) via find_nearest_target.  

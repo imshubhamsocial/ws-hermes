@@ -42,7 +42,15 @@ Thinking "skip TDD just this once"? Stop. That's rationalization.
 NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST
 ```
 
-Write code before the test? Delete it. Start over.
+## Environment Stability Pitfall (Hermes TUI)
+
+**Rule:** Never assume the default `python3` interpreter in the Hermes TUI has the full set of required dependencies (e.g., OpenCV, Playwright).
+**Why:** The default environment often lacks C-extension state, leading to `ModuleNotFoundError` even if packages are installed. Always explicitly invoke the interpreter from a known-good virtual environment path (`/path/to/venv/bin/python`).
+
+## Common Rationalizations (Environment)
+| Excuse | Reality |
+|---|---|
+| "It runs in the notebook/local IDE" | The Hermes TUI environment has a different, stricter runtime configuration. |
 
 **No exceptions:**
 - Don't keep it as "reference"

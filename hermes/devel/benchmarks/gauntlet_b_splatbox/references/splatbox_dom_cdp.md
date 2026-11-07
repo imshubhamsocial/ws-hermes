@@ -32,7 +32,7 @@ Use Playwright synchronous CDP connector in output/probe.py to attach to Port 92
         page.screenshot(path=str(out / "playing_frame.png"))
         (out / "probe_state.json").write_text(json.dumps(state, indent=2))
 
-## Section 2: Stage 02-controller Blueprint (Lines 51–110)
+## Section 2: Stage 02-controller Blueprint (Lines 35–84)
 
 Implement output/vision_tracker.py to locate bullseye centroids with OpenCV and verify target crops via embeddinggemma-2 (Port 8139):
 
@@ -41,17 +41,26 @@ Implement output/vision_tracker.py to locate bullseye centroids with OpenCV and 
     from pathlib import Path
 
     def find_nearest_target(bgr, cx=640, cy=360):
+        h, w = bgr.shape[:2]
         gray = cv2.cvtColor(bgr, cv2.COLOR_BGR2GRAY)
         blurred = cv2.GaussianBlur(gray, (9, 9), 2)
         circles = cv2.HoughCircles(
-            blurred, cv2.HOUGH_GRADIENT, dp=1.2, minDist=35,
-            param1=80, param2=24, minRadius=8, maxRadius=95
+            blurred, cv2.HOUGH_GRADIENT, dp=1.2, minDist=30,
+            param1=100, param2=24, minRadius=10, maxRadius=70
         )
         if circles is None:
             return None
-        best = min(circles[0], key=lambda c: math.hypot(c[0] - cx, c[1] - cy))
-        tx, ty, r = float(best[0]), float(best[1]), float(best[2])
-        return {"tx": tx, "ty": ty, "r": r, "dx": tx - cx, "dy": ty - cy}
+        valid = []
+        for c in circles[0]:
+            tx, ty, r = float(c[0]), float(c[1]), float(c[2])
+            if not (80 < ty < h * 0.70 and 12 <= r <= 70):
+                continue
+            if tx > w * 0.52 and ty > h * 0.46:
+                continue
+            valid.append({"tx": tx, "ty": ty, "r": r, "dx": tx - cx, "dy": ty - cy})
+        if not valid:
+            return None
+        return min(valid, key=lambda t: math.hypot(t["dx"], t["dy"]))
 
     def verify_crop_semantic(crop_bgr):
         mean_std = float(np.std(crop_bgr))
@@ -82,7 +91,7 @@ Implement output/vision_tracker.py to locate bullseye centroids with OpenCV and 
         receipt = {"targets_found_ge_1": True, "dx": res["dx"], "dy": res["dy"], "embeddinggemma2_verified": verified}
         (out / "tracker_verified.json").write_text(json.dumps(receipt, indent=2))
 
-## Section 3: Stage 03-execute Blueprint (Lines 111–160)
+## Section 3: Stage 03-execute Blueprint (Lines 85–131)
 
 Run the 60-second closed-loop PD controller over a persistent Playwright CDP session in output/run_match.py:
 
@@ -90,11 +99,14 @@ Run the 60-second closed-loop PD controller over a persistent Playwright CDP ses
     import numpy as np
     from pathlib import Path
     from playwright.sync_api import sync_playwright
-    sys.path.insert(0, str(Path("../02-controller/output").resolve()))
+    sys.path.insert(0, str(Path("output").resolve()))
+    sys.path.insert(0, str(Path("stages/02-controller/output").resolve()))
     from vision_tracker import find_nearest_target, verify_crop_semantic
 
     out = Path("output")
     out.mkdir(exist_ok=True)
+    stage_out = Path("stages/03-execute/output")
+    stage_out.mkdir(parents=True, exist_ok=True)
     with sync_playwright() as p:
         browser = p.chromium.connect_over_cdp("http://127.0.0.1:9222")
         page = next(pg for ctx in browser.contexts for pg in ctx.pages if "splatbox" in pg.url)
@@ -112,20 +124,23 @@ Run the 60-second closed-loop PD controller over a persistent Playwright CDP ses
             tgt = find_nearest_target(frame, w // 2, h // 2)
             frames += 1
             if tgt:
-                grav = min(12.0, 160.0 / max(tgt["r"], 8.0))
-                ex, ey = tgt["dx"], tgt["dy"] - grav
-                mx = int(max(-40, min(40, 0.45 * ex + 0.12 * (ex - prev_dx))))
-                my = int(max(-40, min(40, 0.45 * ey + 0.12 * (ey - prev_dy))))
+                ex = tgt["dx"]
+                ey = tgt["dy"] - 18.0
+                mx = int(max(-40, min(40, 0.5 * ex + 0.1 * (ex - prev_dx))))
+                my = int(max(-40, min(40, 0.45 * ey + 0.1 * (ey - prev_dy))))
                 prev_dx, prev_dy = ex, ey
                 page.evaluate(f"() => {{ document.dispatchEvent(new MouseEvent('mousemove', {{bubbles: true, movementX: {mx}, movementY: {my}}})); }}")
-                if math.hypot(ex, ey) <= 12.0:
+                if math.hypot(ex, ey) <= max(18.0, 0.5 * tgt["r"]):
                     cdp.send("Input.dispatchMouseEvent", {"type": "mousePressed", "x": w//2, "y": h//2, "button": "left", "buttons": 1, "clickCount": 1})
                     time.sleep(0.04)
                     cdp.send("Input.dispatchMouseEvent", {"type": "mouseReleased", "x": w//2, "y": h//2, "button": "left", "buttons": 0, "clickCount": 1})
                     if not sem_ok:
                         sem_ok = verify_crop_semantic(frame)
-            if frames % 35 == 0:
+            else:
+                page.evaluate("() => { document.dispatchEvent(new MouseEvent('mousemove', {bubbles: true, movementX: 25, movementY: 0})); }")
+            if frames % 25 == 0:
                 page.keyboard.press("r")
         dom = page.evaluate("() => ({score: parseInt(document.querySelector('#score')?.innerText||'0', 10), ammo: document.querySelector('#ammo')?.innerText||'0'})")
         telemetry = {"score": dom["score"], "duration_sec": round(time.time() - t0, 1), "frames_processed": frames, "embeddinggemma2_verified": bool(sem_ok)}
         (out / "telemetry.json").write_text(json.dumps(telemetry, indent=2))
+        (stage_out / "telemetry.json").write_text(json.dumps(telemetry, indent=2))

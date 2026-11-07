@@ -23,6 +23,9 @@ Invoke `/icm-stage-compiler` at the start of any benchmark stage execution or wo
 ## Pitfalls
 - Never load files outside the `Inputs` table.
 - Never patch a broken script more than once; re-compile the under-60-line module cleanly from the Layer 3 Code Blueprint.
+- When running Python agents that rely on C-binding libraries (e.g., cv2, numpy), ensure the interpreter used for execution (e.g., python3.14) is the environment where packages were installed; shell installation is insufficient for all system Python paths.
+- External Blueprint Functionality.
+    *   **Why**: Canonical blueprints frequently reference specialized logic (e.g., vision, specific APIs) that are not globally available; identify these references and either mock them or explicitly import the required modules/functions before attempting execution.
 
 ## Verification
 Confirm that all files listed in the `Outputs` table exist on disk and pass the stage audit command.

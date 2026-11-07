@@ -7,21 +7,23 @@ out = Path("output")
 out.mkdir(exist_ok=True)
 
 with sync_playwright() as p:
+    # Connect to CDP
     browser = p.chromium.connect_over_cdp("http://127.0.0.1:9222")
-    # Locate tab containing splatbox
+    
+    # Find tab and bring to front
     page = next(pg for ctx in browser.contexts for pg in ctx.pages if "splatbox" in pg.url)
     page.bring_to_front()
     
-    # Step 1: Initial Screenshot
+    # Screenshot menu
     page.screenshot(path=str(out / "menu_frame.png"))
     
-    # Step 2: Attempt to engage PointerLock
+    # Click play
     play_btn = page.locator("#play")
     if play_btn.is_visible():
-        play_btn.click() # Dispatches native trusted CDP mouse gesture
-        time.sleep(0.5)
+        play_btn.click()
+        time.sleep(0.6)
         
-    # Step 3: Evaluate state and extract HUD
+    # Evaluate state and extract HUD
     state = page.evaluate("""() => ({
         pointer_lock_active: document.pointerLockElement !== null,
         viewport: {width: window.innerWidth, height: window.innerHeight},
@@ -32,6 +34,8 @@ with sync_playwright() as p:
         }
     })""")
     
-    # Step 4: Post-game screenshot and state saving
+    # Screenshot playing
     page.screenshot(path=str(out / "playing_frame.png"))
+    
+    # Write state JSON
     (out / "probe_state.json").write_text(json.dumps(state, indent=2))

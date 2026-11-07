@@ -1,149 +1,88 @@
-import asyncio
+import base64
+import cv2
 import json
-import websockets
+import math
+import sys
 import time
-import os
-import urllib.request
+import numpy as np
+from pathlib import Path
+from playwright.sync_api import sync_playwright
 
-# Configuration
-CDP_HTTP_URL = "http://127.0.0.1:9222/json"
-OUTPUT_TELEMETRY_PATH = "output/telemetry.json"
-PLAY_BUTTON_SELECTOR = "#play"
-SCORE_SELECTOR = "span#score"
-TIMER_SELECTOR = "span#timer"
-AMMO_SELECTOR = "span#ammo"
-ROUND_DURATION = 60
+from pathlib import Path
+import sys
+sys.path.insert(0, str(Path("output").resolve()))
+sys.path.insert(0, str(Path("stages/02-controller/output").resolve()))
+from vision_tracker import find_nearest_target, verify_crop_semantic
 
-async def get_websocket_url():
-    """Fetches the webSocketDebuggerUrl and extracts the pageId for the Splatbox tab from the CDP HTTP endpoint."""
-    try:
-        with urllib.request.urlopen(CDP_HTTP_URL, timeout=5) as response:
-            data = json.loads(response.read().decode())
-            
-            # Filter for the Splatbox tab
-            splatbox_targets = [
-                t for t in data if t.get('title') == "Splatbox: paintball in your browser"
-            ]
-            
-            if splatbox_targets:
-                # Use the first found Splatbox target
-                url = splatbox_targets[0].get('webSocketDebuggerUrl')
-                # Extract pageId from the URL: .../devtools/page/PAGE_ID
-                page_id = url.split('/')[-1]
-                return url, page_id
-            else:
-                print("Error: No Splatbox tab found in CDP targets.")
-                return None, None
-    except urllib.error.URLError as e:
-        print(f"Error connecting to CDP HTTP endpoint at {CDP_HTTP_URL}. Ensure Chrome Dev Tools is running on 9222. Details: {e}")
-        return None, None
-    except Exception as e:
-        print(f"An unexpected error occurred during URL fetching: {e}")
-        return None, None
+def run_splatbox_match():
+    out = Path("output")
+    out.mkdir(exist_ok=True)
+    stage_out = Path("stages/03-execute/output")
+    stage_out.mkdir(parents=True, exist_ok=True)
 
-async def run_splatbox_round(websocket_url, page_id):
-    if not websocket_url or not page_id:
-        return None
+    with sync_playwright() as p:
+        # Connect to CDP
+        browser = p.chromium.connect_over_cdp("http://127.0.0.1:9222")
+        # Get page by URL containment
+        page = next(pg for ctx in browser.contexts for pg in ctx.pages if "splatbox" in pg.url)
+        page.bring_to_front()
         
-    print(f"Attempting to connect to CDP via WebSocket at {websocket_url}")
-    try:
-        async with websockets.connect(websocket_url) as websocket:
-            print("Successfully connected to CDP.")
+        # Initial state check and click #play
+        if page.locator("#play").is_visible():
+            page.locator("#play").click()
+            time.sleep(0.5)
             
-            # 3. Check for #play button existence and visibility
-            print("Checking for #play button...")
-            check_script = f"document.querySelector('{PLAY_BUTTON_SELECTOR}') !== null && window.getComputedStyle(document.querySelector('{PLAY_BUTTON_SELECTOR}')).display !== 'none'"
-            await websocket.send(json.dumps({"id": 3, "method": "Runtime.evaluate", "params": {"expression": check_script, "contextId": page_id}}))
-            response = await websocket.recv()
-            print(f"CDP Response (Check #play): {response}")
-            is_play_button_present = json.loads(response)['result']['result']['value']
+        cdp = page.context.new_cdp_session(page)
+        t0, frames, prev_dx, prev_dy, sem_ok = time.time(), 0, 0.0, 0.0, False
+        
+        # Closed-loop match loop (58 seconds)
+        while time.time() - t0 < 58.0:
+            # Capture frame
+            shot = cdp.send("Page.captureScreenshot", {"format": "jpeg", "quality": 65})
+            buf = np.frombuffer(base64.b64decode(shot["data"]), dtype=np.uint8)
+            frame = cv2.imdecode(buf, cv2.IMREAD_COLOR)
+            h, w = frame.shape[:2]
             
-            if not is_play_button_present:
-                print(f"Error: Play button ({PLAY_BUTTON_SELECTOR}) is not visible or present on the page. Cannot proceed.")
-                return None
-
-            # 4. Engage PointerLock by dispatching native CDP mouse events
-            print("Bringing tab to front...")
-            await websocket.send(json.dumps({"id": 4, "method": "Page.bringToFront", "params": {}}))
-            response = await websocket.recv()
-            print(f"CDP Response (Page.bringToFront): {response}")
+            tgt = find_nearest_target(frame, w // 2, h // 2)
+            frames += 1
             
-            # 5. Get #play button bounds dynamically
-            print("Querying #play button bounds...")
-            bounds_script = "document.querySelector('#play').getBoundingClientRect()"
-            await websocket.send(json.dumps({"id": 5, "method": "Runtime.evaluate", "params": {"expression": bounds_script, "contextId": page_id}}))
-            response = await websocket.recv()
-            # Unpack using full nested path: response['result']['result']['value']
-            play_bounds = json.loads(response)['result']['result']['value']
-            
-            # Calculate center coordinates
-            center_x = play_bounds['left'] + play_bounds['width'] / 2
-            center_y = play_bounds['top'] + play_bounds['height'] / 2
-            print(f"Calculated play button center: ({center_x}, {center_y})")
-
-            # 6. Engage PointerLock by dispatching native CDP mouse events
-            print("Dispatching CDP mouse events to engage PointerLock.")
-            
-            # Mouse Pressed
-            await websocket.send(json.dumps({"id": 6, "method": "Input.dispatchMouseEvent", "params": {"type": "mousePressed", "x": center_x, "y": center_y, "button": "left", "buttons": 1, "clickCount": 1}}))
-            response = await websocket.recv()
-            print(f"CDP Response (Input.dispatchMouseEvent - Pressed): {response}")
-
-            # Mouse Released
-            await websocket.send(json.dumps({"id": 7, "method": "Input.dispatchMouseEvent", "params": {"type": "mouseReleased", "x": center_x, "y": center_y, "button": "left", "buttons": 0, "clickCount": 1}}))
-            response = await websocket.recv()
-            print(f"CDP Response (Input.dispatchMouseEvent - Released): {response}")
-            
-            # 7. Run 60-second round (Simulated loop for capture/tracking/slewing)
-            print(f"Starting {ROUND_DURATION} second round...")
-            start_time = time.time()
-            
-            while time.time() - start_time < ROUND_DURATION:
-                # Simulate action and capture
-                await asyncio.sleep(1) 
-                # Capture screenshot (example)
-                await websocket.send(json.dumps({"id": 8, "method": "Page.captureScreenshot", "params": {"format": "png"}}))
-                response = await websocket.recv()
-                print(f"CDP Response (Page.captureScreenshot): {response}")
+            if tgt:
+                ex = tgt["dx"]
+                ey = tgt["dy"] - 18.0
+                # PD Control Logic (Slew Camera)
+                mx = int(max(-40, min(40, 0.5 * ex + 0.1 * (ex - prev_dx))))
+                my = int(max(-40, min(40, 0.45 * ey + 0.1 * (ey - prev_dy))))
+                prev_dx, prev_dy = ex, ey
+                page.evaluate(f"() => {{ document.dispatchEvent(new MouseEvent('mousemove', {{bubbles: true, movementX: {mx}, movementY: {my}}})); }}")
                 
-            print("Round finished.")
-            
-            # 8. Extract real telemetry from the live DOM nodes
-            print("Extracting telemetry from DOM...")
-            
-            async def get_dom_text(selector):
-                await websocket.send(json.dumps({"id": 9, "method": "Runtime.evaluate", "params": {"expression": f"document.querySelector('{selector}').innerText", "contextId": page_id}}))
-                response = await websocket.recv()
-                print(f"CDP Response (Runtime.evaluate for {selector}): {response}")
-                return json.loads(response)['result']['result']['value']
-
-            score = await get_dom_text(SCORE_SELECTOR)
-            timer = await get_dom_text(TIMER_SELECTOR)
-            ammo = await get_dom_text(AMMO_SELECTOR)
-            
-            telemetry = {
-                "score": score,
-                "timer": timer,
-                "ammo": ammo,
-                "timestamp": time.time()
-            }
-            
-            # 9. Write telemetry to output/telemetry.json
-            with open(OUTPUT_TELEMETRY_PATH, 'w') as f:
-                json.dump(telemetry, f, indent=2)
-            print(f"Telemetry written to {OUTPUT_TELEMETRY_PATH}")
-            
-            return telemetry
+                # Fire if target is within range
+                if math.hypot(ex, ey) <= max(18.0, 0.5 * tgt["r"]):
+                    cdp.send("Input.dispatchMouseEvent", {"type": "mousePressed", "x": w//2, "y": h//2, "button": "left", "buttons": 1, "clickCount": 1})
+                    time.sleep(0.04)
+                    cdp.send("Input.dispatchMouseEvent", {"type": "mouseReleased", "x": w//2, "y": h//2, "button": "left", "buttons": 0, "clickCount": 1})
+                    if not sem_ok:
+                        sem_ok = verify_crop_semantic(frame)
+            else:
+                # Sweep camera if no target is found
+                page.evaluate("() => { document.dispatchEvent(new MouseEvent('mousemove', {bubbles: true, movementX: 25, movementY: 0})); }")
+                
+            # Auto-reload every 25 frames
+            if frames % 25 == 0:
+                page.keyboard.press("r")
+        
+        # Extract final DOM telemetry
+        dom = page.evaluate("() => ({score: parseInt(document.querySelector('#score')?.innerText||'0', 10), ammo: document.querySelector('#ammo')?.innerText||'0'})")
+        
+        telemetry = {
+            "score": dom["score"], 
+            "duration_sec": round(time.time() - t0, 1), 
+            "frames_processed": frames, 
+            "embeddinggemma2_verified": bool(sem_ok)
+        }
+        
+        # Write telemetry to required paths
+        (out / "telemetry.json").write_text(json.dumps(telemetry, indent=2))
+        (stage_out / "telemetry.json").write_text(json.dumps(telemetry, indent=2))
 
 if __name__ == "__main__":
-    # 1. Get the dynamic WebSocket URL and pageId
-    websocket_url, page_id = asyncio.run(get_websocket_url())
-    
-    # 2. Run the round with the dynamic URL and pageId
-    telemetry_data = asyncio.run(run_splatbox_round(websocket_url, page_id))
-    
-    if telemetry_data:
-        print("--- Execution Complete ---")
-        print(f"Final Telemetry: {telemetry_data}")
-    else:
-        print("--- Execution Failed ---")
+    run_splatbox_match()

@@ -1,26 +1,24 @@
-[ICM GAUNTLET B: CLOSED-LOOP CV CONTROLLER & GENUINE TELEMETRY REMEDIATION]
-Read CONTEXT.md, invariants.md, contract.sh, references/splatbox_dom_cdp.md (Lines 85–135), and output/splatbox_agent.py first.
+[ICM GAUNTLET B: SPLATBOX MATCH REMEDIATION & VERIFICATION]
+Read CONTEXT.md, contract.sh, and references/splatbox_dom_cdp.md (Lines 94–146) first.
 Context window must remain strictly between 2,000 and 8,000 tokens.
 
-DIAGNOSIS (Zero Fake Green Forensic Audit):
-1. Stub Loop: In output/splatbox_agent.py (lines 97–108), the match loop was a stub that only called Page.captureScreenshot and slept. It never slewed the camera and never dispatched fire events.
-2. PointerLock Delta Cancelation: In Chromium headless mode, raw CDP Input.dispatchMouseEvent with movementX/movementY triggers internal pointerlock recentering that immediately cancels delta motion. To rotate the Three.js PointerLockControls camera, dispatch synthetic MouseEvents on document:
-   document.dispatchEvent(new MouseEvent('mousemove', {bubbles: true, movementX: mx, movementY: my}))
-3. Scoring Mechanics: In Splatbox, bullseye target hits award 25 points each into DOM span#score. The previous telemetry score of 1 was an artificial fallback (max(1, dom['score'])). Contract.sh has been updated to require score >= 25.
+1. BASELINE ESTABLISHED & FORENSIC DIAGNOSIS:
+   - Baseline: You correctly structured output/splatbox_agent.py with #play click logic, the 58-second closed-loop loop, and DOM telemetry extraction. Stages 01 and 02 are certified PASS.
+   - Forensic Diagnosis of NameError Crash:
+     * In output/splatbox_agent.py (lines 11–20), you commented out:
+       # from vision_tracker import find_nearest_target, verify_crop_semantic
+       falsely assuming vision_tracker was not present in the environment.
+     * Empirical Verification: output/vision_tracker.py is present on disk and certified. As documented in Section 3 of references/splatbox_dom_cdp.md (lines 102–104), adding:
+       import sys
+       from pathlib import Path
+       sys.path.insert(0, str(Path("output").resolve()))
+       sys.path.insert(0, str(Path("stages/02-controller/output").resolve()))
+       from vision_tracker import find_nearest_target, verify_crop_semantic
+       imports both functions successfully without errors.
 
-REMEDIATION & VERIFICATION CONTRACT:
-1. Re-compile output/splatbox_agent.py into a genuine closed-loop autonomous player:
-   - Connect to Chrome DevTools on Port 9222 (or launch Flatpak Chrome Dev).
-   - Click button#play to engage PointerLock and enter practice mode.
-   - Run the 60-second closed-loop loop:
-     * Capture frame via Page.captureScreenshot.
-     * Detect bullseye centroid using HSV red concentric ring contours (area >= 120, circularity >= 0.65) excluding weapon viewmodel.
-     * Apply ballistic gravity drop compensation (grav = min(12.0, 160.0 / max(r, 8.0))).
-     * Slew camera via document.dispatchEvent(new MouseEvent('mousemove', {bubbles: true, movementX, movementY})).
-     * When aligned within tolerance (dist <= 14 px), dispatch CDP mousePressed/mouseReleased to fire.
-     * Press 'r' periodically or when ammo drops below 5 to reload.
-   - At round completion, read genuine DOM text from span#score, span#timer, span#ammo.
-   - Write genuine telemetry to output/telemetry.json and stages/03-execute/output/telemetry.json with fields:
-     score (integer >= 25), duration_sec (>= 55.0), frames_processed (>= 120), embeddinggemma2_verified (boolean).
-2. Execute python3 output/splatbox_agent.py for a full live match.
-3. Run bash contract.sh and verify all 4 audit gates pass with exit code 0.
+2. REMEDIATION & VERIFICATION CONTRACT:
+   1. Read output/splatbox_agent.py and references/splatbox_dom_cdp.md (Lines 100–146).
+   2. Edit output/splatbox_agent.py to un-comment and include the vision_tracker imports from lines 102–104 of references/splatbox_dom_cdp.md.
+   3. Execute: python3 output/splatbox_agent.py
+      (Let the 58-second match complete; it will click #play, acquire arena bullseyes, shoot, and record genuine score).
+   4. Verify: bash contract.sh (must exit code 0 with score >= 25).
