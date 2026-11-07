@@ -1,13 +1,26 @@
-[ICM GAUNTLET B: ISOLATED REMEDIATION STAGE — LIVE CDP ROUND & TELEMETRY SEALING]
-Read CONTEXT.md, invariants.md, rules.md, references.md, and output/splatbox_agent.py.
-Working context must remain strictly between 2,000 and 8,000 tokens.
+[ICM GAUNTLET B: CLOSED-LOOP CV CONTROLLER & GENUINE TELEMETRY REMEDIATION]
+Read CONTEXT.md, invariants.md, contract.sh, references/splatbox_dom_cdp.md (Lines 85–135), and output/splatbox_agent.py first.
+Context window must remain strictly between 2,000 and 8,000 tokens.
 
-FORENSIC AUDIT OF output/splatbox_agent.py:
-1. Your dynamic URL resolution (get_websocket_url) successfully connects to the page WebSocket at ws://127.0.0.1:9222/devtools/page/...
-2. Exception "0" was a Python KeyError on line 59: targets['result'] is a dictionary containing "targetInfos", not a list.
-3. Architecture Fix: Because your WebSocket already connects directly to the page target URL (/devtools/page/...), you are already attached to the Splatbox page. Omit Target.getTargets and Target.createTarget entirely.
-4. Directly execute on the page WebSocket:
-   - Engage PointerLock by evaluating document.querySelector('#play').click().
-   - Execute the 60-second round capturing Page.captureScreenshot, tracking targets, slewing camera via Input.dispatchMouseEvent (movementX/movementY), and firing.
-   - Extract real telemetry from the live DOM nodes (span#score, span#timer, span#ammo) after the round into output/telemetry.json.
-   - Verify output/telemetry.json contains genuine gameplay metrics, then execute bash contract.sh and confirm exit code 0.
+DIAGNOSIS (Zero Fake Green Forensic Audit):
+1. Stub Loop: In output/splatbox_agent.py (lines 97–108), the match loop was a stub that only called Page.captureScreenshot and slept. It never slewed the camera and never dispatched fire events.
+2. PointerLock Delta Cancelation: In Chromium headless mode, raw CDP Input.dispatchMouseEvent with movementX/movementY triggers internal pointerlock recentering that immediately cancels delta motion. To rotate the Three.js PointerLockControls camera, dispatch synthetic MouseEvents on document:
+   document.dispatchEvent(new MouseEvent('mousemove', {bubbles: true, movementX: mx, movementY: my}))
+3. Scoring Mechanics: In Splatbox, bullseye target hits award 25 points each into DOM span#score. The previous telemetry score of 1 was an artificial fallback (max(1, dom['score'])). Contract.sh has been updated to require score >= 25.
+
+REMEDIATION & VERIFICATION CONTRACT:
+1. Re-compile output/splatbox_agent.py into a genuine closed-loop autonomous player:
+   - Connect to Chrome DevTools on Port 9222 (or launch Flatpak Chrome Dev).
+   - Click button#play to engage PointerLock and enter practice mode.
+   - Run the 60-second closed-loop loop:
+     * Capture frame via Page.captureScreenshot.
+     * Detect bullseye centroid using HSV red concentric ring contours (area >= 120, circularity >= 0.65) excluding weapon viewmodel.
+     * Apply ballistic gravity drop compensation (grav = min(12.0, 160.0 / max(r, 8.0))).
+     * Slew camera via document.dispatchEvent(new MouseEvent('mousemove', {bubbles: true, movementX, movementY})).
+     * When aligned within tolerance (dist <= 14 px), dispatch CDP mousePressed/mouseReleased to fire.
+     * Press 'r' periodically or when ammo drops below 5 to reload.
+   - At round completion, read genuine DOM text from span#score, span#timer, span#ammo.
+   - Write genuine telemetry to output/telemetry.json and stages/03-execute/output/telemetry.json with fields:
+     score (integer >= 25), duration_sec (>= 55.0), frames_processed (>= 120), embeddinggemma2_verified (boolean).
+2. Execute python3 output/splatbox_agent.py for a full live match.
+3. Run bash contract.sh and verify all 4 audit gates pass with exit code 0.

@@ -14,7 +14,7 @@ One job: Execute autonomous Splatbox gameplay via 3-stage compiler pipeline on C
 > 1. Execute Stage 1: Browser and canvas state probing (stages/01-probe/).
 > 2. Execute Stage 2: CPU OpenCV HoughCircles centroid calculation (stages/02-controller/).
 > 3. Execute Stage 3: CDP action dispatch and frame telemetry capture (stages/03-execute/).
-> 4. Verify telemetry.json records >= 100 frames and score >= 1.
+> 4. Verify telemetry.json records >= 120 frames and score >= 25 (genuine bullseye hit).
 
 ## Outputs
 
@@ -25,4 +25,4 @@ One job: Execute autonomous Splatbox gameplay via 3-stage compiler pipeline on C
 
 ## Check
 
-Run bash ./contract.sh and confirm 145 frames captured, score = 1, and exit code 0.
+Run bash ./contract.sh and confirm frames >= 120, score >= 25, and exit code 0.

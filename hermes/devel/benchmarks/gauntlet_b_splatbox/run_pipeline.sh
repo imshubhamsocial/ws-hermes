@@ -2,7 +2,7 @@
 # Deterministic 3-Stage ICM Compiler Pipeline for Gauntlet B (TUI Enabled)
 set -euo pipefail
 
-BENCH_DIR="/var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/benchmarks/gauntlet_b_splatbox"
+BENCH_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 for stage in 01-probe 02-controller 03-execute; do
   echo "===================================================="

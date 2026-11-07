@@ -112,19 +112,20 @@ Run the 60-second closed-loop PD controller over a persistent Playwright CDP ses
             tgt = find_nearest_target(frame, w // 2, h // 2)
             frames += 1
             if tgt:
-                grav = min(12.0, 180.0 / max(tgt["r"], 8.0))
+                grav = min(12.0, 160.0 / max(tgt["r"], 8.0))
                 ex, ey = tgt["dx"], tgt["dy"] - grav
-                mx = int(max(-60, min(60, 0.55 * ex + 0.15 * (ex - prev_dx))))
-                my = int(max(-60, min(60, 0.55 * ey + 0.15 * (ey - prev_dy))))
+                mx = int(max(-40, min(40, 0.45 * ex + 0.12 * (ex - prev_dx))))
+                my = int(max(-40, min(40, 0.45 * ey + 0.12 * (ey - prev_dy))))
                 prev_dx, prev_dy = ex, ey
-                cdp.send("Input.dispatchMouseEvent", {"type": "mouseMoved", "x": w//2, "y": h//2, "movementX": mx, "movementY": my})
-                if math.hypot(ex, ey) <= 8.5:
+                page.evaluate(f"() => {{ document.dispatchEvent(new MouseEvent('mousemove', {{bubbles: true, movementX: {mx}, movementY: {my}}})); }}")
+                if math.hypot(ex, ey) <= 12.0:
                     cdp.send("Input.dispatchMouseEvent", {"type": "mousePressed", "x": w//2, "y": h//2, "button": "left", "buttons": 1, "clickCount": 1})
+                    time.sleep(0.04)
                     cdp.send("Input.dispatchMouseEvent", {"type": "mouseReleased", "x": w//2, "y": h//2, "button": "left", "buttons": 0, "clickCount": 1})
                     if not sem_ok:
                         sem_ok = verify_crop_semantic(frame)
             if frames % 35 == 0:
                 page.keyboard.press("r")
-        dom = page.evaluate("() => ({score: parseInt(document.querySelector('#score')?.innerText||'1',10), ammo: document.querySelector('#ammo')?.innerText||'40'})")
-        telemetry = {"score": max(1, dom["score"]), "duration_sec": round(time.time() - t0, 1), "frames_processed": frames, "embeddinggemma2_verified": bool(sem_ok or True)}
+        dom = page.evaluate("() => ({score: parseInt(document.querySelector('#score')?.innerText||'0', 10), ammo: document.querySelector('#ammo')?.innerText||'0'})")
+        telemetry = {"score": dom["score"], "duration_sec": round(time.time() - t0, 1), "frames_processed": frames, "embeddinggemma2_verified": bool(sem_ok)}
         (out / "telemetry.json").write_text(json.dumps(telemetry, indent=2))

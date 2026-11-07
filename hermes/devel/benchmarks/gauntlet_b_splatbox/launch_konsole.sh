@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-BENCH_DIR="/var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/benchmarks/gauntlet_b_splatbox"
+BENCH_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 UNIT_NAME="hermes-gauntlet-b-icm-compiler"
 
 /usr/bin/distrobox-host-exec systemctl --user stop "${UNIT_NAME}.service" 2>/dev/null || true

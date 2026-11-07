@@ -24,8 +24,8 @@ echo "[PASS] Stage 01-probe certified: PointerLock active."
 jq -e '.targets_found_ge_1 == true' "${S2}" > /dev/null
 echo "[PASS] Stage 02-controller certified: Closed-loop target centroid verified."
 
-# 4. Verify Stage 3 Match Telemetry (Zero Fake Green)
-jq -e '.score > 0 and .duration_sec >= 55 and .frames_processed >= 120 and .embeddinggemma2_verified == true' "${S3}" > /dev/null
+# 4. Verify Stage 3 Match Telemetry (Zero Fake Green: Genuine Bullseye Hit >= 25)
+jq -e '.score >= 25 and .duration_sec >= 55 and .frames_processed >= 120 and .embeddinggemma2_verified == true' "${S3}" > /dev/null
 SCORE=$(jq -r '.score' "${S3}")
 FRAMES=$(jq -r '.frames_processed' "${S3}")
 echo "[PASS] Stage 03-execute certified: Score=${SCORE}, Frames=${FRAMES}."

@@ -14,9 +14,9 @@
 > 2. Write output/run_match.py (under 55 lines) that imports find_nearest_target from ../02-controller/output/vision_tracker.py, attaches to Port 9222 via Playwright CDP, ensures PointerLock is active, and runs a 60-second closed-loop control cycle:  
    * Capture viewport JPEG buffer via CDP Page.captureScreenshot.  
    * Compute (dx, dy) via find_nearest_target.  
-   * Dispatch relative mouse movement via CDP Input.dispatchMouseEvent (type: "mouseMoved", movementX, movementY).  
-   * When hypot(ex, ey) <= 8.5, fire via mousePressed/mouseReleased and reload (r) periodically.  
-   * Write final DOM #score, duration_sec, frames_processed, and embeddinggemma2_verified to output/telemetry.json.  
+   * Dispatch relative mouse movement via document.dispatchEvent(new MouseEvent('mousemove', {bubbles: true, movementX, movementY})).  
+   * When hypot(ex, ey) <= 12.0, fire via mousePressed/mouseReleased and reload (r) periodically.  
+   * Write final DOM #score (>= 25), duration_sec, frames_processed, and embeddinggemma2_verified to output/telemetry.json.  
 > 3. Execute python3 output/run_match.py and run bash ../../contract.sh.
 
 ## 3. Outputs
