@@ -30,8 +30,8 @@ assert_check() {
 echo "=== Executing Phase 57 Verification Contract ==="
 
 # Assertion 1: Layer 0 Workspace Map Presence
-assert_check "1. Layer 0 workspace map exists (IDENTITY.md, AGENTS.md, SOUL.md, CONTEXT.md)" \
-  "[[ -f IDENTITY.md && -f AGENTS.md && -f SOUL.md && -f CONTEXT.md ]]"
+assert_check "1. Layer 0 workspace map exists (IDENTITY.md, AGENTS.md, .hermes/SOUL.md, CONTEXT.md)" \
+  "[[ -f IDENTITY.md && -f AGENTS.md && -f .hermes/SOUL.md && -f CONTEXT.md ]]"
 
 # Assertion 2: Line Budget Discipline (CONTEXT.md <= 80 lines)
 assert_check "2. All CONTEXT.md files are strictly <= 80 lines" \

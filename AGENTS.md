@@ -6,7 +6,7 @@ You operate inside ws-hermes (/var/home/imshubhamsocial/Projects/Workspace/Perso
 
 ## 2. Core Directory Locations
 
-* SOUL.md: Host substrate persona (.hermes/SOUL.md) for Hermes cognitive disposition.
+* .hermes/SOUL.md: Host substrate persona for Hermes cognitive disposition.
 * CONTEXT.md: Layer 1 Umbrella task router mapping objectives to project folders.
 * hermes/: Project domain shelf containing active development in hermes/devel/.
 * hermes/devel/: Self-contained Hermes Agent OS project workspace (compiler, gauntlets, phases).

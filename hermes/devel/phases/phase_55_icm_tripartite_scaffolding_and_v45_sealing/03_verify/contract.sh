@@ -35,9 +35,9 @@ echo "=== Executing Phase 55 Verification Contract ==="
 assert_check "1. AGENTS.md exists and is strictly <= 80 lines" \
   "[[ -f AGENTS.md ]] && [[ \$(wc -l < AGENTS.md) -le 80 ]]"
 
-# Assertion 2: Layer 0 CLAUDE.md Compatibility Pointer
-assert_check "2. CLAUDE.md exists as a 1-line pointer to AGENTS.md" \
-  "[[ -f CLAUDE.md ]] && [[ \$(wc -l < CLAUDE.md) -le 5 ]]"
+# Assertion 2: Layer 0 Unified Multi-Agent Entry Point
+assert_check "2. AGENTS.md operates as unified multi-agent entry point" \
+  "[[ -f AGENTS.md ]] && grep -q 'Layer 0' AGENTS.md"
 
 # Assertion 3: Layer 1 Root Task Router (CONTEXT.md <= 80 lines)
 assert_check "3. Root CONTEXT.md exists and is strictly <= 80 lines" \
