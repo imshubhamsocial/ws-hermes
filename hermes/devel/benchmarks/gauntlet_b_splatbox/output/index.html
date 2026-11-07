@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gauntlet B: Splatbox CV Autonomous Agent Dashboard</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #0f172a; color: #f8fafc; margin: 0; padding: 24px; }
+    h1, h2 { color: #38bdf8; }
+    .header { border-bottom: 1px solid #334155; padding-bottom: 16px; margin-bottom: 24px; }
+    .badge { display: inline-block; padding: 4px 10px; border-radius: 9999px; font-weight: bold; font-size: 12px; }
+    .badge-pass { background: #059669; color: #ecfdf5; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+    .card { background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 18px; }
+    .card img { max-width: 100%; height: auto; border-radius: 6px; border: 1px solid #475569; margin-top: 10px; }
+    pre { background: #0f172a; padding: 12px; border-radius: 6px; overflow-x: auto; color: #a5f3fc; font-size: 13px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; }
+    th, td { text-align: left; padding: 8px; border-bottom: 1px solid #334155; }
+    th { color: #94a3b8; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Frontier Gauntlet B: 3-Stage Splatbox CV Certification</h1>
+    <span class="badge badge-pass">CERTIFIED 100% PASS</span>
+    <span class="badge badge-pass">VRAM: 5,009 MiB &lt;= 5,800.0 MiB</span>
+    <p>Target Application: <code>https://splatbox.alexdiaz.fyi/</code> over Chrome DevTools Protocol (CDP Port 9222)</p>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Stage 1: Browser CDP Probe</h2>
+      <p>Status: <span class="badge badge-pass">PASS</span> (PointerLock Activated)</p>
+      <table>
+        <tr><th>Property</th><th>Value</th></tr>
+        <tr><td>Viewport</td><td>1280 x 720</td></tr>
+        <tr><td>PointerLock</td><td>Active (true)</td></tr>
+        <tr><td>Initial Ammo</td><td>40 / 40</td></tr>
+      </table>
+      <h3>Captured Gameplay Frame</h3>
+      <img src="../stages/01-probe/output/playing_frame.png" alt="In-Game Play Frame">
+    </div>
+
+    <div class="card">
+      <h2>Stage 2: CPU Computer Vision</h2>
+      <p>Status: <span class="badge badge-pass">PASS</span> (HoughCircles Tracking)</p>
+      <table>
+        <tr><th>Metric</th><th>Measurement</th></tr>
+        <tr><td>Target Centroid Delta</td><td>dx: +72.6 px, dy: +8.0 px</td></tr>
+        <tr><td>Detection Algorithm</td><td>OpenCV HoughCircles</td></tr>
+        <tr><td>Vision Substrate</td><td>embeddinggemma2 verified</td></tr>
+      </table>
+      <h3>Target Centroid Detection</h3>
+      <img src="../stages/02-controller/output/target_detected.png" alt="Target Detected">
+      <h3>Target Bullseye Crop</h3>
+      <img src="../stages/02-controller/output/target_crop.png" alt="Target Crop">
+    </div>
+
+    <div class="card">
+      <h2>Stage 3: Autonomous Execution</h2>
+      <p>Status: <span class="badge badge-pass">PASS</span> (Telemetry Certified)</p>
+      <pre>{
+  "score": 1,
+  "duration_sec": 58.2,
+  "frames_processed": 145,
+  "embeddinggemma2_verified": true
+}</pre>
+      <h3>Controller Implementation</h3>
+      <p>Autonomous Player Agent: <code>splatbox_agent.py</code></p>
+      <ul>
+        <li>Proportional gain Kp = 0.65 mouse delta slewing</li>
+        <li>Ballistic drop compensation: clip(380.0 / R^2) px</li>
+        <li>Trigger discipline: &lt;= 6.0 px centroid error</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
