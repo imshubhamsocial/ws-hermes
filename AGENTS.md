@@ -8,15 +8,12 @@ You operate inside ws-hermes (/var/home/imshubhamsocial/Projects/Workspace/Perso
 
 * SOUL.md: Host substrate persona (.hermes/SOUL.md) for Hermes cognitive disposition.
 * CONTEXT.md: Layer 1 Umbrella task router mapping objectives to project folders.
-* projects/: Layer 2 multi-project shelf (Project 1 is projects/hermes/).
+* hermes/: Layer 2 Hermes project tree (active development in hermes/devel/).
 * _config/: Layer 3 system invariants, conventions, hardware ceilings, and domain rules.
 * _templates/: Layer 3 starter templates for stages, checks, and checkpoints.
 * _tools/: Layer 3 deterministic Python/POSIX validators and stage runners.
 * shared/: Layer 3 cross-stage mathematical, netcode, vision, and shader schemas.
 * skills/: Layer 3 domain skills (icm-architect, icm-stage-compiler).
-* stages/: Compatibility symlink to projects/hermes/stages/.
-* benchmarks/: Compatibility symlink to projects/hermes/benchmarks/.
-* phases/status_ledger.json: Compatibility symlink to projects/hermes/phases/status_ledger.json.
 * _archive/: Historical vault for superseded logs, sessions, and legacy evaluations.
 
 ## 3. Ten Non-Negotiable Compiler Rules

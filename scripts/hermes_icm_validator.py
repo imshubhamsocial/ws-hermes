@@ -1,1 +1,0 @@
-../_tools/hermes_icm_validator.py

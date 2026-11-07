@@ -1,1 +1,0 @@
-../_config/operational_rules.md

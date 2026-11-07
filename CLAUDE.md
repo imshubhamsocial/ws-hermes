@@ -1,1 +1,1 @@
-IDENTITY.md
+@AGENTS.md

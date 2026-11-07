@@ -1,1 +1,0 @@
-../_config/hardware_vram_invariants.md

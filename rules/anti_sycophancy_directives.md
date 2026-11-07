@@ -1,1 +1,0 @@
-../_config/anti_sycophancy_directives.md

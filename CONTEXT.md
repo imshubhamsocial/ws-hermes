@@ -3,7 +3,7 @@
 ## 1. Keyword Triggers
 
 * setup: Run workspace onboarding or verify directory scaffolding via python3 _tools/hermes_icm_validator.py.
-* status: Inspect pipeline completion state across stages/*/output/check.md and phases/status_ledger.json.
+* status: Inspect pipeline completion state across hermes/devel/stages/*/output/check.md and hermes/devel/phases/status_ledger.json.
 * walk-test: Execute the cold 8-point ICM Walk Test via python3 _tools/hermes_icm_validator.py.
 * icm-sync: Audit relative links and regenerate context graphs via python3 -I _tools/links.py . --skip docs --skip phases --skip benchmarks --skip skills.
 * quiesce: Stop hermes-llama-server.service and verify GPU VRAM <= 100 MiB via python3 _tools/check_vram_limit.py --mode quiescent.
@@ -12,17 +12,17 @@
 
 | User Objective / Task Description | Target Directory | Entry Contract / Script | Layer / Scope |
 | :--- | :--- | :--- | :--- |
-| Enter Project 1 (Hermes Agent OS) Workspace | `projects/hermes/` | `projects/hermes/CONTEXT.md` | Layer 2 Project |
-| Execute Project 1 Stage 1 (Browser CDP Probe) | `stages/01-probe/` | `stages/01-probe/CONTEXT.md` | Layer 2 Stage |
-| Execute Project 1 Stage 2 (CPU HoughCircles Aim) | `stages/02-controller/` | `stages/02-controller/CONTEXT.md` | Layer 2 Stage |
-| Execute Project 1 Stage 3 (Action & Telemetry) | `stages/03-execute/` | `stages/03-execute/CONTEXT.md` | Layer 2 Stage |
-| Run or audit Project 1 Gauntlet A (3D Voxel FPS) | `benchmarks/gauntlet_a_voxel_fps/` | `benchmarks/gauntlet_a_voxel_fps/contract.sh` | Layer 4 Gauntlet |
-| Run or audit Project 1 Gauntlet B (3D Splatbox CV) | `benchmarks/gauntlet_b_splatbox/` | `benchmarks/gauntlet_b_splatbox/contract.sh` | Layer 4 Gauntlet |
-| Run or audit Project 1 Gauntlet C (3D WebGL Aquarium) | `benchmarks/gauntlet_c_aquarium/` | `benchmarks/gauntlet_c_aquarium/contract.sh` | Layer 4 Gauntlet |
-| Access Multi-Project Shelf (Project 2+) | `projects/` | `projects/CONTEXT.md` | Layer 2 Shelf |
+| Enter Hermes Agent OS Development Track | `hermes/devel/` | `hermes/devel/CONTEXT.md` | Layer 2 Track |
+| Execute Gauntlet B Stage 1 (Browser CDP Probe) | `hermes/devel/stages/01-probe/` | `hermes/devel/stages/01-probe/CONTEXT.md` | Layer 2 Stage |
+| Execute Gauntlet B Stage 2 (CPU HoughCircles Aim) | `hermes/devel/stages/02-controller/` | `hermes/devel/stages/02-controller/CONTEXT.md` | Layer 2 Stage |
+| Execute Gauntlet B Stage 3 (Action & Telemetry) | `hermes/devel/stages/03-execute/` | `hermes/devel/stages/03-execute/CONTEXT.md` | Layer 2 Stage |
+| Run or audit Frontier Gauntlet A (3D Voxel FPS) | `hermes/devel/benchmarks/gauntlet_a_voxel_fps/` | `hermes/devel/benchmarks/gauntlet_a_voxel_fps/contract.sh` | Layer 4 Gauntlet |
+| Run or audit Frontier Gauntlet B (3D Splatbox CV) | `hermes/devel/benchmarks/gauntlet_b_splatbox/` | `hermes/devel/benchmarks/gauntlet_b_splatbox/contract.sh` | Layer 4 Gauntlet |
+| Run or audit Frontier Gauntlet C (3D WebGL Aquarium) | `hermes/devel/benchmarks/gauntlet_c_aquarium/` | `hermes/devel/benchmarks/gauntlet_c_aquarium/contract.sh` | Layer 4 Gauntlet |
+| Access Hermes Project Track Shelf | `hermes/` | `hermes/CONTEXT.md` | Layer 2 Shelf |
 | Design or restructure a workspace using ICM | `skills/icm-architect/` | `skills/icm-architect/SKILL.md` | Layer 3 Skill |
 | Compile a single ICM stage with KV cache isolation | `_tools/` | `_tools/hermes_stage_runner.py` | Layer 3 Tool |
-| Audit Phase 58 and seal the master status ledger | `phases/phase_58_autonomous_icm_factory_and_multi_gauntlet_certification/` | `03_verify/contract.sh` | Layer 4 Gate |
+| Audit Phase 58 and seal the master status ledger | `hermes/devel/phases/phase_58_autonomous_icm_factory_and_multi_gauntlet_certification/` | `03_verify/contract.sh` | Layer 4 Gate |
 | Check system invariants, ports, and VRAM limits | `_config/` | `_config/invariants.md` | Layer 3 Config |
 
 ## 3. Context Takeover Rule
