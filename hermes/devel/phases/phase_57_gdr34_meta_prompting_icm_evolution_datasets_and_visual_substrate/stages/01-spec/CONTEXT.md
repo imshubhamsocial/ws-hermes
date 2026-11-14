@@ -12,7 +12,7 @@
    - Enforce compiler pipeline architecture: Spec $\to$ Plan $\to$ Execute $\to$ Verify.
 2. **GP2: One Fact, One Home (Folder Architecture)**:
    - Scaffold distinct directories with isolated `CONTEXT.md` contracts.
-   - Establish Layer 0 workspace map: `IDENTITY.md`, `AGENTS.md`, `SOUL.md`.
+   - Establish Layer 0 workspace map: `AGENTS.md`, `SOUL.md`.
 3. **GP3: ICM Evolution Datasets**:
    - Clone and maintain upstream ICM templates in `~/.cache/icm-datasets/`.
    - Deploy `icm-stage-compiler` into `~/.hermes/skills/icm/`.

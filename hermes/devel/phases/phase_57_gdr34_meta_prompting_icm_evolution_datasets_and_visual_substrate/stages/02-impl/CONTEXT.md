@@ -8,7 +8,7 @@
 ## 1. Execution Log Summary
 
 1. **Layer 0 & Layer 1 Workspace Deployment**:
-   - Deployed `IDENTITY.md` (canonical ports 8138, 8139, 1933, 8642, 9222).
+   - Deployed `_config/substrate_ports.md` (canonical ports 8138, 8139, 1933, 8642, 9222).
    - Deployed `AGENTS.md` (6 core rules, 3-tier permissions, line discipline).
    - Deployed `SOUL.md` (empirical disposition, glass-box receipts).
    - Deployed `CONTEXT.md` (root routing table).

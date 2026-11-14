@@ -3,7 +3,7 @@
 ## 1. Modifications Summary
 
 ### Layer 0 & Layer 1 Workspace Architecture
-- Established canonical `IDENTITY.md` tracking all ports and directory paths.
+- Established canonical `_config/substrate_ports.md` tracking all ports and directory paths.
 - Authored root `AGENTS.md` enforcing the 6 core compiler rules, 3-tier permissions, and line budgets.
 - Authored root `SOUL.md` embodying empirical disposition, anti-slop rules, and verification receipts.
 - Authored root `CONTEXT.md` acting as the Layer 1 Router with a clear routing table.

@@ -11,7 +11,7 @@ Scan the current workspace and re-sync the ICM routing files (`IDENTITY.md` and 
 
 ## Step 1: Locate ICM Root
 
-Find the workspace root by searching upward from the current directory for `IDENTITY.md`. If no IDENTITY.md exists, report: "No ICM workspace found. Run `/icm-scaffold` first." and stop.
+Find the workspace root by searching upward from the current directory for `AGENTS.md` (or `IDENTITY.md`). If neither exists, report: "No ICM workspace found. Run `/icm-scaffold` first." and stop.
 
 Read these files to understand what is currently documented:
 - `IDENTITY.md` — folder map tree, rules, any stage or project tables

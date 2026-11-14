@@ -23,10 +23,6 @@ def validate_workspace() -> int:
         errors.append("Layer 0 AGENTS.md exceeds 60-line limit")
     if os.path.isfile(context_md) and count_lines(context_md) > 80:
         errors.append("Layer 1 CONTEXT.md exceeds 80-line limit")
-    for ptr in ["IDENTITY.md"]:
-        p = os.path.join(ROOT, ptr)
-        if os.path.isfile(p) and count_lines(p) > 5:
-            errors.append(f"{ptr} must be a 1-line pointer to AGENTS.md (One Fact, One Home)")
     stage_dirs = ["stages/01-probe", "stages/02-controller", "stages/03-execute",
                   "benchmarks/gauntlet_a_voxel_fps", "benchmarks/gauntlet_b_splatbox",
                   "benchmarks/gauntlet_c_aquarium"]

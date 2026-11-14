@@ -11,7 +11,7 @@ Scan the current ICM workspace and create `CONTEXT.md` files for any folder that
 
 ## Step 1: Locate ICM Root
 
-Find the workspace root by searching upward from the current directory for `IDENTITY.md`. If no IDENTITY.md exists, report: "No ICM workspace found. Run `/icm-scaffold` first." and stop.
+Find the workspace root by searching upward from the current directory for `AGENTS.md` (or `IDENTITY.md`). If neither exists, report: "No ICM workspace found. Run `/icm-scaffold` first." and stop.
 
 ## Step 2: Learn the Format
 

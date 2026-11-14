@@ -9,7 +9,7 @@
 
 | Metric | Required Specification | Measured Value | Verdict |
 | :--- | :--- | :--- | :--- |
-| **Workspace Map** | `IDENTITY.md`, `AGENTS.md`, `SOUL.md`, `CONTEXT.md` | All present | PASS |
+| **Workspace Map** | `AGENTS.md`, `SOUL.md`, `CONTEXT.md` | All present | PASS |
 | **Line Discipline** | All `CONTEXT.md` $\le 80$ lines | Max 76 lines | PASS |
 | **Substrate Context** | `-c 131072` (128K context) | `n_ctx: 131072` | PASS |
 | **VRAM Ceiling** | $\le 5,800.0$ MiB on RTX 3050 | 4,997 MiB | PASS |

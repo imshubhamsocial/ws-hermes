@@ -8,7 +8,7 @@
 
 ## 1. Five-Layer ICM Architecture
 
-* **Layer 0 (`AGENTS.md`, `IDENTITY.md`, `.hermes/SOUL.md`)**: Workspace map and 10 non-negotiable compiler rules (< 60 lines).
+* **Layer 0 (`AGENTS.md`, `.hermes/SOUL.md`)**: Workspace map and 10 non-negotiable compiler rules (< 60 lines).
 * **Layer 1 (`CONTEXT.md`)**: Task router and keyword triggers (< 80 lines).
 * **Layer 2 (`stages/*/CONTEXT.md`, `benchmarks/*/CONTEXT.md`)**: Bounded single-job stage contracts (< 80 lines).
 * **Layer 3 (`_config/`, `shared/`, `_templates/`, `_tools/`, `skills/`)**: System invariants, domain schemas, and deterministic validators (< 200 lines).
