@@ -14,7 +14,12 @@
 * **Layer 3 (`_config/`, `shared/`, `_templates/`, `_tools/`, `skills/`)**: System invariants, domain schemas, and deterministic validators (< 200 lines).
 * **Layer 4 (`stages/*/output/`, `benchmarks/*/output/`, `phases/`)**: Inspectable plain-text deliverables and sealed verification receipts.
 
-## 2. Quickstart Verification Commands
+## 2. Active Research & Architectural Blueprints
+
+* **GDR39 Master Architectural Blueprint (Certified Ground Truth, 30 Code Blocks)**: [gdr39_master_blueprint_formatted.md](hermes/devel/docs/research/GDR39/Output/gdr39_master_blueprint_formatted.md)
+* **GDR40 Chronological Synthesis Package**: [hermes/devel/docs/research/GDR40/](hermes/devel/docs/research/GDR40/)
+
+## 3. Quickstart Verification Commands
 
 ```bash
 cd hermes/devel
