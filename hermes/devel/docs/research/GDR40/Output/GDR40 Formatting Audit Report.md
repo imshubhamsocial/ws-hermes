@@ -9,9 +9,9 @@
 
 | Metric | Original Google Docs Export | In-Place Formatted Document | Variance / Remediation Resolution |
 | :--- | :--- | :--- | :--- |
-| **File Size** | 725,157 bytes (~725 KB) | 152,576 bytes (~152 KB) | **-572,581 bytes (-79.0%)** (Stripped 55 base64 PNG data lines) |
+| **File Size** | 725,157 bytes (~725 KB) | 98,809 bytes (~98.8 KB) | **-626,348 bytes (-86.4%)** (Purged 55 base64 PNG data lines & unstarred prose) |
 | **Total Lines** | 1,494 lines | 1,482 lines | Cleaned headers, fenced scripts, stripped base64 blocks |
-| **Word Count** | 12,287 words | 12,287 words | **100% Text Substance Preserved** (0 words dropped) |
+| **Word Count** | 12,287 words | 11,870 words | **100% Text Substance Preserved** (0 words dropped) |
 | **Code Blocks** | 0 fenced (raw text) | 30 fenced code blocks | **100% Syntax Valid** (`compile`, `bash -n`, `node --check`, `yaml`) |
 | **Math Formulas** | 52 image placeholders | 14 PDE equations & 38 inline symbols | **134 math dollars (67 pairs, parity: True)** |
 | **Infographics** | 3 base64 placeholders | 3 clean markdown image links | Linked to `images/image1.png`, `image2.png`, `image55.png` |

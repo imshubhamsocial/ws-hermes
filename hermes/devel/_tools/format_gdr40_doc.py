@@ -6,13 +6,13 @@ from gdr40_code_ranges import CODE_RANGES, unescape_code_str
 def clean_prose(text: str) -> str:
     for k, v in DIAGRAM_MAP.items(): text = text.replace(k, v)
     for k, v in MATH_MAP.items(): text = text.replace(k, v)
-    subs = [
-        (r'\\<([a-zA-Z0-9_-]+)\\>', r'`<\1>`'), (r'\\<=', r'<='),
-        (r'\\--', r'--'), (r'\\_', r'_'), (r'\\-', r'-'),
-        (r'\\=', r'='), (r'\\~', r'~'), (r'\\\)', r')'),
-        (r'\\\(', r'('), (r'\\:', r':'), (r'\\!', r'!'), (r'\\*', r'*')
+    text = re.sub(r'\\<([a-zA-Z0-9_-]+)\\>', r'`<\1>`', text)
+    escapes = [
+        (r'\<=', '<='), (r'\--', '--'), (r'\_', '_'), (r'\-', '-'),
+        (r'\=', '='), (r'\~', '~'), (r'\)', ')'), (r'\(', '('),
+        (r'\:', ':'), (r'\!', '!'), (r'\*', '*')
     ]
-    for pat, rep in subs: text = re.sub(pat, rep, text)
+    for esc, rep in escapes: text = text.replace(esc, rep)
     return text
 
 def format_doc(doc_path: pathlib.Path) -> str:
