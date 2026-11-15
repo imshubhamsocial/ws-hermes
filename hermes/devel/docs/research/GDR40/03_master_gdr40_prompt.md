@@ -1,12 +1,11 @@
 # Master Prompt for Lead Architect Argon (GDR40 Chronological Synthesis & Complete ICM Operating System)
 
 > **Instructions for User**:  
-> 1. Open [gemini.google.com](https://gemini.google.com) in your browser.  
-> 2. Select the **Chat** tab and enable **Thinking Process: High**.  
-> 3. Click the **+** (**Add file**) icon → **More Uploads** → **Import code**.  
-> 4. Paste the repository URL: `https://github.com/imshubhamsocial/ws-hermes` and click **Import**.  
-> 5. Alternatively, the raw GitHub links below provide immediate direct ingestion.  
-> 6. Copy the markdown prompt below, paste it into the message box, and submit.  
+> 1. Open [gemini.google.com](https://gemini.google.com) or [notebooklm.google.com](https://notebooklm.google.com) in your browser.  
+> 2. In Gemini: Select the **Chat** tab and enable **Thinking Process: High** (or invoke Lead Architect Argon in Deep Research mode).  
+> 3. Click the **+** (**Add file**) icon → **Import** (or upload the local markdown files directly to NotebookLM).  
+> 4. Ingest the 4 canonical raw endpoints listed in the prompt below (well under the 10-file ceiling).  
+> 5. Copy the markdown prompt below, paste it into the message box, and submit.  
 
 ---
 
@@ -18,7 +17,7 @@
 > **Inference Engine**: Dual-Track (Google Gemma 4 Exact 4B + NVIDIA Nemotron Dory 1.0 Looped 4B)  
 > **Context Window Enforced**: 131,072 to 262,144 tokens (128K–256K, Google TurboQuant Q4_0 KV Cache)  
 > **Hardware Status**: Discrete NVIDIA GeForce RTX 3050 Laptop GPU (6,144 MiB physical GDDR6, ceiling $\le 5,800.0\text{ MiB}$); Intel iGPU for Desktop & Wayland Compositor (Disp.A: Off, 25 MiB idle); Host system on CPU & 16 GB System RAM  
-> **Primary Ground Truth**: [GDR39 ICM Architecture Blueprint (formatted).md](https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR39/Output/GDR39%20ICM%20Architecture%20Blueprint%20(formatted).md) (Certified 100% Pass, 92 KB, 32 Code Blocks)  
+> **Primary Ground Truth**: [GDR39 ICM Architecture Blueprint (formatted).md](https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR39/Output/GDR39%20ICM%20Architecture%20Blueprint%20(formatted).md) (Certified 100% Pass, 82.5 KB, 30 Code Blocks)  
 
 ---
 
@@ -26,22 +25,23 @@
 
 You are Lead Architect Argon.
 
-You are provided with the master blueprint from our previous research cycle: **`GDR39 ICM Architecture Blueprint (formatted).md`** alongside all foundational project documentation.
+You are provided with the master blueprint from our previous research cycle: **`GDR39 ICM Architecture Blueprint (formatted).md`** alongside foundational project documentation.
 
-In GDR39, you successfully delivered eight exhaustive, high-value technical directives covering ICM theory, profile bots, Gauntlet C WebGL2 simulations, slash commands, Socratic gates, substrate harmonization, universal context, and Cloudflare decision models.
+In GDR39, you successfully delivered seven exhaustive, high-value technical directives covering ICM theory, profile bots, Gauntlet C WebGL2 simulations, slash commands, Socratic planning gates, substrate harmonization, and universal workspace routing.
 
-However, because GDR39 was structured as **eight topical silos**, its directives currently appear as disconnected reference chapters rather than an **executable chronological workflow**. For example:
-* Profile bots are described in Section 2, but the pre-coding planner bot is deferred to Section 5, and the root substrate `SOUL.md` is placed in Section 6.
-* Gauntlet C is introduced in Section 3, while the Cloudflare decision router needed to route tasks is introduced in Section 8.
-* Fresh scaffolding is in Section 1, while AST repository migration is in Section 2.
-* Slash command automation (`/goal`) is in Section 4, while autonomous skill distillation (`/learn`) is in Section 6.
+However, because GDR39 was structured as **topical silos**, its directives currently appear as disconnected reference chapters rather than an **executable chronological workflow**:
+* Profile bots are described in Directive 2, while the pre-coding planner bot is in Directive 5, and the root substrate `SOUL.md` is in Directive 6.
+* Gauntlet C simulation implementation is detailed in Directive 3, while the pre-coding Socratic gate needed to plan contracts is in Directive 5, and multi-stage orchestration is in Directive 4.
+* Fresh scaffolding is in Directive 1, while AST repository migration is in Directive 2.
+* Slash command automation (`/goal`) is analyzed in Directive 4, while autonomous skill distillation (`/learn`) is in Directive 6.
 
 ### Your Golden Mission for GDR40
-Your mission is to perform a **thorough forensic analysis of `GDR39 ICM Architecture Blueprint (formatted).md`** and **reorganize 100% of its content into a single, unambiguous, end-to-end chronological execution pipeline (Steps 0 through 9)**:
-1. **Chronological Sequencing**: Every tool, script, formula, configuration, and rule must be placed in the exact order an engineer or autonomous agent encounters and executes it.
-2. **Zero Dropped Content**: You must preserve all 32 executable code blocks, all 14 LaTeX math PDEs, all 4 isolated profile bots, the root `SOUL.md`, the Universal `CONTEXT.md`, and all verification gates.
+Your mission is to perform an exhaustive **forensic dependency analysis of `GDR39 ICM Architecture Blueprint (formatted).md`** and **reorganize 100% of its content into a single, unambiguous, end-to-end chronological execution pipeline**:
+1. **Forensic Dependency Analysis**: Analyze what must precede what. An autonomous agent or engineer cannot build before planning, cannot execute without an isolated environment, and cannot verify without deterministic contracts. Determine the natural, logical chronological sequence of operations.
+2. **Zero Dropped Content**: You must preserve all 30 executable code blocks, all 14 LaTeX math PDEs, all 4 isolated profile bots, the root `SOUL.md`, the Universal `CONTEXT.md`, and all verification gates without dropping any technical detail.
 3. **Zero Duplicates or Ambiguities**: Enforce "One Fact, One Home". Eliminate redundant hardware statements. Resolve all contradictions between slash commands and clean sessions. Unify greenfield scaffolding with brownfield migration into a single logical branching step.
-4. **Mandatory Google Docs & Gemini Web Safety**: Enforce strict formatting hygiene so that the output compiles cleanly, renders without truncation, and exports to Google Docs with zero errors.
+4. **Substrate Autonomy**: All architectures, tools, and gates must operate 100% locally on the host substrate. Zero external proprietary decision endpoints.
+5. **Mandatory Google Docs & Gemini Web Safety**: Enforce strict formatting hygiene so that the output compiles cleanly, renders without truncation, and exports to Google Docs with zero errors.
 
 ---
 
@@ -49,9 +49,9 @@ Your mission is to perform a **thorough forensic analysis of `GDR39 ICM Architec
 
 Directly ingest the four canonical raw markdown endpoints below:
 
-1. **Master Ground Truth Blueprint (92 KB, 32 Code Blocks)**:  
+1. **Master Ground Truth Blueprint (82.5 KB, 30 Code Blocks)**:  
    `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR39/Output/GDR39%20ICM%20Architecture%20Blueprint%20(formatted).md`
-2. **GDR40 Technical Consultation Brief (10-Step Operational Roadmap)**:  
+2. **GDR40 Technical Consultation Brief**:  
    `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR40/01_master_gdr40_brief.md`
 3. **GDR40 Chronological Synthesis Audit & Component Catalog**:  
    `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR40/02_doc1_gdr39_chronological_synthesis.md`
@@ -60,71 +60,49 @@ Directly ingest the four canonical raw markdown endpoints below:
 
 ---
 
-## Required Chronological Pipeline Structure
+## Technical Assets to Analyze and Chronologically Structure
 
-Your final deliverable must be structured as the **GDR40 Master Architectural Blueprint: The Unified ICM Operating System Playbook**, structured strictly as follows:
+Your final deliverable must chronologically sequence every technical component from the foundation upward:
 
-### Step 0: Hardware Environment, Substrate Ceilings & Isolation Boundaries
-* Define Fedora Kinoite 44 host, Intel iGPU display, and discrete NVIDIA RTX 3050 ceiling ($\le 5,800.0\text{ MiB}$).
-* Define Substrate Purity (Rule 9: `/var/home/imshubhamsocial/.hermes/hermes-agent` untouched).
-* Define Atomic Script Rule (Rule 6: scripts strictly under 60 lines).
-
-### Step 1: Epistemic Foundation & Universal Inter-Agent Routing
-* Deploy Root Substrate `SOUL.md` to `~/.hermes/SOUL.md` and `.hermes/SOUL.md`.
-* Deploy Universal Workspace `CONTEXT.md` to workspace root.
-* Enforce the Ten Non-Negotiable Compiler Rules.
-
-### Step 2: Dedicated Autonomous Profile Bots Fleet Provisioning
-* Explain profile isolation mechanics (`~/.hermes/profiles/<name>/` for zero KV cache bleed).
-* Provide the Master Provisioning Script provisioning all four profiles with `--no-skills`.
-* Provide complete manifests (`config.yaml` and `SOUL.md`) for:
-  1. `icm-planner` (Pre-coding Socratic review bot).
-  2. `icm-scaffolder` (Workspace generator bot).
-  3. `icm-migrator` (Unstructured repository refactoring bot).
-  4. `icm-auditor` (Read-only deterministic verification bot).
-
-### Step 3: Phase A — Pre-Coding Socratic Alignment (The Elephant-Goldfish Dynamic)
-* Provide the theoretical justification for pre-coding spec debate.
-* Provide `egm_goldfish_gate.py` (running comprehension, design, and readiness lenses).
-* Define the blocking gate requirement (`goldfish_review_report.json` must certify before coding).
-
-### Step 4: Phase B — Task Classification & High-Speed Decision Routing
-* Explain non-autoregressive decision models vs autoregressive text generation.
-* Provide `hermes_decision_router.py` (querying Cloudflare Clef-flash for choice/noul decisions in 10 ms).
-
-### Step 5: Phase C — Workspace Setup & Repository Migration
-* **Branch A (Greenfield)**: 6-step scaffolding for fresh projects with `icm_scaffolder.py`.
-* **Branch B (Brownfield)**: Ingestion of arbitrary repos with 5-bucket AST classifier `icm_repo_migrator.py`.
-
-### Step 6: Phase D — Clean-Session Stage Orchestration & Prompting
-* Reconcile `/goal` automation with "One Task, One Clean Session".
-* Provide the deterministic multi-stage clean-session Bash runner (`_tools/run_multi_stage.sh`).
-* Provide the 4-part Executive Prompt Engineering Guide for user interaction.
-
-### Step 7: Phase E — Full Simulation Production Factory (Gauntlet C WebGL2)
-* Present the complete physical & optical PDEs (Wave stencil, differential caustics, spherical-cap buoyancy).
-* Provide all 5 atomic JavaScript modules (strictly under 60 lines each):
-  1. `wave_pde.js`
-  2. `caustics_shader.js`
-  3. `sphere_physics.js`
-  4. `boids_fish.js`
-  5. `main.js`
-
-### Step 8: Phase F — Deterministic Verification Gates & Multimodal Assessment
-* Provide the Layer 4 POSIX contract gate (`contract.sh`).
-* Provide the Cloudflare Clef multimodal verifier (`hermes_decision_gate.py`).
-
-### Step 9: Phase G — Continuous Hygiene, Rot Auditing & Autonomous Distillation
-* Evaluate NVIDIA SkillEvaluator, Google AQuA, and Auto Ontology.
-* Provide the native substrate direct auditor script (`audit_hermes_home.sh`).
-* Establish the 4 rules for autonomous skill distillation via `/learn` and `/refine` into ICM layout.
-* Provide the `icm-stage-compiler` custom skill with `verify_stage.py` and `test_skill.py`.
+1. **Host Environment & Substrate Ceilings**:
+   * Fedora Kinoite 44 host, Intel iGPU display, discrete NVIDIA RTX 3050 ceiling ($\le 5,800.0\text{ MiB}$).
+   * Substrate Purity (Rule 9: `/var/home/imshubhamsocial/.hermes/hermes-agent` untouched).
+   * Atomic Script Rule (Rule 6: scripts strictly under 60 lines).
+2. **Substrate Identity & Global Routing**:
+   * Root Substrate `SOUL.md` deployed to `~/.hermes/SOUL.md` and `.hermes/SOUL.md`.
+   * Universal Workspace `CONTEXT.md` deployed to workspace root.
+   * The Ten Non-Negotiable Compiler Rules.
+3. **Dedicated Autonomous Profile Bots Fleet Provisioning**:
+   * Profile isolation mechanics (`~/.hermes/profiles/<name>/` for zero KV cache bleed).
+   * Master Provisioning Script provisioning all four profiles with `--no-skills`.
+   * Complete manifests (`config.yaml` and `SOUL.md`) for `icm-planner`, `icm-scaffolder`, `icm-migrator`, and `icm-auditor`.
+4. **Pre-Coding Socratic Spec Alignment (The Elephant-Goldfish Dynamic)**:
+   * Theoretical justification for pre-coding specification debate.
+   * `egm_goldfish_gate.py` running comprehension, design, and readiness lenses.
+   * Generation of `goldfish_review_report.json` as a blocking gate before code generation.
+5. **Workspace Setup & Repository Migration**:
+   * Path A (Greenfield): 6-step scaffolding for fresh projects with `icm_scaffolder.py`.
+   * Path B (Brownfield): Ingestion of arbitrary repositories with 5-bucket AST classifier `icm_repo_migrator.py`.
+6. **Clean-Session Multi-Stage Orchestration & Execution**:
+   * Reconcile `/goal` automation inside bounded stages with clean-session context wiping (`/new --yes`) across stage transitions.
+   * Deterministic multi-stage clean-session Bash runner (`_tools/run_multi_stage.sh`).
+   * 4-part Executive Prompt Engineering Guide for user interaction.
+7. **Simulation Production Factory (Gauntlet C WebGL2)**:
+   * Physical and optical PDEs (wave stencil, differential area caustics, spherical-cap buoyancy).
+   * All 5 atomic JavaScript modules (strictly under 60 lines each): `wave_pde.js`, `caustics_shader.js`, `sphere_physics.js`, `boids_fish.js`, `main.js`.
+8. **Deterministic Verification Gates**:
+   * Layer 4 POSIX contract gate (`contract.sh`) validating line counts, shader AST, live CDP telemetry, and VRAM ceilings.
+9. **Continuous Hygiene, Substrate Auditing & Skill Distillation**:
+   * Comparative evaluation of NVIDIA SkillEvaluator, Google AQuA, and Auto Ontology.
+   * Native substrate direct auditor script (`audit_hermes_home.sh`).
+   * Rules for autonomous skill distillation via `/learn` and `/refine` into the 5-layer ICM layout.
+   * The `icm-stage-compiler` custom skill with `verify_stage.py` and `test_skill.py`.
 
 ---
 
 ## Non-Negotiable Google Docs & Gemini Web Safety Rules
 
-To prevent the formatting crashes and export errors experienced in previous cycles, you must strictly comply with these six formatting invariants:
+To prevent formatting crashes and export errors, you must strictly comply with these six formatting invariants:
 
 1. **Even Code Fence Parity**: Total count of triple backtick fences must be an **even integer** (code fence count % 2 == 0). Never wrap the markdown document in an outer code fence.
 2. **Even Math Dollar Parity**: Total count of dollar signs must be an **even integer** (dollar count % 2 == 0). Every `$formula$` and `$$formula$$` must be strictly closed. Never use raw dollar symbols in prose or shell variables outside code blocks.

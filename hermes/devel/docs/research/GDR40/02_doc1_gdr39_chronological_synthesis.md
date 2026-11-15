@@ -1,17 +1,17 @@
 # GDR39 Chronological Synthesis & Structural Harmonization Audit
 
 > **Document Role**: Technical Bridge & Inventory Audit for GDR40  
-> **Source Document Audited**: [GDR39 ICM Architecture Blueprint (formatted).md](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/docs/research/GDR39/Output/GDR39%20ICM%20Architecture%20Blueprint%20(formatted).md) (92,205 bytes, 1,827 lines)  
+> **Source Document Audited**: [GDR39 ICM Architecture Blueprint (formatted).md](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/docs/research/GDR39/Output/GDR39%20ICM%20Architecture%20Blueprint%20(formatted).md) (82,487 bytes, 1,645 lines)  
 > **Target Package**: GDR40  
-> **Status**: Complete component catalog, ambiguity reconciliation, and chronological pipeline mapping.
+> **Status**: Complete component catalog, ambiguity analysis, and foundational dependency graph.
 
 ---
 
 ## 1. Complete Inventory of GDR39 Technical Assets
 
-To guarantee zero loss of technical content during the GDR40 chronological synthesis, every asset from the GDR39 master blueprint has been indexed below:
+To guarantee zero loss of technical content during the GDR40 chronological synthesis, every asset from the GDR39 master blueprint is cataloged below:
 
-### A. The 32 Certified Code Blocks & Scripts
+### A. The 30 Certified Code Blocks & Scripts
 
 | Block Index | Language | Identifier / Role | Target Path in Architecture | Line Count |
 | :--- | :--- | :--- | :--- | :--- |
@@ -45,58 +45,47 @@ To guarantee zero loss of technical content during the GDR40 chronological synth
 | **27** | Bash | `audit_hermes_home.sh` | `~/.hermes/tools/icm/audit_hermes_home.sh` | 26 lines |
 | **28** | Markdown | Root Substrate SOUL persona | `/var/home/imshubhamsocial/.hermes/SOUL.md` | 42 lines |
 | **29** | Markdown | Universal Workspace CONTEXT.md | `ws-hermes/CONTEXT.md` | 86 lines |
-| **30** | Python | `hermes_decision_router.py` (Clef) | `_tools/hermes_decision_router.py` | 58 lines |
-| **31** | Python | `hermes_decision_gate.py` (Clef verifier) | `_tools/hermes_decision_gate.py` | 67 lines |
 
 ---
 
-## 2. Structural Defect Analysis & Ambiguity Reconciliation
+## 2. Structural Defect Analysis & Synthesis Requirements
 
-A forensic comparison reveals four structural issues in GDR39 that must be reconciled during chronological synthesis:
+A forensic comparison reveals structural issues in GDR39 that Lead Architect Argon must reconcile through chronological dependency analysis:
 
-### Ambiguity 1: Dispersed Persona & Profile Definitions
+### Structural Issue 1: Dispersed Persona and Profile Definitions
 * **Current State in GDR39**: Three profile bots are defined in Directive 2, the `icm-planner` bot is defined in Directive 5, and the root substrate `SOUL.md` is defined in Directive 6.
-* **Problem**: An engineer provisioning the system has to jump across 60 pages to gather all configurations.
-* **Resolution in GDR40**: 
-  * Step 1 establishes the Host Substrate Root `SOUL.md` and Universal `CONTEXT.md`.
-  * Step 2 establishes the entire Fleet Provisioning Script and defines all four profile bots (`icm-planner`, `icm-scaffolder`, `icm-migrator`, `icm-auditor`) with their respective `config.yaml` and `SOUL.md` manifests in one unified location.
+* **Problem**: An engineer provisioning the system must jump across disparate sections to gather related configurations.
+* **Synthesis Objective**: Establish host substrate identity and universal routing first, followed by unified fleet provisioning of all four profiles (`icm-planner`, `icm-scaffolder`, `icm-migrator`, `icm-auditor`).
 
-### Ambiguity 2: Greenfield Scaffolding vs. Brownfield Migration
+### Structural Issue 2: Separation of Greenfield Scaffolding and Brownfield Migration
 * **Current State in GDR39**: Greenfield 5-layer scaffolding is introduced in Section 1.1, while legacy codebase migration using the 5-bucket AST parser is presented in Section 2.2.
-* **Problem**: The user cannot clearly see the branching point when facing an arbitrary repository.
-* **Resolution in GDR40**: 
-  * Step 5 (Phase C) introduces a unified decision tree:
-    * If starting from an empty directory $\rightarrow$ Execute Path A: Greenfield Scaffolding (`icm_scaffolder.py`).
-    * If ingesting an existing Git repo $\rightarrow$ Execute Path B: Brownfield Migration (`icm_repo_migrator.py`).
+* **Problem**: The engineer cannot view the common branching decision when facing an arbitrary repository.
+* **Synthesis Objective**: Present workspace setup as a unified branching protocol: Path A for greenfield creation versus Path B for brownfield AST migration.
 
-### Ambiguity 3: Slash Commands vs. "One Task, One Clean Session"
-* **Current State in GDR39**: Section 4.1 warns that native `/goal` runs continuously inside a single session, accumulating KV cache and causing context degradation after 8–10 turns. Section 4.2 presents clean-session wiping (`/new`).
-* **Problem**: Ambiguity exists on whether to use `/goal` or whether `/goal` is prohibited.
-* **Resolution in GDR40**: 
-  * Step 6 clarifies the definitive operational rule:
-    * Inside a **single stage** with bounded context, `/goal` is encouraged (with `max_turns: 10–15`).
-    * Across **stage boundaries**, context must be wiped to zero using `/new --yes <stage-name>` or the multi-stage bash runner. Never carry KV cache from stage $N$ to stage $N+1$.
+### Structural Issue 3: Reconciling Slash Commands with Clean Contexts
+* **Current State in GDR39**: Section 4.1 warns that native `/goal` runs continuously inside a single session, accumulating KV cache and causing context degradation after 8 to 10 turns. Section 4.2 presents clean-session wiping (`/new`).
+* **Problem**: Potential ambiguity exists regarding when to leverage `/goal` versus when to wipe context with `/new`.
+* **Synthesis Objective**: Formulate unambiguous operational guidance: inside a single bounded stage, `/goal` operates with bounded turn ceilings; across stage transitions, KV cache must be wiped cleanly to zero (`/new`).
 
-### Ambiguity 4: Placement of Decision Routing Tools
-* **Current State in GDR39**: Cloudflare Clef decision tools are placed in Directive 8 (the very end of the document), even though they are used to route intents and verify stages.
-* **Problem**: The routing tool appears after the tutorial that it is supposed to route!
-* **Resolution in GDR40**: 
-  * Step 4 positions the Cloudflare Clef decision router as Phase B (Task Classification & Routing), directly preceding workspace setup.
-  * Step 8 positions the Cloudflare Clef gate verifier alongside `contract.sh` for multi-modal telemetry certification.
+### Structural Issue 4: Inverted Lifecycle Sequence
+* **Current State in GDR39**: Gauntlet C WebGL2 simulation implementation is detailed in Directive 3, while pre-coding Socratic planning is placed in Directive 5, and multi-stage orchestration runner is placed in Directive 4.
+* **Problem**: Implementation is presented before planning, and execution before orchestration setup.
+* **Synthesis Objective**: Perform rigorous dependency analysis so that pre-coding planning precedes workspace execution, execution precedes implementation, and implementation precedes verification.
 
 ---
 
-## 3. The 10-Step Chronological Execution Flowchart
+## 3. Foundational Architectural Dependency Graph
 
 ```mermaid
 flowchart TD
-    S0["Step 0: Hardware Ceilings & Substrate Invariants<br/>(RTX 3050 <= 5800 MiB, Intel iGPU, Rule 9)"] --> S1["Step 1: Epistemic Foundation & Universal Routing<br/>(Root SOUL.md, Universal CONTEXT.md, 10 Rules)"]
-    S1 --> S2["Step 2: Profile Bots Fleet Provisioning<br/>(icm-planner, icm-scaffolder, icm-migrator, icm-auditor)"]
-    S2 --> S3["Step 3: Phase A — Pre-Coding Alignment<br/>(Elephant-Goldfish Socratic Reviewer)"]
-    S3 --> S4["Step 4: Phase B — Intent Routing & Decision Engine<br/>(Cloudflare Clef Non-Autoregressive Classifier)"]
-    S4 --> S5["Step 5: Phase C — Workspace Setup & Migration<br/>(Branch: Greenfield Scaffolding vs. AST Migration)"]
-    S5 --> S6["Step 6: Phase D — Clean-Session Orchestration<br/>(Reconciling /goal, /loop, /new & Stage Runner)"]
-    S6 --> S7["Step 7: Phase E — Full Simulation Production Factory<br/>(Gauntlet C WebGL2, Caustics, Physics, Boids)"]
-    S7 --> S8["Step 8: Phase F — Verification Gates & Telemetry<br/>(contract.sh, Live CDP Telemetry, Clef Gate)"]
-    S8 --> S9["Step 9: Phase G — Continuous Hygiene & Distillation<br/>(SkillEvaluator, AQuA, /learn into ICM Layout)"]
+    HW["Hardware Ceilings & Host Invariants<br/>(RTX 3050 <= 5800 MiB, Intel iGPU, Rule 9)"] --> ID["Global Substrate Identity & Protocol<br/>(Root SOUL.md, Universal CONTEXT.md, 10 Rules)"]
+    ID --> FLEET["Hermes Isolated Profile Fleet<br/>(icm-planner, icm-scaffolder, icm-migrator, icm-auditor)"]
+    FLEET --> PLAN["Pre-Coding Socratic Spec Debate<br/>(Elephant-Goldfish Reviewer & Gate Report)"]
+    PLAN --> WS["Workspace Setup & Repository Scaffolding<br/>(Branch: Greenfield Scaffolding vs. Brownfield AST Migration)"]
+    WS --> ORCH["Clean-Session Multi-Stage Runner<br/>(Stage Orchestration, /goal, /new, /clear)"]
+    ORCH --> FACTORY["Simulation Production Factory<br/>(Gauntlet C WebGL2, PDEs, Caustics, Physics, Boids)"]
+    FACTORY --> GATE["Deterministic Verification Gates<br/>(POSIX contract.sh, CDP Telemetry, Zero Errors)"]
+    GATE --> AUDIT["Continuous Substrate Hygiene & Distillation<br/>(SkillEvaluator, AQuA, /learn into ICM 5-Layer Layout)"]
 ```
+
+Lead Architect Argon must evaluate this dependency chain, refine the stage boundaries, and author an unambiguous, step-by-step operational playbook covering all 30 code blocks, 14 LaTeX math PDEs, and 7 core directives.

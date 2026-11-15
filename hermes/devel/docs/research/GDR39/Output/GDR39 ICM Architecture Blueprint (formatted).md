@@ -3,7 +3,7 @@ Isolated Profile Bots, and Gauntlet C Simulation Factory**
 
 This master blueprint delivers the curriculum, auditing pipeline, isolated bot 
 blueprints, Gauntlet C simulation tutorial, Socratic planning gates, substrate 
-harmonization map, universal context file, and decision routing tools for 
+harmonization map, and universal context file for 
 ws-hermes1. Following the certification of Frontier Gauntlet B (1,149 points 
 across 220 frames in 56.9 seconds at 4,993 MiB VRAM on Google Gemma 4 Exact 4B), 
 ws-hermes now transitions into an automated Interpretable Context Methodology 
@@ -16,8 +16,8 @@ Off, 25 MiB idle)1. The upstream runtime at
 /var/home/imshubhamsocial/.hermes/hermes-agent remains untouched (Rule 9), and 
 all executable helper scripts stay under 60 lines (Rule 6)1. Where external 
 vendor metrics are cited—such as Google's Elephant-Goldfish Model (EGM) adoption 
-claims or Cloudflare's Clef benchmark figures—this report explicitly notes where 
-independent third-party replication is not yet published5.
+claims—this report explicitly notes where independent third-party replication is 
+not yet published6.
 
 ## **1. Directive 1: ICM Pedagogy, Official Tooling & Context Rot Mitigation**
 
@@ -1178,10 +1178,8 @@ structural compliance and gate passage.
 
 | Resource | Load Command | Purpose |
 | :---- | :---- | :---- |
-| Global Invariants | `read_file("~/.hermes/rules/hardware/invariants.md")` | 
-Verify VRAM (<=5,800 MiB) and timeout ceilings |
-| Stage Rules | `skill_view("icm-stage-compiler", "references/stage_schema.md")` 
-| Inspect required table headers for CONTEXT.md |
+| Global Invariants | `read_file("~/.hermes/rules/hardware/invariants.md")` | Verify VRAM (<=5,800 MiB) and timeout ceilings |
+| Stage Rules | `skill_view("icm-stage-compiler", "references/stage_schema.md")` | Inspect required table headers for CONTEXT.md |
 
 ## Procedure
 
@@ -1429,34 +1427,23 @@ fence/math delimiter parity.
 
 ## 3. Workspace Task & Benchmark Routing Table
 
-| Task Trigger / Intent | Target Directory / Contract | Deterministic 
-Verification Gate |
+| Task Trigger / Intent | Target Directory / Contract | Deterministic Verification Gate |
 | :---- | :---- | :---- |
-| **Root Protocol & Rules** | AGENTS.md, hermes/devel/_config/invariants.md | 
-python3 ~/.hermes/tools/icm/icm_context_auditor.py . |
-| **Compiler Pipeline** | hermes/devel/stages/01-probe/ -> 03-execute/ | bash 
-hermes/devel/contract.sh |
-| **Gauntlet A (Voxel FPS)** | hermes/devel/benchmarks/gauntlet_a_voxel_fps/ | 
-bash hermes/devel/benchmarks/gauntlet_a_voxel_fps/contract.sh |
-| **Gauntlet B (Splatbox CV)** | hermes/devel/benchmarks/gauntlet_b_splatbox/ | 
-bash hermes/devel/benchmarks/gauntlet_b_splatbox/contract.sh |
-| **Gauntlet C (Aquarium 3D)** | hermes/devel/benchmarks/gauntlet_c_aquarium/ | 
-bash hermes/devel/benchmarks/gauntlet_c_aquarium/contract.sh |
-| **Native Hermes Skills** | ~/.hermes/skills/icm/, ~/.hermes/tools/tools.md | 
-bash ~/.hermes/tools/icm/audit_hermes_home.sh |
+| **Root Protocol & Rules** | AGENTS.md, hermes/devel/_config/invariants.md | python3 ~/.hermes/tools/icm/icm_context_auditor.py . |
+| **Compiler Pipeline** | hermes/devel/stages/01-probe/ -> 03-execute/ | bash hermes/devel/contract.sh |
+| **Gauntlet A (Voxel FPS)** | hermes/devel/benchmarks/gauntlet_a_voxel_fps/ | bash hermes/devel/benchmarks/gauntlet_a_voxel_fps/contract.sh |
+| **Gauntlet B (Splatbox CV)** | hermes/devel/benchmarks/gauntlet_b_splatbox/ | bash hermes/devel/benchmarks/gauntlet_b_splatbox/contract.sh |
+| **Gauntlet C (Aquarium 3D)** | hermes/devel/benchmarks/gauntlet_c_aquarium/ | bash hermes/devel/benchmarks/gauntlet_c_aquarium/contract.sh |
+| **Native Hermes Skills** | ~/.hermes/skills/icm/, ~/.hermes/tools/tools.md | bash ~/.hermes/tools/icm/audit_hermes_home.sh |
 
 ## 4. Canonical GDR Research Corpus (docs/research/)
 
 | Package | Core Architectural Focus |
 | :---- | :---- |
-| **GDR30-GDR32** | Golden GAIA/TAU-2 baselines, substrate sync, and user 
-systemd telemetry harnesses. |
-| **GDR33-GDR35** | Gauntlet A netcode jitter, Gauntlet B OpenCV servoing, and 
-Gauntlet C WebGL shader diagnostics. |
-| **GDR36-GDR37** | 4-tier skill precedence, ICM 5-layer migration, and 
-AGENTS.md standardization. |
-| **GDR38-GDR39** | Gemma 4 Exact + Nemotron Dory 4B, ICM pedagogy, 
-SkillEvaluator/AQuA, EGM planning, and Clef routing. |
+| **GDR30-GDR32** | Golden GAIA/TAU-2 baselines, substrate sync, and user systemd telemetry harnesses. |
+| **GDR33-GDR35** | Gauntlet A netcode jitter, Gauntlet B OpenCV servoing, and Gauntlet C WebGL shader diagnostics. |
+| **GDR36-GDR37** | 4-tier skill precedence, ICM 5-layer migration, and AGENTS.md standardization. |
+| **GDR38-GDR39** | Gemma 4 Exact + Nemotron Dory 4B, ICM pedagogy, SkillEvaluator/AQuA, and EGM planning. |
 
 ## 5. Deterministic Inter-Agent Handoff Protocol
 
@@ -1471,162 +1458,7 @@ receipt output/check.md.
 next stage.
 ```
 
-## **8. Directive 8: Cloudflare Decision Models for High-Speed ICM Routing & 
-Verification**
-
-### **8.1 Non-Autoregressive Decision Models vs. Autoregressive LLM Generation**
-
-Generating free-form autoregressive text when an ICM workflow only needs a 
-discrete routing choice or binary gate check wastes latency and tokens4. 
-Cloudflare Workers AI provides two open-weight (Apache 2.0) multimodal decision 
-models: **Clef** (`@cf/cloudflare/clef`, post-trained from a frozen 
-**Qwen3.8-27B** backbone) and **Clef-flash** (`@cf/cloudflare/clef-flash`, 
-post-trained from a frozen **Qwen3.5-9B** backbone), alongside **Cloudflare AI 
-Gateway Auto Router** (`cloudflare/auto`)5.  
-Clef and Clef-flash run a **single prefill-only pass** over the state (text, 
-JSON, or up to 4 base64 PNG/JPEG/WebP images) and score all allowed schema 
-options in parallel using a **two-stage attention routing head** trained with 
-rank-256 LoRA adapters, label-smoothed cross-entropy, **Brier loss**, and 
-**Reinforcement Learning for Calibrated Decisions (RLCD)**5. Because decision 
-scoring is non-autoregressive, `"output_tokens"` is always 0, and the API 
-returns calibrated probabilities across three typed question schemas: `noul` 
-(boolean yes/no probability in `[0, 1]`), `choice` (2 to 255 options with 
-`"choice"`, `"probabilities"`, and `"confidence"`), and `score` (2 to 10 ordered 
-rubric levels)51.  
-
-| Model / Endpoint | Backbone & Context | Median / p95 Latency | Input Token Cost (Output = 0) | Optimal ICM System Role & Caveat |
-| :---- | :---- | :---- | :---- | :---- |
-| **`@cf/cloudflare/clef-flash`** (`"model": "clef-flash"`) | Frozen Qwen3.5-9B + Vision Encoder (24,576–65,536 tokens)5. | **38.8 ms** median / **122.4 ms** p9548. | 0.038–0.09 USD / 1M input tokens5. | **Layer 1 Task Router & In-Stage Branch Selector**: Ultra-fast routing with zero local VRAM overhead4. |
-| **`@cf/cloudflare/clef`** (`"model": "clef"`) | Frozen Qwen3.8-27B + Vision Encoder (65,536 tokens)5. | **209.3 ms** median / **238.6 ms** p9548. | 0.24 USD / 1M input tokens5. | **Layer 4 Multimodal & Telemetry Gate Verifier**: Vendor-reported 97.43 Macro-F1 on CLINC150+OOS and 94.20 on BANKING775. |
-| **`cloudflare/auto`** (AI Gateway Auto Router) | Multi-head classifier + utility matrix across 14 task categories50. | Edge GPU classifier + session affinity (`cf-aig-session-id`)50. | Free in beta (up to 30% cost reduction)50. | **External Cloud Fallback Router**: Scores Complexity, Ambiguity, Stakes, and Context Dependence (1–5) while preserving prompt cache affinity50. |
-
-*Epistemic Calibration Caveat*: In Cloudflare's vendor-reported Decision Index 
-benchmarks, Clef outperforms TypeSafe's Jev on classification and tool routing 
-(97.43 vs 89.27 on CLINC150+OOS) but scores lower on knowledge-heavy reasoning 
-(48.0 vs 78.3 on GPQA Diamond), and independent replication is not yet 
-published5. Use Clef and Clef-flash strictly for discrete routing and gate 
-classification, while keeping mathematical derivation and code generation on 
-your local Gemma 4 Exact 4B and Nemotron Dory 4B engines4.
-
-### **8.2 Deterministic Python Tools for Automated ICM Integration (strictly under 60 lines 
-Each)**
-
-#### **Tool 1: High-Speed Layer 1 Task Router 
-(`_tools/hermes_decision_router.py`, 48 Lines)**
-
-```python
-#!/usr/bin/env python3
-"""Cloudflare Clef-flash Layer 1 ICM Task Router (<60 lines)."""
-import json
-import os
-import sys
-import urllib.request
-
-ROUTES = {
-    "gauntlet_a": "hermes/devel/benchmarks/gauntlet_a_voxel_fps/ (3D FPS netcode, jitter, state sync)",
-    "gauntlet_b": "hermes/devel/benchmarks/gauntlet_b_splatbox/ (OpenCV bullseye tracking, ballistics, CDP)",
-    "gauntlet_c": "hermes/devel/benchmarks/gauntlet_c_aquarium/ (WebGL2 wave PDE, dFdx/dFdy caustics, boids)",
-    "icm_scaffold": "Scaffold a new 5-layer ICM directory tree, AGENTS.md, CONTEXT.md, and contract.sh",
-    "icm_audit": "Run NVIDIA SkillEvaluator, link checks, and contract.sh verification gates"
-}
-
-def route_request(user_prompt: str) -> dict:
-    acct = os.environ["CLOUDFLARE_ACCOUNT_ID"]
-    token = os.environ["CLOUDFLARE_AUTH_TOKEN"]
-    url = f"https://api.cloudflare.com/client/v4/accounts/{acct}/ai/run/@cf/cloudflare/clef-flash"
-    payload = json.dumps({
-        "model": "clef-flash",
-        "state": user_prompt,
-        "questions": {
-            "target_route": {
-                "type": "choice",
-                "instructions": "Select the exact ICM workspace route matching this engineering request.",
-                "criteria": ROUTES
-            },
-            "requires_socratic_plan": {
-                "type": "noul",
-                "instructions": "Does this request involve a new architecture or complex physics/shader design requiring pre-coding Socratic planning?"
-            }
-        }
-    }).encode("utf-8")
-    req = urllib.request.Request(
-        url, data=payload,
-        headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
-    )
-    with urllib.request.urlopen(req, timeout=10) as resp:
-        ans = json.loads(resp.read().decode("utf-8"))["result"]["answers"]
-        return {
-            "route": ans["target_route"]["choice"],
-            "confidence": ans["target_route"]["confidence"],
-            "socratic_gate_prob": ans["requires_socratic_plan"]["noul"]
-        }
-
-if __name__ == "__main__":
-    prompt = " ".join(sys.argv[1:]) or "Implement WebGL2 derivative caustics and spherical-cap buoyancy."
-    print(json.dumps(route_request(prompt), indent=2))
-```
-
-#### **Tool 2: Multimodal & Telemetry Contract Gate Verifier 
-(`_tools/hermes_decision_gate.py`, 52 Lines)**
-
-```python
-#!/usr/bin/env python3
-"""Cloudflare Clef Layer 4 Contract & Multimodal Gate Verifier (<60 lines)."""
-import base64
-import json
-import os
-import pathlib
-import sys
-import urllib.request
-
-def evaluate_gate(telemetry_path: str, screenshot_path: str = "") -> int:
-    acct = os.environ["CLOUDFLARE_ACCOUNT_ID"]
-    token = os.environ["CLOUDFLARE_AUTH_TOKEN"]
-    url = f"https://api.cloudflare.com/client/v4/accounts/{acct}/ai/run/@cf/cloudflare/clef-flash"
-    state_obj = json.loads(pathlib.Path(telemetry_path).read_text())
-    body = {
-        "model": "clef-flash",
-        "state": state_obj,
-        "questions": {
-            "contract_pass": {
-                "type": "noul",
-                "instructions": "Does the telemetry satisfy webgl2=true, fps>=50, console_errors=0, and vram<=5800?"
-            },
-            "remediation_action": {
-                "type": "choice",
-                "instructions": "Which stage action should the orchestrator take next?",
-                "criteria": {
-                    "advance": "All invariants pass; certify stage and advance",
-                    "rerun_probe": "WebGL2 context or float FBO extension failed",
-                    "rerun_controller": "Shader compilation, physics NaN, or boid count failed",
-                    "rerun_execute": "Frame rate < 50 FPS or runtime console errors occurred"
-                }
-            },
-            "visual_quality": {
-                "type": "score",
-                "instructions": "Rate the simulation telemetry and visual completeness.",
-                "criteria": ["Broken/Blank", "Degraded", "Compliant", "Frontier Quality"]
-            }
-        }
-    }
-    if screenshot_path and pathlib.Path(screenshot_path).exists():
-        b64 = base64.b64encode(pathlib.Path(screenshot_path).read_bytes()).decode("ascii")
-        body["images"] = [{"content_type": "image/png", "base64": b64}]
-    req = urllib.request.Request(
-        url, data=json.dumps(body).encode("utf-8"),
-        headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
-    )
-    with urllib.request.urlopen(req, timeout=15) as resp:
-        ans = json.loads(resp.read().decode("utf-8"))["result"]["answers"]
-        passed = (ans["contract_pass"]["noul"] >= 0.90) and (ans["remediation_action"]["choice"] == "advance")
-        print(json.dumps({"status": "PASS" if passed else "FAIL", "decisions": ans}, indent=2))
-        return 0 if passed else 1
-
-if __name__ == "__main__":
-    sys.exit(evaluate_gate(sys.argv[1], sys.argv[2] if len(sys.argv) > 2 else ""))
-```
-
-### **8.3 Immediate Deployment Checklist for `ws-hermes`**
+## **8. Immediate Deployment Checklist for `ws-hermes`**
 
 1. **Harmonize Substrate**: Copy the updated `SOUL.md` to `~/.hermes/SOUL.md`, 
 place the Universal `CONTEXT.md` at 
@@ -1651,11 +1483,8 @@ context rot4.
 2. `01_master_gdr39_brief.md`  
 3. `02_doc1_icm_execution_review_gauntlet_b.md`  
 4. `03_doc2_icm_pedagogy_tools_bots_spec.md`  
-5. Cloudflare open-sources Clef (27B) and Clef-flash (9B): Apache 2.0, 
-[https://www.reddit.com/r/machinelearningnews/comments/1wvh2if/
-cloudflare_opensources_clef_27b_and_clefflash_9b/](https://www.reddit.com/r/
-machinelearningnews/comments/1wvh2if/
-cloudflare_opensources_clef_27b_and_clefflash_9b/)  
+5. Interpretable Context Methodology: Folder Structure as Agent State Machine, 
+[https://arxiv.org/abs/2603.16021](https://arxiv.org/abs/2603.16021)  
 6. Google's Elephant-Goldfish Model: A Design-First... - daily.dev, 
 [https://daily.dev/posts/google-s-elephant-goldfish-model-a-design-first-
 workflow-for-coding-agents-fvgice43m](https://daily.dev/posts/google-s-elephant-
@@ -1801,27 +1630,3 @@ goldfish-googles-new-way-to-build-software-with-ai-90e2c88d1079)
 [https://github.com/NousResearch/hermes-agent/blob/main/website/docs/guides/work
 -with-skills.md](https://github.com/NousResearch/hermes-agent/blob/main/website/
 docs/guides/work-with-skills.md)  
-47. Cloudflare Clef, Jev and decision models: why AI agents need better, 
-[https://say-digital.io/blog/cloudflare-clef-jev-decision-models-ai-agents/?lang
-=en](https://say-digital.io/blog/cloudflare-clef-jev-decision-models-ai-agents/?
-lang=en)  
-48. our open-source decision models, and new RL fine-tuning platform, 
-[https://blog.cloudflare.com/clef-decision-models/](https://blog.cloudflare.com/
-clef-decision-models/)  
-49. Workers AI Models - Cloudflare Docs, 
-[https://developers.cloudflare.com/workers-ai/models/](https://developers.
-cloudflare.com/workers-ai/models/)  
-50. Cut your AI spend with AI Gateway's Auto Router - Cloudflare Blog, 
-[https://blog.cloudflare.com/auto-router/](https://blog.cloudflare.com/auto-
-router/)  
-51. 
-[https://dev.to/akari_iku/hands-on-with-cloudflares-decision-model-clef-on-
-workers-ai-del](https://dev.to/akari_iku/hands-on-with-cloudflares-decision-
-model-clef-on-workers-ai-del)  
-52. 
-[https://developers.cloudflare.com/workers-ai/models/clef-flash/](https://
-developers.cloudflare.com/workers-ai/models/clef-flash/)  
-53. 
-[https://github.com/cloudflare/cloudflare-docs/blob/production/src/content/
-workers-ai-models/clef.json](https://github.com/cloudflare/cloudflare-docs/blob/
-production/src/content/workers-ai-models/clef.json)
