@@ -1,11 +1,10 @@
 # Master Prompt for Lead Architect Argon (GDR40 Chronological Synthesis & Complete ICM Operating System)
 
 > **Instructions for User**:  
-> 1. Open [gemini.google.com](https://gemini.google.com) or [notebooklm.google.com](https://notebooklm.google.com) in your browser.  
-> 2. In Gemini: Select the **Chat** tab and enable **Thinking Process: High** (or invoke Lead Architect Argon in Deep Research mode).  
-> 3. Click the **+** (**Add file**) icon → **Import** (or upload the local markdown files directly to NotebookLM).  
-> 4. Ingest the 4 canonical raw endpoints listed in the prompt below (well under the 10-file ceiling).  
-> 5. Copy the markdown prompt below, paste it into the message box, and submit.  
+> 1. Open [gemini.google.com](https://gemini.google.com) in your browser.  
+> 2. In the prompt area, enable **Deep Research** (or select the Deep Research tool / mode).  
+> 3. Copy the markdown directive below, paste it into the message box, and click submit.  
+> 4. Gemini Deep Research will anchor to your live GitHub repository (`https://github.com/imshubhamsocial/ws-hermes`), crawl the target documents, and perform targeted web searches to validate and enhance the operational playbook.  
 
 ---
 
@@ -17,52 +16,72 @@
 > **Inference Engine**: Dual-Track (Google Gemma 4 Exact 4B + NVIDIA Nemotron Dory 1.0 Looped 4B)  
 > **Context Window Enforced**: 131,072 to 262,144 tokens (128K–256K, Google TurboQuant Q4_0 KV Cache)  
 > **Hardware Status**: Discrete NVIDIA GeForce RTX 3050 Laptop GPU (6,144 MiB physical GDDR6, ceiling $\le 5,800.0\text{ MiB}$); Intel iGPU for Desktop & Wayland Compositor (Disp.A: Off, 25 MiB idle); Host system on CPU & 16 GB System RAM  
-> **Primary Ground Truth**: [GDR39 ICM Architecture Blueprint (formatted).md](https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR39/Output/GDR39%20ICM%20Architecture%20Blueprint%20(formatted).md) (Certified 100% Pass, 82.5 KB, 30 Code Blocks)  
+> **Primary Ground Truth**: https://github.com/imshubhamsocial/ws-hermes/blob/master/hermes/devel/docs/research/GDR39/Output/GDR39%20ICM%20Architecture%20Blueprint%20(formatted).md (Certified 100% Pass, 82.5 KB, 30 Code Blocks)  
 
 ---
 
-## Instructions for Lead Architect Argon (Gemini Argon / High Thinking)
+## Instructions for Lead Architect Argon (Gemini Deep Research Mode)
 
-You are Lead Architect Argon.
+You are Lead Architect Argon, operating inside Google Deep Research.
 
-You are provided with the master blueprint from our previous research cycle: **`GDR39 ICM Architecture Blueprint (formatted).md`** alongside foundational project documentation.
+You are provided with the master blueprint from our previous research cycle alongside the live GitHub repository:
+* **Primary Repository Anchor**: `https://github.com/imshubhamsocial/ws-hermes`
+* **Master Architectural Blueprint**: `https://github.com/imshubhamsocial/ws-hermes/blob/master/hermes/devel/docs/research/GDR39/Output/GDR39%20ICM%20Architecture%20Blueprint%20(formatted).md`
 
-In GDR39, you successfully delivered seven exhaustive, high-value technical directives covering ICM theory, profile bots, Gauntlet C WebGL2 simulations, slash commands, Socratic planning gates, substrate harmonization, and universal workspace routing.
+In GDR39, you delivered seven exhaustive architectural directives covering ICM theory, profile bots, Gauntlet C WebGL2 simulations, slash commands, Socratic planning gates, substrate harmonization, and universal workspace routing.
 
-However, because GDR39 was structured as **topical silos**, its directives currently appear as disconnected reference chapters rather than an **executable chronological workflow**:
+However, because GDR39 was organized as **topical silos**, its directives currently read as reference chapters rather than an **executable chronological workflow**:
 * Profile bots are described in Directive 2, while the pre-coding planner bot is in Directive 5, and the root substrate `SOUL.md` is in Directive 6.
 * Gauntlet C simulation implementation is detailed in Directive 3, while the pre-coding Socratic gate needed to plan contracts is in Directive 5, and multi-stage orchestration is in Directive 4.
 * Fresh scaffolding is in Directive 1, while AST repository migration is in Directive 2.
 * Slash command automation (`/goal`) is analyzed in Directive 4, while autonomous skill distillation (`/learn`) is in Directive 6.
 
-### Your Golden Mission for GDR40
-Your mission is to perform an exhaustive **forensic dependency analysis of `GDR39 ICM Architecture Blueprint (formatted).md`** and **reorganize 100% of its content into a single, unambiguous, end-to-end chronological execution pipeline**:
-1. **Forensic Dependency Analysis**: Analyze what must precede what. An autonomous agent or engineer cannot build before planning, cannot execute without an isolated environment, and cannot verify without deterministic contracts. Determine the natural, logical chronological sequence of operations.
-2. **Zero Dropped Content**: You must preserve all 30 executable code blocks, all 14 LaTeX math PDEs, all 4 isolated profile bots, the root `SOUL.md`, the Universal `CONTEXT.md`, and all verification gates without dropping any technical detail.
-3. **Zero Duplicates or Ambiguities**: Enforce "One Fact, One Home". Eliminate redundant hardware statements. Resolve all contradictions between slash commands and clean sessions. Unify greenfield scaffolding with brownfield migration into a single logical branching step.
-4. **Substrate Autonomy**: All architectures, tools, and gates must operate 100% locally on the host substrate. Zero external proprietary decision endpoints.
-5. **Mandatory Google Docs & Gemini Web Safety**: Enforce strict formatting hygiene so that the output compiles cleanly, renders without truncation, and exports to Google Docs with zero errors.
+### Your Dual Mandate in Deep Research
+
+1. **Forensic Dependency Analysis & Chronological Reorganization**:
+   * Analyze the dependency graph of all components from GDR39. Determine what must precede what. An autonomous agent or engineer cannot implement code before planning, cannot execute without an isolated environment, and cannot verify without deterministic contracts.
+   * Reorganize 100% of GDR39 content into an unambiguous, step-by-step chronological operational execution pipeline. Determine the natural operational stages and naming from scratch.
+2. **Targeted Web Validation & Enhancement**:
+   * You have full autonomy to conduct targeted web searches across arXiv, GitHub, and technical documentation to cross-reference foundational principles:
+     * Interpretable Context Methodology (arXiv:2603.16021 by Jake Van Clief and David McDermott).
+     * Google Elephant-Goldfish Model (EGM) pre-coding Socratic workflows.
+     * Clean-session context wiping and KV cache degradation mechanics.
+     * WebGL2 GPGPU wave equation stencils, screen-space caustics with partial derivatives (`dFdx`/`dFdy`), and 3D Boids flocking.
+     * NVIDIA SkillEvaluator CLI and Google AQuA agent quality benchmarking.
+   * Integrate verified industry benchmarks and architectural improvements into the playbook where appropriate.
+3. **Zero Dropped Content**:
+   * You must preserve all 30 executable code blocks, all 14 LaTeX math PDEs, all 4 isolated profile bots, the root `SOUL.md`, the Universal `CONTEXT.md`, and all verification gates without dropping technical substance.
+4. **Substrate Autonomy**:
+   * The architecture must run 100% locally on Fedora Kinoite 44 with zero external proprietary decision endpoints (zero Cloudflare dependencies).
+5. **Mandatory Google Docs & Gemini Web Safety**:
+   * Enforce strict formatting hygiene so that the output compiles cleanly, renders without truncation, and exports to Google Docs with zero errors.
 
 ---
 
-## Raw Ingestion Endpoints (Strictly 4 Primary Files — Under 10-File Ceiling)
+## Canonical Ingestion Endpoints (Strictly Grounded)
 
-Directly ingest the four canonical raw markdown endpoints below:
+Inspect the live repository and the primary documentation endpoints below:
 
-1. **Master Ground Truth Blueprint (82.5 KB, 30 Code Blocks)**:  
-   `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR39/Output/GDR39%20ICM%20Architecture%20Blueprint%20(formatted).md`
-2. **GDR40 Technical Consultation Brief**:  
-   `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR40/01_master_gdr40_brief.md`
-3. **GDR40 Chronological Synthesis Audit & Component Catalog**:  
-   `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR40/02_doc1_gdr39_chronological_synthesis.md`
-4. **GDR39 Forensic Verification Report**:  
-   `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR39/Output/GDR39%20Formatting%20Audit%20Report.md`
+1. **Master Repository Root**:  
+   `https://github.com/imshubhamsocial/ws-hermes`
+2. **GDR39 Master Blueprint (Certified Ground Truth, 82.5 KB, 30 Code Blocks)**:  
+   Web: `https://github.com/imshubhamsocial/ws-hermes/blob/master/hermes/devel/docs/research/GDR39/Output/GDR39%20ICM%20Architecture%20Blueprint%20(formatted).md`  
+   Raw: `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR39/Output/GDR39%20ICM%20Architecture%20Blueprint%20(formatted).md`
+3. **GDR40 Technical Consultation Brief**:  
+   Web: `https://github.com/imshubhamsocial/ws-hermes/blob/master/hermes/devel/docs/research/GDR40/01_master_gdr40_brief.md`  
+   Raw: `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR40/01_master_gdr40_brief.md`
+4. **GDR40 Chronological Synthesis Audit & Component Catalog**:  
+   Web: `https://github.com/imshubhamsocial/ws-hermes/blob/master/hermes/devel/docs/research/GDR40/02_doc1_gdr39_chronological_synthesis.md`  
+   Raw: `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR40/02_doc1_gdr39_chronological_synthesis.md`
+5. **GDR39 Formatting & Forensic Audit Report**:  
+   Web: `https://github.com/imshubhamsocial/ws-hermes/blob/master/hermes/devel/docs/research/GDR39/Output/GDR39%20Formatting%20Audit%20Report.md`  
+   Raw: `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR39/Output/GDR39%20Formatting%20Audit%20Report.md`
 
 ---
 
-## Technical Assets to Analyze and Chronologically Structure
+## Technical Assets to Sequence Chronologically
 
-Your final deliverable must chronologically sequence every technical component from the foundation upward:
+Your final deliverable must chronologically sequence every technical component from the substrate upward:
 
 1. **Host Environment & Substrate Ceilings**:
    * Fedora Kinoite 44 host, Intel iGPU display, discrete NVIDIA RTX 3050 ceiling ($\le 5,800.0\text{ MiB}$).
