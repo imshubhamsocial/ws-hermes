@@ -23,6 +23,7 @@
 | Design or restructure a workspace using ICM | `hermes/devel/skills/icm-architect/` | `hermes/devel/skills/icm-architect/SKILL.md` | Layer 3 Skill |
 | Compile a single ICM stage with KV cache isolation | `hermes/devel/_tools/` | `hermes/devel/_tools/hermes_stage_runner.py` | Layer 3 Tool |
 | Audit Phase 58 and seal the master status ledger | `hermes/devel/phases/phase_58_autonomous_icm_factory_and_multi_gauntlet_certification/` | `03_verify/contract.sh` | Layer 4 Gate |
+| Consult or ingest GDR39 Research Release (ICM Pedagogy, Bots, Gauntlet C) | `hermes/devel/docs/research/GDR39/` | `docs/research/GDR39/00_README.md` | Layer 3 Research |
 | Check system invariants, ports, and VRAM limits | `hermes/devel/_config/` | `hermes/devel/_config/invariants.md` | Layer 3 Config |
 
 ## 3. Context Takeover Rule

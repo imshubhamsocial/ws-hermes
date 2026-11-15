@@ -1,14 +1,24 @@
-# Procedural Rules: Gauntlet B — Autonomous Splatbox Browser Gameplay
+# Procedural Rules: Gauntlet B — Dual-Launch Splatbox Benchmark
 
-> 1. **Step 1 — Host Browser Launch (89luca89/distrobox)**:
-   * Create mkdir -p "$HOME/.cache/chrome_dev_debug".
-   * Launch /usr/bin/distrobox-host-exec flatpak run com.google.ChromeDev --remote-debugging-port=9222 --user-data-dir="$HOME/.cache/chrome_dev_debug" --window-size=1280,720 "https://splatbox.alexdiaz.fyi/" &.
-> 2. **Step 2 — Readiness & PointerLock Engagement (browser-use / CDP)**:
-   * Poll http://127.0.0.1:9222/json until the Splatbox tab webSocketDebuggerUrl is available.
-   * Poll DOM via Runtime.evaluate until document.querySelector('#play') && !document.querySelector('#play').disabled.
-   * Click #play and verify #hud is unhidden (!document.getElementById('hud').hidden).
-> 3. **Step 3 — Hybrid Vision & Ballistic Engagement Loop**:
-   * Capture viewport frame via CDP Page.captureScreenshot (format: "jpeg", quality: 70).
-   * Query embeddinggemma2 (Port 8139) / vision_tools.py on initial frame and every 10th cycle to confirm active target clusters and HUD state; run cv2.HoughCircles masking the top 80px and bottom 90px HUD regions to lock onto the nearest target bullseye.
-   * Compute vertical drop offset, slew camera by relative deltas, and fire only when error <= 6.0 px.
-   * Press KeyR whenever parseInt(document.getElementById('ammo').textContent) <= 5.
+> 1. **Prompt Contract (Zero Spoon-Feeding)**:
+>    * Prompts must follow user conversational style.
+>    * Never provide hardcoded pixel coordinates, bounding box areas, or specific numeric offsets.
+>    * Prompt instructs Hermes to analyze shooting angles, weapon distances (pistol, rifle, shotgun), and fix vision tracking and ballistics.
+> 2. **Stage 1 — Remediation & Weapon Analysis Run**:
+>    * Launch host Konsole running Hermes TUI (`hermes chat --in <BENCH> -m <model> --skills icm-architect --accept-hooks --tui --yolo -q <prompt>`).
+>    * Launch native KDE dummy placeholder on right screen (`placeholder.py`).
+>    * Record Konsole window on left (frame, titlebar, shadows) for Stage 1 duration.
+> 3. **Stage 2 — Autonomous Execution Run**:
+>    * Launch fresh Konsole running Hermes TUI instructing execution of `python3 output/splatbox_agent.py`.
+>    * Record Konsole window on left executing command and verifying telemetry.
+> 4. **Stage 3 — WebGPU Game Play & Window Capture**:
+>    * Launch Google Chrome on Intel iGPU (`DRI_PRIME=0`, `__NV_PRIME_RENDER_OFFLOAD=0`, `__GLX_VENDOR_LIBRARY_NAME=mesa`) on port 9222.
+>    * Record Chrome window with full Breeze titlebar, tabs, canvas, and shadows playing `https://splatbox.alexdiaz.fyi/?autoplay`.
+>    * Splatbox agent writes match telemetry to `stages/03-execute/output/telemetry.json` (score >= 25, frames >= 120).
+> 5. **Stage 4 — Deterministic Composition**:
+>    * Composite left stream (Hermes Run 1 followed by Hermes Run 2) side-by-side with right stream (KDE placeholder during Run 1, Chrome WebGPU game during Run 2).
+>    * Output master benchmark video to `output/<model_video>.mp4`.
+> 6. **Hardware & Substrate Cleanliness**:
+>    * Stop all test processes before and after each benchmark run.
+>    * Zero residual processes, temporary profiles, or background subshells.
+>    * Never modify `/var/home/imshubhamsocial/.hermes/hermes-agent`.

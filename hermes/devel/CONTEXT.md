@@ -19,6 +19,7 @@
 | Frontier Gauntlet A (3D Voxel FPS) | `benchmarks/gauntlet_a_voxel_fps/` | `benchmarks/gauntlet_a_voxel_fps/contract.sh` | Layer 4 Gauntlet |
 | Frontier Gauntlet B (3D Splatbox CV) | `benchmarks/gauntlet_b_splatbox/` | `benchmarks/gauntlet_b_splatbox/contract.sh` | Layer 4 Gauntlet |
 | Frontier Gauntlet C (3D WebGL Aquarium) | `benchmarks/gauntlet_c_aquarium/` | `benchmarks/gauntlet_c_aquarium/contract.sh` | Layer 4 Gauntlet |
+| GDR39 Research Release (ICM Pedagogy, Bots, Gauntlet C) | `docs/research/GDR39/` | `docs/research/GDR39/00_README.md` | Layer 3 Research |
 | Phase 58 Certification Gate | `phases/phase_58_autonomous_icm_factory_and_multi_gauntlet_certification/` | `03_verify/contract.sh` | Layer 4 Gate |
 
 ## 3. Context Takeover Rule
