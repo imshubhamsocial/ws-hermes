@@ -1,7 +1,6 @@
 # GDR40 Chronological Blueprint: Forensic Formatting Audit & Certification Report
 
 > **Target Document Audited**: [GDR40 Chronological Blueprint Reorganization.md](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/docs/research/GDR40/Output/GDR40%20Chronological%20Blueprint%20Reorganization.md)  
-> **Canonical Alias**: [gdr40_chronological_blueprint_reorganization.md](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/docs/research/GDR40/Output/gdr40_chronological_blueprint_reorganization.md)  
 > **Status**: **100% Certified Pass** (30/30 code blocks pass compiler checks, 0 broken table rows, strict backtick and math parity).
 
 ---
