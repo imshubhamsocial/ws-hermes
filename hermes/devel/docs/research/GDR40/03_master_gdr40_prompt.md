@@ -45,26 +45,18 @@ Your mission is to perform a **thorough forensic analysis of `GDR39 ICM Architec
 
 ---
 
-## Raw Ingestion Endpoints (Direct Access)
+## Raw Ingestion Endpoints (Strictly 4 Primary Files — Under 10-File Ceiling)
 
-Directly ingest the canonical raw markdown endpoints below:
+Directly ingest the four canonical raw markdown endpoints below:
 
-### 1. Primary Subject & Prior Audit
-* **GDR39 Master Blueprint (Certified)**: `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR39/Output/GDR39%20ICM%20Architecture%20Blueprint%20(formatted).md`
-* **GDR39 Formatting Audit Report**: `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR39/Output/GDR39%20Formatting%20Audit%20Report.md`
-* **GDR40 Consultation Brief**: `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR40/01_master_gdr40_brief.md`
-* **GDR40 Chronological Synthesis Audit**: `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR40/02_doc1_gdr39_chronological_synthesis.md`
-
-### 2. Core Protocols & Host Substrate
-* **Layer 0 Operating Protocol**: `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/AGENTS.md`
-* **Layer 1 Umbrella Router**: `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/CONTEXT.md`
-* **Hermes Soul & Epistemics**: `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/.hermes/SOUL.md`
-
-### 3. Benchmarks & Verification
-* **Gauntlet B Router & Contract**: `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/benchmarks/gauntlet_b_splatbox/CONTEXT.md`
-* **Gauntlet B Telemetry**: `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/benchmarks/gauntlet_b_splatbox/output/telemetry.json`
-* **Gauntlet C Router & Contract**: `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/benchmarks/gauntlet_c_aquarium/CONTEXT.md`
-* **Gauntlet C Invariants & Shader Rules**: `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/benchmarks/gauntlet_c_aquarium/invariants.md`
+1. **Master Ground Truth Blueprint (92 KB, 32 Code Blocks)**:  
+   `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR39/Output/GDR39%20ICM%20Architecture%20Blueprint%20(formatted).md`
+2. **GDR40 Technical Consultation Brief (10-Step Operational Roadmap)**:  
+   `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR40/01_master_gdr40_brief.md`
+3. **GDR40 Chronological Synthesis Audit & Component Catalog**:  
+   `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR40/02_doc1_gdr39_chronological_synthesis.md`
+4. **GDR39 Forensic Verification Report**:  
+   `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR39/Output/GDR39%20Formatting%20Audit%20Report.md`
 
 ---
 
