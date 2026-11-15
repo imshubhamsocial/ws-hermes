@@ -1,4 +1,4 @@
-# GDR40 Master Release: Chronological Synthesis, End-to-End Operational Pipeline & Complete ICM Factory Architecture
+# GDR40 Master Release: Chronological Reorganization of GDR39 Master Blueprint
 
 > **Release Package**: GDR40  
 > **Date**: November 16, 2026  
@@ -6,7 +6,7 @@
 > **Inference Engine**: Dual-Track (Google Gemma 4 Exact 4B + NVIDIA Nemotron Dory 1.0 Looped 4B)  
 > **Context Window Enforced**: 131,072 to 262,144 tokens (128K–256K, Google TurboQuant Q4_0 KV Cache)  
 > **Hardware Status**: Discrete NVIDIA GeForce RTX 3050 Laptop GPU (6,144 MiB physical GDDR6, ceiling $\le 5,800.0\text{ MiB}$); Intel iGPU for Desktop & Wayland Compositor (Disp.A: Off, 25 MiB idle); Host system on CPU & 16 GB System RAM  
-> **Primary Objective**: Comprehensive forensic dependency analysis of [GDR39 ICM Architecture Blueprint (formatted).md](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/docs/research/GDR39/Output/GDR39%20ICM%20Architecture%20Blueprint%20(formatted).md) and total reorganization into an unambiguous, chronological operational execution pipeline via Google Deep Research.  
+> **Primary Objective**: Strict chronological reorganization of [GDR39 ICM Architecture Blueprint (formatted).md](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/docs/research/GDR39/Output/GDR39%20ICM%20Architecture%20Blueprint%20(formatted).md) into an unambiguous sequential operational pipeline, using the supporting GDR39 documentation suite for reference.  
 > **Export Integrity**: Strict Google Docs and Gemini Web safety compliance (0 broken tables, 0 unclosed tags, 100% code fence and math dollar parity).
 
 ---
@@ -28,20 +28,37 @@ The table below provides direct HTTPS endpoints for headless web crawlers and Go
 
 ---
 
-## 2. Core Primary Ingestion Documents (Web & Raw Endpoints)
+## 2. Ingestion Endpoints (Primary Subject & Supporting GDR39 Reference Corpus)
 
+### A. Primary Document to Reorganize
 1. **Master Formatted Blueprint (Certified, 82.5 KB, 30 Code Blocks)**:  
    Web: `https://github.com/imshubhamsocial/ws-hermes/blob/master/hermes/devel/docs/research/GDR39/Output/GDR39%20ICM%20Architecture%20Blueprint%20(formatted).md`  
    Raw: `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR39/Output/GDR39%20ICM%20Architecture%20Blueprint%20(formatted).md`
-2. **GDR40 Master Consultation Brief**:  
-   Web: `https://github.com/imshubhamsocial/ws-hermes/blob/master/hermes/devel/docs/research/GDR40/01_master_gdr40_brief.md`  
-   Raw: `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR40/01_master_gdr40_brief.md`
-3. **GDR40 Chronological Synthesis Audit & Component Catalog**:  
-   Web: `https://github.com/imshubhamsocial/ws-hermes/blob/master/hermes/devel/docs/research/GDR40/02_doc1_gdr39_chronological_synthesis.md`  
-   Raw: `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR40/02_doc1_gdr39_chronological_synthesis.md`
-4. **GDR39 Formatting & Forensic Audit Report**:  
+
+### B. Supporting GDR39 Reference Suite
+2. **GDR39 Master Consultation Brief**:  
+   Web: `https://github.com/imshubhamsocial/ws-hermes/blob/master/hermes/devel/docs/research/GDR39/01_master_gdr39_brief.md`  
+   Raw: `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR39/01_master_gdr39_brief.md`
+3. **GDR39 Doc 1 (Gauntlet B Review & Methodology)**:  
+   Web: `https://github.com/imshubhamsocial/ws-hermes/blob/master/hermes/devel/docs/research/GDR39/02_doc1_icm_execution_review_gauntlet_b.md`  
+   Raw: `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR39/02_doc1_icm_execution_review_gauntlet_b.md`
+4. **GDR39 Doc 2 (Pedagogy, Tools & Bot Specs)**:  
+   Web: `https://github.com/imshubhamsocial/ws-hermes/blob/master/hermes/devel/docs/research/GDR39/03_doc2_icm_pedagogy_tools_bots_spec.md`  
+   Raw: `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR39/03_doc2_icm_pedagogy_tools_bots_spec.md`
+5. **GDR39 Master Package Index**:  
+   Web: `https://github.com/imshubhamsocial/ws-hermes/blob/master/hermes/devel/docs/research/GDR39/00_README.md`  
+   Raw: `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR39/00_README.md`
+6. **GDR39 Formatting & Forensic Audit Report**:  
    Web: `https://github.com/imshubhamsocial/ws-hermes/blob/master/hermes/devel/docs/research/GDR39/Output/GDR39%20Formatting%20Audit%20Report.md`  
    Raw: `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR39/Output/GDR39%20Formatting%20Audit%20Report.md`
+
+### C. GDR40 Synthesis Documentation
+7. **GDR40 Master Consultation Brief**:  
+   Web: `https://github.com/imshubhamsocial/ws-hermes/blob/master/hermes/devel/docs/research/GDR40/01_master_gdr40_brief.md`  
+   Raw: `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR40/01_master_gdr40_brief.md`
+8. **GDR40 Chronological Synthesis Audit & Component Catalog**:  
+   Web: `https://github.com/imshubhamsocial/ws-hermes/blob/master/hermes/devel/docs/research/GDR40/02_doc1_gdr39_chronological_synthesis.md`  
+   Raw: `https://raw.githubusercontent.com/imshubhamsocial/ws-hermes/master/hermes/devel/docs/research/GDR40/02_doc1_gdr39_chronological_synthesis.md`
 
 ---
 
