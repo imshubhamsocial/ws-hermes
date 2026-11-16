@@ -227,17 +227,17 @@ exec taskset -c 0-5 "${SERVER_BIN}" \
 
 ---
 
-## 9. Certified Gauntlet B Triple-Model Empirical Telemetry
+## 9. Certified Gauntlet B Triple-Model Empirical Telemetry (Optimized Hardware Pinning & Micro-Batching)
 
-The turnkey Gauntlet B triple-model benchmark suite (`run_triple_gauntlet_b.sh`) executed on Fedora Kinoite 44 with NVIDIA GeForce RTX 3050 Laptop GPU, verifying full 256K context capabilities and discrete VRAM ceilings across all models:
+The turnkey Gauntlet B triple-model benchmark suite (`run_triple_gauntlet_b.sh`) executed on Fedora Kinoite 44 with NVIDIA GeForce RTX 3050 Laptop GPU, verifying full 256K context capabilities and discrete VRAM ceilings across all models with dedicated physical P-core pinning (`0,2,4,6,8,10`), cuBLAS Tensor Core acceleration (`GGML_CUDA_FORCE_MMQ=0`), and micro-batch scaling (`ubatch=1024`):
 
 | Model Identifier | Precision & Format | Context Window | Offload (`-ngl`) | Active VRAM | Prompt Speed | Gen Speed | Gauntlet B Score | Frames | Certified Video Proof |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Qwen 3.5 4B Heretic** | `Q5_K_M` (GDN Hybrid) | **262,144 (Full Native)** | 99 (100% GPU) | **4,533 MiB** | **237.58 tok/s** | **22.78 tok/s** | **835 Points** | 383 | [splatbox_qwen_q5.mp4](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/benchmarks/gauntlet_b_splatbox/output/splatbox_qwen_q5.mp4) |
-| **Qwen 3.5 4B Heretic** | `Q6_K` (GDN Hybrid) | **262,144 (Full Native)** | 99 (100% GPU) | **4,903 MiB** | **245.65 tok/s** | **21.03 tok/s** | **660 Points** | 387 | [splatbox_qwen_q6.mp4](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/benchmarks/gauntlet_b_splatbox/output/splatbox_qwen_q6.mp4) |
-| **NVIDIA Dory 1.0 4B** | `Q5_K_M` ($k=2$ Loops) | **262,144 (Full Native)** | 72 (100% GPU) | **3,189 MiB** | **130.17 tok/s** | **20.52 tok/s** | **924 Points** | 344 | [splatbox_dory_k2.mp4](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/benchmarks/gauntlet_b_splatbox/output/splatbox_dory_k2.mp4) |
+| **Qwen 3.5 4B Heretic** | `Q5_K_M` (GDN Hybrid) | **262,144 (Full Native)** | 99 (100% GPU) | **5,007 MiB** | **256.74 tok/s** | **23.75 tok/s** | **1,085 Points** | 379 | [splatbox_qwen_q5.mp4](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/benchmarks/gauntlet_b_splatbox/output/splatbox_qwen_q5.mp4) |
+| **Qwen 3.5 4B Heretic** | `Q6_K` (GDN Hybrid) | **262,144 (Full Native)** | 99 (100% GPU) | **5,377 MiB** | **241.36 tok/s** | **20.41 tok/s** | **1,136 Points** | 386 | [splatbox_qwen_q6.mp4](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/benchmarks/gauntlet_b_splatbox/output/splatbox_qwen_q6.mp4) |
+| **NVIDIA Dory 1.0 4B** | `Q5_K_M` ($k=2$ Loops) | **262,144 (Full Native)** | 72 (100% GPU) | **3,283 MiB** | **126.64 tok/s** | **19.38 tok/s** | **1,048 Points** | 396 | [splatbox_dory_k2.mp4](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/benchmarks/gauntlet_b_splatbox/output/splatbox_dory_k2.mp4) |
 
-* **Master Showcase Artifact**: [hermes_gauntlet_b_triple_showcase.mp4](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/benchmarks/gauntlet_b_splatbox/output/hermes_gauntlet_b_triple_showcase.mp4) (02:03.60, 1920x1080 10 fps, 9.3 MB).
+* **Master Showcase Artifact**: [hermes_gauntlet_b_triple_showcase.mp4](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/benchmarks/gauntlet_b_splatbox/output/hermes_gauntlet_b_triple_showcase.mp4) (02:08.80, 1920x1080 10 fps, 12.4 MB).
 * **Hardware Ceiling Compliance**: Verified $\le 5,800.0\text{ MiB}$ discrete VRAM across all runs, with 26 MiB quiescent baseline.
 * **Deterministic Contract Gate**: `contract.sh` executed in fresh process and returned exit code 0 (`embeddinggemma2_verified: true`, frames $\ge 120$, score $\ge 25$).
 
