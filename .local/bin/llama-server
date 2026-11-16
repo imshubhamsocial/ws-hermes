@@ -1,32 +1,37 @@
 #!/usr/bin/env bash
-# Hermes GDR37 Production llama-server: Gemma 4 Exact (128K TurboQuant + MTP Drafter)
+# Hermes Production llama-server: Google Gemma 4 Exact (128K TurboQuant + MTP)
 set -euo pipefail
-SITE_PACKAGES="$(python3 -m site --user-site 2>/dev/null || python3.14 -m site --user-site 2>/dev/null || python3.13 -m site --user-site 2>/dev/null || echo "${HOME}/.local/lib/python3.14/site-packages")"
-LLAMA_LIB_DIR="${HOME}/.local/lib:${WORKSPACE_ROOT:-$(pwd)}/.local/lib"
-SERVER_BIN="${HOME}/.local/bin/llama-server.bin"
-export LD_LIBRARY_PATH="${LLAMA_LIB_DIR}:${SITE_PACKAGES}/nvidia/cu13/lib:${SITE_PACKAGES}/nvidia/cublas/lib:${SITE_PACKAGES}/nvidia/cuda_nvrtc/lib:${SITE_PACKAGES}/nvidia/nccl/lib:${SITE_PACKAGES}/nvidia/cuda_runtime/lib:${HOME}/.local/share/cuda-libs:${LD_LIBRARY_PATH:-}"
+WS="/var/home/imshubhamsocial/Projects/Workspace/Personal/hermes"
+HOST="/var/home/imshubhamsocial"
+BASE="$WS"
+[[ -f "${HOME:-}/.local/libexec/llama-server.bin" ]] && BASE="$HOME"
+[[ -f "${HOST}/.local/libexec/llama-server.bin" && ! -f "${BASE}/.local/libexec/llama-server.bin" ]] && BASE="$HOST"
 
-if [[ $# -gt 0 ]]; then
-    exec "$SERVER_BIN" "$@"
-fi
+SITE_PACKAGES="${BASE}/.local/lib/python3.14/site-packages"
+for p in "${BASE}/.local/lib"/python3.*/site-packages "${HOST}/.local/lib"/python3.*/site-packages; do
+    [[ -d "${p}/nvidia/cu13/lib" ]] && { SITE_PACKAGES="$p"; break; }
+done
 
-export GGML_CUDA_GRAPH_OPT=1
-export GGML_CUDA_FORCE_MMQ=1
+BIN="${BASE}/.local/libexec/llama-server.bin"
+CUDA_LIBS="${SITE_PACKAGES}/nvidia/cu13/lib:${SITE_PACKAGES}/nvidia/cublas/lib:${SITE_PACKAGES}/nvidia/cuda_nvrtc/lib:${SITE_PACKAGES}/nvidia/nccl/lib:${SITE_PACKAGES}/nvidia/cuda_runtime/lib:${BASE}/.local/share/cuda-libs"
+export LD_LIBRARY_PATH="${BASE}/.local/lib/llama.cpp:${HOST}/.local/lib/llama.cpp:${CUDA_LIBS}:${LD_LIBRARY_PATH:-}"
 
-exec taskset -c 0-5 "$SERVER_BIN" \
-    --model "${HOME}/.hermes/models/gemma-4-E4B-it-q4_0-exact.gguf" \
-    --model-draft "${HOME}/.hermes/models/gemma-4-E4B-it-qat-assistant-q4_0-exact.gguf" \
-    --n-gpu-layers-draft all \
-    --spec-type draft-mtp \
-    --spec-draft-n-max 2 \
-    --alias "gemma-4-E4B-it-qat-exact,gemma-4-e4b-exact,google/gemma-4-E4B-it,nemotron-3.5-bolt-e4b,dory" \
+[[ $# -gt 0 ]] && exec "$BIN" "$@"
+
+MDIR="${HOST}/.hermes/models"
+[[ -d "$MDIR" ]] || MDIR="${WS}/.hermes/models"
+MAIN="${MDIR}/gemma-4-E4B-it-q4_0-exact.gguf"
+DRAFT="${MDIR}/gemma-4-E4B-it-qat-assistant-q4_0-exact.gguf"
+
+DRAFT_FLAGS=()
+[[ -f "$DRAFT" ]] && DRAFT_FLAGS=(--model-draft "$DRAFT" --n-gpu-layers-draft all --spec-type draft-mtp --spec-draft-n-max 2)
+
+export GGML_CUDA_GRAPH_OPT=1 GGML_CUDA_FORCE_MMQ=0
+exec taskset -c 0,2,4,6,8,10 "$BIN" \
+    --model "$MAIN" "${DRAFT_FLAGS[@]}" \
+    --alias "gemma-4-E4B-it-qat-exact,gemma-4-e4b-exact,google/gemma-4-E4B-it,model,default" \
     --host 127.0.0.1 --port 8138 \
-    --ctx-size 131072 \
-    --cache-type-k q4_0 --cache-type-v q4_0 \
-    --batch-size 2048 --ubatch-size 1024 \
-    --flash-attn on \
-    --reasoning on \
-    --jinja \
-    --n-gpu-layers 99 \
+    --ctx-size 131072 --cache-type-k q4_0 --cache-type-v q4_0 \
+    --batch-size 2048 --ubatch-size 1024 --flash-attn on --jinja --n-gpu-layers 99 \
     --threads 6 --threads-batch 6 --parallel 1 --cont-batching \
-    --temp 1.0 --top-p 0.95 --top-k 64 --metrics
+    --temp 0.2 --top-p 0.95 --top-k 64 --min-p 0.05 --repeat-penalty 1.05 --metrics
