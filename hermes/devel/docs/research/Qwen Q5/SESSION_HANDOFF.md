@@ -42,17 +42,20 @@ The memory curve of Qwen 3.5 closely mirrors NVIDIA Dory's last-loop caching:
 
 ---
 
-## 3. Procurement Specification
+## 3. Procurement Specification & Verification Status
 
-The model suite is downloading to the local model repository (`/var/home/imshubhamsocial/.hermes/models/`):
+The model suite has been completely downloaded and verified on disk in `/var/home/imshubhamsocial/.hermes/models/`:
 
-1. **`Qwen3.5-4B-heretic-Q5_K_M.gguf`** (2,932.5 MiB):
+1. **`Qwen3.5-4B-heretic-Q5_K_M.gguf`** (2,932.5 MiB, 426 tensors):
+   - Status: **VERIFIED & CERTIFIED**
    - Source: `saidutta69/Qwen3.5-4B-heretic`
    - Purpose: Universal 256K full-context execution with 0.2% refusal rate and delta-gate stability.
-2. **`Qwen3.5-4B-heretic-Q6_K.gguf`** (3,303.6 MiB):
+2. **`Qwen3.5-4B-heretic-Q6_K.gguf`** (3,303.6 MiB, 426 tensors):
+   - Status: **VERIFIED & CERTIFIED**
    - Source: `saidutta69/Qwen3.5-4B-heretic`
    - Purpose: High-precision 6-bit quantization for $\le 128\text{K}$ context tasks with near-zero KL divergence.
-3. **`qwen2.5-coder-0.5b-instruct-q4_0.gguf`** (408.9 MiB):
+3. **`qwen2.5-coder-0.5b-instruct-q4_0.gguf`** (408.9 MiB, 291 tensors):
+   - Status: **VERIFIED & CERTIFIED**
    - Source: `Qwen/Qwen2.5-Coder-0.5B-Instruct-GGUF`
    - Purpose: Companion Multi-Token Prediction (MTP) speculative drafter to accelerate generation to **~76.5 tok/s**.
 
