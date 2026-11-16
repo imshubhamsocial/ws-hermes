@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Modular Server Manager for Gauntlet B Triple-Model Benchmark Suite
 set -euo pipefail
-ACTION="${1:-stop}"; MODE="${2:-qwen_q5}"
+ACTION="${1:-stop}"; MODE="${2:-gemma4_exact}"
 BIN="/var/home/imshubhamsocial/llama.cpp-dory/build-cuda/bin/llama-server"
 MODELS="/var/home/imshubhamsocial/.hermes/models"
 SITE_PKG="$(python3 -m site --user-site 2>/dev/null || echo "${HOME}/.local/lib/python3.14/site-packages")"
@@ -20,6 +20,11 @@ start_srv() {
     stop_srv
     local m_path="" ctx="${HERMES_CTX:-262144}" ngl="99" bs="2048" ubs="1024" flags=()
     case "${MODE}" in
+        gemma4_exact)
+            m_path="${MODELS}/gemma-4-E4B-it-q4_0-exact.gguf"; ctx="${HERMES_CTX:-65536}"
+            flags=(--spec-draft-model "${MODELS}/gemma-4-E4B-it-qat-assistant-q4_0-exact.gguf"
+                   --n-gpu-layers-draft 99 --spec-type draft-mtp --spec-draft-n-max 2 --spec-draft-p-min 0.75
+                   --temp 0.2 --top-p 0.95 --top-k 64 --min-p 0.05 --repeat-penalty 1.05 --jinja) ;;
         qwen_q5)
             m_path="${MODELS}/Qwen3.5-4B-heretic-Q5_K_M.gguf"; bs="1024"; ubs="512"
             flags=(--no-kv-offload --temp 0.1 --top-p 0.80 --top-k 30 --min-p 0.05 --repeat-penalty 1.05 --jinja
