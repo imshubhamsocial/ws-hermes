@@ -6,7 +6,7 @@ cd "${BENCH_DIR}"
 
 echo "=========================================================="
 echo "Starting Hermes Agent OS Gauntlet B Triple-Model Suite"
-echo "Target Models: Qwen3.5 Q5_K_M (256k), Qwen3.5 Q6_K (128k), Dory (256k, k=2)"
+echo "Target Models: Qwen3.5 Q5_K_M (256k), Qwen3.5 Q6_K (256k), Dory (256k, k=2)"
 echo "Hardware Bound: NVIDIA RTX 3050 Laptop GPU (<= 5,800 MiB)"
 echo "=========================================================="
 

@@ -12,6 +12,7 @@ export GGML_CUDA_GRAPH_OPT=1 GGML_CUDA_FORCE_MMQ=1
 stop_srv() {
     pkill -9 -x llama-server 2>/dev/null || true
     for _ in {1..15}; do ! curl -sf http://127.0.0.1:8138/health >/dev/null 2>&1 && break || sleep 0.5; done
+    for _ in {1..20}; do [[ $(nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits 2>/dev/null || echo 0) -lt 500 ]] && break || sleep 0.5; done
     echo "[SERVER] Stopped. Quiescent VRAM: $(nvidia-smi --query-gpu=memory.used --format=csv,noheader)"
 }
 
@@ -20,16 +21,16 @@ start_srv() {
     local m_path="" ctx="262144" ngl="24" flags=()
     case "${MODE}" in
         qwen_q5)
-            m_path="${MODELS}/Qwen3.5-4B-heretic-Q5_K_M.gguf"
-            flags=(--temp 0.1 --top-p 0.80 --top-k 30 --min-p 0.05 --repeat-penalty 1.05 --jinja
+            m_path="${MODELS}/Qwen3.5-4B-heretic-Q5_K_M.gguf"; ctx="262144"; ngl="99"
+            flags=(--no-kv-offload --temp 0.1 --top-p 0.80 --top-k 30 --min-p 0.05 --repeat-penalty 1.05 --jinja
                    --spec-type ngram-mod --spec-ngram-mod-n-min 8 --spec-ngram-mod-n-match 12 --spec-ngram-mod-n-max 32) ;;
         qwen_q6)
-            m_path="${MODELS}/Qwen3.5-4B-heretic-Q6_K.gguf"; ctx="131072"; ngl="99"
-            flags=(--temp 0.1 --top-p 0.80 --top-k 30 --min-p 0.05 --repeat-penalty 1.05 --jinja
+            m_path="${MODELS}/Qwen3.5-4B-heretic-Q6_K.gguf"; ctx="262144"; ngl="99"
+            flags=(--no-kv-offload --temp 0.1 --top-p 0.80 --top-k 30 --min-p 0.05 --repeat-penalty 1.05 --jinja
                    --spec-type ngram-mod --spec-ngram-mod-n-min 8 --spec-ngram-mod-n-match 12 --spec-ngram-mod-n-max 32) ;;
         dory_k2)
-            m_path="${MODELS}/dory-heretic-q5_k_m.gguf"; ngl="48"
-            flags=(--temp 1.0 --top-p 0.95 --top-k 0 --min-p 0.0 --repeat-penalty 1.0 --jinja --reasoning on
+            m_path="${MODELS}/dory-heretic-q5_k_m.gguf"; ctx="262144"; ngl="72"
+            flags=(--no-kv-offload --temp 1.0 --top-p 0.95 --top-k 0 --min-p 0.0 --repeat-penalty 1.0 --jinja --reasoning on
                    --override-kv "dory.num_loops=int:2,dory.recurrent_kv_cache_mode=str:last_loop"
                    --spec-type ngram-mod --spec-ngram-mod-n-min 8 --spec-ngram-mod-n-match 12 --spec-ngram-mod-n-max 32) ;;
         *) echo "Unknown mode: ${MODE}" && exit 1 ;;
