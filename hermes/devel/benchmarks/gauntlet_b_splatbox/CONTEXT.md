@@ -31,9 +31,8 @@ One job: Certify Hermes Agent OS autonomous Splatbox gameplay via dual-launch IC
 | Artifact | Location | Format |
 | :--- | :--- | :--- |
 | Gemma 4 Exact Benchmark | output/splatbox_gemma4_exact.mp4 | 1920x1080 MP4 |
-| Dory k=2 Benchmark | output/splatbox_dory_k2.mp4 | 1920x1080 MP4 |
-| Dory k=4 Benchmark | output/splatbox_dory_k4.mp4 | 1920x1080 MP4 |
-| Master Showcase | output/hermes_splatbox_showcase.mp4 | 1920x1080 Concat MP4 |
+| Stage 1 Maximized TUI | output/splatbox_stage1_maximized.mp4 | 1920x1080 MP4 |
+| Master Showcase | output/hermes_splatbox_showcase.mp4 | 1920x1080 MP4 |
 | Telemetry Receipt | stages/03-execute/output/telemetry.json | Execution metrics JSON |
 | Audit Verification | output/check.md | YAML-frontmattered receipt |
 

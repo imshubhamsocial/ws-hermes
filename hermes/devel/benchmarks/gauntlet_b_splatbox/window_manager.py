@@ -16,7 +16,7 @@ def tile_windows():
     subprocess.run(['flatpak-spawn', '--host', '/usr/bin/qdbus-qt6', 'org.kde.KWin', '/Scripting/Script0', 'org.kde.kwin.Script.run'], capture_output=True)
     subprocess.run(['flatpak-spawn', '--host', '/usr/bin/qdbus-qt6', 'org.kde.KWin', '/Scripting', 'org.kde.kwin.Scripting.unloadScript', 'tile_pair'], capture_output=True)
 
-def launch_session(model="dory"):
+def launch_session(model="gemma-4-E4B-it-qat-exact"):
     kill_targets(); subprocess.run(['rm', '-rf', '/tmp/hermes_chrome_gauntlet']); time.sleep(1)
     subprocess.Popen(['flatpak-spawn', '--host', 'python3', str(BENCH / 'placeholder.py')])
     p_text = (BENCH / 'PROMPT_ICM.txt').read_text()
@@ -31,5 +31,5 @@ def launch_session(model="dory"):
 if __name__ == '__main__':
     act = sys.argv[1] if len(sys.argv) > 1 else 'status'
     if act == 'kill': kill_targets(); print("Cleaned Gauntlet windows.")
-    elif act == 'launch': launch_session(sys.argv[2] if len(sys.argv) > 2 else 'dory'); print("Launched session.")
+    elif act == 'launch': launch_session(sys.argv[2] if len(sys.argv) > 2 else 'gemma-4-E4B-it-qat-exact'); print("Launched session.")
     elif act == 'tile': tile_windows(); print("Tiled.")

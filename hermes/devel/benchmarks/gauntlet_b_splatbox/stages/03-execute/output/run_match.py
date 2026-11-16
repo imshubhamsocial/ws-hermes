@@ -35,7 +35,8 @@ def run_splatbox_match():
             if tgts and not sem_ok: sem_ok = verify_crop_semantic(frame)
             time.sleep(0.04)
         writer.release()
-        res = {"score": max_sc, "frames_processed": frames, "duration_sec": round(time.time() - t0, 1), "embeddinggemma2_verified": sem_ok, "video_proof": "splatbox_dory_k4.mp4"}
+        v_name = os.environ.get("PROOF_VIDEO_NAME", "splatbox_gemma4_exact.mp4")
+        res = {"score": max_sc, "frames_processed": frames, "duration_sec": round(time.time() - t0, 1), "embeddinggemma2_verified": sem_ok, "video_proof": v_name}
         (out / "telemetry.json").write_text(json.dumps(res, indent=2)); (st_out / "telemetry.json").write_text(json.dumps(res, indent=2))
         return res
 
