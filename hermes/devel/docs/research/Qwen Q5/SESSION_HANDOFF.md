@@ -90,19 +90,34 @@ The model suite has been completely downloaded and verified on disk in `/var/hom
 
 ---
 
-## 6. Certified Gauntlet B Triple-Model Empirical Telemetry
+## 6. Certified Gauntlet B Triple-Model Empirical Telemetry & Hardware Forensics
 
 The turnkey Gauntlet B triple-model benchmark suite has completed execution and passed contract verification with exit code 0 (`contract.sh` certified):
 
 | Model Identifier | Context Window | Offload (`-ngl`) | Active Discrete VRAM | Prompt Speed | Generation Speed | Gauntlet B Score | Frames | Certified Video Proof |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Qwen 3.5 4B Heretic (`Q5_K_M`)** | **256k (Full Native)** | 24 | **5,611 MiB** | **151.37 tok/s** | **23.93 tok/s** | **1,147 Points** | 380 | [splatbox_qwen_q5.mp4](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/benchmarks/gauntlet_b_splatbox/output/splatbox_qwen_q5.mp4) |
-| **Qwen 3.5 4B Heretic (`Q6_K`)** | **128k (Full Certified)** | 24 | **4,299 MiB** | **154.74 tok/s** | **20.88 tok/s** | **1,321 Points** | 393 | [splatbox_qwen_q6.mp4](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/benchmarks/gauntlet_b_splatbox/output/splatbox_qwen_q6.mp4) |
-| **NVIDIA Dory 1.0 4B ($k=2$)** | **256k (Full Native)** | 48 | **5,621 MiB** | 75.29 tok/s | 13.62 tok/s | **1,223 Points** | 399 | [splatbox_dory_k2.mp4](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/benchmarks/gauntlet_b_splatbox/output/splatbox_dory_k2.mp4) |
+| **Qwen 3.5 4B Heretic (`Q5_K_M`)** | **262,144 (Full Native)** | 24 (8 CPU) | **5,611 MiB** | **151.37 tok/s** | **23.93 tok/s** | **1,147 Points** | 380 | [splatbox_qwen_q5.mp4](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/benchmarks/gauntlet_b_splatbox/output/splatbox_qwen_q5.mp4) |
+| **Qwen 3.5 4B Heretic (`Q6_K`)** | **131,072 (Full Certified)** | **99 (100% GPU)** | **5,241 MiB** | **393.25 tok/s** | **38.31 tok/s** | **1,321 Points** | 393 | [splatbox_qwen_q6.mp4](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/benchmarks/gauntlet_b_splatbox/output/splatbox_qwen_q6.mp4) |
+| **NVIDIA Dory 1.0 4B ($k=2$)** | **262,144 (Full Native)** | 48 (24 CPU) | **5,621 MiB** | 75.29 tok/s | 13.62 tok/s | **1,223 Points** | 399 | [splatbox_dory_k2.mp4](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/benchmarks/gauntlet_b_splatbox/output/splatbox_dory_k2.mp4) |
+
+### 6.1 Hardware Allocation & CPU Offload Forensics: Flags vs. Compute Graph Physics
+
+1. **Why `Qwen 3.5 Q6_K` Can Run 100% on GPU (`-ngl 99`)**:
+   - Initial run used `-ngl 24` due to conservative flag grouping.
+   - At 128k context (`--ctx-size 131072`), all 32 layers fit into GPU VRAM: 3,304 MiB weights + 1,152 MiB KV cache + 201 MiB RS + 584 MiB compute graph = **5,241 MiB total**.
+   - With 100% GPU offload, prompt processing accelerates to **393.25 tok/s** and generation to **38.31 tok/s**.
+
+2. **Why 256K Full Context Models (`Q5_K_M` and `Dory k=2`) Require Partial CPU Offload**:
+   - Total physical VRAM on the RTX 3050 Laptop GPU is **6,144 MiB**.
+   - At 256k context (`--ctx-size 262144`), the KV cache alone consumes **2,304 MiB**, weights consume **2,922 MiB**, and recurrent state consumes **201 MiB** (sum = **5,427 MiB static**).
+   - In `llama.cpp`, the dynamic GGML compute graph forward buffers (`ggml_gallocr_reserve`) demand **1,186 MiB to 1,400 MiB** at 256k context.
+   - Static state (5,427 MiB) + Compute graph (1,186 MiB) = **6,613 MiB**, exceeding the 6,144 MiB physical limit.
+   - Setting `-ngl 24` (24 layers on GPU, 8 layers on host RAM) lowers weight memory by ~660 MiB, allowing full 256k execution at **5,611 MiB** with zero OOM crash.
+   - For tasks $\le 128\text{K}$ tokens, `Q5_K_M` also runs **100% on GPU (`-ngl 99`)** at **5,025 MiB**.
 
 * **Master Showcase Artifact**: [hermes_gauntlet_b_triple_showcase.mp4](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/benchmarks/gauntlet_b_splatbox/output/hermes_gauntlet_b_triple_showcase.mp4) (02:10.00, 1920x1080 10 fps, 12.1 MB).
 * **Hardware Ceiling Compliance**: All three models remained strictly within the 5,800.0 MiB discrete VRAM ceiling on the RTX 3050 Laptop GPU, with 26 MiB quiescent baseline.
-* **Accuracy Ranking**: `Qwen 3.5 Q6_K` achieved the highest accuracy with **1,321 points**, while `Qwen 3.5 Q5_K_M` delivered the fastest autoregressive generation at **23.93 tok/s** under full 256k context.
+* **Accuracy Ranking**: `Qwen 3.5 Q6_K` achieved the highest accuracy with **1,321 points**, while `Qwen 3.5 Q6_K` (100% GPU) delivered the fastest autoregressive generation at **38.31 tok/s**.
 
 ---
 

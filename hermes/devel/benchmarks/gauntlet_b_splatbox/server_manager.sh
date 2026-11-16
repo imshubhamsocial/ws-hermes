@@ -24,7 +24,7 @@ start_srv() {
             flags=(--temp 0.1 --top-p 0.80 --top-k 30 --min-p 0.05 --repeat-penalty 1.05 --jinja
                    --spec-type ngram-mod --spec-ngram-mod-n-min 8 --spec-ngram-mod-n-match 12 --spec-ngram-mod-n-max 32) ;;
         qwen_q6)
-            m_path="${MODELS}/Qwen3.5-4B-heretic-Q6_K.gguf"; ctx="131072"
+            m_path="${MODELS}/Qwen3.5-4B-heretic-Q6_K.gguf"; ctx="131072"; ngl="99"
             flags=(--temp 0.1 --top-p 0.80 --top-k 30 --min-p 0.05 --repeat-penalty 1.05 --jinja
                    --spec-type ngram-mod --spec-ngram-mod-n-min 8 --spec-ngram-mod-n-match 12 --spec-ngram-mod-n-max 32) ;;
         dory_k2)
