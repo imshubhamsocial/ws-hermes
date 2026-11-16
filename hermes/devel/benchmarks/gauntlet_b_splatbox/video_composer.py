@@ -3,7 +3,7 @@ FONT = "/usr/share/fonts/adwaita-mono-fonts/AdwaitaMono-Bold.ttf"
 
 def compose_split(raw_vid, final_vid, name, ctx, vram, sc):
     raw_p, fin_p = Path(raw_vid).resolve(), Path(final_vid).resolve()
-    banner = f"{name} - Context {ctx} - Active VRAM {vram} - Score {sc}"
+    banner = f"{name} - Context {ctx} - Active VRAM {vram} - Score {sc}".replace("%", "%%")
     vf = (f"fps=10,scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2,"
           f"drawbox=y=0:color=black@0.82:width=iw:height=64:t=fill,"
           f"drawtext=fontfile={FONT}:text='{banner}':fontcolor=white:fontsize=22:x=(w-text_w)/2:y=20")
