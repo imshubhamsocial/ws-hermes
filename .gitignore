@@ -145,6 +145,7 @@ node_modules/**
 .local/bin/*
 !.local/bin/llama-server
 !.local/bin/openviking-server
+.local/libexec/**
 .local/lib/**
 .local/share/**
 .local/state/**

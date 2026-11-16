@@ -15,7 +15,7 @@ def run_gemma():
     OUT.mkdir(exist_ok=True); (BENCH / "stages/03-execute/output").mkdir(parents=True, exist_ok=True)
     ensure_server()
     vram = subprocess.check_output("nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits", shell=True, text=True).split()[0] + " MiB"
-    sp = subprocess.run(["python3", str(BENCH.parents[1] / "_tools/benchmark_dory_speed.py"), "120", "0.2", "0.95"], capture_output=True, text=True)
+    sp = subprocess.run(["python3", str(BENCH.parents[1] / "_tools/benchmark_speed.py"), "120", "0.2", "0.95"], capture_output=True, text=True)
     print(f"[gemma4_exact] Speed: {sp.stdout.strip()}")
     raw_vid, fin_vid = OUT / "raw_splatbox_gemma4_exact.mp4", OUT / "splatbox_gemma4_exact.mp4"
     os.environ["RECORD_VIDEO_PATH"], os.environ["PROOF_VIDEO_NAME"] = str(raw_vid), fin_vid.name
