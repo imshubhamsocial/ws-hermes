@@ -1,7 +1,7 @@
 {
-  "score": 622,
-  "frames_processed": 383,
-  "duration_sec": 56.6,
+  "score": 1222,
+  "frames_processed": 375,
+  "duration_sec": 56.5,
   "embeddinggemma2_verified": true,
-  "video_proof": "splatbox_dory_k2.mp4"
+  "video_proof": "splatbox_qwen_q5.mp4"
 }

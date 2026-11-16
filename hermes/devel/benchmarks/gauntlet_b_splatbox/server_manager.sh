@@ -21,18 +21,19 @@ start_srv() {
     local m_path="" ctx="${HERMES_CTX:-262144}" ngl="99" bs="2048" ubs="1024" flags=()
     case "${MODE}" in
         qwen_q5)
-            m_path="${MODELS}/Qwen3.5-4B-heretic-Q5_K_M.gguf"; bs="128"; ubs="128"
+            m_path="${MODELS}/Qwen3.5-4B-heretic-Q5_K_M.gguf"; bs="1024"; ubs="512"
             flags=(--no-kv-offload --temp 0.1 --top-p 0.80 --top-k 30 --min-p 0.05 --repeat-penalty 1.05 --jinja
                    --spec-draft-model "${MODELS}/Qwen3.5-0.8B-heretic-Q4_0.gguf" --spec-type draft-simple
                    --n-gpu-layers-draft 99 --spec-draft-type-k q4_0 --spec-draft-type-v q4_0
-                   --spec-draft-n-ubatch 32 --spec-draft-n-max 6 --spec-draft-n-min 1 --spec-draft-p-min 0.50) ;;
+                   --spec-draft-n-ubatch 64 --spec-draft-n-max 4 --spec-draft-n-min 1 --spec-draft-p-min 0.60) ;;
         qwen_q6)
             m_path="${MODELS}/Qwen3.5-4B-heretic-Q6_K.gguf"
             flags=(--no-kv-offload --temp 0.1 --top-p 0.80 --top-k 30 --min-p 0.05 --repeat-penalty 1.05 --jinja
                    --spec-type ngram-simple --spec-ngram-simple-size-n 3 --spec-ngram-simple-size-m 4) ;;
         dory_k2)
-            m_path="${MODELS}/dory-heretic-q5_k_m.gguf"; ngl="72"
-            flags=(--no-kv-offload --temp 1.0 --top-p 0.95 --top-k 0 --min-p 0.0 --repeat-penalty 1.0 --jinja --reasoning on
+            m_path="${MODELS}/dory-heretic-q5_k_m.gguf"; ngl="72"; local kv_off=()
+            [[ "${ctx}" -gt 131072 ]] && kv_off=(--no-kv-offload)
+            flags=("${kv_off[@]}" --temp 1.0 --top-p 0.95 --top-k 0 --min-p 0.0 --repeat-penalty 1.0 --jinja --reasoning on
                    --override-kv "dory.num_loops=int:2,dory.recurrent_kv_cache_mode=str:last_loop"
                    --spec-type ngram-simple --spec-ngram-simple-size-n 2 --spec-ngram-simple-size-m 6) ;;
         *) echo "Unknown mode: ${MODE}" && exit 1 ;;
