@@ -4,7 +4,7 @@
 
 | Source | File / Location | Section / Lines | Why |
 | :--- | :--- | :--- | :--- |
-| Layer 0 Map | ../../../../AGENTS.md | Lines 1–25 | Workspace operating protocol |
+| Layer 0 Map | ../../AGENTS.md | Lines 1–27 | Benchmark operating protocol |
 | Layer 3 Blueprint | ../../references/splatbox_dom_cdp.md | Lines 1–50 | Playwright CDP attach & trusted native click blueprint |
 
 ## 2. Process (Single Job: Probe & Engage PointerLock)

@@ -1,12 +1,12 @@
 {
   "pointer_lock_active": true,
   "viewport": {
-    "width": 1280,
-    "height": 720
+    "width": 1248,
+    "height": 591
   },
   "hud": {
     "score": "0",
-    "timer": "60",
-    "ammo": "40 / 40"
+    "timer": "1:00",
+    "ammo": "40"
   }
 }

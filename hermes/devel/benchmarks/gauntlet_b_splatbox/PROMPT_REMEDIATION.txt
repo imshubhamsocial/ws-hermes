@@ -1,24 +1,25 @@
-[ICM GAUNTLET B: SPLATBOX MATCH REMEDIATION & VERIFICATION]
-Read CONTEXT.md, contract.sh, and references/splatbox_dom_cdp.md (Lines 94–146) first.
+[ICM GAUNTLET B: SPLATBOX MATCH HORIZON & ANTI-GROUND LOCK REMEDIATION]
+Read CONTEXT.md, contract.sh, and references/splatbox_dom_cdp.md first.
 Context window must remain strictly between 2,000 and 8,000 tokens.
 
-1. BASELINE ESTABLISHED & FORENSIC DIAGNOSIS:
-   - Baseline: You correctly structured output/splatbox_agent.py with #play click logic, the 58-second closed-loop loop, and DOM telemetry extraction. Stages 01 and 02 are certified PASS.
-   - Forensic Diagnosis of NameError Crash:
-     * In output/splatbox_agent.py (lines 11–20), you commented out:
-       # from vision_tracker import find_nearest_target, verify_crop_semantic
-       falsely assuming vision_tracker was not present in the environment.
-     * Empirical Verification: output/vision_tracker.py is present on disk and certified. As documented in Section 3 of references/splatbox_dom_cdp.md (lines 102–104), adding:
-       import sys
-       from pathlib import Path
-       sys.path.insert(0, str(Path("output").resolve()))
-       sys.path.insert(0, str(Path("stages/02-controller/output").resolve()))
-       from vision_tracker import find_nearest_target, verify_crop_semantic
-       imports both functions successfully without errors.
+1. EMPIRICAL FORENSIC DIAGNOSIS:
+   - Root Cause of Grass Latching:
+     * In output/vision_tracker.py, HoughCircles fallback allowed targets down to ty <= 0.85 h.
+     * When wall targets were destroyed, grass textures and fallen floor paintballs at ty = 400..500 px triggered false centroids.
+     * In output/splatbox_agent.py, ey = ty - cy > 0 commanded downward pitch (movementY > 0), pitching the camera into the grass floor at maxPolarAngle.
+     * Once on the ground, tgt was never None, preventing horizontal sweeping and trapping the agent circling the dirt until the 58s timer expired.
+   - Root Cause of Black Video Recording:
+     * Under KDE Plasma Wayland, ffmpeg x11grab on :0.0 captures Xwayland which is black for native Wayland Chrome.
+     * Solution: Record decoded CDP viewport frames directly into cv2.VideoWriter to guarantee full-color video proofs.
 
-2. REMEDIATION & VERIFICATION CONTRACT:
-   1. Read output/splatbox_agent.py and references/splatbox_dom_cdp.md (Lines 100–146).
-   2. Edit output/splatbox_agent.py to un-comment and include the vision_tracker imports from lines 102–104 of references/splatbox_dom_cdp.md.
-   3. Execute: python3 output/splatbox_agent.py
-      (Let the 58-second match complete; it will click #play, acquire arena bullseyes, shoot, and record genuine score).
-   4. Verify: bash contract.sh (must exit code 0 with score >= 25).
+2. REMEDIATION CONTRACT:
+   1. In output/vision_tracker.py (and stages/02-controller/output/vision_tracker.py, <= 55 lines):
+      - Restrict all target centroids strictly to the Wall Band: 0.22 * h <= ty <= 0.62 * h.
+      - Reject any detection in the Sky Band (ty < 0.22 * h) or Ground Band (ty > 0.62 * h).
+      - Ensure detection requires red-ring contrast (#d32f2f) to eliminate grayscale floor textures.
+   2. In output/splatbox_agent.py (and stages/03-execute/output/run_match.py, <= 58 lines):
+      - Record decoded CDP frames directly to cv2.VideoWriter using mp4v codec.
+      - When tgt is None, sweep horizontally (movementX: 250) and restore pitch to horizon level (movementY: -10 if crosshair drifted down).
+      - Apply distance-dependent ballistic compensation: ey = tgt["dy"] - (10.0 + 35.0 / max(8.0, tgt["r"])).
+   3. Execute python3 output/vision_tracker.py stages/01-probe/output/playing_frame.png.
+   4. Execute python3 output/splatbox_agent.py and verify contract.sh (score >= 25, duration >= 55s, frames >= 120, video_proof exists).

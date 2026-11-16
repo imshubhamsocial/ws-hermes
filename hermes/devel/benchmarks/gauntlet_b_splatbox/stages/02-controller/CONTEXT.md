@@ -1,29 +1,29 @@
-# Layer 2: Stage 02-controller Contract (Closed-Loop Vision & Semantic Verifier)
+# Layer 2: Stage 02-controller Contract (Closed-Loop Vision & Gun Calibration)
 
 ## 1. Inputs (Selective Section Routing)
 
 | Source | File / Location | Section / Lines | Why |
 | :--- | :--- | :--- | :--- |
-| Stage 1 Frame | ../01-probe/output/playing_frame.png | Full image | Real captured frame for offline target detection tuning |
+| Benchmark Map | ../../AGENTS.md | Lines 1–27 | Benchmark operating protocol |
+| Stage 1 Frame | ../01-probe/output/playing_frame.png | Full image | Target detection frame |
 | Stage 1 Receipt | ../01-probe/output/probe_state.json | Lines 1–20 | Viewport center coordinates (cx, cy) |
-| Layer 3 Blueprint | ../../references/splatbox_dom_cdp.md | Lines 35–84 | OpenCV centroid tracker & embeddinggemma-2 verification blueprint |
+| Gun Blueprint | ../../references/splatbox_dom_cdp.md | Lines 35–84 | Live weapon switching and ballistics |
 
-## 2. Process (Single Job: Build & Verify Vision Tracker Module)
+## 2. Process (Single Job: Calibrate Weapons & Verify Occlusion Filtering)
 
-> 1. Read ../01-probe/output/probe_state.json and Lines 35–84 of ../../references/splatbox_dom_cdp.md.  
-> 2. Write output/vision_tracker.py (under 55 lines) implementing:  
-   * find_nearest_target(bgr_frame, cx, cy) using OpenCV cv2.HoughCircles to return (tx, ty, r, dx, dy) for the bullseye target closest to crosshair (cx, cy).  
-   * verify_crop_semantic(crop_bgr) querying Port 8139 (embeddinggemma-2) or fallback colour-ring check to confirm the crop is an active target.  
-> 3. Run python3 output/vision_tracker.py ../01-probe/output/playing_frame.png to generate output/target_detected.png, output/target_crop.png, and output/tracker_verified.json.
+> 1. Update `output/vision_tracker.py` to filter out targets completely blocked by walls, prioritizing visible ones.  
+> 2. Run `python3 output/calibrate_weapons.py` over CDP (Port 9222) to probe live weapon characteristics (pistol, rifle, shotgun) and write `output/gun_stats.json`.  
+> 3. Verify `jq -e '.rifle.drop_offset_px != null' output/gun_stats.json`.
 
 ## 3. Outputs
 
 | Artifact | Location | Format |
 | :--- | :--- | :--- |
-| Vision Module | output/vision_tracker.py | Python module (under 55 lines) |
-| Overlay Receipt | output/target_detected.png | Annotated PNG |
-| Tracker Receipt | output/tracker_verified.json | JSON (targets_found_ge_1, dx, dy, embeddinggemma2_verified) |
+| Vision Module | output/vision_tracker.py | Python module (< 60 lines) |
+| Calibration Script | output/calibrate_weapons.py | Python script (< 60 lines) |
+| Calibrated Stats | output/gun_stats.json | JSON (effective_range, drop_offset, ammo) |
+| Tracker Receipt | output/tracker_verified.json | JSON (targets_found_ge_1, dx, dy) |
 
 ## 4. Checkpoints & Audits
 
-Run: jq -e '.targets_found_ge_1 == true and (.dx | type == "number")' output/tracker_verified.json && test -s output/target_detected.png
+Run: jq -e '.rifle.drop_offset_px != null and .pistol.effective_range_px != null' output/gun_stats.json

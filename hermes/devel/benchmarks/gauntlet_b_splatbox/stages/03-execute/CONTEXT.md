@@ -4,6 +4,7 @@
 
 | Source | File / Location | Section / Lines | Why |
 | :--- | :--- | :--- | :--- |
+| Benchmark Map | ../../AGENTS.md | Lines 1–27 | Benchmark operating protocol |
 | Stage 1 Receipt | ../01-probe/output/probe_state.json | Lines 1–20 | Verified viewport dimensions |
 | Stage 2 Module | ../02-controller/output/vision_tracker.py | Lines 1–55 | Certified target centroid detector |
 | Layer 3 Blueprint | ../../references/splatbox_dom_cdp.md | Lines 85–131 | Closed-loop PD mouse delta actuation & telemetry logger |

@@ -9,7 +9,7 @@ def ensure_chrome():
 
 def main():
     OUT.mkdir(exist_ok=True); (BENCH / "stages/03-execute/output").mkdir(parents=True, exist_ok=True)
-    tag, name, ctx = "dory_k2", "NVIDIA Nemotron Dory 1.0 4B (k=2)", "128k (Accelerated)"
+    tag, name, ctx = "dory_k2", "NVIDIA Nemotron Dory 1.0 4B (k=2)", "128k (100% GPU VRAM)"
     print(f"\n=== [GAUNTLET B] Benchmarking {name} ({ctx}) ===")
     os.environ["HERMES_CTX"] = "131072"
     subprocess.run(["bash", str(BENCH / "server_manager.sh"), "start", tag], check=True)

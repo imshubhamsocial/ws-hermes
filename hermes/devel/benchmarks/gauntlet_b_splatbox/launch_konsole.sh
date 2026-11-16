@@ -1,25 +1,43 @@
 #!/usr/bin/env bash
+# Proven AGY Konsole TUI Launcher: Hermes (Left) + Chrome Dev (Right)
 set -euo pipefail
 
-BENCH_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-UNIT_NAME="hermes-gauntlet-b-icm-compiler"
+BENCH_DIR="/var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/benchmarks/gauntlet_b_splatbox"
+cd "${BENCH_DIR}"
 
-/usr/bin/distrobox-host-exec systemctl --user stop "${UNIT_NAME}.service" 2>/dev/null || true
-/usr/bin/distrobox-host-exec systemctl --user reset-failed "${UNIT_NAME}.service" 2>/dev/null || true
-
-MODE="${1:-remediate}"
-
-if [[ "$MODE" == "pipeline" ]]; then
-  CMD="bash '${BENCH_DIR}/run_pipeline.sh'"
-  TAB="Gauntlet B - 3-Stage Pipeline"
-else
-  CMD="cd '${BENCH_DIR}' && PROMPT_TEXT=\$(cat '${BENCH_DIR}/PROMPT_REMEDIATION.txt') && export HERMES_TUI_QUERY=\"\$PROMPT_TEXT\" && hermes chat --in '${BENCH_DIR}' --accept-hooks --yolo -s icm-architect --toolsets 'terminal,file,browser,vision' --max-turns 25 -q \"\$PROMPT_TEXT\" --tui -v"
-  TAB="Gauntlet B - Remediation"
+# 1. Ensure Local Inference Server is Healthy
+if ! curl -sf http://127.0.0.1:8138/health >/dev/null 2>&1; then
+  echo "Restoring local Gemma 4 Exact daemon..."
+  python3 /var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/.local/bin/hermes-supervisor ensure
+  sleep 3
 fi
 
-/usr/bin/distrobox-host-exec systemd-run --user --unit="${UNIT_NAME}" \
-  --setenv=DISPLAY="${DISPLAY:-:0}" \
-  --setenv=WAYLAND_DISPLAY="${WAYLAND_DISPLAY:-wayland-1}" \
+# 2. Launch Chrome on Right Half (960,0 960x1080)
+flatpak-spawn --host flatpak run com.google.ChromeDev \
+  --remote-debugging-port=9222 \
+  --user-data-dir="/tmp/hermes_chrome_debug" \
+  --window-position=960,0 \
+  --window-size=960,1080 \
+  "https://splatbox.alexdiaz.fyi/" >/tmp/chrome_tui.log 2>&1 &
+
+sleep 2
+
+# 3. Launch Konsole with Hermes in TUI Mode on Left Half (0,0 960x1080)
+flatpak-spawn --host systemctl --user stop hermes-splatbox-tui.service 2>/dev/null || true
+flatpak-spawn --host systemctl --user reset-failed hermes-splatbox-tui.service 2>/dev/null || true
+flatpak-spawn --host systemd-run --user --unit=hermes-splatbox-tui \
+  --setenv=WAYLAND_DISPLAY="wayland-1" \
+  --setenv=DISPLAY=":0" \
   --setenv=XDG_RUNTIME_DIR="/run/user/1000" \
-  konsole --separate --hold -p "tabtitle=${TAB}" \
-  -e distrobox enter ws-hermes -- bash -c "${CMD}"
+  /usr/bin/konsole --separate \
+  --qwindowgeometry 960x1080+0+0 \
+  -p "tabtitle=Hermes Agent OS (TUI Mode)" \
+  --workdir "${BENCH_DIR}" \
+  -e distrobox enter ws-hermes -- hermes chat --in "${BENCH_DIR}" \
+    --provider local-llama -m gemma-4-E4B-it-qat-exact \
+    --skills icm-architect --accept-hooks --tui --yolo \
+    -q "Execute Gauntlet B: autonomous Splatbox 3D gameplay target acquisition. Reason over 3D ballistics, coordinate with vision tracker, and destroy all bullseyes."
+
+echo "=== [HERMES TUI LAUNCHED ON DESKTOP] ==="
+echo "Left Pane : Konsole (Hermes Full TUI Interface with Live Reasoning)"
+echo "Right Pane: Google Chrome (Splatbox 3D WebGPU Arena on Port 9222)"

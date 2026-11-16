@@ -29,4 +29,11 @@
 
 ## 3. Context Takeover Rule
 
-Once routed to a target stage or benchmark directory, read that directory's local CONTEXT.md and load only the files specified in its Inputs table. Do not load sibling stage folders.
+Once routed to a target stage or benchmark directory, read that directory's local CONTEXT.md and load only the files specified in its Inputs table. 
+## 4. ICM Scaffolding Requirements (Curation)
+The current workspace lacks explicit Layer 2 (Stage Gate Folders) and Layer 3 (Factory/Immutables) structures required by the `icm-architect` skill. The following structure must be created to achieve full ICM compliance:
+
+*   **Layer 2 Stages:** Create directories `01_spec/`, `02_impl/`, and `03_verify/`. Each requires a local `CONTEXT.md` contract.
+*   **Layer 3 Factories:** Create directories `rules/` and `_config/`. These hold project-specific conventions and domain definitions.
+
+This scaffolding is necessary for the full 5-layer progressive hierarchy to function correctly.
