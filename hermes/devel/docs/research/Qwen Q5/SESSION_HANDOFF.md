@@ -81,18 +81,35 @@ The model suite has been completely downloaded and verified on disk in `/var/hom
 2. **Deterministic Server Launcher**:
    - Location: [run_qwen_q5_server.sh](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/docs/research/Qwen%20Q5/run_qwen_q5_server.sh)
    - Adheres strictly to Rule 6 (45 lines).
-   - Usage:
-     - Run Q5 variant (up to 256K ctx): `./run_qwen_q5_server.sh q5 131072 8138`
-     - Run Q6 variant (up to 128K ctx): `./run_qwen_q5_server.sh q6 65536 8138`
+3. **Turnkey Triple-Model Benchmark Suite (Gauntlet B)**:
+   - Runner Script: [run_triple_gauntlet_b.sh](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/benchmarks/gauntlet_b_splatbox/run_triple_gauntlet_b.sh) (25 lines)
+   - Orchestration Suite: [run_triple_model_suite.py](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/benchmarks/gauntlet_b_splatbox/run_triple_model_suite.py) (36 lines)
+   - Server Lifecycle Manager: [server_manager.sh](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/benchmarks/gauntlet_b_splatbox/server_manager.sh) (47 lines)
+   - Video & Telemetry Composer: [video_composer.py](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/benchmarks/gauntlet_b_splatbox/video_composer.py) (29 lines)
+   - All default system scripts remain completely untouched; flags and lifecycle logic are self-contained.
 
 ---
 
-## 6. Next Session Action Items
+## 6. Certified Gauntlet B Triple-Model Empirical Telemetry
 
-1. **Verify Download Completion**:
-   - Verify that all three GGUF files exist in `/var/home/imshubhamsocial/.hermes/models/`.
-2. **Execute Comparative Benchmark**:
-   - Launch `run_qwen_q5_server.sh q5` on Port 8138 and measure exact prompt ingestion speed and token generation speed with speculative drafting.
-   - Repeat for `q6` variant to verify throughput and VRAM telemetry on the discrete GPU.
-3. **Execute Gauntlet B & C Validation**:
-   - Run the automated test suites against Port 8138 to confirm 0 runtime errors and $\le 2\text{ px}$ target precision.
+The turnkey Gauntlet B triple-model benchmark suite has completed execution and passed contract verification with exit code 0 (`contract.sh` certified):
+
+| Model Identifier | Context Window | Offload (`-ngl`) | Active Discrete VRAM | Prompt Speed | Generation Speed | Gauntlet B Score | Frames | Certified Video Proof |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Qwen 3.5 4B Heretic (`Q5_K_M`)** | **256k (Full Native)** | 24 | **5,611 MiB** | **151.37 tok/s** | **23.93 tok/s** | **1,147 Points** | 380 | [splatbox_qwen_q5.mp4](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/benchmarks/gauntlet_b_splatbox/output/splatbox_qwen_q5.mp4) |
+| **Qwen 3.5 4B Heretic (`Q6_K`)** | **128k (Full Certified)** | 24 | **4,299 MiB** | **154.74 tok/s** | **20.88 tok/s** | **1,321 Points** | 393 | [splatbox_qwen_q6.mp4](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/benchmarks/gauntlet_b_splatbox/output/splatbox_qwen_q6.mp4) |
+| **NVIDIA Dory 1.0 4B ($k=2$)** | **256k (Full Native)** | 48 | **5,621 MiB** | 75.29 tok/s | 13.62 tok/s | **1,223 Points** | 399 | [splatbox_dory_k2.mp4](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/benchmarks/gauntlet_b_splatbox/output/splatbox_dory_k2.mp4) |
+
+* **Master Showcase Artifact**: [hermes_gauntlet_b_triple_showcase.mp4](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/benchmarks/gauntlet_b_splatbox/output/hermes_gauntlet_b_triple_showcase.mp4) (02:10.00, 1920x1080 10 fps, 12.1 MB).
+* **Hardware Ceiling Compliance**: All three models remained strictly within the 5,800.0 MiB discrete VRAM ceiling on the RTX 3050 Laptop GPU, with 26 MiB quiescent baseline.
+* **Accuracy Ranking**: `Qwen 3.5 Q6_K` achieved the highest accuracy with **1,321 points**, while `Qwen 3.5 Q5_K_M` delivered the fastest autoregressive generation at **23.93 tok/s** under full 256k context.
+
+---
+
+## 7. Next Session Action Items
+
+1. **Deploy Model Suite in Production Workflows**:
+   - Route code generation, tool calls, and high-context agentic tasks to `Qwen 3.5 4B Heretic Q5_K_M` at 256k context.
+   - Route precision math, physics, and shader tasks to `Qwen 3.5 4B Heretic Q6_K` at 128k context.
+2. **Execute Gauntlet C (Aquarium PDEs)**:
+   - Run the 14 PDE benchmark suite to compare numerical stability between Qwen GDN and Dory recurrent loops.

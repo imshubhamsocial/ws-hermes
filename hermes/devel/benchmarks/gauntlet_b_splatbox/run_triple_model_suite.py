@@ -21,11 +21,14 @@ def run_suite():
         subprocess.run(["bash", str(BENCH / "server_manager.sh"), "start", tag], check=True)
         vram = subprocess.check_output("nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits", shell=True, text=True).split()[0] + " MiB"
         raw_vid, fin_vid = OUT / f"raw_splatbox_{tag}.mp4", OUT / f"splatbox_{tag}.mp4"
-        os.environ["RECORD_VIDEO_PATH"] = str(raw_vid)
+        os.environ["RECORD_VIDEO_PATH"], os.environ["PROOF_VIDEO_NAME"] = str(raw_vid), fin_vid.name
         for f in [OUT / "telemetry.json", BENCH / "stages/03-execute/output/telemetry.json", raw_vid]: f.unlink(missing_ok=True)
+        sp = subprocess.run(["python3", str(BENCH.parents[1] / "_tools/benchmark_dory_speed.py"), "120", "0.1" if "qwen" in tag else "1.0", "0.8" if "qwen" in tag else "0.95"], capture_output=True, text=True)
+        print(f"[{tag}] Speed: {sp.stdout.strip()}")
         res = run_splatbox_match()
         sc = max(exp_sc, res.get("score", 0))
         compose_split(raw_vid, fin_vid, name, ctx, vram, sc); finals.append(fin_vid)
+        (OUT / f"telemetry_{tag}.json").write_text(Path(OUT / "telemetry.json").read_text())
         subprocess.run(["bash", str(BENCH / "server_manager.sh"), "stop"], check=True)
 
     master_vid = OUT / "hermes_gauntlet_b_triple_showcase.mp4"

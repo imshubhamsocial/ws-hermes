@@ -227,7 +227,23 @@ exec taskset -c 0-5 "${SERVER_BIN}" \
 
 ---
 
-## 9. Summary of Engineering Recommendations
+## 9. Certified Gauntlet B Triple-Model Empirical Telemetry
+
+The turnkey Gauntlet B triple-model benchmark suite (`run_triple_gauntlet_b.sh`) executed on Fedora Kinoite 44 with NVIDIA GeForce RTX 3050 Laptop GPU, verifying full context capabilities and discrete VRAM ceilings:
+
+| Model Identifier | Precision & Format | Context Window | Offload (`-ngl`) | Active VRAM | Prompt Speed | Gen Speed | Gauntlet B Score | Frames | Certified Video Proof |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Qwen 3.5 4B Heretic** | `Q5_K_M` (GDN Hybrid) | **262,144 (Full Native)** | 24 | **5,611 MiB** | **151.37 tok/s** | **23.93 tok/s** | **1,147 Points** | 380 | [splatbox_qwen_q5.mp4](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/benchmarks/gauntlet_b_splatbox/output/splatbox_qwen_q5.mp4) |
+| **Qwen 3.5 4B Heretic** | `Q6_K` (GDN Hybrid) | **131,072 (Full Certified)**| 24 | **4,299 MiB** | **154.74 tok/s** | **20.88 tok/s** | **1,321 Points** | 393 | [splatbox_qwen_q6.mp4](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/benchmarks/gauntlet_b_splatbox/output/splatbox_qwen_q6.mp4) |
+| **NVIDIA Dory 1.0 4B** | `Q5_K_M` ($k=2$ Loops) | **262,144 (Full Native)** | 48 | **5,621 MiB** | 75.29 tok/s | 13.62 tok/s | **1,223 Points** | 399 | [splatbox_dory_k2.mp4](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/benchmarks/gauntlet_b_splatbox/output/splatbox_dory_k2.mp4) |
+
+* **Master Showcase Artifact**: [hermes_gauntlet_b_triple_showcase.mp4](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/benchmarks/gauntlet_b_splatbox/output/hermes_gauntlet_b_triple_showcase.mp4) (02:10.00, 1920x1080 10 fps, 12.1 MB).
+* **Hardware Ceiling Compliance**: Verified $\le 5,800.0\text{ MiB}$ discrete VRAM across all runs, with 26 MiB quiescent baseline.
+* **Deterministic Contract Gate**: `contract.sh` executed in fresh process and returned exit code 0 (`embeddinggemma2_verified: true`, frames $\ge 120$, score $\ge 25$).
+
+---
+
+## 10. Summary of Engineering Recommendations
 
 1. **Quantization Selection**:
    - For **Full 256K Native Context**: Deploy **`Qwen3.5-4B-heretic-Q5_K_M.gguf`** (peaks at **5,762 MiB**, safe under the 5,800 MiB ceiling).

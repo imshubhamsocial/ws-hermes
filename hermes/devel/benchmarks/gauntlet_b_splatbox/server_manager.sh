@@ -17,7 +17,7 @@ stop_srv() {
 
 start_srv() {
     stop_srv
-    local m_path="" ctx="262144" flags=()
+    local m_path="" ctx="262144" ngl="24" flags=()
     case "${MODE}" in
         qwen_q5)
             m_path="${MODELS}/Qwen3.5-4B-heretic-Q5_K_M.gguf"
@@ -26,18 +26,18 @@ start_srv() {
         qwen_q6)
             m_path="${MODELS}/Qwen3.5-4B-heretic-Q6_K.gguf"; ctx="131072"
             flags=(--temp 0.1 --top-p 0.80 --top-k 30 --min-p 0.05 --repeat-penalty 1.05 --jinja
-                   --model-draft "${MODELS}/qwen2.5-coder-0.5b-instruct-q4_0.gguf" -ngld 99 --draft-max 4 --draft-min 2) ;;
+                   --spec-type ngram-mod --spec-ngram-mod-n-min 8 --spec-ngram-mod-n-match 12 --spec-ngram-mod-n-max 32) ;;
         dory_k2)
-            m_path="${MODELS}/dory-heretic-q5_k_m.gguf"
+            m_path="${MODELS}/dory-heretic-q5_k_m.gguf"; ngl="48"
             flags=(--temp 1.0 --top-p 0.95 --top-k 0 --min-p 0.0 --repeat-penalty 1.0 --jinja --reasoning on
                    --override-kv "dory.num_loops=int:2,dory.recurrent_kv_cache_mode=str:last_loop"
                    --spec-type ngram-mod --spec-ngram-mod-n-min 8 --spec-ngram-mod-n-match 12 --spec-ngram-mod-n-max 32) ;;
         *) echo "Unknown mode: ${MODE}" && exit 1 ;;
     esac
-    echo "[SERVER] Starting ${MODE} (Ctx: ${ctx})..."
+    echo "[SERVER] Starting ${MODE} (Ctx: ${ctx}, NGL: ${ngl})..."
     taskset -c 0-5 "${BIN}" --model "${m_path}" --alias "model,default" --host 127.0.0.1 --port 8138 \
-        --ctx-size "${ctx}" --cache-type-k q4_0 --cache-type-v q4_0 --batch-size 2048 --ubatch-size 1024 \
-        --flash-attn on --no-context-shift --n-gpu-layers 99 --threads 6 --threads-batch 6 --parallel 1 \
+        --ctx-size "${ctx}" --cache-type-k q4_0 --cache-type-v q4_0 --batch-size 512 --ubatch-size 256 \
+        --flash-attn on --no-context-shift --n-gpu-layers "${ngl}" --threads 6 --threads-batch 6 --parallel 1 \
         --cont-batching --metrics "${flags[@]}" >"/tmp/llama_${MODE}.log" 2>&1 &
     for _ in {1..40}; do curl -sf http://127.0.0.1:8138/health >/dev/null 2>&1 && break || sleep 1; done
     curl -sf http://127.0.0.1:8138/health >/dev/null 2>&1 || { echo "[ERROR] Server failed to start"; exit 1; }
