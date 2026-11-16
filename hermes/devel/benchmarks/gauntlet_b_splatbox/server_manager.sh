@@ -18,7 +18,7 @@ stop_srv() {
 
 start_srv() {
     stop_srv
-    local m_path="" ctx="262144" ngl="99" bs="2048" ubs="1024" flags=()
+    local m_path="" ctx="${HERMES_CTX:-262144}" ngl="99" bs="2048" ubs="1024" flags=()
     case "${MODE}" in
         qwen_q5)
             m_path="${MODELS}/Qwen3.5-4B-heretic-Q5_K_M.gguf"; bs="128"; ubs="128"
