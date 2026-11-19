@@ -1,85 +1,37 @@
-// output/aquarium-sim/js/caustics_shader.js
-import * as THREE from 'three';
+// Layer 4 Atomic Module: WebGL2 Differential Area Caustics Shader (37 lines)  
+export const CAUSTICS_VERT_SRC = [  
+  "#version 300 es",  
+  "in vec2 aPos; out vec3 vOldPos; out vec3 vNewPos;",  
+  "uniform sampler2D uWaveTex; uniform vec3 uLightDir;",  
+  "void main() {",  
+  "  vec2 uv = aPos * 0.5 + 0.5;",  
+  "  vec4 w = texture(uWaveTex, uv);",  
+  "  vec3 n = normalize(vec3(-w.b, 1.0, -w.a));",  
+  "  vec3 r = refract(normalize(uLightDir), n, 0.7501875);",  
+  "  vec3 surf = vec3(aPos.x, w.r, aPos.y);",  
+  "  vOldPos = surf + uLightDir * ((-1.0 - w.r) / uLightDir.y);",  
+  "  vNewPos = surf + r * ((-1.0 - w.r) / r.y);",  
+  "  gl_Position = vec4(vNewPos.xz, 0.0, 1.0);",  
+  "}"  
+].join("\\n");
 
-/**
- * @module causticsShader
- * @description Implements real-time underwater caustics using GLSL screen-space partial derivatives.
- * Adheres strictly to invariants: dFdx/dFdy caustics, Schlick Fresnel.
- */
+export const CAUSTICS_FRAG_SRC = [  
+  "#version 300 es",  
+  "#extension GL_OES_standard_derivatives : enable",  
+  "precision highp float;",  
+  "in vec3 vOldPos; in vec3 vNewPos; out vec4 fragColor;",  
+  "void main() {",  
+  "  float oldArea = length(dFdx(vOldPos)) * length(dFdy(vOldPos));",  
+  "  float newArea = length(dFdx(vNewPos)) * length(dFdy(vNewPos));",  
+  "  float intensity = 0.25 * (oldArea / max(newArea, 0.00001));",  
+  "  fragColor = vec4(vec3(0.2, 0.75, 1.0) * intensity, 1.0);",  
+  "}"  
+].join("\\n");
 
-export class CausticsShader {
-    constructor(renderer, width = 512, height = 512) {
-        this.width = width;
-        this.height = height;
-        this.renderer = renderer;
-
-        // Setup render target for 512x512 caustics
-        this.causticsTexture = new THREE.WebGLRenderTarget(width, height, {
-            type: THREE.HalfFloatType,
-            format: THREE.RedFormat,
-            encoding: THREE.LinearEncoding
-        });
-
-        // Initialize uniforms
-        this.uniformS = {
-            resolution: { value: new THREE.Vector2(width, height) },
-            time: { value: 0.0 },
-            cameraPos: { value: new THREE.Vector3(0, -5, 0) }
-        };
-        
-        // Create ShaderMaterial using GLSL fragment code
-        this.material = new THREE.ShaderMaterial({
-            uniforms: this.uniformS,
-            vertexShader: `
-                varying vec2 vUv;
-                void main() {
-                    vUv = uv;
-                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-                }
-            `,
-            fragmentShader: `
-                uniform vec2 resolution;
-                uniform float time;
-                uniform vec3 cameraPos;
-                varying vec2 vUv;
-
-                // Schlick Fresnel approximation
-                float schlickFresnel(float R0) {
-                    return R0 + (1.0 - R0) * pow(1.0 - dot(v.xyz, cameraPos), 5.0);
-                }
-
-                void main() {
-                    vec2 pos = vUv * 2.0 - 1.0;
-                    
-                    // Screen-space partial derivatives (dFdx, dFdy)
-                    vec2 dFdx = dFdx(pos);
-                    vec2 dFdy = dFdy(pos);
-
-                    // Caustics Intensity calculation based on derivatives (Invariant requirement)
-                    float intensity = (length(dFdx) * length(dFdy)) / 
-                                     (length(dFdx + dFdy) * length(dFdy - dFdx));
-                    
-                    // Apply Schlick Fresnel
-                    float fresnel = schlickFresnel(0.02); // R0 = 0.02
-                    
-                    vec3 color = vec3(intensity * fresnel);
-                    
-                    // Output to texture
-                    gl_FragColor = vec4(color, 1.0);
-                }
-            `,
-            // ... other settings
-        });
-    }
-
-    render() {
-        this.renderer.setRenderTarget(this.causticsTexture);
-        this.renderer.material = this.material;
-        // Logic to draw full-screen quad...
-    }
-
-    getCurrentTexture() {
-        return this.causticsTexture;
-    }
+export function buildCausticsProgram(gl) {  
+  const vs = gl.createShader(gl.VERTEX_SHADER), fs = gl.createShader(gl.FRAGMENT_SHADER);  
+  gl.shaderSource(vs, CAUSTICS_VERT_SRC); gl.compileShader(vs);  
+  gl.shaderSource(fs, CAUSTICS_FRAG_SRC); gl.compileShader(fs);  
+  const prog = gl.createProgram();  
+  gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog); return prog;  
 }
-// Note: Full THREE.js setup and GLSL implementation are assumed to be completed per rules.

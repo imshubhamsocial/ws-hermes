@@ -1,0 +1,12 @@
+{
+  "stage": "03-implement",
+  "status": "PASS",
+  "deployed_modules": [
+    { "path": "output/aquarium-sim/js/wave_pde.js", "lines": 40, "limit": 60 },
+    { "path": "output/aquarium-sim/js/caustics_shader.js", "lines": 37, "limit": 60 },
+    { "path": "output/aquarium-sim/js/sphere_physics.js", "lines": 35, "limit": 60 },
+    { "path": "output/aquarium-sim/js/boids_fish.js", "lines": 48, "limit": 60 },
+    { "path": "output/aquarium-sim/js/main.js", "lines": 43, "limit": 60 }
+  ],
+  "canvas_entrypoint": "output/aquarium-sim/index.html"
+}

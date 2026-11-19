@@ -1,0 +1,37 @@
+{
+  "stage": "02-scaffold",
+  "status": "PASS",
+  "modules": [
+    {
+      "name": "wave_pde.js",
+      "path": "output/aquarium-sim/js/wave_pde.js",
+      "max_lines": 59,
+      "symbols": ["WavePDESolver"]
+    },
+    {
+      "name": "caustics_shader.js",
+      "path": "output/aquarium-sim/js/caustics_shader.js",
+      "max_lines": 59,
+      "symbols": ["CAUSTICS_VERT_SRC", "CAUSTICS_FRAG_SRC", "buildCausticsProgram"]
+    },
+    {
+      "name": "sphere_physics.js",
+      "path": "output/aquarium-sim/js/sphere_physics.js",
+      "max_lines": 59,
+      "symbols": ["BuoyantSphere"]
+    },
+    {
+      "name": "boids_fish.js",
+      "path": "output/aquarium-sim/js/boids_fish.js",
+      "max_lines": 59,
+      "symbols": ["BoidsFlock"]
+    },
+    {
+      "name": "main.js",
+      "path": "output/aquarium-sim/js/main.js",
+      "max_lines": 59,
+      "symbols": ["startAquariumSimulation", "__AQUARIUM_TELEMETRY__"]
+    }
+  ],
+  "contract": "benchmarks/gauntlet_c_aquarium/contract.sh"
+}

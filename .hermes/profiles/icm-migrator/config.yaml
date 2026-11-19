@@ -1,0 +1,15 @@
+profile:
+  name: icm-migrator
+  isolated: true
+model:
+  provider: openai_compatible
+  base_url: http://127.0.0.1:8138/v1
+  name: nemotron-dory-1.0-looped-4b
+  context_length: 131072
+  kv_cache_quant: turboquant_q4_0
+  temperature: 0.0
+terminal:
+  cwd: /var/home/imshubhamsocial/Projects/Workspace/Personal/hermes
+skills:
+  bundled: false
+  external_dirs: ["/var/home/imshubhamsocial/.hermes/skills/icm"]

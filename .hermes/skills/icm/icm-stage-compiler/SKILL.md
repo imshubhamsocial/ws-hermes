@@ -1,31 +1,52 @@
 ---
 name: icm-stage-compiler
-description: Enforces Jake Van Clief's Interpretable Context Methodology (ICM) 5-layer stage compilation, selective line-range routing, and under-60-line modular code generation.
+description: Compile and verify 5-layer ICM stage contracts and scripts
 version: 1.0.0
 platforms: [linux]
 metadata:
   hermes:
-    tags: [icm, architecture, compiler, van-clief]
-    category: architecture
-    requires_toolsets: [terminal, file]
+    tags: [icm, compiler, verification, architecture]
+    category: icm
+    requires_toolsets: [terminal]
 ---
+
 # ICM Stage Compiler Skill
 
 ## When to Use
-Invoke `/icm-stage-compiler` at the start of any benchmark stage execution or workspace scaffolding pass.
+
+Invoke this skill when scaffolding, executing, or auditing a numbered ICM stage folder (stages/01-spec through stages/04-verify) or distilling a completed workflow via /learn.
 
 ## Procedure
-1. Read `CONTEXT.md` in the current working directory (must be under 80 lines).
-2. Parse the `Inputs` table. Use `read_file` with exact `offset` and `limit` parameters matching the `Lines` column to load only the specified sections of Layer 3 blueprints and Layer 4 upstream outputs.
-3. Execute the `Process` steps sequentially. Write modular scripts (under 60 lines each) to `output/`.
-4. Run the command in `Checkpoints & Audits`. Do not proceed or claim success unless exit code is `0` and `output/` artifacts are non-empty.
+
+> 1. Verify that the active stage folder contains CONTEXT.md, references/, and output/.  
+> 2. Confirm CONTEXT.md declares explicit Inputs, Process Steps, and Outputs tables.  
+> 3. Load strictly the files and line ranges specified in the stage Inputs table.  
+> 4. Synthesize stage outputs into output/, keeping every script strictly under 60 lines.  
+> 5. Run the deterministic verification script before concluding the stage:
+>    python3 ~/.hermes/skills/icm/icm-stage-compiler/scripts/verify_stage.py stages/01-spec  
+> 6. Wipe session context via /new --yes before entering the next numbered stage.
 
 ## Pitfalls
-- Never load files outside the `Inputs` table.
-- Never patch a broken script more than once; re-compile the under-60-line module cleanly from the Layer 3 Code Blueprint.
-- When running Python agents that rely on C-binding libraries (e.g., cv2, numpy), ensure the interpreter used for execution (e.g., python3.14) is the environment where packages were installed; shell installation is insufficient for all system Python paths.
-- External Blueprint Functionality.
-    *   **Why**: Canonical blueprints frequently reference specialized logic (e.g., vision, specific APIs) that are not globally available; identify these references and either mock them or explicitly import the required modules/functions before attempting execution.
+
+* **Monolithic Context Bleed**: Never read upstream stages earlier than N-1.  
+* **Line Ceiling Violation**: Any .py, .sh, or .js file with 60 or more lines fails the gate.  
+* **Unverified Goal Loop**: Never run /goal without first attaching a deterministic /goal gate add.  
+* **Substrate Mutation**: Never write files inside ~/.hermes/hermes-agent.
 
 ## Verification
-Confirm that all files listed in the `Outputs` table exist on disk and pass the stage audit command.
+
+Run the bundled unit test suite and static verifier to confirm zero defects:
+
+> 1. python3 ~/.hermes/skills/icm/icm-stage-compiler/scripts/verify_stage.py stages/01-spec  
+> 2. python3 -m unittest ~/.hermes/skills/icm/icm-stage-compiler/tests/test_skill.py  
+> 3. skillevaluator quality-check ~/.hermes/skills/icm/icm-stage-compiler
+
+## Layer Mapping Reference
+
+| ICM Layer | Artifact | Max Token Budget |
+| :---- | :---- | :---- |
+| Layer 0 | IDENTITY.md / SOUL.md | 800 tokens |
+| Layer 1 | Root CONTEXT.md | 300 tokens |
+| Layer 2 | Stage CONTEXT.md | 500 tokens |
+| Layer 3 | _config/ & references/ | 2,000 tokens |
+| Layer 4 | Stage output/ artifacts | Dynamic (Total <= 8,000) |

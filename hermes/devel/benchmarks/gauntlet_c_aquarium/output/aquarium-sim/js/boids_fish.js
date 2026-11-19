@@ -1,146 +1,48 @@
-/**
- * boids_fish.js
- * Implements 3D Boid Flocking with Sinusoidal Tail-Fin Vertex Animation and Sphere Repulsion.
- * @module BoidsFish
- */
-
-import * as THREE from 'three';
-
-class BoidFish {
-    constructor(id, position, scale = 0.5) {
-        this.id = id;
-        this.position = new THREE.Vector3(position.x, position.y, position.z);
-        this.scale = scale;
-        this.mesh = this.createMesh();
-        this.mesh.position.copy(this.position);
-        this.mesh.scale.set(this.scale, this.scale, this.scale);
-    }
-
-    createMesh() {
-        // Use a simple geometry for the fish body (e.g., a scaled cone or a custom shape)
-        // For simplicity here, we use a basic box/cone and apply sinusoidal deformation later.
-        const geometry = new THREE.ConeGeometry(this.scale * 0.5, this.scale * 1.5, 8);
-        const colors = [0xff6b35, 0x00f5d4, 0xffd166, 0xf72585];
-        const fishColor = colors[this.id % colors.length];
-        const material = new THREE.MeshPhongMaterial({ color: fishColor, emissive: 0x112233, flatShading: true });
-        const mesh = new THREE.Mesh(geometry, material);
-        mesh.rotation.y = Math.PI / 2; // Point along Z axis
-        return mesh;
-    }
-
-    // Steering behaviors
-    separation(neighbors) {
-        let steer = new THREE.Vector3();
-        let count = 0;
-        const desiredSeparation = 2.5 * this.scale;
-
-        for (const neighbor of neighbors) {
-            const distance = this.position.distanceTo(neighbor.position);
-            if (distance < desiredSeparation && distance > 0) {
-                const diff = new THREE.Vector3().subVectors(this.position, neighbor.position);
-                diff.normalize().multiplyScalar(1.0 / distance); // Weight by inverse distance
-                steer.add(diff);
-                count++;
-            }
-        }
-
-        if (count > 0) {
-            steer.divideScalar(count);
-            // Apply desired separation force
-            this.applySteering(steer, 0.05);
-        }
-    }
-
-    alignment(neighbors) {
-        let avgVelocity = new THREE.Vector3();
-        const count = neighbors.length;
-
-        for (const neighbor of neighbors) {
-            avgVelocity.add(neighbor.mesh.position.clone().sub(this.position)); // Using position vector as velocity proxy
-        }
-
-        avgVelocity.divideScalar(count);
-        avgVelocity.normalize();
-
-        const desired = avgVelocity.clone().multiplyScalar(0.05);
-        this.applySteering(desired, 0.05);
-    }
-
-    cohesion(neighbors) {
-        let centerOfMass = new THREE.Vector3();
-        let count = 0;
-
-        for (const neighbor of neighbors) {
-            centerOfMass.add(neighbor.position);
-            count++;
-        }
-
-        centerOfMass.divideScalar(count);
-        const desired = centerOfMass.sub(this.position);
-
-        this.applySteering(desired, 0.05);
-    }
-
-    // Steering helper function
-    applySteering(desired, strength) {
-        const currentVelocity = new THREE.Vector3().subVectors(this.position, this.mesh.position.clone()); // Dummy velocity placeholder
-        const force = desired.clone().sub(currentVelocity);
-        force.normalize().multiplyScalar(strength);
-        // In a real implementation, this would modify the object's actual velocity vector.
-        // Here we just apply the force as a translation proxy for demonstration.
-        this.position.add(force.multiplyScalar(0.1));
-        this.mesh.position.copy(this.position);
-    }
-
-    // Sinusoidal Tail-Fin Vertex Animation (Conceptual implementation)
-    updateTailAnimation(time) {
-        const positions = this.mesh.geometry.attributes.position.array;
-        const vertexCount = positions.length / 3;
-        
-        // Simple sine wave based on vertex index and time
-        for (let i = 0; i < vertexCount; i++) {
-            const index = i * 3;
-            const offset = Math.sin(time * 5 + i * 0.5) * 0.1; // Sinusoidal movement
-            // Modify the Z or X position slightly to simulate tail movement
-            positions[index + 2] += offset; 
-        }
-        this.mesh.geometry.attributes.position.needsUpdate = true;
-    }
-
-    // Repulsion from walls and sphere
-    applyRepulsion(spherePos, sphereRadius) {
-        const walls = [
-            { normal: new THREE.Vector3(1, 0, 0), distance: 10 },
-            { normal: new THREE.Vector3(-1, 0, 0), distance: 10 },
-            { normal: new THREE.Vector3(0, 1, 0), distance: 10 },
-            { normal: new THREE.Vector3(0, -1, 0), distance: 10 },
-            { normal: new THREE.Vector3(0, 0, 1), distance: 10 },
-            { normal: new THREE.Vector3(0, 0, -1), distance: 10 }
-        ];
-        const selfPos = this.position;
-        let repulsionForce = new THREE.Vector3();
-
-        // Wall repulsion
-        for (const wall of walls) {
-            const dist = wall.normal.dot(selfPos) - wall.distance;
-            if (dist < 0) {
-                repulsionForce.add(wall.normal.clone().multiplyScalar(-1 / Math.abs(dist)));
-            }
-        }
-
-        // Sphere repulsion
-        const sphereDistance = selfPos.distanceTo(spherePos);
-        const minDistance = sphereRadius * 1.5;
-        if (sphereDistance < minDistance) {
-            const dir = new THREE.Vector3().subVectors(selfPos, spherePos).normalize();
-            const force = new THREE.Vector3().addScaledVector(dir, 1.0 / (sphereDistance - minDistance));
-            repulsionForce.add(force);
-        }
-
-        // Apply force (simplified)
-        this.position.add(repulsionForce.multiplyScalar(0.01));
-        this.mesh.position.copy(this.position);
-    }
+// Layer 4 Atomic Module: 3D Craig Reynolds Boids Flocking System (49 lines)  
+export class BoidsFlock {  
+  constructor(count = 24) {  
+    this.boids = Array.from({ length: count }, (_, i) => ({  
+      pos: [Math.sin(i) * 0.5, -0.2 - (i % 5) * 0.1, Math.cos(i) * 0.5],  
+      vel: [Math.cos(i) * 0.25, 0.02, -Math.sin(i) * 0.25],  
+    }));  
+    this.vMin = 0.15; this.vMax = 0.55;  
+  }  
+  step(dt, spherePos = [0, 0, 0], sphereRadius = 0.18) {  
+    const n = this.boids.length;  
+    for (let i = 0; i < n; i++) {  
+      const b = this.boids[i];  
+      let sx = 0, sy = 0, sz = 0, ax = 0, ay = 0, az = 0, cx = 0, cy = 0, cz = 0, cnt = 0;  
+      for (let j = 0; j < n; j++) {  
+        if (i === j) continue;  
+        const o = this.boids[j];  
+        const dx = b.pos[0] - o.pos[0], dy = b.pos[1] - o.pos[1], dz = b.pos[2] - o.pos[2];  
+        const d2 = dx * dx + dy * dy + dz * dz + 0.0001;  
+        if (d2 < 0.18) {  
+          sx += dx / d2; sy += dy / d2; sz += dz / d2;  
+          ax += o.vel[0]; ay += o.vel[1]; az += o.vel[2];  
+          cx += o.pos[0]; cy += o.pos[1]; cz += o.pos[2];  
+          cnt++;  
+        }  
+      }  
+      let fx = sx * 0.04, fy = sy * 0.04, fz = sz * 0.04;  
+      if (cnt > 0) {  
+        fx += (ax / cnt - b.vel[0]) * 1.2 + (cx / cnt - b.pos[0]) * 0.8;  
+        fy += (ay / cnt - b.vel[1]) * 1.2 + (cy / cnt - b.pos[1]) * 0.8;  
+        fz += (az / cnt - b.vel[2]) * 1.2 + (cz / cnt - b.pos[2]) * 0.8;  
+      }  
+      for (let k = 0; k < 3; k++) {  
+        const lim = k === 1 ? 0.75 : 0.85;  
+        if (b.pos[k] > lim) b.vel[k] -= (b.pos[k] - lim) * 4.0 * dt;  
+        if (b.pos[k] < -lim) b.vel[k] -= (b.pos[k] + lim) * 4.0 * dt;  
+      }  
+      const sdx = b.pos[0] - spherePos[0], sdy = b.pos[1] - spherePos[1], sdz = b.pos[2] - spherePos[2];  
+      const sd = Math.hypot(sdx, sdy, sdz) + 0.001;  
+      if (sd < sphereRadius + 0.15) { fx += (sdx / sd) * 1.5; fy += (sdy / sd) * 1.5; fz += (sdz / sd) * 1.5; }  
+      b.vel[0] += fx * dt; b.vel[1] += fy * dt; b.vel[2] += fz * dt;  
+      const spd = Math.hypot(b.vel[0], b.vel[1], b.vel[2]) + 0.0001;  
+      const cSpd = Math.max(this.vMin, Math.min(this.vMax, spd));  
+      b.vel[0] = (b.vel[0] / spd) * cSpd; b.vel[1] = (b.vel[1] / spd) * cSpd; b.vel[2] = (b.vel[2] / spd) * cSpd;  
+      b.pos[0] += b.vel[0] * dt; b.pos[1] += b.vel[1] * dt; b.pos[2] += b.vel[2] * dt;  
+    }  
+  }  
 }
-
-export { BoidFish };

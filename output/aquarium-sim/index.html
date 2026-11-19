@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WebGL2 Aquarium Simulation</title>
+  <style>
+    body { margin: 0; overflow: hidden; background: #020c18; }
+    canvas { width: 100vw; height: 100vh; display: block; }
+  </style>
+</head>
+<body>
+  <canvas id="glcanvas" width="800" height="600"></canvas>
+  <script type="module">
+    import { startAquariumSimulation } from "./js/main.js";
+    const canvas = document.getElementById("glcanvas");
+    startAquariumSimulation(canvas);
+  </script>
+</body>
+</html>

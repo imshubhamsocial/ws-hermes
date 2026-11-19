@@ -29,7 +29,7 @@ DRAFT_FLAGS=()
 export GGML_CUDA_GRAPH_OPT=1 GGML_CUDA_FORCE_MMQ=0
 exec taskset -c 0,2,4,6,8,10 "$BIN" \
     --model "$MAIN" "${DRAFT_FLAGS[@]}" \
-    --alias "gemma-4-E4B-it-qat-exact,gemma-4-e4b-exact,google/gemma-4-E4B-it,model,default" \
+    --alias "gemma-4-E4B-it-qat-exact,gemma-4-e4b-exact,google/gemma-4-E4B-it,gemma-4-exact-4b,nemotron-dory-1.0-looped-4b,model,default" \
     --host 127.0.0.1 --port 8138 \
     --ctx-size 131072 --cache-type-k q4_0 --cache-type-v q4_0 \
     --batch-size 2048 --ubatch-size 1024 --flash-attn on --jinja --n-gpu-layers 99 \

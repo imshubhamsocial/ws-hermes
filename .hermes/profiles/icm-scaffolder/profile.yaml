@@ -1,0 +1,5 @@
+name: icm-scaffolder
+description: "Greenfield 5-layer ICM workspace generator and stage contract compiler."
+description_auto: false
+no_bundled_skills: true
+role: workspace_scaffolder

@@ -199,7 +199,14 @@ tests/.hermes/**
 
 # Hermes profiles and tool binaries
 .hermes/profiles/**
-.hermes/tools/**
+!.hermes/profiles/provision_icm_fleet.sh
+!.hermes/profiles/icm-*/
+!.hermes/profiles/icm-*/*.yaml
+!.hermes/profiles/icm-*/SOUL.md
+!.hermes/profiles/icm-*/.no-bundled-skills
+.hermes/tools/*
+!.hermes/tools/icm
+!.hermes/tools/icm/**
 .hermes/tui-theme-boot.json
 
 # Hermes dynamic auto rules & skills cache

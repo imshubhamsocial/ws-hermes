@@ -1,4 +1,4 @@
-# Layer 1: Workspace Task Routing Map
+# Layer 1: Universal Workspace Routing Table (ws-hermes)
 
 ## 1. Keyword Triggers
 
@@ -8,32 +8,39 @@
 * icm-sync: Audit relative links and regenerate context graphs via python3 -I hermes/devel/_tools/links.py . --skip docs --skip phases --skip benchmarks --skip skills.
 * quiesce: Stop llama-server.service and verify GPU VRAM <= 100 MiB via python3 hermes/devel/_tools/check_vram_limit.py --mode quiescent.
 
-## 2. Task Routing Table
+## 2. Intent-to-Directory Routing Matrix
 
-| User Objective / Task Description | Target Directory | Entry Contract / Script | Layer / Scope |
+| Task Intent | Target Profile Bot | Entry Contract (Layer 2) | Verification Gate |
 | :--- | :--- | :--- | :--- |
-| Enter Hermes Agent OS Development Track | `hermes/devel/` | `hermes/devel/CONTEXT.md` | Layer 2 Track |
-| Execute Gauntlet B Stage 1 (Browser CDP Probe) | `hermes/devel/stages/01-probe/` | `hermes/devel/stages/01-probe/CONTEXT.md` | Layer 2 Stage |
-| Execute Gauntlet B Stage 2 (CPU HoughCircles Aim) | `hermes/devel/stages/02-controller/` | `hermes/devel/stages/02-controller/CONTEXT.md` | Layer 2 Stage |
-| Execute Gauntlet B Stage 3 (Action & Telemetry) | `hermes/devel/stages/03-execute/` | `hermes/devel/stages/03-execute/CONTEXT.md` | Layer 2 Stage |
-| Run or audit Frontier Gauntlet A (3D Voxel FPS) | `hermes/devel/benchmarks/gauntlet_a_voxel_fps/` | `benchmarks/gauntlet_a_voxel_fps/contract.sh` | Layer 4 Gauntlet |
-| Run or audit Frontier Gauntlet B (3D Splatbox CV) | `hermes/devel/benchmarks/gauntlet_b_splatbox/` | `benchmarks/gauntlet_b_splatbox/contract.sh` | Layer 4 Gauntlet |
-| Run or audit Frontier Gauntlet C (3D WebGL Aquarium) | `hermes/devel/benchmarks/gauntlet_c_aquarium/` | `benchmarks/gauntlet_c_aquarium/contract.sh` | Layer 4 Gauntlet |
-| Access Hermes Project Track Shelf | `hermes/` | `hermes/CONTEXT.md` | Layer 2 Shelf |
-| Design or restructure a workspace using ICM | `hermes/devel/skills/icm-architect/` | `hermes/devel/skills/icm-architect/SKILL.md` | Layer 3 Skill |
-| Compile a single ICM stage with KV cache isolation | `hermes/devel/_tools/` | `hermes/devel/_tools/hermes_stage_runner.py` | Layer 3 Tool |
-| Audit Phase 58 and seal the master status ledger | `hermes/devel/phases/phase_58_autonomous_icm_factory_and_multi_gauntlet_certification/` | `03_verify/contract.sh` | Layer 4 Gate |
-| Consult or ingest GDR39 Research Release (ICM Pedagogy, Bots, Gauntlet C) | `hermes/devel/docs/research/GDR39/` | `docs/research/GDR39/00_README.md` | Layer 3 Research |
-| Consult or execute GDR40 Chronological Reorganization | `hermes/devel/docs/research/GDR40/` | `docs/research/GDR40/00_README.md` | Layer 3 Research |
-| Check system invariants, ports, and VRAM limits | `hermes/devel/_config/` | `hermes/devel/_config/invariants.md` | Layer 3 Config |
+| Pre-Coding Spec & Socratic Review | icm-planner | stages/01-spec/CONTEXT.md | _tools/egm_goldfish_gate.py |
+| Greenfield Workspace Scaffolding | icm-scaffolder | setup/questionnaire.md | ~/.hermes/tools/icm/icm_scaffolder.py |
+| Brownfield AST Repo Migration | icm-migrator | stages/00-migrate/CONTEXT.md | ~/.hermes/tools/icm/icm_repo_migrator.py |
+| Multi-Stage Pipeline Execution | default | _tools/run_multi_stage.sh | verify_stage.py |
+| Gauntlet C WebGL2 Simulation | default | benchmarks/gauntlet_c_aquarium/CONTEXT.md | benchmarks/gauntlet_c_aquarium/contract.sh |
+| Substrate & Token Hygiene Audit | icm-auditor | ~/.hermes/tools/icm/ | ~/.hermes/tools/icm/audit_hermes_home.sh |
+| Enter Hermes Agent OS Track | default | hermes/devel/CONTEXT.md | hermes/devel/Makefile |
+| Run Gauntlet B (Splatbox CV) | default | hermes/devel/benchmarks/gauntlet_b_splatbox/ | contract.sh |
 
-## 3. Context Takeover Rule
+## 3. Canonical Directory Map
 
-Once routed to a target stage or benchmark directory, read that directory's local CONTEXT.md and load only the files specified in its Inputs table. 
-## 4. ICM Scaffolding Requirements (Curation)
-The current workspace lacks explicit Layer 2 (Stage Gate Folders) and Layer 3 (Factory/Immutables) structures required by the `icm-architect` skill. The following structure must be created to achieve full ICM compliance:
+* Layer 0 (Global Rules): .hermes/SOUL.md and IDENTITY.md (~800 tokens)
+* Layer 1 (Task Router): CONTEXT.md (this file, read once at session entry)
+* Layer 2 (Stage Contracts): stages/<nn>/CONTEXT.md (200–500 tokens)
+* Layer 3 (The Factory): _config/, shared/, references/, and ~/.hermes/skills/
+* Layer 4 (Working Artifacts): stages/<nn>/output/ and benchmarks/
 
-*   **Layer 2 Stages:** Create directories `01_spec/`, `02_impl/`, and `03_verify/`. Each requires a local `CONTEXT.md` contract.
-*   **Layer 3 Factories:** Create directories `rules/` and `_config/`. These hold project-specific conventions and domain definitions.
+## 4. Cross-Agent Adapter Mapping
 
-This scaffolding is necessary for the full 5-layer progressive hierarchy to function correctly.
+| Agent Harness | Layer 0 Adapter | Skill Directory | Profile Isolation Path |
+| :--- | :--- | :--- | :--- |
+| Hermes Agent | .hermes/SOUL.md | ~/.hermes/skills/ | ~/.hermes/profiles/<name>/ |
+| Claude Code | CLAUDE.md | .claude/skills/ | Subagent clean context |
+| OpenAI Codex | AGENTS.md | ~/.agents/skills/ | Fresh subagent spawn |
+| Gemini CLI | IDENTITY.md | ~/.gemini/skills/ | Workspace session scope |
+
+## 5. Non-Negotiable Safety Gates
+
+* Verify git status --porcelain in ~/.hermes/hermes-agent returns empty before and after runs.
+* Verify wc -l is strictly under 60 lines for every generated Python, Bash, or JS file.
+* Verify nvidia-smi memory.used stays at or below 5,800 MiB during all inference and WebGL2 runs.
+* Verify goldfish_review_report.json reports status PASS before running Stage 03.
