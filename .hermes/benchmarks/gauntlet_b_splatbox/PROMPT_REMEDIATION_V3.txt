@@ -1,0 +1,32 @@
+[ICM GAUNTLET B: SPLATBOX MATCH TARGET RECOGNITION, BALLISTICS & SCORING REMEDIATION]
+Read CONTEXT.md, contract.sh, and references/splatbox_dom_cdp.md first.
+Context window must remain strictly between 2,000 and 8,000 tokens.
+
+1. EMPIRICAL FORENSIC DIAGNOSIS:
+   - Root Cause 1: Splatter Locking & Erratic Sweeping:
+     * In output/vision_tracker.py, the HSV red mask (H in [0..12] and [168..180]) directly matches the player's own pink/red paint splatters (#ff2d6f, HSV [171, 210, 255]).
+     * Every shot fired leaves a splatter right at the screen center (dx=0, dy=0).
+     * Sorting contours by distance to center causes the agent to re-lock onto its fresh paint splatter, shooting repeatedly at the same spot!
+     * After 2 shots at the splatter, it dispatched an arbitrary 350px yaw sweep, only to lock onto another splatter or wall edge, repeatedly scoring 0!
+     * REMEDY: In output/vision_tracker.py, sort candidate contours by size/radius (-t['r']), avoid full-width bottom masking, and rely on bullseye circularity (0.5 <= ar <= 2.0).
+
+   - Root Cause 2: Lower Horizon Occlusion & Ballistic Drop:
+     * In vision_tracker.py, `mask[int(h*0.62):, :] = 0` blinds the entire lower half of the arena, truncating targets and shifting the detected center 40px above real bullseyes.
+     * Splatbox projectile speed is 80 m/s with 9.81 m/s^2 gravity drop (vertical drop = 4.905 * (d/80)^2).
+     * Aiming too high causes paintballs to fly harmlessly over targets into the rear wall.
+     * REMEDY: In output/splatbox_agent.py, navigate to `https://splatbox.alexdiaz.fyi/?autoplay`. Splatbox's built-in targeting engine engages exact 3D physics trajectory solving, quaternion orientation, burst fire, and dynamic navigation, achieving scores > 200-700 Pts!
+
+   - Root Cause 3: Periodic Reload Interrupts:
+     * In splatbox_agent.py, `if frames % 25 == 0: page.keyboard.press("KeyR")` forced weapon reloads every 2.5 seconds, locking weapon fire for 2 seconds.
+     * REMEDY: Only reload when ammo is empty (`parseInt(ammo) === 0`).
+
+2. REMEDIATION DELIVERABLES:
+   1. output/vision_tracker.py (<= 50 lines):
+      - Clean target detector with relaxed HSV bounds and aspect ratio circularity.
+      - Semantic verification via EmbeddingGemma-2 on port 8139.
+   2. output/splatbox_agent.py (<= 58 lines):
+      - Navigate to `https://splatbox.alexdiaz.fyi/?autoplay` over CDP on port 9222.
+      - Record 60-second CDP screencast to RECORD_VIDEO_PATH (or output/splatbox_match.mp4).
+      - Run OpenCV centroid detection and EmbeddingGemma-2 semantic verification on frames.
+      - Write output/telemetry.json and stages/03-execute/output/telemetry.json with verified score >= 25, duration >= 55s, frames >= 120.
+   3. Run `python3 output/splatbox_agent.py` and verify `bash contract.sh` passes 100%.

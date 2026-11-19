@@ -1,0 +1,25 @@
+[ICM GAUNTLET B: SPLATBOX MATCH HORIZON & ANTI-GROUND LOCK REMEDIATION]
+Read CONTEXT.md, contract.sh, and references/splatbox_dom_cdp.md first.
+Context window must remain strictly between 2,000 and 8,000 tokens.
+
+1. EMPIRICAL FORENSIC DIAGNOSIS:
+   - Root Cause of Grass Latching:
+     * In output/vision_tracker.py, HoughCircles fallback allowed targets down to ty <= 0.85 h.
+     * When wall targets were destroyed, grass textures and fallen floor paintballs at ty = 400..500 px triggered false centroids.
+     * In output/splatbox_agent.py, ey = ty - cy > 0 commanded downward pitch (movementY > 0), pitching the camera into the grass floor at maxPolarAngle.
+     * Once on the ground, tgt was never None, preventing horizontal sweeping and trapping the agent circling the dirt until the 58s timer expired.
+   - Root Cause of Black Video Recording:
+     * Under KDE Plasma Wayland, ffmpeg x11grab on :0.0 captures Xwayland which is black for native Wayland Chrome.
+     * Solution: Record decoded CDP viewport frames directly into cv2.VideoWriter to guarantee full-color video proofs.
+
+2. REMEDIATION CONTRACT:
+   1. In output/vision_tracker.py (and stages/02-controller/output/vision_tracker.py, <= 55 lines):
+      - Restrict all target centroids strictly to the Wall Band: 0.22 * h <= ty <= 0.62 * h.
+      - Reject any detection in the Sky Band (ty < 0.22 * h) or Ground Band (ty > 0.62 * h).
+      - Ensure detection requires red-ring contrast (#d32f2f) to eliminate grayscale floor textures.
+   2. In output/splatbox_agent.py (and stages/03-execute/output/run_match.py, <= 58 lines):
+      - Record decoded CDP frames directly to cv2.VideoWriter using mp4v codec.
+      - When tgt is None, sweep horizontally (movementX: 250) and restore pitch to horizon level (movementY: -10 if crosshair drifted down).
+      - Apply distance-dependent ballistic compensation: ey = tgt["dy"] - (10.0 + 35.0 / max(8.0, tgt["r"])).
+   3. Execute python3 output/vision_tracker.py stages/01-probe/output/playing_frame.png.
+   4. Execute python3 output/splatbox_agent.py and verify contract.sh (score >= 25, duration >= 55s, frames >= 120, video_proof exists).

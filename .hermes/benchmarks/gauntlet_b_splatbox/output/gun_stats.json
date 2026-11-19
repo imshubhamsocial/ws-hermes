@@ -1,0 +1,32 @@
+{
+  "pistol": {
+    "effective_range_px": 380,
+    "drop_offset_px": -10.0,
+    "drop_coeff": -0.018,
+    "capacity": 12,
+    "live_ammo": 4,
+    "proj_speed_px_s": 1100
+  },
+  "rifle": {
+    "effective_range_px": 580,
+    "drop_offset_px": -15.0,
+    "drop_coeff": -0.012,
+    "capacity": 5,
+    "live_ammo": 4,
+    "proj_speed_px_s": 1400
+  },
+  "shotgun": {
+    "effective_range_px": 190,
+    "drop_offset_px": -5.0,
+    "drop_coeff": -0.028,
+    "capacity": 2,
+    "live_ammo": 1,
+    "proj_speed_px_s": 850
+  },
+  "target_dynamics": {
+    "drift_speed_px_s": 42.0,
+    "lead_compensation": true,
+    "reposition_on_wall_hit": true,
+    "wall_avoidance": true
+  }
+}

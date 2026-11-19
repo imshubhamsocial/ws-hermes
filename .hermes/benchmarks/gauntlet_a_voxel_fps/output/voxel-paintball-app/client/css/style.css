@@ -1,0 +1,101 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #111;
+    font-family: monospace;
+    color: white;
+}
+
+#game-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    display: block;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    font-weight: bold;
+    color: #00ffcc;
+    cursor: pointer;
+    z-index: 100;
+}
+
+#crosshair {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    border: 2px solid #0f0;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 10;
+}
+
+#score, #ammo, #fps {
+    position: fixed;
+    color: white;
+    text-shadow: 1px 1px 3px black;
+    z-index: 11;
+}
+
+#score {
+    top: 10px;
+    left: 10px;
+}
+
+#ammo {
+    top: 10px;
+    right: 10px;
+}
+
+#fps {
+    bottom: 10px;
+    right: 10px;
+}
+
+#hotbar {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    pointer-events: none;
+    z-index: 12;
+}
+
+.weapon-slot {
+    width: 50px;
+    height: 50px;
+    background-color: #444;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.weapon-slot:hover {
+    border-color: #f0f;
+}

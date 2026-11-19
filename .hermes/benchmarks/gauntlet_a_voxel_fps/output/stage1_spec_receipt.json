@@ -1,0 +1,31 @@
+{
+  "stage": 1,
+  "description": "Authoritative Server and Dependency Manifest",
+  "status": "Complete",
+  "timestamp": "2026-10-31T10:30:00Z",
+  "server_details": {
+    "binding": "127.0.0.1:8080",
+    "protocol": "WebSocket (ws) + HTTP (for static client assets)",
+    "tick_rate": "20 Hz",
+    "server_file": "output/voxel-paintball-app/server/server.js"
+  },
+  "wire_protocol": {
+    "packet_types_received": [
+      "JOIN_ROOM",
+      "INPUT",
+      "SHOOT",
+      "SNAPSHOT",
+      "SPLAT"
+    ],
+    "packet_types_broadcast": [
+      "WELCOME",
+      "STATE_SNAPSHOT"
+    ],
+    "description": "All packet payloads are JSON objects. Input packets handle player actions; Snapshot packets contain the authoritative 3D state, including parabolic entity positions."
+  },
+  "endpoints": {
+    "ws_endpoint": "ws://127.0.0.1:8080",
+    "http_assets_endpoint": "http://127.0.0.1:8080/"
+  },
+  "implementation_notes": "3D parabolic ballistics simulation is implemented in the gameTick loop using a fixed gravity constant of -24.0 m/s^2. The server is 100% stub-free as requested."
+}

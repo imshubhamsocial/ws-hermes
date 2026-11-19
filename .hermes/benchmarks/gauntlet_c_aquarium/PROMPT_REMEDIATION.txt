@@ -1,0 +1,38 @@
+[ICM GAUNTLET C: RUNTIME BROWSER REMEDIATION & CLIENT INTEGRATION]
+Read CONTEXT.md, invariants.md, rules.md, and references.md.
+IMPORTANT: You MUST read all simulation files first with read_file before editing to satisfy the write-safety invariant:
+- output/aquarium-sim/index.html
+- output/aquarium-sim/js/main.js
+- output/aquarium-sim/js/water_gpgpu.js
+- output/aquarium-sim/js/caustics_shader.js
+- output/aquarium-sim/js/sphere_physics.js
+- output/aquarium-sim/js/boids_fish.js
+
+DIAGNOSIS & ROOT CAUSE:
+1. When loading http://127.0.0.1:8081 in a real browser, console crashes with:
+   "Access to script at 'https://unpkg.com/three@r165/build/three.module.js' blocked by CORS policy" because unpkg returns HTTP 404 on 'three@r165'.
+2. main.js imports setupWater, updateWater, and renderCaustics from ./water_gpgpu.js, but water_gpgpu.js exports class WaterGPGPU.
+3. main.js appends renderer.domElement directly to document.body instead of #canvas-container.
+4. CausticsShader and BoidFish classes must be instantiated and cleanly stepped in the requestAnimationFrame loop.
+
+REMEDIATION STEPS:
+1. In index.html:
+   - Update <script type="importmap"> to use a working CDN:
+     "three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.165.0/three.module.js"
+   - Mount canvas inside #canvas-container.
+2. In water_gpgpu.js:
+   - Ensure WaterGPGPU class or helper functions are cleanly exported.
+   - HARD INVARIANTS: You MUST keep the string "OES_texture_float_linear" and "frustumCulled = false" in water_gpgpu.js.
+3. In caustics_shader.js:
+   - HARD INVARIANTS: You MUST keep "dFdx" and "dFdy" screen-space derivative calculations in the shader.
+4. In sphere_physics.js:
+   - HARD INVARIANTS: You MUST retain exact export function computeSubmergedVolume(ds, r) piecewise formula tested by contract.sh.
+5. In main.js:
+   - Align imports with the exported classes/functions from water_gpgpu.js, caustics_shader.js, sphere_physics.js, and boids_fish.js.
+   - Mount renderer to document.getElementById('canvas-container').
+   - Connect HUD buttons ('btn-drop-sphere', 'btn-toggle-gravity', 'btn-add-ripple') to actual simulation actions.
+6. Verification:
+   - Ensure server is active on http://127.0.0.1:8081.
+   - Run a python/playwright check against http://127.0.0.1:8081 to verify ZERO page errors and ZERO console errors.
+   - Run bash contract.sh and verify exit code 0.
+7. Write output/stage4_remediation_receipt.json and stop.

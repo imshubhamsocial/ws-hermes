@@ -1,0 +1,15 @@
+[ICM GAUNTLET B: SPLATBOX MATCH TARGETING & SCORING REMEDIATION]
+Read CONTEXT.md, contract.sh, and references/splatbox_dom_cdp.md first.
+Context window must remain strictly between 2,000 and 8,000 tokens.
+
+1. PROBLEM SPECIFICATION:
+   - In Gauntlet B, the autonomous Splatbox player in output/splatbox_agent.py scores 0 points.
+   - The agent repeatedly locks onto its own weapon paint splatters at the crosshairs and rotates randomly.
+   - The vision tracker in output/vision_tracker.py suffers from lower field-of-view occlusion, and periodic reload calls disable weapon firing.
+   - Projectiles experience gravity drop over distance in the 3D physics arena.
+
+2. YOUR TASK:
+   - Inspect the codebase (output/vision_tracker.py, output/splatbox_agent.py, references/splatbox_dom_cdp.md).
+   - Fix target detection in output/vision_tracker.py to reliably isolate genuine bullseye targets from weapon splatters, filtering by circular geometry and sorting by target scale rather than crosshair distance.
+   - Remediate output/splatbox_agent.py to properly control 3D ballistics and navigation (leveraging Splatbox's precision autoplay targeting engine on CDP port 9222), eliminating splatter lock, recording match telemetry, and ensuring score >= 25.
+   - Execute python3 output/splatbox_agent.py and verify that bash contract.sh passes 100%.

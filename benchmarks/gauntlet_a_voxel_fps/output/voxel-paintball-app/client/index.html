@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voxel Paintball Frontier</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="overlay">Click to Play</div>
+    <div id="crosshair"></div>
+    <div id="score">Score: 0</div>
+    <div id="ammo">Ammo: 30</div>
+    <div id="fps">FPS: 0</div>
+    <div id="hotbar">
+        <div class="weapon-slot" data-id="1">1</div>
+        <div class="weapon-slot" data-id="2">2</div>
+        <div class="weapon-slot" data-id="3">3</div>
+        <div class="weapon-slot" data-id="4">4</div>
+        <div class="weapon-slot" data-id="5">5</div>
+    </div>
+    <canvas id="gameCanvas"></canvas>
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.164.1/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/",
+        "three/examples/jsm/": "https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"
+      }
+    }
+    </script>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

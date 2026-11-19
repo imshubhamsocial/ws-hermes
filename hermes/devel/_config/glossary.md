@@ -1,8 +1,7 @@
-# Layer 3: Controlled Technical Lexicon (ASD-STE100)
+# Layer 3 ICM Glossary: Five-Layer Architecture
 
-## Terminology
-- **Stage**: A single directory executing one specific transformation step.
-- **Contract**: A markdown document defining Inputs, Process, Outputs, and Check.
-- **Substrate**: The underlying AI inference engine and runtime operating system.
-- **Factory**: The collection of templates, rules, and scripts that govern execution.
-- **Product**: The per-run deliverables and artifacts written to output directories.
+- **Layer 0 (Substrate Identity & Persona)**: `.hermes/SOUL.md` and workspace `AGENTS.md`. Governs epistemic honesty, glass-box precision, and core operating protocols.
+- **Layer 1 (Global Routing)**: Root `CONTEXT.md`. High-level task routing matrix directing tasks to exact stage directories.
+- **Layer 2 (Stage Contracts)**: `stages/XX-*/CONTEXT.md`. Formal specifications declaring Inputs, Process Steps, Outputs, and Verification Gates.
+- **Layer 3 (The Factory)**: `.hermes/rules/`, `.hermes/skills/`, `.hermes/tools/`, and shared schemas. Persistent system constraints, domain capabilities, and validators.
+- **Layer 4 (The Product)**: Stage output artifacts (`stages/XX-*/output/`) and deterministic POSIX verification gates (`contract.sh`).

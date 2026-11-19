@@ -1,0 +1,3 @@
+[ICM STAGE 3 OF 3: SHADER AST & BUOYANCY CONTRACT VERIFICATION] Read CONTEXT.md, invariants.md, output/stage1_physics_receipt.json, and output/stage2_scene_receipt.json.
+1. Execute bash ./contract.sh to verify file existence, OES_texture_float_linear, frustumCulled = false, dFdx/dFdy caustics derivatives, and the Node.js ES module boundary test on computeSubmergedVolume(ds, r).
+2. Write output/status.json with "status": "VERIFIED_AND_SEALED" and "contract_exit_code": 0, then conclude.

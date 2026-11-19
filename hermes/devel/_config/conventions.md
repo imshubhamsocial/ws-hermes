@@ -1,18 +1,21 @@
-# Layer 3: ICM Core Conventions and Invariants
+# Layer 3 ICM Conventions: Code & Communication Standards
 
-## The 15 Conventions
-1. Stage Contracts: Every stage has Inputs, Process, Outputs, and Check.
-2. Stage Handoffs: Output folders connect stages directly.
-3. One-Way References: Dependencies flow in one direction only.
-4. Selective Section Routing: Load only needed sections from reference files.
-5. Canonical Sources: Every fact has one authoritative home.
-6. Specs Are Contracts: Specs state WHAT and WHEN; build defines HOW.
-7. Checkpoints: Pause execution for human review at major milestones.
-8. Stage Audits: Automated verification before saving final outputs.
-9. Value Validation: Explicit schema and type validation.
-10. Docs Over Outputs: Learn patterns from Layer 3 references, never previous outputs.
-11. Questionnaire Design: Fast, all-at-once onboarding configuration.
-12. Shared Constants: Centralized constants prevent scattered magic values.
-13. Strict Line Limits: CONTEXT.md < 80 lines; references < 200 lines.
-14. Clean Output State: Do not commit generated run artifacts.
-15. System-Level Setup: Configure the production factory once.
+## 1. Atomic Script Ceiling (Rule 6)
+Every authored script (`.py`, `.sh`, `.js`) must strictly contain fewer than 60 lines (maximum 59 lines).
+Never create monoliths; decompose execution logic into modular, single-responsibility atomic scripts.
+
+## 2. ASD-STE100 Prose Discipline (Rule 10)
+Communicate technical reports, plans, and summaries in Simplified Technical English (ASD-STE100).
+Enforce short declarative sentences, active verbs, and unambiguous terminology.
+
+## 3. Bounded Context Budget (Rule 2)
+Keep prompt context strictly bounded between 2,000 and 8,000 tokens per stage invocation.
+Load only explicitly declared inputs specified in the stage's `CONTEXT.md`.
+
+## 4. One Stage, One Job (Rule 1)
+Each numbered stage folder (`stages/XX-*/`) must perform exactly one bounded task.
+All stage outputs must be written directly to `stages/XX-*/output/`.
+
+## 5. Mathematical Parity & Notation
+Enforce even parity on code fences (triple backticks) and LaTeX math delimiters (dollar signs).
+Prevent syntax parsing corruption in rendering environments and downstream tooling.

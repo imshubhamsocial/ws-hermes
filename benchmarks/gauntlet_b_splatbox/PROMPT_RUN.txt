@@ -1,0 +1,1 @@
+Awesome job! Now let's run the game live with full knowledge. Launch python3 output/splatbox_agent.py to start the match, monitor the live score until completion, and verify that bash contract.sh passes cleanly!

@@ -1,0 +1,14 @@
+{
+  "stage": 2,
+  "status": "COMPLETE",
+  "binding": "ws://127.0.0.1:8080",
+  "protocol": {
+    "voidfall": ["input", "shoot", "snapshot", "splat"],
+    "contract": ["JOIN_ROOM", "WELCOME", "FIRE_SHOT", "STATE_SNAPSHOT"]
+  },
+  "endpoints": {
+    "static_client": "/client/",
+    "websocket": "ws://127.0.0.1:8080"
+  },
+  "notes": "All 7 client files (index.html, style.css, voxel_world.js, camera_fps.js, paintball.js, socket_sync.js, main.js) have been written and verified with zero TODO/FIXME strings, fulfilling the Stage 2 contract."
+}

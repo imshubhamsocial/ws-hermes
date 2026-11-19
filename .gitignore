@@ -210,6 +210,7 @@ tests/.hermes/**
 .hermes/tui-theme-boot.json
 
 # Hermes dynamic auto rules & skills cache
+.hermes/rules/_archive/**
 .hermes/rules/auto_rsi_*.md
 .hermes/skills/.hub/**
 .hermes/skills/.curator_*

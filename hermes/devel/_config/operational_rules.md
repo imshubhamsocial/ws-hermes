@@ -1,22 +1,16 @@
-# Root Operational Rules (Layer 2)
+# Layer 3 ICM Operational Rules: Execution Lifecycles
 
-> Architectural Standard: Jake Van Clief's ICM (arXiv:2603.16021)
-> Strict Line Budget: <= 120 lines
+## 1. Pre-Coding Socratic Spec Alignment
+Before writing production code, run the stateless Elephant-Goldfish Model (EGM) gate (`_tools/egm_goldfish_gate.py`).
+Verify zero blocker findings across Comprehension, Design Critic, and Readiness lenses.
 
-1. **Deterministic Sequential Stage Execution**:
-   - Every complex engineering requirement must traverse the 4-stage pipeline sequentially:
-     `01-spec` -> `02-plan` -> `03-execute` -> `04-verify`.
-   - Never skip directly to execution without an approved specification and signed contract.
+## 2. Clean Session Resets
+Execute multi-stage workflows in clean sessions using `/new --yes` or `hermes chat --oneshot -q`.
+Wipe session context between stages to guarantee stateless execution and prevent context rot.
 
-2. **Contract-First Verification**:
-   - Each operational directory must contain a deterministic `contract.sh` with `set -euo pipefail`.
-   - All tests must run headlessly and verify syntax, AST structure, and exit code 0.
+## 3. Fresh Context Auditing (Rule 8)
+Never evaluate your own output within the generating conversation context.
+Always evaluate artifacts through deterministic automated test runners (`contract.sh`, `verify_stage.py`).
 
-3. **Two-Strike Tabu Rule**:
-   - If an agent generates code that fails verification twice, it must revert to the last green checkpoint and try an alternative architecture.
-
-4. **Normalized Output Rule**:
-   - Autonomous verification evaluations must emit exact ground-truth values without conversational conversational prefixes.
-
-5. **Tool Call Protocol**:
-   - All tool calls must be emitted in structured JSON format; plain text leaks are strictly forbidden.
+## 4. Docs Over Outputs (Rule 4)
+Learn domain patterns and invariants from Layer 3 documentation (`.hermes/rules/`, `shared/`), never from prior session conversational outputs.

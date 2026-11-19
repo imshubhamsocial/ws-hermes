@@ -1,0 +1,5 @@
+[ICM STAGE 2 OF 3: 3D BOID FISH, INTERACTIVE SCENE & UI ENTRYPOINT] Read CONTEXT.md, invariants.md, rules.md, references.md, and output/stage1_physics_receipt.json. Do NOT rewrite the Stage 1 physics modules. Implement the remaining three files in output/aquarium-sim/:
+1. output/aquarium-sim/js/boids_fish.js: Implement >= 12 3D flocking aquarium fish with separation, alignment, cohesion, sinusoidal tail-fin vertex animation, and repulsive potential from aquarium glass walls and the falling sphere.
+2. output/aquarium-sim/js/main.js: Wire the GPGPU water ping-pong pass, caustics projection, sphere physics integrator, boid fish update, THREE.Raycaster mouse picking/dropping on the sphere, and camera orbit controls with dt = Math.min(clock.getDelta(), 0.033).
+3. output/aquarium-sim/index.html: Configure the ES module importmap for Three.js (r165+), mount #canvas-container, and wire the interactive HUD buttons (Drop Sphere, Toggle Gravity, Add Ripple).
+4. Write output/stage2_scene_receipt.json and stop immediately.
