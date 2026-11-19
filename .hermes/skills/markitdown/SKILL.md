@@ -1,6 +1,6 @@
 ---
 name: markitdown
-description: "Convert multi-modal files (PDF, DOCX, XLSX, PPTX, HTML, CSV, JSON, XML, ZIP, EPUB, Images, Audio) to clean GitHub-Flavored Markdown (GFM) using Microsoft MarkItDown. Supports offline conversion via CLI (markitdown <input> -o <output.md>) and Python API (MarkItDown(enable_plugins=False).convert_local(path))."
+description: "Convert multi-modal files (PDF, DOCX, XLSX, PPTX, HTML, CSV, JSON, XML, ZIP, EPUB, Images, Audio) to clean GitHub-Flavored Markdown (GFM) using Microsoft MarkItDown. Supports offline conversion via CLI (markitdown [input] -o [output.md]) and Python API (MarkItDown(enable_plugins=False).convert_local(path))."
 ---
 
 # markitdown: Multi-Modal Document to Markdown Ingestion

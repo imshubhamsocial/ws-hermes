@@ -1,5 +1,5 @@
 ---
-name: domain_db_tool_precedence
+name: domain-db-tool-precedence
 version: 1.0.0
 category: procedural_tool_orchestration
 triggers:

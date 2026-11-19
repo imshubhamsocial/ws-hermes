@@ -2,7 +2,7 @@
 # Proven AGY Konsole TUI Launcher: Hermes (Left) + Chrome Dev (Right)
 set -euo pipefail
 
-BENCH_DIR="/var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/benchmarks/gauntlet_b_splatbox"
+BENCH_DIR="/var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/benchmarks/gauntlet_b_splatbox"
 cd "${BENCH_DIR}"
 
 # 1. Ensure Local Inference Server is Healthy

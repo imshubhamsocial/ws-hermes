@@ -2,7 +2,7 @@
 # Turnkey Side-by-Side Live Showcase: Hermes TUI (Left) + Splatbox (Right)
 set -euo pipefail
 
-BENCH_DIR="/var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/benchmarks/gauntlet_b_splatbox"
+BENCH_DIR="/var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/benchmarks/gauntlet_b_splatbox"
 cd "${BENCH_DIR}"
 
 # 1. Verify Local Model Server on Port 8138

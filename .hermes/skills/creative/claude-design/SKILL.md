@@ -1,5 +1,5 @@
 ---
-name: claude-design
+name: creative-html-design
 description: Design one-off HTML artifacts (landing, deck, prototype).
 version: 1.1.0
 author: BadTechBandit

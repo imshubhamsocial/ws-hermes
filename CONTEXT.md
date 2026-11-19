@@ -2,11 +2,11 @@
 
 ## 1. Keyword Triggers
 
-* setup: Run workspace onboarding or verify directory scaffolding via python3 hermes/devel/_tools/hermes_icm_validator.py.
-* status: Inspect pipeline completion state across hermes/devel/stages/*/output/check.md and hermes/devel/phases/status_ledger.json.
-* walk-test: Execute the cold 8-point ICM Walk Test via python3 hermes/devel/_tools/hermes_icm_validator.py.
-* icm-sync: Audit relative links and regenerate context graphs via python3 -I hermes/devel/_tools/links.py . --skip docs --skip phases --skip benchmarks --skip skills.
-* quiesce: Stop llama-server.service and verify GPU VRAM <= 100 MiB via python3 hermes/devel/_tools/check_vram_limit.py --mode quiescent.
+* setup: Run workspace onboarding or verify directory scaffolding via python3 _tools/hermes_icm_validator.py.
+* status: Inspect pipeline completion state across stages/*/output/check.md and phases/status_ledger.json.
+* walk-test: Execute the cold 8-point ICM Walk Test via python3 _tools/hermes_icm_validator.py.
+* icm-sync: Audit relative links and regenerate context graphs via python3 -I .hermes/skills/icm/icm-architect/scripts/audit_links.py .
+* quiesce: Stop llama-server.service and verify GPU VRAM <= 100 MiB via python3 _tools/check_vram_limit.py --mode quiescent.
 
 ## 2. Intent-to-Directory Routing Matrix
 
@@ -18,8 +18,8 @@
 | Multi-Stage Pipeline Execution | default | _tools/run_multi_stage.sh | verify_stage.py |
 | Gauntlet C WebGL2 Simulation | default | benchmarks/gauntlet_c_aquarium/CONTEXT.md | benchmarks/gauntlet_c_aquarium/contract.sh |
 | Substrate & Token Hygiene Audit | icm-auditor | ~/.hermes/tools/icm/ | ~/.hermes/tools/icm/audit_hermes_home.sh |
-| Enter Hermes Agent OS Track | default | hermes/devel/CONTEXT.md | hermes/devel/Makefile |
-| Run Gauntlet B (Splatbox CV) | default | hermes/devel/benchmarks/gauntlet_b_splatbox/ | contract.sh |
+| Full Suite Walk & Gauntlets | default | CONTEXT.md | Makefile |
+| Run Gauntlet B (Splatbox CV) | default | benchmarks/gauntlet_b_splatbox/CONTEXT.md | benchmarks/gauntlet_b_splatbox/contract.sh |
 
 ## 3. Canonical Directory Map
 

@@ -5,6 +5,7 @@
 # User desktop, temporary files, and external GDR releases
 Desktop/**
 tmp/**
+reports/**
 
 # Build artifacts & Python caches
 build/**

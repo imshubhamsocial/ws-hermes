@@ -13,7 +13,7 @@ You operate inside ws-hermes (/var/home/imshubhamsocial/Projects/Workspace/Perso
 * .hermes/shared/: Layer 3 cross-stage mathematical, netcode, and vision schemas.
 * .hermes/skills/icm/: Layer 3 domain skills (icm-stage-compiler, icm-architect).
 * .hermes/benchmarks/: Layer 4 deterministic Gauntlet verification suites (Gauntlets A, B, C).
-* hermes/devel/: Consolidated development shelf (research corpora and phase archives).
+* docs/ & phases/: Historical research corpora (GDR30-GDR40) and sealed phase registry.
 
 ## 3. Ten Non-Negotiable Compiler Rules
 
