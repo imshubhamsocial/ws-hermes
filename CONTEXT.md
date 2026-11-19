@@ -2,20 +2,20 @@
 
 ## 1. Keyword Triggers
 
-* setup: Run workspace onboarding or verify directory scaffolding via python3 _tools/hermes_icm_validator.py.
+* setup: Run workspace onboarding or verify directory scaffolding via python3 .hermes/skills/icm/icm-stage-compiler/scripts/hermes_icm_validator.py.
 * status: Inspect pipeline completion state across benchmarks/*/stages/*/output/check.md and phases/status_ledger.json.
-* walk-test: Execute the cold 8-point ICM Walk Test via python3 _tools/hermes_icm_validator.py.
+* walk-test: Execute the cold 8-point ICM Walk Test via python3 .hermes/skills/icm/icm-stage-compiler/scripts/hermes_icm_validator.py.
 * icm-sync: Audit relative links and regenerate context graphs via python3 -I .hermes/skills/icm/icm-architect/scripts/audit_links.py .
-* quiesce: Stop llama-server.service and verify GPU VRAM <= 100 MiB via python3 _tools/check_vram_limit.py --mode quiescent.
+* quiesce: Stop llama-server.service and verify GPU VRAM <= 100 MiB via python3 .hermes/tools/icm/check_vram_limit.py --mode quiescent.
 
 ## 2. Intent-to-Directory Routing Matrix
 
 | Task Intent | Target Profile Bot | Entry Contract (Layer 2) | Verification Gate |
 | :--- | :--- | :--- | :--- |
-| Pre-Coding Spec & Socratic Review | icm-planner | benchmarks/gauntlet_c_aquarium/stages/01-spec/CONTEXT.md | _tools/egm_goldfish_gate.py |
+| Pre-Coding Spec & Socratic Review | icm-planner | benchmarks/gauntlet_c_aquarium/stages/01-spec/CONTEXT.md | ~/.hermes/tools/icm/egm_goldfish_gate.py |
 | Greenfield Workspace Scaffolding | icm-scaffolder | setup/questionnaire.md | ~/.hermes/tools/icm/icm_scaffolder.py |
 | Brownfield AST Repo Migration | icm-migrator | stages/00-migrate/CONTEXT.md | ~/.hermes/tools/icm/icm_repo_migrator.py |
-| Multi-Stage Pipeline Execution | default | _tools/run_multi_stage.sh | verify_stage.py |
+| Multi-Stage Pipeline Execution | default | ~/.hermes/tools/icm/run_multi_stage.sh | verify_stage.py |
 | Benchmark Suite & Frontier Gauntlets | default | benchmarks/CONTEXT.md | Makefile |
 | Substrate & Token Hygiene Audit | icm-auditor | ~/.hermes/tools/icm/ | ~/.hermes/tools/icm/audit_hermes_home.sh |
 | Full Suite Walk & Gauntlets | default | CONTEXT.md | Makefile |
