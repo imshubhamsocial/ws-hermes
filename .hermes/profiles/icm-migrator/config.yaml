@@ -3,17 +3,17 @@ profile:
   isolated: true
 model:
   provider: local-llama
-  default: nemotron-dory-1.0-looped-4b
+  default: gemma-4-E4B-it-qat-exact
   base_url: http://127.0.0.1:8138/v1
   context_length: 131072
-  temperature: 0.0
+  temperature: 0.7
 providers:
   local-llama:
     api: http://127.0.0.1:8138/v1
     api_key_env: LOCAL_LLAMA_API_KEY
     stale_timeout_seconds: 120
     models:
-      nemotron-dory-1.0-looped-4b:
+      gemma-4-E4B-it-qat-exact:
         context_length: 131072
         max_output_tokens: 4096
 terminal:

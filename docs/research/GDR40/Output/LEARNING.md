@@ -15,12 +15,15 @@ Running planning, scaffolding, migration, and auditing in one shared session cau
 Hermes Agent OS solves this problem with isolated profiles in [~/.hermes/profiles/](file:///var/home/imshubhamsocial/.hermes/profiles/).  
 Each profile enforces the Single Responsibility Principle:
 
-| Profile Name | Model Assigned | Temperature | Persona Document | Operational Role |
+| Profile Name | Model Assigned | Parameters (Google Defaults) | Persona Document | Operational Role |
 | :--- | :--- | :--- | :--- | :--- |
-| **`icm-planner`** | `gemma-4-E4B-it-qat-exact` | 0.2 | [SOUL.md](file:///var/home/imshubhamsocial/.hermes/profiles/icm-planner/SOUL.md) | Socratic spec interviewer and Goldfish review controller. |
-| **`icm-scaffolder`** | `gemma-4-E4B-it-qat-exact` | 0.1 | [SOUL.md](file:///var/home/imshubhamsocial/.hermes/profiles/icm-scaffolder/SOUL.md) | Greenfield 5-layer workspace generator and contract compiler. |
-| **`icm-migrator`** | `nemotron-dory-1.0-looped-4b` | 0.0 | [SOUL.md](file:///var/home/imshubhamsocial/.hermes/profiles/icm-migrator/SOUL.md) | Brownfield AST 5-bucket classifier and module refactorer. |
-| **`icm-auditor`** | `gemma-4-E4B-it-qat-exact` | 0.0 (Read-Only) | [SOUL.md](file:///var/home/imshubhamsocial/.hermes/profiles/icm-auditor/SOUL.md) | Deterministic token, line-ceiling, and substrate auditor. |
+| **`icm-planner`** | `gemma-4-E4B-it-qat-exact` | Default Google Values (`temperature: 0.7`) | [SOUL.md](file:///var/home/imshubhamsocial/.hermes/profiles/icm-planner/SOUL.md) | Socratic spec interviewer and Goldfish review controller. |
+| **`icm-scaffolder`** | `gemma-4-E4B-it-qat-exact` | Default Google Values (`temperature: 0.7`) | [SOUL.md](file:///var/home/imshubhamsocial/.hermes/profiles/icm-scaffolder/SOUL.md) | Greenfield 5-layer workspace generator and contract compiler. |
+| **`icm-migrator`** | `gemma-4-E4B-it-qat-exact` | Default Google Values (`temperature: 0.7`) | [SOUL.md](file:///var/home/imshubhamsocial/.hermes/profiles/icm-migrator/SOUL.md) | Brownfield AST 5-bucket classifier and module refactorer. |
+| **`icm-auditor`** | `gemma-4-E4B-it-qat-exact` | Default Google Values (`temperature: 0.7`, Read-Only) | [SOUL.md](file:///var/home/imshubhamsocial/.hermes/profiles/icm-auditor/SOUL.md) | Deterministic token, line-ceiling, and substrate auditor. |
+
+> [!NOTE]
+> All profile bots standardize on the Google Gemma 4 Exact model (`gemma-4-E4B-it-qat-exact`) with native Google generation parameters (`temperature: 0.7`). Standard Google values maintain creative, natural, and expressive reasoning across all tasks, while deterministic ICM shell gates (`contract.sh`, `hermes_icm_validator.py`, `egm_goldfish_gate.py`) enforce strict architectural invariants.
 
 Hermes provides two execution surfaces:
 1. **Direct CLI Mode**: Run isolated commands with `hermes -p <profile>`.

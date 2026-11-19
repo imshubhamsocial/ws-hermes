@@ -6,7 +6,7 @@ import sys
 import urllib.request
 
 ENDPOINT = "http://127.0.0.1:8138/v1/chat/completions"
-MODEL = "nemotron-dory-1.0-looped-4b"
+MODEL = "gemma-4-E4B-it-qat-exact"
 LENSES = {
     "comprehension": "Paraphrase this spec as a naive reader. Flag any ambiguity or missing context.",
     "design_critic": "Audit math PDEs, VRAM limits (<=5800 MiB), and failure modes. Rank BLOCKER/MAJOR/NIT.",
@@ -16,7 +16,7 @@ LENSES = {
 def query_goldfish(lens_name: str, rubric: str, spec_text: str) -> dict:
     payload = {
         "model": MODEL,
-        "temperature": 0.0,
+        "temperature": 0.7,
         "messages": [
             {"role": "system", "content": f"You are a stateless Goldfish reviewer ({lens_name}). {rubric}"},
             {"role": "user", "content": spec_text},

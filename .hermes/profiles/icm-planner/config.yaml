@@ -3,25 +3,14 @@ model:
   default: gemma-4-E4B-it-qat-exact
   base_url: http://127.0.0.1:8138/v1
   context_length: 131072
+  temperature: 0.7
 providers:
   local-llama:
     api: http://127.0.0.1:8138/v1
     api_key_env: LOCAL_LLAMA_API_KEY
     stale_timeout_seconds: 120
     models:
-      nemotron-3.5-bolt-e4b:
-        context_length: 65536
-        max_output_tokens: 4096
       gemma-4-E4B-it-qat-exact:
         context_length: 131072
-        max_output_tokens: 4096
-      dory:
-        context_length: 262144
-        max_output_tokens: 4096
-      dory-heretic-k2:
-        context_length: 262144
-        max_output_tokens: 4096
-      dory-heretic-k4:
-        context_length: 262144
         max_output_tokens: 4096
 _config_version: 53
