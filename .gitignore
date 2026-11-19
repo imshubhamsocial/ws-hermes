@@ -158,7 +158,13 @@ node_modules/**
 !.config/systemd/user
 .config/systemd/user/*
 !.config/systemd/user/llama-server.service
+!.config/systemd/user/llama-server-watcher.service
 !.config/systemd/user/hermes-openviking.service
+!.config/fish
+.config/fish/*
+!.config/fish/conf.d
+.config/fish/conf.d/*
+!.config/fish/conf.d/00-llama-server.fish
 
 # User system artifacts
 .cua-driver

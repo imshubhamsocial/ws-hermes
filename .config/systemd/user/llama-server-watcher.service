@@ -1,0 +1,13 @@
+[Unit]
+Description=Llama Server Container Lifecycle Watcher (ws-hermes Distrobox Sync)
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=%h/Projects/Workspace/Personal/hermes/hermes/devel/_tools/distrobox_llama_watcher.sh
+Restart=always
+RestartSec=3s
+KillMode=mixed
+
+[Install]
+WantedBy=default.target
