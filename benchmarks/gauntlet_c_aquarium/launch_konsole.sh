@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Hermes TUI Konsole Launcher for Gauntlet C - WebGL Aquarium (ICM 3-Stage Pipeline)
 set -euo pipefail
-WORKSPACE_DIR="/var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/benchmarks/gauntlet_c_aquarium"
+WORKSPACE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 UNIT="hermes-gauntlet-c-aquarium"
 SKILL="icm-architect"
 

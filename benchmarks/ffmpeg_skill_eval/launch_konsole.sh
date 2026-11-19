@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Hermes TUI Konsole Launcher for Gauntlet E - ffmpeg-skill Video Editor (ICM 3-Stage Pipeline)
 set -euo pipefail
-WORKSPACE_DIR="/var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/benchmarks/ffmpeg_skill_eval"
+WORKSPACE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 UNIT="hermes-gauntlet-e-ffmpeg"
 SKILL="icm-architect,ffmpeg-skill"
 

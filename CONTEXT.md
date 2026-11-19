@@ -26,7 +26,7 @@
 * Layer 0 (Global Rules): .hermes/SOUL.md and IDENTITY.md (~800 tokens)
 * Layer 1 (Task Router): CONTEXT.md (this file, read once at session entry)
 * Layer 2 (Stage Contracts): benchmarks/<suite>/stages/<nn>/CONTEXT.md (200–500 tokens)
-* Layer 3 (The Factory): .hermes/_config/ (symlinked to _config/), shared/, references/, and ~/.hermes/skills/
+* Layer 3 (The Factory): .hermes/_config/, shared/, references/, and ~/.hermes/skills/
 * Layer 4 (Working Artifacts): benchmarks/ and benchmarks/<suite>/output/
 
 ## 4. Cross-Agent Adapter Mapping

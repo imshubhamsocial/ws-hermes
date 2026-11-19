@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Hermes TUI Konsole Launcher for Gauntlet F - diagram-design Visualizer (ICM 3-Stage Pipeline)
 set -euo pipefail
-WORKSPACE_DIR="/var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/benchmarks/diagram_design_eval"
+WORKSPACE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 UNIT="hermes-gauntlet-f-diagram"
 SKILL="icm-architect,diagram-design"
 

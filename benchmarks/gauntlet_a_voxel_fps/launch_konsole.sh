@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Hermes TUI Konsole Launcher for Gauntlet A - Voxel Paintball (ICM 3-Stage Pipeline)
 set -euo pipefail
-WORKSPACE_DIR="/var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/benchmarks/gauntlet_a_voxel_fps"
+WORKSPACE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 UNIT="hermes-gauntlet-a-voxel-fps"
 SKILL="icm-architect"
 

@@ -14,7 +14,7 @@ You operate inside `gauntlet_b_splatbox`. This is a 3-stage Interpretable Contex
 
 ## 2. Shared References (Layer 3 Factory)
 
-- Invariants: `../../_config/invariants.md` (VRAM <= 5,800 MiB, Port 9222)
+- Invariants: `../_config/invariants.md` (VRAM <= 5,800 MiB, Port 9222)
 - Schemas: `../../shared/vision_schemas.md` (Centroid ballistics, HSV masking)
 - Blueprint: `references/splatbox_dom_cdp.md` (CDP dispatch protocols)
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Hermes TUI Konsole Launcher for Gauntlet G - markitdown Document Ingestion (ICM 3-Stage Pipeline)
 set -euo pipefail
-WORKSPACE_DIR="/var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/benchmarks/markitdown_eval"
+WORKSPACE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 UNIT="hermes-gauntlet-g-markitdown"
 SKILL="icm-architect,markitdown"
 

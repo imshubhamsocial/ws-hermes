@@ -15,8 +15,9 @@ def validate_workspace() -> int:
     errors = []
     agents_md = os.path.join(ROOT, "AGENTS.md")
     context_md = os.path.join(ROOT, "CONTEXT.md")
-    invariants_md = os.path.join(ROOT, "_config", "invariants.md")
-    for req in [agents_md, context_md, invariants_md]:
+    invariants_md = os.path.join(ROOT, ".hermes", "_config", "invariants.md")
+    bench_invariants = os.path.join(ROOT, "benchmarks", "_config", "invariants.md")
+    for req in [agents_md, context_md, invariants_md, bench_invariants]:
         if not os.path.isfile(req):
             errors.append(f"Missing core file: {req}")
     if os.path.isfile(agents_md) and count_lines(agents_md) > 60:

@@ -2,7 +2,7 @@
 
 ## 1. Identity and Workspace Map
 
-You operate inside ws-hermes (/var/home/imshubhamsocial/Projects/Workspace/Personal/hermes). You are a single-pass stage compiler inside a 5-layer Interpretable Context Methodology (ICM) state machine. Do not explore the filesystem randomly. Read CONTEXT.md at the workspace root to route your task.
+You operate inside ws-hermes. You are a single-pass stage compiler inside a 5-layer Interpretable Context Methodology (ICM) state machine. Do not explore the filesystem randomly. Read CONTEXT.md at the workspace root to route your task.
 
 ## 2. Core Directory Locations
 
@@ -12,7 +12,7 @@ You operate inside ws-hermes (/var/home/imshubhamsocial/Projects/Workspace/Perso
 * .hermes/tools/icm/: Layer 3 deterministic Python/POSIX validators and stage runners.
 * .hermes/shared/: Layer 3 cross-stage mathematical, netcode, and vision schemas.
 * .hermes/skills/icm/: Layer 3 domain skills (icm-stage-compiler, icm-architect).
-* .hermes/benchmarks/: Layer 4 deterministic Gauntlet verification suites (Gauntlets A, B, C).
+* benchmarks/: Layer 4 autonomous benchmark project folder (Gauntlets A, B, C).
 * docs/ & phases/: Historical research corpora (GDR30-GDR40) and sealed phase registry.
 
 ## 3. Ten Non-Negotiable Compiler Rules
@@ -25,5 +25,5 @@ You operate inside ws-hermes (/var/home/imshubhamsocial/Projects/Workspace/Perso
 > 6. Atomic Scripts: Author modular Python and shell scripts strictly under 60 lines.
 > 7. Browser Verification: Use Playwright (connect_over_cdp or headless Chromium) to verify 0 runtime errors.
 > 8. Fresh Context Auditing: Never grade your own output in the generating context; use _tools/ check gates.
-> 9. Substrate Purity: Never modify files inside /var/home/imshubhamsocial/.hermes/hermes-agent.
+> 9. Substrate Purity: Never modify files inside upstream hermes-agent repository (~/.hermes/hermes-agent).
 > 10. Mandatory ASD-STE100 & Google Docs Safety: Use Simplified Technical English and even fence/dollar parity.

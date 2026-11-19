@@ -36,10 +36,10 @@ The Hermes Agent OS operates across two isolated layers:
 ### Table 2.1: Filesystem Parity and Locations
 | Component | Distrobox Workspace Path | Host Home Path |
 | :--- | :--- | :--- |
-| Launcher Script | [/var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/.local/bin/llama-server](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/.local/bin/llama-server) | [/var/home/imshubhamsocial/.local/bin/llama-server](file:///var/home/imshubhamsocial/.local/bin/llama-server) |
-| Binary Executable | [/var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/.local/libexec/llama-server.bin](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/.local/libexec/llama-server.bin) | [/var/home/imshubhamsocial/.local/libexec/llama-server.bin](file:///var/home/imshubhamsocial/.local/libexec/llama-server.bin) |
-| Shared Libraries | [/var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/.local/lib/llama.cpp/](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/.local/lib/llama.cpp/) | [/var/home/imshubhamsocial/.local/lib/llama.cpp/](file:///var/home/imshubhamsocial/.local/lib/llama.cpp/) |
-| Weights Directory | [/var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/.hermes/models/](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/.hermes/models/) | [/var/home/imshubhamsocial/.hermes/models/](file:///var/home/imshubhamsocial/.hermes/models/) |
+| Launcher Script | `~/.local/bin/llama-server` | `~/.local/bin/llama-server` |
+| Binary Executable | `~/.local/libexec/llama-server.bin` | `~/.local/libexec/llama-server.bin` |
+| Shared Libraries | `~/.local/lib/llama.cpp/` | `~/.local/lib/llama.cpp/` |
+| Weights Directory | `~/.hermes/models/` | `~/.hermes/models/` |
 
 ---
 

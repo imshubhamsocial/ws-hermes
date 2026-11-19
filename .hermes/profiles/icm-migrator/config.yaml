@@ -9,7 +9,7 @@ model:
   kv_cache_quant: turboquant_q4_0
   temperature: 0.0
 terminal:
-  cwd: /var/home/imshubhamsocial/Projects/Workspace/Personal/hermes
+  cwd: .
 skills:
   bundled: false
-  external_dirs: ["/var/home/imshubhamsocial/.hermes/skills/icm"]
+  external_dirs: ["~/.hermes/skills/icm"]

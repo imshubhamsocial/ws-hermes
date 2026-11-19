@@ -379,7 +379,7 @@ Perform a web search to get the latest data. If Eliud Kipchoge could maintain hi
 * **Outcome**: The session executed for **62 full turns** before hitting the step cap.
 
 #### The Phenomenon
-1. When `tau-bench` initialized `UserSimulationEnv` on Port 8642, Hermes Gateway booted up `AIAgent._run_agent()` with its developer workspace prompt from [`AGENTS.md`](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/AGENTS.md).
+1. When `tau-bench` initialized `UserSimulationEnv` on Port 8642, Hermes Gateway booted up `AIAgent._run_agent()` with its developer workspace prompt from `AGENTS.md`.
 2. The Customer greeted the Agent:
    > *"Hello! I'm here to assist with your project. Are you looking to scope a new requirement, modify code, audit the ICM structure, or something else?"*
 3. The Agent attempted to execute an action: `{"name": "skill_view", "arguments": {"name": "icm-architect"}}`. Tau's retail environment returned `API output: Unknown action skill_view`.

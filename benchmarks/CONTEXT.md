@@ -17,9 +17,9 @@
 
 ## 2. Global Substrate Invariants
 
-* Hardware Ceilings: `../_config/hardware_ceilings.md` (RTX 3050 <= 5800.0 MiB VRAM).
-* Network & Port Invariants: `../_config/invariants.md` (llama-server: 8138, Chrome CDP: 9222).
-* Coding & Script Ceiling: `../_config/conventions.md` (Strictly < 60 lines per script).
+* Hardware Ceilings: `_config/hardware_ceilings.md` (RTX 3050 <= 5800.0 MiB VRAM).
+* Network & Port Invariants: `_config/invariants.md` (llama-server: 8138, Chrome CDP: 9222).
+* Coding & Script Ceiling: `_config/conventions.md` (Strictly < 60 lines per script).
 
 ## 3. Automation Targets
 

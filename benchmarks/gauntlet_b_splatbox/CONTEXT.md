@@ -6,7 +6,7 @@ One job: Certify Hermes Agent OS autonomous Splatbox gameplay via dual-launch IC
 
 | Source | File/Location | Section/Scope | Why |
 | :--- | :--- | :--- | :--- |
-| System Invariants | `../../_config/invariants.md` | Network Ports & Hardware | Port 8138 LLM, Port 9222 CDP, VRAM <= 5800 MiB |
+| System Invariants | `../_config/invariants.md` | Network Ports & Hardware | Port 8138 LLM, Port 9222 CDP, VRAM <= 5800 MiB |
 | Hardware Invariants | `invariants.md` | Device Ceilings | NVIDIA GPU inference only; Chrome/Konsole on iGPU |
 | Benchmark Rules | `rules.md` | Dual-Launch Workflow | Prompting style, per-window recording, and composition |
 

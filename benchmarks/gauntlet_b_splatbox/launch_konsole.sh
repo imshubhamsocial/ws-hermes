@@ -2,13 +2,13 @@
 # Proven AGY Konsole TUI Launcher: Hermes (Left) + Chrome Dev (Right)
 set -euo pipefail
 
-BENCH_DIR="/var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/benchmarks/gauntlet_b_splatbox"
+BENCH_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "${BENCH_DIR}"
 
 # 1. Ensure Local Inference Server is Healthy
 if ! curl -sf http://127.0.0.1:8138/health >/dev/null 2>&1; then
   echo "Restoring local Gemma 4 Exact daemon..."
-  python3 /var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/.local/bin/hermes-supervisor ensure
+  python3 "${HOME}/.local/bin/hermes-supervisor" ensure
   sleep 3
 fi
 
