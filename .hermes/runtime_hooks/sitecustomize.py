@@ -84,7 +84,9 @@ class _GDR15SessionState:
             gitignore = target_path / ".gitignore"
             if not gitignore.exists():
                 gitignore.write_text("__pycache__/\n*.pyc\n.pytest_cache/\n", encoding="utf-8")
-            root_conftest = WORKSPACE_ROOT / "conftest.py"
+            root_conftest = WORKSPACE_ROOT / ".hermes" / "conftest.py"
+            if not root_conftest.exists():
+                root_conftest = WORKSPACE_ROOT / "conftest.py"
             local_conftest = target_path / "conftest.py"
             if root_conftest.exists() and not local_conftest.exists():
                 shutil.copy2(root_conftest, local_conftest)

@@ -14,7 +14,7 @@ from pathlib import Path
 
 import pytest
 
-HERMES_ROOT = Path(__file__).resolve().parent  
+HERMES_ROOT = Path(__file__).resolve().parent.parent if Path(__file__).resolve().parent.name == ".hermes" else Path(__file__).resolve().parent
 SHADOW_ARCHIVE_ROOT = HERMES_ROOT / ".hermes" / "cache" / "shadow_backups"
 
 def _collect_domain_c_git_diff(testbed_root: Path) -> tuple[list[str], str]:  
