@@ -5,8 +5,8 @@
 | Source | File/Location | Section/Scope | Why |
 | :--- | :--- | :--- | :--- |
 | Stage 01 Brief | ../01-spec/output/concepts_brief.md | All | Certified 4 mathematical regimes and module scopes |
-| Conventions | _config/conventions.md | All | Atomic < 60 line ceiling and ASD-STE100 active prose |
-| Hardware Ceilings | _config/hardware_ceilings.md | All | RTX 3050 <= 5800.0 MiB discrete memory limit |
+| Conventions | ../../_config/conventions.md | All | Atomic < 60 line ceiling and ASD-STE100 active prose |
+| Hardware Ceilings | ../../_config/hardware_ceilings.md | All | RTX 3050 <= 5800.0 MiB discrete memory limit |
 
 ## Process Steps
 

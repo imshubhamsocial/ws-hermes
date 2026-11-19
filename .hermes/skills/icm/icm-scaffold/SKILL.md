@@ -1,3 +1,13 @@
+---
+name: icm-scaffold
+description: "Provisions standard 3-layer or 5-layer Interpretable Context Methodology (ICM) workspace hierarchies and contracts."
+tools:
+  - bash
+  - python
+  - read_file
+  - write_file
+---
+
 # ICM Scaffold
 
 Set up an ICM (Interpretable Context Methodology) workspace on any project — generating IDENTITY.md (Layer 0), CONTEXT.md (Layer 1), and _config/ (Layer 3) files tailored to the project's domain, folder structure, and workflow.

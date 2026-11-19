@@ -24,7 +24,7 @@
 | Execution Output | `benchmarks/ast_grep_eval/output/run.log` | Linter, compiler, and binary execution log |
 | Verification Receipt | `benchmarks/ast_grep_eval/output/receipt.json` | JSON test result |
 
-## 4. Verify
+## 4. Check
 * [ ] GCC compilation exits with code 0.
 * [ ] Binary execution outputs exact string `55`.
 * [ ] Zero compiler warnings or ast-grep pattern violations.

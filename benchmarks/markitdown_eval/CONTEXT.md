@@ -17,5 +17,5 @@
 * Ingested Markdown Files: output/ingested/*.md
 * Verification Receipt: output/status.json
 
-## Verify
+## Check
 * Run bash ./contract.sh and confirm exit code 0.

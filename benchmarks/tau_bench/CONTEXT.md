@@ -24,7 +24,7 @@
 | Evaluation Logs | `benchmarks/tau_bench/output/eval_results.json` | JSON trajectory ledger |
 | Metrics Summary | `benchmarks/tau_bench/output/metrics.md` | Success rate & cost |
 
-## 4. Verify
+## 4. Check
 * [ ] Dual-port isolation enforced (Port 8642 vs Port 20128).
 * [ ] LiteLLM registers models at zero cost (`$0.0`).
 * [ ] Zero 422 validation rejections from LiteLLM proxy.

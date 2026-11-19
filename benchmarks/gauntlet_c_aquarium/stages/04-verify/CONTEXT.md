@@ -6,7 +6,7 @@
 | :--- | :--- | :--- | :--- |
 | Implementation Receipt | ../03-implement/output/implementation_receipt.json | All | Verified atomic WebGL2 modules |
 | Deterministic Contract Gate | ../contract.sh | All | 4-gate verification suite |
-| Hardware Ceilings | _config/hardware_ceilings.md | All | RTX 3050 <= 5800.0 MiB discrete memory limit |
+| Hardware Ceilings | ../../_config/hardware_ceilings.md | All | RTX 3050 <= 5800.0 MiB discrete memory limit |
 
 ## Process Steps
 

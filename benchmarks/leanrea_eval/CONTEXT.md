@@ -18,5 +18,5 @@
 * Recon Report: output/recon_report.md
 * Machine-Readable Evidence Ledger: output/recon_evidence.json
 
-## Verify
+## Check
 * Run bash ./contract.sh and confirm exit code 0.

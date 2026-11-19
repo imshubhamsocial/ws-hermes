@@ -6,7 +6,7 @@
 | :--- | :--- | :--- | :--- |
 | Topology Manifest | ../02-scaffold/output/topology_manifest.json | All | Verified module specifications and path bindings |
 | Blueprint Reorganization | docs/research/GDR40/Output/GDR40 Chronological Blueprint Reorganization.md | Section 7.2-7.6 | Certified Code Blocks 14 through 18 |
-| Conventions | _config/conventions.md | All | Atomic < 60 line ceiling and ASD-STE100 active prose |
+| Conventions | ../../_config/conventions.md | All | Atomic < 60 line ceiling and ASD-STE100 active prose |
 
 ## Process Steps
 

@@ -18,5 +18,5 @@
 * Visual Contact Sheet: output/final_sheet.png
 * SPEC Contract Receipt: output/contract_receipt.json
 
-## Verify
+## Check
 * Run bash ./contract.sh and confirm exit code 0.

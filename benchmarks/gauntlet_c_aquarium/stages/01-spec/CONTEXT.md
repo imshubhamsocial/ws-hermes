@@ -5,8 +5,8 @@
 | Source | File/Location | Section/Scope | Why |
 | :--- | :--- | :--- | :--- |
 | Mathematical Physics Specification | docs/research/GDR40/Output/GDR40 Chronological Blueprint Reorganization.md | Section 7.1 | 14 certified governing equations across 4 discrete physical regimes |
-| Hardware Ceilings | _config/hardware_ceilings.md | All | Enforce RTX 3050 <= 5800.0 MiB and Intel iGPU Wayland offload |
-| Conventions | _config/conventions.md | All | Atomic < 60 line modular scripts and ASD-STE100 active prose |
+| Hardware Ceilings | ../../_config/hardware_ceilings.md | All | Enforce RTX 3050 <= 5800.0 MiB and Intel iGPU Wayland offload |
+| Conventions | ../../_config/conventions.md | All | Atomic < 60 line modular scripts and ASD-STE100 active prose |
 
 ## Process Steps
 

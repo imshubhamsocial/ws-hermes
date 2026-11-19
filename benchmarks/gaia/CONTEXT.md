@@ -24,7 +24,7 @@
 | Session Traces | `benchmarks/gaia/output/traces/` | Markdown and JSONL exports |
 | Verification Score | `benchmarks/gaia/output/score.json` | Exact match accuracy ledger |
 
-## 4. Verify
+## 4. Check
 * [ ] Local execution sandbox provisioned (`--sandbox local`).
 * [ ] Final answer strictly formatted inside `<FINAL_ANSWER>...</FINAL_ANSWER>`.
 * [ ] Zero unit repetition or prose wrapper leaks.
