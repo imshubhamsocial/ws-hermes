@@ -6,7 +6,7 @@
 * status: Inspect pipeline completion state across hermes/devel/stages/*/output/check.md and hermes/devel/phases/status_ledger.json.
 * walk-test: Execute the cold 8-point ICM Walk Test via python3 hermes/devel/_tools/hermes_icm_validator.py.
 * icm-sync: Audit relative links and regenerate context graphs via python3 -I hermes/devel/_tools/links.py . --skip docs --skip phases --skip benchmarks --skip skills.
-* quiesce: Stop hermes-llama-server.service and verify GPU VRAM <= 100 MiB via python3 hermes/devel/_tools/check_vram_limit.py --mode quiescent.
+* quiesce: Stop llama-server.service and verify GPU VRAM <= 100 MiB via python3 hermes/devel/_tools/check_vram_limit.py --mode quiescent.
 
 ## 2. Task Routing Table
 

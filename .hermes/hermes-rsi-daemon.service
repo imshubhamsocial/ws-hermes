@@ -1,7 +1,7 @@
 [Unit]
 Description=Hermes Agent OS Dream-RSI Evolving Worlds & Counterfactual Replay Daemon (arXiv:2609.14858)
 Documentation=https://github.com/zhengkid/Dream-RSI
-After=network.target hermes-llama-server.service hermes-openviking.service
+After=network.target llama-server.service hermes-openviking.service
 Wants=hermes-openviking.service
 
 [Service]

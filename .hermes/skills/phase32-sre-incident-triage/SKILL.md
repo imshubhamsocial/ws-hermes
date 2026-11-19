@@ -11,7 +11,7 @@ Use for diagnosing daemon crashes, GPU VRAM spikes, systemd unit failures, and e
 ## Quick Reference
 * Omniscient Audit: `mcp_openjev(jev_verify_arsi_omniscient)`
 * Live VRAM Check: `mcp_openjev(query_live_nvml_vram)`
-* Logs: `journalctl --user -u hermes-llama-server -n 100 --no-pager`
+* Logs: `journalctl --user -u llama-server -n 100 --no-pager`
 
 ## Procedure
 1. Invoke `jev_compile_intent` and `jev_verify_arsi_omniscient` on Turn 1 to inspect VRAM (<= 4,812.0 MiB) and Ports 8138, 8139, 1933.

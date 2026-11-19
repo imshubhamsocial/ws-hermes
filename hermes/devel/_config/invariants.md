@@ -5,7 +5,7 @@
 * Host OS: Fedora Kinoite 44 (x86_64, rpm-ostree immutable atomic desktop).
 * Discrete GPU: NVIDIA GeForce RTX 3050 Laptop GPU (6,144 MiB physical GDDR6).
 * Hard VRAM Safety Ceiling (Active Inference): 5,800.0 MiB maximum under 131,072-token (128K) context with Q4_0 TurboQuant KV cache (-ctk q4_0 -ctv q4_0).
-* Quiescent VRAM Ceiling (Daemon Stopped): <= 100.0 MiB (40 MiB nominal idle at ~55°C, 12W) when hermes-llama-server.service is stopped.
+* Quiescent VRAM Ceiling (Daemon Stopped): <= 100.0 MiB (40 MiB nominal idle at ~55°C, 12W) when llama-server.service is stopped.
 * Display Compositor Offload: Wayland compositor must run on the Intel integrated GPU (Disp.A: Off on NVIDIA nvidia-smi).
 * CPU Vision Offload: Computer vision centroid calculations (OpenCV HoughCircles) must run on host CPU (0 MiB GPU VRAM, < 5 ms frame latency).
 

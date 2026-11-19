@@ -8,7 +8,7 @@ cd "${BENCH_DIR}"
 # 1. Verify Local Model Server on Port 8138
 if ! curl -sf http://127.0.0.1:8138/health >/dev/null 2>&1; then
   echo "Starting Gemma 4 Exact daemon on Port 8138..."
-  /var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/_tools/run_model_server.sh gemma_exact 65536 >/tmp/llama_showcase.log 2>&1 &
+  systemctl --user start llama-server.service
   sleep 4
 fi
 

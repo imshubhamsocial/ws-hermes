@@ -1,5 +1,5 @@
 [Unit]
-Description=Hermes Local LLM Inference Daemon (llama-server)
+Description=Llama Server Daemon (Google Gemma 4 Exact 128K TurboQuant + MTP on Port 8138)
 After=network.target
 
 [Service]
@@ -7,6 +7,8 @@ Type=simple
 ExecStart=%h/.local/bin/llama-server
 Restart=always
 RestartSec=5s
+TimeoutStartSec=180
+TimeoutStopSec=30
 KillMode=process
 LimitNOFILE=65535
 

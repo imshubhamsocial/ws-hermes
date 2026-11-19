@@ -9,7 +9,7 @@ walk-test:
 	python3 _tools/hermes_icm_validator.py
 
 check-vram:
-	@if systemctl --user is-active --quiet hermes-llama-server.service; then \
+	@if systemctl --user is-active --quiet llama-server.service; then \
 		python3 _tools/check_vram_limit.py --mode active --max-active 5800.0; \
 	else \
 		python3 _tools/check_vram_limit.py --mode quiescent --max-quiescent 100.0; \

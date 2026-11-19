@@ -24,10 +24,10 @@ cmake -S "$CACHE" -B "${CACHE}/build" -G Ninja \
 
 cmake --build "${CACHE}/build" --target llama-server -j "$(nproc)"
 
-systemctl --user stop hermes-llama-server.service || true
+systemctl --user stop llama-server.service || true
 cp "${CACHE}/build/bin/llama-server" "${BASE}/.local/libexec/llama-server.bin"
 cp -a "${CACHE}/build/bin"/lib*.so* "${BASE}/.local/lib/llama.cpp/"
-systemctl --user start hermes-llama-server.service
+systemctl --user start llama-server.service
 
 for i in {1..30}; do
     curl -s http://127.0.0.1:8138/health | grep -q '"status":"ok"' && exit 0

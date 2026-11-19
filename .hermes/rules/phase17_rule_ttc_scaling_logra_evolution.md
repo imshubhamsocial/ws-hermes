@@ -23,7 +23,7 @@ In local-first execution on hardware-bounded consumer GPUs (NVIDIA RTX 3050, 6GB
    - **GrowMTP Tracking (arXiv:2609.16648)**: Logs online speculative acceptance $(\text{draft\_n}, \text{draft\_n\_accepted})$. If empirical draft acceptance falls below $\alpha_{\text{draft}} < 0.75$, offline draft head distillation is queued during the 03:15 AM TME window.
 
 2. **Offline Hibernate-and-Train LoGRA/NoRA Evolution**:
-   - **Temporal Mutual Exclusion**: Before launching PyTorch optimization, Hermes hibernates `hermes-llama-server` and verifies GPU memory drops below 650 MiB.
+   - **Temporal Mutual Exclusion**: Before launching PyTorch optimization, Hermes hibernates `llama-server` and verifies GPU memory drops below 650 MiB.
    - **Allocator Ceiling**: Sets `torch.cuda.set_per_process_memory_fraction(0.64)`, restricting PyTorch to $\le 3,932$ MiB and guaranteeing total system VRAM remains $\le 4,812$ MiB.
    - **GRADDOT & LoRIF Data Attribution (arXiv:2609.38767, arXiv:2601.21929)**: Trajectories are filtered online via GRADDOT inner products before backpropagation; gradients are stored in LoRIF rank-1 factorized Woodbury formats ($15\times$ I/O reduction, $30\times$ speedup).
    - **Rank-64 LoGRA Random Gradient Projection**: Projects microbatch gradients on-the-fly via rank-$r$ ($r=64$) step-redrawn Gaussian matrices $P \in \mathbb{R}^{d \times r}$:

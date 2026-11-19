@@ -6,7 +6,7 @@
 >    * NVIDIA RTX 3050 discrete GPU is strictly dedicated to Hermes LLM inference on port 8138.
 >    * Total GPU VRAM usage MUST NOT exceed 5,800.0 MiB at any time.
 >    * Google Chrome, Konsole, ffmpeg, and Python scripts MUST run on CPU / Intel Raptor Lake UHD Graphics (iGPU, `DRI_PRIME=0`, `__NV_PRIME_RENDER_OFFLOAD=0`, `__GLX_VENDOR_LIBRARY_NAME=mesa`).
-> 4. **Researched Upstream Flags**: Port 8138 must run using canonical flags defined in `hermes/devel/_tools/run_model_server.sh` for each model mode. No uncoordinated server restarts or duplicate instances.
+> 4. **Researched Upstream Flags**: Port 8138 must run using canonical flags defined in `~/.local/bin/llama-server` for each model mode. No uncoordinated server restarts or duplicate instances.
 > 5. **Native Desktop Window Capture**:
 >    * All recordings MUST capture authentic host application windows including titlebars, buttons, frames, and drop shadows via KWin ScreenShot2 DBus interface.
 >    * Synthetic border rendering, manual window framing in PIL/OpenCV, or synthetic overlays are strictly forbidden.
