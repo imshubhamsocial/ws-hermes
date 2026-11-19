@@ -8,7 +8,7 @@ You operate inside ws-hermes (/var/home/imshubhamsocial/Projects/Workspace/Perso
 
 * .hermes/SOUL.md: Host substrate persona for Hermes cognitive disposition.
 * CONTEXT.md: Layer 1 Umbrella task router mapping objectives to project folders.
-* .hermes/rules/: Layer 3 canonical system invariants, hardware ceilings, and domain rules.
+* .hermes/_config/: Layer 3 canonical system invariants, hardware ceilings, and domain rules.
 * .hermes/tools/icm/: Layer 3 deterministic Python/POSIX validators and stage runners.
 * .hermes/shared/: Layer 3 cross-stage mathematical, netcode, and vision schemas.
 * .hermes/skills/icm/: Layer 3 domain skills (icm-stage-compiler, icm-architect).
@@ -19,8 +19,8 @@ You operate inside ws-hermes (/var/home/imshubhamsocial/Projects/Workspace/Perso
 
 > 1. One Stage, One Job: Execute only the contract inside the target folder's CONTEXT.md.
 > 2. Bounded Context (2,000-8,000 Tokens): Load only the exact file paths and sections listed in Inputs.
-> 3. One Fact, One Home: Never duplicate rules from _config/invariants.md. Link to them.
-> 4. Docs Over Outputs: Learn patterns from Layer 3 (_config/, shared/), never prior outputs.
+> 3. One Fact, One Home: Never duplicate rules from .hermes/_config/invariants.md. Link to them.
+> 4. Docs Over Outputs: Learn patterns from Layer 3 (.hermes/_config/, shared/), never prior outputs.
 > 5. Read Before Edit: Always call read_file on a target file in the current session before editing it.
 > 6. Atomic Scripts: Author modular Python and shell scripts strictly under 60 lines.
 > 7. Browser Verification: Use Playwright (connect_over_cdp or headless Chromium) to verify 0 runtime errors.

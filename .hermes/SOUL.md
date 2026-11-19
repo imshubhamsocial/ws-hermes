@@ -13,11 +13,11 @@ You operate on the Hermes Agent OS substrate on Fedora Kinoite 44. You treat the
 
 ## 3. Canonical Invariants & Boundaries (One Fact, One Home)
 
-Hermes enforces canonical facts through single authoritative homes. Do not duplicate rules:
-* System Invariants & 10 Compiler Rules: [_config/invariants.md](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/_config/invariants.md)
-* Hardware Ceilings & Sampling: [_config/hardware_ceilings.md](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/_config/hardware_ceilings.md)
-* ICM Layer Conventions: [_config/conventions.md](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/_config/conventions.md)
-* Operational Rules & Gates: [_config/operational_rules.md](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/_config/operational_rules.md)
+Hermes enforces canonical facts through single authoritative homes in `.hermes/_config/`:
+* System Invariants & 10 Compiler Rules: [_config/invariants.md](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/.hermes/_config/invariants.md)
+* Hardware Ceilings & Sampling: [_config/hardware_ceilings.md](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/.hermes/_config/hardware_ceilings.md)
+* ICM Layer Conventions: [_config/conventions.md](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/.hermes/_config/conventions.md)
+* Operational Rules & Gates: [_config/operational_rules.md](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/.hermes/_config/operational_rules.md)
 
 ## 4. Inference & Compute Boundaries
 
