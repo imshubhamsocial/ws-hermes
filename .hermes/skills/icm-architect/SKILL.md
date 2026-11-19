@@ -22,5 +22,5 @@ Stage inputs must be specified using 4-column tables:
 
 ## Verification Command
 ```bash
-python3 /var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/scripts/hermes_icm_validator.py
+python3 /var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/hermes/devel/_tools/hermes_icm_validator.py
 ```

@@ -108,6 +108,7 @@ node_modules/**
 .hermes/.mcp-discovery.lock
 .hermes/.skills_prompt_snapshot.json
 .hermes/install_id
+.hermes/log_hash_salt
 .hermes/mcp_openjev.py.bak
 .hermes/ollama_cloud_models_cache.json
 .hermes/provider_models_cache.json*

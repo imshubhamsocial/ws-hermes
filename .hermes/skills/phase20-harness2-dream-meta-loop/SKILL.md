@@ -34,4 +34,4 @@ Evaluate the candidate rule against existing testbeds under `tests/` in an isola
 If all regression checks pass with zero defects:
 1. Promote the rule into `.hermes/rules/` via `/loop learn`.
 2. Commit session reflection into OpenViking semantic memory via `memory` tool.
-3. Sync changes to Chezmoi dotfiles.
+3. Apply changes to Chezmoi dotfiles using `chezmoi apply`.

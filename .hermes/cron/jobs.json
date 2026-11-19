@@ -30,15 +30,15 @@
       "schedule_display": "0 3 * * *",
       "repeat": {
         "times": null,
-        "completed": 13
+        "completed": 16
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-10-20T01:16:55.717856+05:30",
-      "next_run_at": "2026-11-17T03:00:00+05:30",
-      "last_run_at": "2026-11-16T16:59:31.127865+05:30",
+      "next_run_at": "2026-11-20T03:00:00+05:30",
+      "last_run_at": "2026-11-19T11:10:28.921854+05:30",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -49,14 +49,14 @@
       "enabled_toolsets": null,
       "workdir": null,
       "last_dispatch": {
-        "scheduled_at": "2026-11-16T03:00:00+05:30",
-        "dispatched_at": "2026-11-16T16:51:31.568027+05:30",
-        "lateness_seconds": 49891.6,
+        "scheduled_at": "2026-11-19T03:00:00+05:30",
+        "dispatched_at": "2026-11-19T11:07:27.411139+05:30",
+        "lateness_seconds": 29247.4,
         "kind": "catch_up"
       },
       "fire_claim": null,
       "canonical_completions": [
-        "73d64f88772b4a0b87a4e072da94b823"
+        "c3d0e28f1c1f45dea7156676239272b0"
       ],
       "last_failure": {
         "at": "2026-11-07T02:38:23.311315+05:30",
@@ -90,15 +90,15 @@
       "schedule_display": "0 3 * * *",
       "repeat": {
         "times": null,
-        "completed": 7
+        "completed": 10
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-10-29T23:18:47.219868+05:30",
-      "next_run_at": "2026-11-17T03:00:00+05:30",
-      "last_run_at": "2026-11-16T17:02:17.222461+05:30",
+      "next_run_at": "2026-11-20T03:00:00+05:30",
+      "last_run_at": "2026-11-19T11:09:36.876929+05:30",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -109,20 +109,20 @@
       "enabled_toolsets": null,
       "workdir": null,
       "last_dispatch": {
-        "scheduled_at": "2026-11-16T03:00:00+05:30",
-        "dispatched_at": "2026-11-16T16:51:31.568027+05:30",
-        "lateness_seconds": 49891.6,
+        "scheduled_at": "2026-11-19T03:00:00+05:30",
+        "dispatched_at": "2026-11-19T11:07:27.411139+05:30",
+        "lateness_seconds": 29247.4,
         "kind": "catch_up"
       },
       "fire_claim": null,
       "canonical_completions": [
-        "1ac068d670a945369ca4f584a9fe8105"
+        "5a35184c857d404191f7bb877f37136e"
       ],
       "last_failure": {
-        "at": "2026-11-15T03:01:35.201210+05:30",
-        "detail": "The scheduled execution of the `icm-architect` skill failed. The required verification script, `/var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/scripts/hermes_icm_validator.py`, could not be located. Execution terminated due to file not found (Exit Code 2). The ICM validation step is currently unperformable as the validation tool is missing from the defined path."
+        "at": "2026-11-17T13:09:42.993497+05:30",
+        "detail": "The ICM validator script is missing from the expected path. The execution of the 8-point walk test failed due to a file system error. The validation process cannot proceed without the required verification tool. Skill curation is deferred until the validator is present and functional."
       }
     }
   ],
-  "updated_at": "2026-11-16T17:02:17.223002+05:30"
+  "updated_at": "2026-11-19T11:10:28.923041+05:30"
 }

@@ -1,5 +1,5 @@
 # ~/.hermes/config.yaml — Certified GDR31 Production Configuration
-_config_version: 52
+_config_version: 53
 
 model:
   provider: local-llama
