@@ -32,14 +32,6 @@ Hermes provides two execution surfaces:
 
 This workflow transforms a project concept into a verified 5-layer ICM workspace.
 
-```mermaid
-flowchart LR
-    A["Engineer"] -->|"1. Socratic Interview"| B["icm-planner"]
-    B -->|"2. Goldfish Review Gate"| C["stages/01-spec/"]
-    C -->|"3. 5-Layer Scaffolding"| D["icm-scaffolder"]
-    D -->|"4. Contract Validation"| E["Ready Workspace"]
-```
-
 ### A. Direct CLI Mode (`hermes -p`)
 
 #### Step 1: Conduct Socratic Interview and Compile Specification
@@ -124,14 +116,6 @@ Create linked task cards on the durable task board:
 
 This workflow audits an unstructured codebase, classifies all files into 5 buckets, and decomposes monolithic files.
 
-```mermaid
-flowchart LR
-    A["Messy Repository"] -->|"1. AST Analysis"| B["icm-migrator"]
-    B -->|"2. 5-Bucket Classifier"| C["migration_map.json"]
-    C -->|"3. Human Approval"| D["Decompose & Relocate"]
-    D -->|"4. Walk Test Audit"| E["Migrated ICM Repo"]
-```
-
 ### A. Direct CLI Mode (`hermes -p`)
 
 #### Step 1: Execute AST Classification and Emit Migration Plan
@@ -199,14 +183,6 @@ delegate_task(
 ## 4. Task 3: Audit and Remediation (Fix Existing ICM Repositories)
 
 Use this workflow to detect and fix broken invariants, line-ceiling violations ($\ge 60$ lines), missing headers, or substrate contamination.
-
-```mermaid
-flowchart LR
-    A["Active Workspace"] -->|"1. Read-Only Scan"| B["icm-auditor"]
-    B -->|"2. Defect Diagnostics"| C["Audit Report"]
-    C -->|"3. Automated Remediation"| D["icm-migrator"]
-    D -->|"4. Static Walk Test"| E["Verified Compliance"]
-```
 
 ### A. Direct CLI Mode (`hermes -p`)
 

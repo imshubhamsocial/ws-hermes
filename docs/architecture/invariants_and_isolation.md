@@ -10,20 +10,6 @@
 
 Hermes strictly isolates the Agent OS substrate from project-specific domains:
 
-```mermaid
-flowchart TD
-    Root["ws-hermes Workspace Root"]
-    Root --> OS[".hermes/<br/>Agent OS Substrate & Developer Configs"]
-    Root --> Bench["benchmarks/<br/>Self-Contained Gauntlets & Projects"]
-    
-    OS --> CfgOS[".hermes/_config/<br/>distrobox.ini, invariants.md"]
-    OS --> ToolsOS[".hermes/tools/icm/<br/>Deterministic Validators"]
-    OS --> SkillsOS[".hermes/skills/icm/<br/>icm-stage-compiler"]
-    
-    Bench --> CfgBench["benchmarks/_config/<br/>Hardware, VRAM & Netcode Invariants"]
-    Bench --> Gauntlets["benchmarks/gauntlet_*/<br/>Autonomous Evaluation Suites"]
-```
-
 ### Architectural Separation
 * **`.hermes/`**: Houses Agent OS configs (`pyproject.toml`, `package.json`, `distrobox.ini`), developer profiles, tools, and skills.
 * **`benchmarks/`**: Houses self-contained project gauntlets, project-level configurations, templates, and archives.

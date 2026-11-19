@@ -76,16 +76,4 @@ A forensic comparison reveals structural issues in GDR39 that Lead Architect Arg
 
 ## 3. Foundational Architectural Dependency Graph
 
-```mermaid
-flowchart TD
-    HW["Hardware Ceilings & Host Invariants<br/>(RTX 3050 <= 5800 MiB, Intel iGPU, Rule 9)"] --> ID["Global Substrate Identity & Protocol<br/>(Root SOUL.md, Universal CONTEXT.md, 10 Rules)"]
-    ID --> FLEET["Hermes Isolated Profile Fleet<br/>(icm-planner, icm-scaffolder, icm-migrator, icm-auditor)"]
-    FLEET --> PLAN["Pre-Coding Socratic Spec Debate<br/>(Elephant-Goldfish Reviewer & Gate Report)"]
-    PLAN --> WS["Workspace Setup & Repository Scaffolding<br/>(Branch: Greenfield Scaffolding vs. Brownfield AST Migration)"]
-    WS --> ORCH["Clean-Session Multi-Stage Runner<br/>(Stage Orchestration, /goal, /new, /clear)"]
-    ORCH --> FACTORY["Simulation Production Factory<br/>(Gauntlet C WebGL2, PDEs, Caustics, Physics, Boids)"]
-    FACTORY --> GATE["Deterministic Verification Gates<br/>(POSIX contract.sh, CDP Telemetry, Zero Errors)"]
-    GATE --> AUDIT["Continuous Substrate Hygiene & Distillation<br/>(SkillEvaluator, AQuA, /learn into ICM 5-Layer Layout)"]
-```
-
 Lead Architect Argon must evaluate this dependency chain, refine the stage boundaries, and author an unambiguous, step-by-step operational playbook covering all 30 code blocks, 14 LaTeX math PDEs, and 7 core directives.

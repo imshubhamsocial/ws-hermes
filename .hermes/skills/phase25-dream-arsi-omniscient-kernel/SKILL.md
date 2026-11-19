@@ -16,20 +16,6 @@ Execute this skill when executing raw, un-spoon-fed complex multi-tier tasks req
 
 ## Master Architecture Flow
 
-```mermaid
-flowchart TD
-    A["Raw User Goal (Zero Spoon-Feeding)"] --> B["Dream-ARSI Master Kernel"]
-    B --> C1["1. STAIR AST Navigation (CPU RAM)"]
-    B --> C2["2. Declarative Attention & Attractor"]
-    B --> C3["3. Proactive Security & SymPy VRAM Proof"]
-    B --> C4["4. Google ADK TaskDAG Federation"]
-    B --> C5["5. Spec-Kit 2.0 Failure Annealing"]
-    B --> C6["6. Dream-RSI 2.0 & LoGRA/NoRA TME"]
-    C1 & C2 & C3 & C4 & C5 & C6 --> D["Deterministic Machine Verification (Exit 0)"]
-    D --> E["Autonomous Invariant Distillation into Rules & Memories"]
-    E --> F["Automated Chezmoi Dotfiles Parity Sync"]
-```
-
 ## The 6 Argon Gauntlet Capabilities
 
 ### 1. STAIR AST Navigation

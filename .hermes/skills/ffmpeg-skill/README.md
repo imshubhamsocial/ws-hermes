@@ -165,29 +165,7 @@ More requests and the commands behind them: [examples/README.md](examples/README
 
 ## How it works
 
-```mermaid
-flowchart TD
-    U[User request] --> A[AI agent<br/>Claude Code · Cursor · Codex]
-    A -->|reads| S[SKILL.md<br/>workflow, request → tool map, report format]
-    A -->|runs| T[Structured tool<br/>scripts/&lt;name&gt;.py, typed argparse flags]
-    T --> C[Contract<br/>input schema · role · capabilities · verification policy]
-    C --> D[Capability detection<br/>doctor: available / missing / unknown]
-    D --> F[FFmpeg execution<br/>no shell, stream copy when possible]
-    F --> V[Verification<br/>probe · check · look.py contact sheet]
-    V --> R[Structured result<br/>--json: status, output, commands, probe]
-    R --> A
-```
-
 Over MCP the same tools are reached through a transport that holds no tool table of its own:
-
-```mermaid
-flowchart LR
-    M[MCP client<br/>Claude Desktop · Cursor · any client] --> P[mcp/server.py<br/>stdio JSON-RPC]
-    P -->|tools/list| C[Contract-derived ToolSpecs<br/>names · order · inputSchema]
-    P -->|tools/call| T[scripts/&lt;name&gt;.py]
-    C -.derived from.-> K[scripts/_contract.py]
-    T -.described by.-> K
-```
 
 Names, order and `inputSchema` in `tools/list` are translated from each tool's argparse parser at start-up, so a new flag or a new script appears in MCP with no edit to `mcp/`. A test copies the skill, adds, removes and edits a script, and reads `tools/list` again to prove it.
 

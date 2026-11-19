@@ -13,26 +13,6 @@ Layer 3 provides deterministic Python and Bash verification tools.
 These tools enforce contracts, line ceilings, substrate purity, and VRAM ceilings.  
 All tools are atomic scripts containing strictly fewer than 60 lines.
 
-```mermaid
-flowchart TD
-    subgraph "Audit & Hygiene Gates"
-        T1["audit_hermes_home.sh<br/>(Substrate Purity & Line Limit)"]
-        T2["check_vram_limit.py<br/>(VRAM <= 5800 MiB)"]
-        T3["icm_context_auditor.py<br/>(Token Budget Audit)"]
-    end
-    subgraph "Compilation & Scaffolding Gates"
-        T4["egm_goldfish_gate.py<br/>(Stateless Spec Review)"]
-        T5["icm_scaffolder.py<br/>(Greenfield 5-Layer Scaffolder)"]
-        T6["icm_repo_migrator.py<br/>(Brownfield AST 5-Bucket Migrator)"]
-    end
-    subgraph "Verification & Stage Runners"
-        T7["hermes_icm_validator.py<br/>(Workspace Structure & Headers)"]
-        T8["hermes_stage_runner.py<br/>(Stage Contract Test Runner)"]
-        T9["verify_stage.py<br/>(Single Stage Directory Validator)"]
-        T10["run_multi_stage.sh<br/>(Clean-Session Batch Orchestrator)"]
-    end
-```
-
 ---
 
 ## 2. Tool Reference Catalog

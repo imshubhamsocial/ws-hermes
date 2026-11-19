@@ -13,15 +13,6 @@ Hermes organizes autonomous capabilities into dedicated, isolated profiles.
 Each profile has its own configuration, memory database, and persona.  
 This separation protects context windows and prevents persona degradation.
 
-```mermaid
-flowchart TD
-    User["Engineer / Orchestrator"]
-    User -->|"1. Plan & Specify"| P["icm-planner<br/>(Dory 4B, Temp 0.2)"]
-    P -->|"2. Scaffold & Compile"| S["icm-scaffolder<br/>(Gemma 4B, Temp 0.1)"]
-    User -->|"3. Refactor Legacy Repos"| M["icm-migrator<br/>(Dory 4B, Temp 0.0)"]
-    User -->|"4. Static & Token Audit"| A["icm-auditor<br/>(Gemma 4B, Read-Only)"]
-```
-
 ---
 
 ## 2. Profile Fleet Specifications

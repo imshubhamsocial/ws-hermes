@@ -362,24 +362,6 @@ In practice, this architecture creates three severe failure modes for local agen
 ### 9.2 The Code-Mode Architecture & Token Efficiency
 Originally pioneered by Cloudflare (Cloudflare Agents, `mcp.cloudflare.com`) and recently introduced to Python ecosystems via `FastMCP` (`FastMCP(transforms=[CodeMode()])` via `fastmcp[code-mode]`), **Code-Mode** fundamentally restructures tool interactions:
 
-```mermaid
-flowchart LR
-    subgraph "Traditional MCP (Sequential Thrashing)"
-        M1[Model] -->|Turn 1| T1[Tool A]
-        T1 -->|Raw Data| M1
-        M1 -->|Turn 2| T2[Tool B]
-        T2 -->|Raw Data| M1
-        M1 -->|Turn 3| T3[Tool C]
-        T3 -->|Raw Data| M1
-    end
-
-    subgraph "Code-Mode (Programmatic Scripting)"
-        M2[Model] -->|Single Turn: Programmatic Script| S1[Secure Sandbox / Worker]
-        S1 -->|Tool A + Tool B + Tool C in Code| S1
-        S1 -->|Clean Aggregated Output Only| M2
-    end
-```
-
 * **Meta-Tool Compression**: Instead of declaring dozens of separate tools, the server exposes only minimal meta-tools: discovery (`search_tools`, `get_tool_schema`) and execution (`execute_code` / `execute_script`).
 * **Programmatic Tool Execution**: The agent writes a concise script (TypeScript/JavaScript or Python) that imports tools as native typed functions.
 * **In-Memory Intermediate Processing**: Loops (`for`, `map`), branching (`if/else`), error handling, and batching (`Promise.all`) execute locally inside an isolated, secure execution environment.

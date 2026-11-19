@@ -15,15 +15,6 @@ Each skill lives in its own folder and contains:
 * `scripts/`: Modular Python or Bash helper scripts (each strictly under 60 lines).
 * `examples/` or `references/`: Optional schemas, prompts, or test fixtures.
 
-```mermaid
-flowchart TD
-    Agent["Hermes Agent / Profile"] -->|"1. Discovers"| SkillDir["~/.hermes/skills/icm/"]
-    SkillDir --> Skill["icm-stage-compiler/"]
-    Skill --> Doc["SKILL.md (Instructions & YAML Frontmatter)"]
-    Skill --> Tools["scripts/<br/>• hermes_icm_validator.py<br/>• hermes_stage_runner.py<br/>• verify_stage.py"]
-    Doc -->|"Verified By"| Eval["NVIDIA SkillEvaluator<br/>(Score: 100.0/100, Grade A)"]
-```
-
 ---
 
 ## 2. NVIDIA SkillEvaluator Compliance

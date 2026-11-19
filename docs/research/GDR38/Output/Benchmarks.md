@@ -228,16 +228,6 @@ We evaluated replacing `llama-server` with `vLLM` on our host:
 
 Hermes adopts a dual-track substrate deployment strategy:
 
-```mermaid
-flowchart TD
-    TaskIn["User Prompt / Stage Objective"] --> Router{"Task Classification"}
-    Router -->|"Interactive Tool Loops / Rapid Code Edits"| TrackA["Track A: Gemma 4 Exact 4B + MTP"]
-    Router -->|"Deep Reasoning / Long Context (>100K) / System Kernel"| TrackB["Track B: NVIDIA Dory 1.0 4B Heretic"]
-    
-    TrackA --> SpecA["Speed: 73.1 tok/s\nTool Accuracy: 98.2%\nDepth: 36 Layers\nVRAM: 3,991 MiB"]
-    TrackB --> SpecB["Loops: k=2 (20.9 tok/s) or k=4 (12.8 tok/s)\nContext: 256K Native\nZero-Refusal Systems Ops\nVRAM: 4,425 MiB"]
-```
-
 1. **Primary Operational Driver (Interactive Gauntlets & Tool Execution)**:
    * Deploy [gemma-4-E4B-it-q4_0-exact.gguf](file:///var/home/imshubhamsocial/.hermes/models/gemma-4-E4B-it-q4_0-exact.gguf) with its MTP companion drafter on Port 8138.
    * Provides **73.13 tokens/second** generation and **98.2%** tool-calling schema precision.

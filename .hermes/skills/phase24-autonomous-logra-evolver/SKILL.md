@@ -10,19 +10,6 @@ Execute this skill during offline hibernation or scheduled nightly maintenance c
 
 ## Execution Sequence
 
-```mermaid
-flowchart TD
-    A["Nightly Idle Event"] --> B["VRAM Quorum Guard (<= 650 MiB)"]
-    B --> C["Suspend Port 8138 llama-server"]
-    C --> D["Set PyTorch Ceiling (0.64 / 3,932 MiB)"]
-    D --> E["Load training_buffer/samples.jsonl"]
-    E --> F["Compute Rank-64 LoGRA Gradient Sketches"]
-    F --> G["Enforce NoRA Normalization (||A||_F = 1.0)"]
-    G --> H["Verify KL-Divergence <= 0.05"]
-    H --> I["Release PyTorch VRAM & Resume llama-server"]
-    I --> J["Verify MTP Throughput >= 42.4 tok/s"]
-```
-
 ## Step 1: Enforce Temporal Mutual Exclusion (TME)
 Before initializing PyTorch backprop, verify quiescent desktop VRAM:
 ```python

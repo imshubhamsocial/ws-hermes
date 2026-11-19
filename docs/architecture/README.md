@@ -12,20 +12,6 @@ Interpretable Context Methodology (ICM) treats LLM context windows as physical m
 It replaces monolithic prompts with bounded, deterministic context layers.  
 Each layer has a defined token budget, strict inputs, and unambiguous exit criteria.
 
-```mermaid
-flowchart TD
-    L0["Layer 0: Host Identity & Protocol<br/>(IDENTITY.md / AGENTS.md / SOUL.md)<br/>Budget: <= 800 tokens"]
-    L1["Layer 1: Umbrella Context Router<br/>(CONTEXT.md at root)<br/>Budget: <= 300 tokens"]
-    L2["Layer 2: Stage Contracts<br/>(stages/0X-*/CONTEXT.md)<br/>Budget: <= 500 tokens"]
-    L3["Layer 3: Canonical Invariants, Tools & Skills<br/>(.hermes/_config/, tools/icm/, skills/icm/)"]
-    L4["Layer 4: Product Code & Benchmarks<br/>(benchmarks/, src/)"]
-
-    L0 --> L1
-    L1 --> L2
-    L2 --> L3
-    L3 --> L4
-```
-
 ---
 
 ## 2. Layer Specifications

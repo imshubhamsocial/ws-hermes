@@ -12,17 +12,6 @@
 This directory contains the canonical documentation for Hermes Agent OS, autonomous bots, skills, tools, and system architecture.  
 Always update these documents whenever system changes occur.
 
-```mermaid
-flowchart TD
-    Root["docs/README.md"]
-    Root --> Bots["docs/bots/<br/>Autonomous Profile Bots"]
-    Root --> Skills["docs/skills/<br/>Domain Skills Ecosystem"]
-    Root --> Tools["docs/tools/<br/>Deterministic ICM Tool Suite"]
-    Root --> Arch["docs/architecture/<br/>5-Layer ICM Architecture"]
-    Root --> Ref["docs/reference/<br/>Mathematical & Telemetry Foundations"]
-    Root --> Res["docs/research/<br/>Historical Research Corpora (GDR30-GDR40)"]
-```
-
 ---
 
 ## 2. Documentation Directory Index

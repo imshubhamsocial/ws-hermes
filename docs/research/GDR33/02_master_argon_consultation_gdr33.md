@@ -82,26 +82,6 @@ Before addressing the architectural remedies, we report the exact empirical tele
 
 The most critical finding of this benchmark is the complete disconnect between the passing contract assertion and the actual state of the client software.
 
-```mermaid
-flowchart TD
-    subgraph "Contract Verification (contract.sh) — REPORTED GREEN"
-        C1["test -f client/index.html"] -->|PASS| C2["grep 'InstancedMesh' voxel_world.js"]
-        C2 -->|PASS| C3["grep 'PointerLockControls' camera_fps.js"]
-        C3 -->|PASS| C4["! grep -rn 'TODO|FIXME' client/"]
-        C4 -->|PASS| C5["Headless Node WebSocket ping/pong"]
-        C5 -->|PASS| C6["[PASS] Gauntlet A Contract Verified (Exit 0)"]
-    end
-
-    subgraph "Real Browser Execution (Chrome Dev) — COMPLETE FAILURE"
-        B1["Open index.html in Browser"] --> B2["Uncaught TypeError: Failed to resolve 'three'"]
-        B2 --> B3["Uncaught TypeError: VoxelWorld is undefined"]
-        B3 --> B4["Uncaught TypeError: CameraFPS.update is not a function"]
-        B4 --> B5["Opaque #overlay traps screen permanently"]
-        B5 --> B6["Canvas unlit & pitch black (0 lights, mesh not in scene)"]
-        B6 --> B7["CRITICAL FAILURE: 0 FPS, Black Screen, Unplayable"]
-    end
-```
-
 ### 2.1 The Seven Fatal Browser Crashes
 1. **Uncaught Bare Module Specifier**:
    [`main.js`](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/benchmarks/gauntlet_a_voxel_fps/output/voxel-paintball-app/client/js/main.js#L5) executed `import * as THREE from 'three';` without an `<script type="importmap">` tag in `index.html`. Chrome threw `TypeError: Failed to resolve module specifier "three"` and refused to run the script.
@@ -190,38 +170,6 @@ Argon, we must cease designing prompt structures and workspace hierarchies based
 ### 5.2 True 3-Tier Layering & 5-Layer Progressive Hierarchy
 Jake's framework is grounded in Unix philosophy: **The filesystem IS the state machine, and plain Markdown IS the context bus.**
 
-```mermaid
-flowchart TD
-    subgraph "Layer 0: Global Workspace Identity"
-        L0["AGENTS.md / CLAUDE.md (< 80 lines)\nRoot routing, permission boundaries, NVML ceilings"]
-    end
-
-    subgraph "Layer 1: Pipeline Stage Routing"
-        L1["CONTEXT.md (< 80 lines)\nStage handoff tables, input exclusions, 4-column routing"]
-    end
-
-    subgraph "Layer 2: Stage Contracts & Invariants"
-        L2A["invariants.md (< 80 lines)\nHard physical ceilings, zero-stub constraints"]
-        L2B["rules.md (< 120 lines)\nExecution procedures, two-strike tabu rules"]
-        L2C["contract.sh\nDeterministic validation & exit code assertions"]
-    end
-
-    subgraph "Layer 3: Factory Reference Immutables"
-        L3["references.md (< 200 lines) & _config/\nUpstream schemas, wire protocols, API contracts"]
-    end
-
-    subgraph "Layer 4: Product Mutables & Artifacts"
-        L4["output/ Directory\nReceipts (stage1_spec_receipt.json), diffs, status.json"]
-    end
-
-    L0 --> L1
-    L1 --> L2A
-    L1 --> L2B
-    L2A --> L3
-    L2B --> L3
-    L2C --> L4
-```
-
 * **The 60 / 30 / 10 Layering Rule**:
   * **60% Infrastructure**: `llama-server`, Linux kernel, NVML, local filesystems, container sandboxes.
   * **30% Orchestration**: Pure Markdown contracts, folder structures, and upstream built-in tools (`read_file`, `write_file`, `patch`, `terminal`).
@@ -309,24 +257,6 @@ In practice, this architecture creates three severe failure modes for local agen
 
 ### 7.2 The Code-Mode Architecture & Token Efficiency
 Originally pioneered by Cloudflare (Cloudflare Agents, `mcp.cloudflare.com`) and recently introduced to Python ecosystems via `FastMCP` (`FastMCP(transforms=[CodeMode()])` via `fastmcp[code-mode]`), **Code-Mode** fundamentally restructures tool interactions:
-
-```mermaid
-flowchart LR
-    subgraph "Traditional MCP (Sequential Thrashing)"
-        M1[Model] -->|Turn 1| T1[Tool A]
-        T1 -->|Raw Data| M1
-        M1 -->|Turn 2| T2[Tool B]
-        T2 -->|Raw Data| M1
-        M1 -->|Turn 3| T3[Tool C]
-        T3 -->|Raw Data| M1
-    end
-
-    subgraph "Code-Mode (Programmatic Scripting)"
-        M2[Model] -->|Single Turn: Programmatic Script| S1[Secure Sandbox / Worker]
-        S1 -->|Tool A + Tool B + Tool C in Code| S1
-        S1 -->|Clean Aggregated Output Only| M2
-    end
-```
 
 * **Meta-Tool Compression**: Instead of declaring dozens of separate tools, the server exposes only minimal meta-tools: discovery (`search_tools`, `get_tool_schema`) and execution (`execute_code` / `execute_script`).
 * **Programmatic Tool Execution**: The agent writes a concise script (TypeScript/JavaScript or Python) that imports tools as native typed functions.
