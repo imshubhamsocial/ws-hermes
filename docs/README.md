@@ -40,7 +40,12 @@ Contains specifications of system invariants and core methodology:
 * [The 10 Non-Negotiable Compiler Rules](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/docs/architecture/ten_compiler_rules.md)
 * [Invariants, Scoping, and Path Isolation](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/docs/architecture/invariants_and_isolation.md)
 
-### 5. Historical Corpora & Mathematical Foundations
+### [5. Infrastructure & Inference Substrates (`docs/infrastructure/`)](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/docs/infrastructure/README.md)
+Contains operations manuals for local inference, embeddings, and daemons:
+* [Infrastructure Overview & Services Index](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/docs/infrastructure/README.md)
+* [llama-server Inference Substrate Manual](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/docs/infrastructure/llama-server.md)
+
+### 6. Historical Corpora & Mathematical Foundations
 * [docs/reference/](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/docs/reference/): Attention physics, speculative telemetry, and mathematical foundations.
 * [docs/research/](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/docs/research/): Historical research corpora from GDR30 through GDR40.
 * [docs/research/GDR40/Output/LEARNING.md](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/docs/research/GDR40/Output/LEARNING.md): Operational guide and self-learning manual.
