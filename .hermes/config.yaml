@@ -6,6 +6,9 @@ model:
   default: gemma-4-E4B-it-qat-exact
   base_url: http://127.0.0.1:8138/v1
   context_length: 131072
+  temperature: 1.0
+  top_p: 0.95
+  top_k: 64
 
 providers:
   local-llama:

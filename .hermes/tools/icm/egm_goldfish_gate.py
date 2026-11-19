@@ -16,7 +16,9 @@ LENSES = {
 def query_goldfish(lens_name: str, rubric: str, spec_text: str) -> dict:
     payload = {
         "model": MODEL,
-        "temperature": 0.7,
+        "temperature": 1.0,
+        "top_p": 0.95,
+        "top_k": 64,
         "messages": [
             {"role": "system", "content": f"You are a stateless Goldfish reviewer ({lens_name}). {rubric}"},
             {"role": "user", "content": spec_text},
