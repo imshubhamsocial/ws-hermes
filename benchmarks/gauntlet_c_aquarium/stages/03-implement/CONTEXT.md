@@ -4,7 +4,7 @@
 
 | Source | File/Location | Section/Scope | Why |
 | :--- | :--- | :--- | :--- |
-| Topology Manifest | stages/02-scaffold/output/topology_manifest.json | All | Verified module specifications and path bindings |
+| Topology Manifest | ../02-scaffold/output/topology_manifest.json | All | Verified module specifications and path bindings |
 | Blueprint Reorganization | docs/research/GDR40/Output/GDR40 Chronological Blueprint Reorganization.md | Section 7.2-7.6 | Certified Code Blocks 14 through 18 |
 | Conventions | _config/conventions.md | All | Atomic < 60 line ceiling and ASD-STE100 active prose |
 
@@ -17,12 +17,16 @@
    - `boids_fish.js` (Code Block 17, 48 lines): 3D Reynolds boids with obstacle avoidance.
    - `main.js` (Code Block 18, 43 lines): 60 FPS loop exporting `__AQUARIUM_TELEMETRY__`.
 2. Ensure each module strictly contains under 60 lines.
-3. Emit implementation receipt and summary report in `stages/03-implement/output/`.
-4. Verify stage structure using `~/.hermes/skills/icm/icm-stage-compiler/scripts/verify_stage.py stages/03-implement`.
+3. Emit implementation receipt and summary report in `output/`.
+4. Verify stage structure using `~/.hermes/skills/icm/icm-stage-compiler/scripts/verify_stage.py`.
 
 ## Outputs
 
 | Artifact | Target Path | Verification |
 | :--- | :--- | :--- |
-| Implementation Receipt | stages/03-implement/output/implementation_receipt.json | verify_stage.py |
-| Module Summary | stages/03-implement/output/module_summary.md | verify_stage.py |
+| Implementation Receipt | output/implementation_receipt.json | verify_stage.py |
+| Module Summary | output/module_summary.md | verify_stage.py |
+
+## Check
+
+Run python3 -m json.tool output/implementation_receipt.json and verify all 5 modules compiled.

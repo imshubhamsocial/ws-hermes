@@ -1,7 +1,8 @@
 #!/usr/bin/env bash  
-# Layer 4 Deterministic Verification Gate: Gauntlet C WebGL2 Aquarium (35 lines)  
+# Layer 4 Deterministic Verification Gate: Gauntlet C WebGL2 Aquarium (37 lines)  
 set -euo pipefail  
-SIM_DIR="output/aquarium-sim/js"  
+BENCH_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SIM_DIR="${BENCH_DIR}/output/aquarium-sim/js"  
 MODULES=("wave_pde.js" "caustics_shader.js" "sphere_physics.js" "boids_fish.js" "main.js")
 
 echo "[GATE 1/4] Enforcing Rule 6 Atomic Script Ceiling (<60 lines)..."  
@@ -21,8 +22,8 @@ grep -q "refract" "${SIM_DIR}/caustics_shader.js"
 
 echo "[GATE 3/4] Verifying Headless CDP Telemetry Invariants..."  
 grep -q "__AQUARIUM_TELEMETRY__" "${SIM_DIR}/main.js"  
-if [[ -f "stages/04-verify/output/cdp_telemetry.json" ]]; then  
-  python3 -c 'import json,sys; d=json.load(open("stages/04-verify/output/cdp_telemetry.json")); sys.exit(0 if d["fps"]>=55 and d["fishCount"]>=20 and d["causticsActive"] and d["consoleErrors"]==0 else 1)'  
+if [[ -f "${BENCH_DIR}/stages/04-verify/output/cdp_telemetry.json" ]]; then  
+  python3 -c "import json,sys; d=json.load(open('${BENCH_DIR}/stages/04-verify/output/cdp_telemetry.json')); sys.exit(0 if d['fps']>=55 and d['fishCount']>=20 and d['causticsActive'] and d['consoleErrors']==0 else 1)"  
 fi
 
 echo "[GATE 4/4] Enforcing RTX 3050 VRAM Ceiling (<= 5800 MiB)..."  

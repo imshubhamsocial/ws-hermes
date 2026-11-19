@@ -28,9 +28,9 @@ gauntlet-a:
 	bash benchmarks/gauntlet_a_voxel_fps/contract.sh
 
 gauntlet-b:
-	python3 _tools/hermes_stage_runner.py --stage-dir stages/01-probe --gate-mode autonomous --verify-only
-	python3 _tools/hermes_stage_runner.py --stage-dir stages/02-controller --gate-mode autonomous --verify-only
-	python3 _tools/hermes_stage_runner.py --stage-dir stages/03-execute --gate-mode autonomous --verify-only
+	python3 _tools/hermes_stage_runner.py --stage-dir benchmarks/gauntlet_b_splatbox/stages/01-probe --gate-mode autonomous --verify-only
+	python3 _tools/hermes_stage_runner.py --stage-dir benchmarks/gauntlet_b_splatbox/stages/02-controller --gate-mode autonomous --verify-only
+	python3 _tools/hermes_stage_runner.py --stage-dir benchmarks/gauntlet_b_splatbox/stages/03-execute --gate-mode autonomous --verify-only
 	bash benchmarks/gauntlet_b_splatbox/contract.sh
 
 gauntlet-c:

@@ -24,10 +24,10 @@
 
 | Artifact | Location | Format | Verification |
 | :--- | :--- | :--- | :--- |
-| Goldfish Review Report | stages/01-spec/output/goldfish_review_report.json | JSON | egm_goldfish_gate.py status PASS |
-| Concepts Brief | stages/01-spec/output/concepts_brief.md | Markdown | verify_stage.py |
+| Goldfish Review Report | output/goldfish_review_report.json | JSON | egm_goldfish_gate.py status PASS |
+| Concepts Brief | output/concepts_brief.md | Markdown | verify_stage.py |
 
-## Verification & Check
+## Check
 
-* Verification: python3 _tools/egm_goldfish_gate.py stages/01-spec/CONTEXT.md
-* Check: [x] status == PASS in stages/01-spec/output/goldfish_review_report.json; [x] missing_sections == []; [x] zero BLOCKER findings.
+* Verification: python3 _tools/egm_goldfish_gate.py benchmarks/gauntlet_c_aquarium/stages/01-spec/CONTEXT.md
+* Check: status PASS in output/goldfish_review_report.json with zero BLOCKER findings.

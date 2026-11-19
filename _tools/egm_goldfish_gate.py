@@ -6,7 +6,7 @@ import sys
 import urllib.request
 
 ENDPOINT = "http://127.0.0.1:8138/v1/chat/completions"
-MODEL = "nemotron-dory-1.0-looped-4b"
+MODEL = "gemma-4-exact-4b"
 LENSES = {
     "comprehension": "Paraphrase this spec as a naive reader. Flag any ambiguity or missing context.",
     "design_critic": "Audit math PDEs, VRAM limits (<=5800 MiB), and failure modes. Rank BLOCKER/MAJOR/NIT.",
@@ -53,5 +53,6 @@ def run_gate(spec_path: pathlib.Path, out_path: pathlib.Path) -> int:
     return 0 if passed else 1
 
 if __name__ == "__main__":
-    s_in = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else "stages/01-spec/CONTEXT.md")
-    sys.exit(run_gate(s_in, pathlib.Path("stages/01-spec/output/goldfish_review_report.json")))
+    s_in = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else "benchmarks/gauntlet_c_aquarium/stages/01-spec/CONTEXT.md")
+    s_out = pathlib.Path(sys.argv[2]) if len(sys.argv) > 2 else s_in.parent / "output/goldfish_review_report.json"
+    sys.exit(run_gate(s_in, s_out))

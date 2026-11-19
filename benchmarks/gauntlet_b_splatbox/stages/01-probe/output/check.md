@@ -1,6 +1,6 @@
 ---
-stage_id: "03-execute"
-timestamp_utc: "2026-11-19T08:53:41Z"
+stage_id: "01-probe"
+timestamp_utc: "2026-11-19T09:14:53Z"
 kv_slot_erased: false
 contract_exit_code: 0
 auditor_verdict: "PASS"

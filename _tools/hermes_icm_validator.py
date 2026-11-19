@@ -23,9 +23,17 @@ def validate_workspace() -> int:
         errors.append("Layer 0 AGENTS.md exceeds 60-line limit")
     if os.path.isfile(context_md) and count_lines(context_md) > 80:
         errors.append("Layer 1 CONTEXT.md exceeds 80-line limit")
-    stage_dirs = ["stages/01-probe", "stages/02-controller", "stages/03-execute",
-                  "benchmarks/gauntlet_a_voxel_fps", "benchmarks/gauntlet_b_splatbox",
-                  "benchmarks/gauntlet_c_aquarium"]
+    stage_dirs = [
+        "benchmarks/gauntlet_a_voxel_fps", "benchmarks/gauntlet_b_splatbox",
+        "benchmarks/gauntlet_c_aquarium",
+        "benchmarks/gauntlet_b_splatbox/stages/01-probe",
+        "benchmarks/gauntlet_b_splatbox/stages/02-controller",
+        "benchmarks/gauntlet_b_splatbox/stages/03-execute",
+        "benchmarks/gauntlet_c_aquarium/stages/01-spec",
+        "benchmarks/gauntlet_c_aquarium/stages/02-scaffold",
+        "benchmarks/gauntlet_c_aquarium/stages/03-implement",
+        "benchmarks/gauntlet_c_aquarium/stages/04-verify",
+    ]
     for sd in stage_dirs:
         cpath = os.path.join(ROOT, sd, "CONTEXT.md")
         if not os.path.isfile(cpath):
@@ -35,9 +43,9 @@ def validate_workspace() -> int:
             errors.append(f"{sd}/CONTEXT.md exceeds 80-line limit")
         with open(cpath, "r", encoding="utf-8") as f:
             txt = f.read()
-        for sec in ["## Inputs", "## Process", "## Outputs", "## Check"]:
-            if sec not in txt:
-                errors.append(f"{sd}/CONTEXT.md missing required section: {sec}")
+        for sec in ["Inputs", "Process", "Outputs", "Check"]:
+            if not re.search(rf"^##\s+(\d+\.\s+)?{sec}", txt, re.MULTILINE):
+                errors.append(f"{sd}/CONTEXT.md missing required section: ## {sec}")
         for rel in re.findall(r"`(\.\./[^`]+)`", txt):
             target = os.path.normpath(os.path.join(ROOT, sd, rel))
             if not os.path.exists(target):

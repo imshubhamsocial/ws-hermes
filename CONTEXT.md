@@ -3,7 +3,7 @@
 ## 1. Keyword Triggers
 
 * setup: Run workspace onboarding or verify directory scaffolding via python3 _tools/hermes_icm_validator.py.
-* status: Inspect pipeline completion state across stages/*/output/check.md and phases/status_ledger.json.
+* status: Inspect pipeline completion state across benchmarks/*/stages/*/output/check.md and phases/status_ledger.json.
 * walk-test: Execute the cold 8-point ICM Walk Test via python3 _tools/hermes_icm_validator.py.
 * icm-sync: Audit relative links and regenerate context graphs via python3 -I .hermes/skills/icm/icm-architect/scripts/audit_links.py .
 * quiesce: Stop llama-server.service and verify GPU VRAM <= 100 MiB via python3 _tools/check_vram_limit.py --mode quiescent.
@@ -12,11 +12,11 @@
 
 | Task Intent | Target Profile Bot | Entry Contract (Layer 2) | Verification Gate |
 | :--- | :--- | :--- | :--- |
-| Pre-Coding Spec & Socratic Review | icm-planner | stages/01-spec/CONTEXT.md | _tools/egm_goldfish_gate.py |
+| Pre-Coding Spec & Socratic Review | icm-planner | benchmarks/gauntlet_c_aquarium/stages/01-spec/CONTEXT.md | _tools/egm_goldfish_gate.py |
 | Greenfield Workspace Scaffolding | icm-scaffolder | setup/questionnaire.md | ~/.hermes/tools/icm/icm_scaffolder.py |
 | Brownfield AST Repo Migration | icm-migrator | stages/00-migrate/CONTEXT.md | ~/.hermes/tools/icm/icm_repo_migrator.py |
 | Multi-Stage Pipeline Execution | default | _tools/run_multi_stage.sh | verify_stage.py |
-| Gauntlet C WebGL2 Simulation | default | benchmarks/gauntlet_c_aquarium/CONTEXT.md | benchmarks/gauntlet_c_aquarium/contract.sh |
+| Benchmark Suite & Frontier Gauntlets | default | benchmarks/CONTEXT.md | Makefile |
 | Substrate & Token Hygiene Audit | icm-auditor | ~/.hermes/tools/icm/ | ~/.hermes/tools/icm/audit_hermes_home.sh |
 | Full Suite Walk & Gauntlets | default | CONTEXT.md | Makefile |
 | Run Gauntlet B (Splatbox CV) | default | benchmarks/gauntlet_b_splatbox/CONTEXT.md | benchmarks/gauntlet_b_splatbox/contract.sh |
@@ -25,9 +25,9 @@
 
 * Layer 0 (Global Rules): .hermes/SOUL.md and IDENTITY.md (~800 tokens)
 * Layer 1 (Task Router): CONTEXT.md (this file, read once at session entry)
-* Layer 2 (Stage Contracts): stages/<nn>/CONTEXT.md (200–500 tokens)
+* Layer 2 (Stage Contracts): benchmarks/<suite>/stages/<nn>/CONTEXT.md (200–500 tokens)
 * Layer 3 (The Factory): _config/, shared/, references/, and ~/.hermes/skills/
-* Layer 4 (Working Artifacts): stages/<nn>/output/ and benchmarks/
+* Layer 4 (Working Artifacts): benchmarks/ and benchmarks/<suite>/output/
 
 ## 4. Cross-Agent Adapter Mapping
 
