@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+cd "$(dirname "${BASH_SOURCE[0]}")"
 test -f "output/recon_report.md"
 test -f "output/recon_evidence.json"
 python3 -c '

@@ -36,7 +36,19 @@ gauntlet-b:
 gauntlet-c:
 	bash benchmarks/gauntlet_c_aquarium/contract.sh
 
-run-all-gauntlets: walk-test gauntlet-a gauntlet-b gauntlet-c
+gauntlet-d:
+	bash benchmarks/leanrea_eval/contract.sh
+
+gauntlet-e:
+	bash benchmarks/ffmpeg_skill_eval/contract.sh
+
+gauntlet-f:
+	bash benchmarks/diagram_design_eval/contract.sh
+
+gauntlet-g:
+	bash benchmarks/markitdown_eval/contract.sh
+
+run-all-gauntlets: walk-test gauntlet-a gauntlet-b gauntlet-c gauntlet-d gauntlet-e gauntlet-f gauntlet-g
 
 phase-58-seal:
 	bash phases/phase_58_autonomous_icm_factory_and_multi_gauntlet_certification/03_verify/contract.sh

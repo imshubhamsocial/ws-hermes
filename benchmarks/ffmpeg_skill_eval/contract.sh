@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+cd "$(dirname "${BASH_SOURCE[0]}")"
 test -f "output/raw_source.mp4"
 test -f "output/final_reels.mp4"
 test -f "output/final_sheet.png"

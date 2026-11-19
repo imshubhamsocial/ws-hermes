@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+cd "$(dirname "${BASH_SOURCE[0]}")"
 test -f "output/ingested/substrate_report.md"
 test -f "output/ingested/consolidated_digest.md"
 grep -q "Hermes Substrate Report" "output/ingested/substrate_report.md"

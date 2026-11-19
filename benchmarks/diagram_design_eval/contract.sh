@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+cd "$(dirname "${BASH_SOURCE[0]}")"
 HTML_FILE="output/hermes_v45_architecture.html"
 test -f "$HTML_FILE"
 ! grep -qiE "box-shadow|drop-shadow|mermaid|cdn\.jsdelivr|unpkg\.com" "$HTML_FILE"
