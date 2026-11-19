@@ -2,12 +2,20 @@ profile:
   name: icm-migrator
   isolated: true
 model:
-  provider: openai_compatible
+  provider: local-llama
+  default: nemotron-dory-1.0-looped-4b
   base_url: http://127.0.0.1:8138/v1
-  name: nemotron-dory-1.0-looped-4b
   context_length: 131072
-  kv_cache_quant: turboquant_q4_0
   temperature: 0.0
+providers:
+  local-llama:
+    api: http://127.0.0.1:8138/v1
+    api_key_env: LOCAL_LLAMA_API_KEY
+    stale_timeout_seconds: 120
+    models:
+      nemotron-dory-1.0-looped-4b:
+        context_length: 131072
+        max_output_tokens: 4096
 terminal:
   cwd: .
 skills:

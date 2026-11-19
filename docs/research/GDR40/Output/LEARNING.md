@@ -1,6 +1,6 @@
 # Hermes ICM Operations and Self-Learning Manual
 
-**Document Version**: 1.0.0  
+**Document Version**: 2.0.0  
 **Language Standard**: ASD-STE100 (Simplified Technical English)  
 **Target Platform**: Fedora Kinoite 44 (x86_64) | ws-hermes Distrobox  
 **Canonical File Location**: [LEARNING.md](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/docs/research/GDR40/Output/LEARNING.md)
@@ -17,10 +17,10 @@ Each profile enforces the Single Responsibility Principle:
 
 | Profile Name | Model Assigned | Temperature | Persona Document | Operational Role |
 | :--- | :--- | :--- | :--- | :--- |
-| **`icm-planner`** | `nemotron-dory-1.0-looped-4b` | 0.2 | [SOUL.md](file:///var/home/imshubhamsocial/.hermes/profiles/icm-planner/SOUL.md) | Socratic spec interviewer and Goldfish review controller. |
-| **`icm-scaffolder`** | `gemma-4-exact-4b` | 0.1 | [SOUL.md](file:///var/home/imshubhamsocial/.hermes/profiles/icm-scaffolder/SOUL.md) | Greenfield 5-layer workspace generator and contract compiler. |
+| **`icm-planner`** | `gemma-4-E4B-it-qat-exact` | 0.2 | [SOUL.md](file:///var/home/imshubhamsocial/.hermes/profiles/icm-planner/SOUL.md) | Socratic spec interviewer and Goldfish review controller. |
+| **`icm-scaffolder`** | `gemma-4-E4B-it-qat-exact` | 0.1 | [SOUL.md](file:///var/home/imshubhamsocial/.hermes/profiles/icm-scaffolder/SOUL.md) | Greenfield 5-layer workspace generator and contract compiler. |
 | **`icm-migrator`** | `nemotron-dory-1.0-looped-4b` | 0.0 | [SOUL.md](file:///var/home/imshubhamsocial/.hermes/profiles/icm-migrator/SOUL.md) | Brownfield AST 5-bucket classifier and module refactorer. |
-| **`icm-auditor`** | `gemma-4-exact-4b` | 0.0 (Read-Only) | [SOUL.md](file:///var/home/imshubhamsocial/.hermes/profiles/icm-auditor/SOUL.md) | Deterministic token, line-ceiling, and substrate auditor. |
+| **`icm-auditor`** | `gemma-4-E4B-it-qat-exact` | 0.0 (Read-Only) | [SOUL.md](file:///var/home/imshubhamsocial/.hermes/profiles/icm-auditor/SOUL.md) | Deterministic token, line-ceiling, and substrate auditor. |
 
 Hermes provides two execution surfaces:
 1. **Direct CLI Mode**: Run isolated commands with `hermes -p <profile>`.
@@ -32,12 +32,27 @@ Hermes provides two execution surfaces:
 
 This workflow transforms a project concept into a verified 5-layer ICM workspace.
 
-### A. Direct CLI Mode (`hermes -p`)
+### A. Directory Structure Before Scaffolding
+
+The target directory begins completely empty:
+
+```text
+target_workspace/
+└── (empty: 0 directories, 0 files)
+```
+
+### B. Live Command Execution & Hermes Agent Output
 
 #### Step 1: Conduct Socratic Interview and Compile Specification
-Run the `icm-planner` profile to interview you and author `stages/01-spec/CONTEXT.md`:
+Run the `icm-planner` profile to author `stages/01-spec/CONTEXT.md`:
 ```bash
-hermes -p icm-planner chat -q "Read CONTEXT.md. Interview me for project 'my-new-app' and author stages/01-spec/CONTEXT.md."
+hermes -p icm-planner chat -q "Read CONTEXT.md. Interview me for project 'aquarium-sim' and author stages/01-spec/CONTEXT.md." --oneshot -Q
+```
+
+Live Hermes Agent response:
+```text
+I am icm-planner, the deep-context Socratic specification architect for the ICM pipeline.
+I will read CONTEXT.md, review your domain constraints, and compile stages/01-spec/CONTEXT.md.
 ```
 
 #### Step 2: Subject the Specification to the Goldfish Gate
@@ -46,24 +61,95 @@ Execute the stateless Goldfish comprehension review:
 python3 ~/.hermes/tools/icm/egm_goldfish_gate.py stages/01-spec/CONTEXT.md
 ```
 
+Deterministic gate output (`stages/01-spec/output/goldfish_review_report.json`):
+```json
+{
+  "spec_file": "stages/01-spec/CONTEXT.md",
+  "status": "PASS",
+  "missing_sections": [],
+  "lens_reviews": [
+    {"lens": "comprehension", "blocker": false, "findings": "Spec defines all inputs, process steps, and outputs clearly."},
+    {"lens": "design_critic", "blocker": false, "findings": "Math PDEs and VRAM limits (<=5800 MiB) audited with 0 blockers."},
+    {"lens": "readiness", "blocker": false, "findings": "Exact file paths and POSIX contract gates verified."}
+  ]
+}
+```
+
 #### Step 3: Scaffold the 5-Layer Hierarchy
-Run the `icm-scaffolder` profile to generate the filesystem layout and stage contracts:
+Run the `icm-scaffolder` profile to generate the filesystem layout:
 ```bash
-hermes -p icm-scaffolder chat -q "Read stages/01-spec/output/goldfish_review_report.json. Execute python3 ~/.hermes/tools/icm/icm_scaffolder.py . to scaffold the workspace."
+hermes -p icm-scaffolder chat -q "Explain how you scaffold a fresh 5-layer ICM repository from an approved Stage 01 specification." --oneshot -Q
+```
+
+Live Hermes Agent response:
+```text
+As the icm-scaffolder, I follow a strict four-step execution procedure:
+1. Specification Verification: Verify that stages/01-spec/output/goldfish_review_report.json equals PASS.
+2. Core Scaffolding Execution: Run ~/.hermes/tools/icm/icm_scaffolder.py against the target workspace root.
+3. Layer Population: Generate Layer 0 (IDENTITY.md), Layer 1 (CONTEXT.md), and Layer 2 stage contracts.
+4. Tooling and Verification Wiring: Wire deterministic POSIX verification scripts into _tools/.
+```
+
+Execute the deterministic scaffolding tool directly:
+```bash
+python3 ~/.hermes/tools/icm/icm_scaffolder.py .
 ```
 
 #### Step 4: Verify Scaffolding Contracts
 Run the deterministic validator:
 ```bash
-python3 ~/.hermes/tools/icm/hermes_icm_validator.py
+python3 ~/.hermes/tools/icm/hermes_icm_validator.py .
 ```
 
----
+Deterministic tool JSON output:
+```json
+{
+  "walk_test_passed": true,
+  "error_count": 0,
+  "errors": []
+}
+```
 
-### B. Inside-Hermes Mode (In-Chat Slash Commands & Bot Routing)
+### C. Directory Structure After Scaffolding
+
+The scaffolder builds a 19-directory, 9-file 5-layer hierarchy:
+
+```text
+target_workspace/
+├── _config/
+│   ├── conventions.md             # Layer 3: conventions & 60-line rule
+│   ├── glossary.md                # Layer 3: domain & architecture glossary
+│   └── hardware_ceilings.md       # Layer 3: RTX 3050 <= 5800 MiB ceiling
+├── CONTEXT.md                     # Layer 1: universal task router
+├── IDENTITY.md                    # Layer 0: spatial orientation map
+├── setup/                         # Layer 3: environment setup manifests
+├── shared/                        # Layer 3: cross-stage schemas and math
+├── skills/                        # Layer 3: project-scoped domain skills
+├── stages/                        # Layer 2: numbered stage contracts
+│   ├── 01-spec/
+│   │   ├── CONTEXT.md             # Stage 01 contract
+│   │   ├── output/                # Stage 01 deliverable folder
+│   │   └── references/            # Stage 01 reference docs
+│   ├── 02-scaffold/
+│   │   ├── CONTEXT.md             # Stage 02 contract
+│   │   ├── output/                # Stage 02 deliverable folder
+│   │   └── references/            # Stage 02 reference docs
+│   ├── 03-implement/
+│   │   ├── CONTEXT.md             # Stage 03 contract
+│   │   ├── output/                # Stage 03 deliverable folder
+│   │   └── references/            # Stage 03 reference docs
+│   └── 04-verify/
+│       ├── CONTEXT.md             # Stage 04 contract
+│       ├── output/                # Stage 04 deliverable folder
+│       └── references/            # Stage 04 reference docs
+└── _tools/                        # Layer 3: deterministic test runners
+
+19 directories, 9 files
+```
+
+### D. Inside-Hermes Mode (In-Chat Slash Commands & Bot Routing)
 
 #### Option 1: Interactive Slash Command Sequence
-Execute this sequence inside any active Hermes chat session:
 ```bash
 # 1. Clean session wipe for planning
 /new --yes setup-spec
@@ -81,7 +167,7 @@ Execute this sequence inside any active Hermes chat session:
 /new --yes setup-scaffold
 
 # 6. Attach deterministic ICM validator gate
-/goal gate add python3 ~/.hermes/tools/icm/hermes_icm_validator.py
+/goal gate add python3 ~/.hermes/tools/icm/hermes_icm_validator.py .
 
 # 7. Execute scaffolding
 /goal Execute python3 ~/.hermes/tools/icm/icm_scaffolder.py . and verify all 5 layers exist.
@@ -91,7 +177,6 @@ Execute this sequence inside any active Hermes chat session:
 ```
 
 #### Option 2: Messaging Gateway Routing (`@bot` mentions)
-In Telegram, Discord, or Slack groups where Hermes gateways operate:
 ```text
 @icm-planner Please interview me on architecture requirements and generate stages/01-spec/CONTEXT.md.
 ```
@@ -101,12 +186,8 @@ Once approved:
 ```
 
 #### Option 3: Multi-Profile Kanban Collaboration (`/kanban`)
-Create linked task cards on the durable task board:
 ```bash
-# Create specification task assigned to planner
 /kanban create "Stage 01 Architecture Specification" --assignee icm-planner
-
-# Create scaffolding task dependent on Stage 01
 /kanban create "Stage 02 Workspace Scaffolding" --assignee icm-scaffolder --parents t_spec01
 ```
 
@@ -116,38 +197,185 @@ Create linked task cards on the durable task board:
 
 This workflow audits an unstructured codebase, classifies all files into 5 buckets, and decomposes monolithic files.
 
-### A. Direct CLI Mode (`hermes -p`)
+### A. Directory Structure Before Migration
 
-#### Step 1: Execute AST Classification and Emit Migration Plan
-Run the `icm-migrator` profile to analyze the codebase:
-```bash
-hermes -p icm-migrator chat -q "Execute python3 ~/.hermes/tools/icm/icm_repo_migrator.py . to classify all files and emit migration_map.json."
+The legacy codebase lacks layer separation and contains monolithic scripts:
+
+```text
+legacy_repository/
+├── app_overview.md                # Unclassified architectural note
+├── broken_syntax.py               # Syntax error file
+├── dist/
+│   └── bundle.js                  # Build product
+├── legacy_backup.py.bak           # Obsolete backup file
+├── math_utils.py                  # Utility module (7 lines)
+├── monolithic_solver.py           # Large solver script (71 lines >= 60 lines)
+├── output/
+│   └── run_log.txt                # Prior execution log
+├── README.md                      # Unstructured project readme
+├── temp_scratch.tmp               # Temporary scratch file
+└── test_solver.py                 # Unit test script (8 lines)
+
+3 directories, 10 files
 ```
 
-#### Step 2: Inspect and Approve the Classification
-View the classification map:
+### B. Live Command Execution & Hermes Agent Output
+
+#### Step 1: Execute AST Classification
+Run `icm_repo_migrator.py` to classify files into the 5 ICM buckets:
 ```bash
-cat migration_map.json | grep -E "catalog|contract|factory|product|dead"
+python3 ~/.hermes/tools/icm/icm_repo_migrator.py .
 ```
 
-#### Step 3: Execute Decomposition and Relocation
-Run the migrator to refactor files and enforce the line ceiling (under 60 lines):
-```bash
-hermes -p icm-migrator chat -q "Apply migration_map.json. Split monolithic source files exceeding 59 lines into atomic modules under 60 lines."
+Tool stdout trace:
+```text
+MIGRATION_MAP_READY: 10 files classified -> ./migration_map.json
 ```
 
----
+Generated `migration_map.json`:
+```json
+{
+  "root": "/path/to/legacy_repository",
+  "classified": [
+    {
+      "bucket": "catalog",
+      "reason": "index_router",
+      "path": "legacy_repository/README.md",
+      "lines": 2,
+      "needs_split": false
+    },
+    {
+      "bucket": "factory",
+      "reason": "reference_or_source",
+      "path": "legacy_repository/app_overview.md",
+      "lines": 2,
+      "needs_split": false
+    },
+    {
+      "bucket": "dead",
+      "reason": "syntax_error",
+      "imports": [],
+      "defs": 0,
+      "path": "legacy_repository/broken_syntax.py",
+      "lines": 2,
+      "needs_split": false
+    },
+    {
+      "bucket": "product",
+      "reason": "run_artifact",
+      "path": "legacy_repository/dist/bundle.js",
+      "lines": 1,
+      "needs_split": false
+    },
+    {
+      "bucket": "dead",
+      "reason": "obsolete_backup",
+      "path": "legacy_repository/legacy_backup.py.bak",
+      "lines": 1,
+      "needs_split": false
+    },
+    {
+      "bucket": "factory",
+      "reason": "executable_module",
+      "imports": ["math"],
+      "defs": 2,
+      "path": "legacy_repository/math_utils.py",
+      "lines": 7,
+      "needs_split": false
+    },
+    {
+      "bucket": "factory",
+      "reason": "executable_module",
+      "imports": ["math"],
+      "defs": 1,
+      "path": "legacy_repository/monolithic_solver.py",
+      "lines": 71,
+      "needs_split": true
+    },
+    {
+      "bucket": "product",
+      "reason": "run_artifact",
+      "path": "legacy_repository/output/run_log.txt",
+      "lines": 1,
+      "needs_split": false
+    },
+    {
+      "bucket": "dead",
+      "reason": "obsolete_backup",
+      "path": "legacy_repository/temp_scratch.tmp",
+      "lines": 1,
+      "needs_split": false
+    },
+    {
+      "bucket": "contract",
+      "reason": "verification_gate",
+      "imports": ["unittest"],
+      "defs": 1,
+      "path": "legacy_repository/test_solver.py",
+      "lines": 8,
+      "needs_split": false
+    }
+  ]
+}
+```
 
-### B. Inside-Hermes Mode (In-Chat Slash Commands & Bot Routing)
+#### Step 2: Query the `icm-migrator` Profile
+```bash
+hermes -p icm-migrator chat -q "Explain how you classify an unstructured codebase into the 5 ICM buckets and handle files with needs_split=true." --oneshot -Q
+```
+
+Live Hermes Agent response:
+```text
+As the icm-migrator (Brownfield AST Repository Refactorer), I execute this procedure:
+1. Run AST Classification: Execute ~/.hermes/tools/icm/icm_repo_migrator.py to generate migration_map.json.
+2. Present Map for Human Approval: Present the 5 buckets (catalog, contract, factory, product, dead) to the engineer.
+3. Decompose Monolithic Files: Decompose all source files with needs_split=true (>=60 lines) into atomic modules under 60 lines.
+4. Relocate Assets: Move approved files to their canonical ICM destinations.
+```
+
+### C. Directory Structure After Migration
+
+After migration and decomposition, the repository adheres to the 5-layer ICM structure:
+
+```text
+migrated_repository/
+├── _config/
+│   ├── conventions.md             # Rule 6 (<60 lines) and conventions
+│   └── hardware_ceilings.md       # Hardware bounds
+├── CONTEXT.md                     # Layer 1 router (migrated from README.md)
+├── IDENTITY.md                    # Layer 0 spatial identity map
+├── migration_map.json             # Certified AST classification audit
+├── _quarantine/                   # Quarantined dead assets awaiting deletion
+│   ├── broken_syntax.py           # Quarantined: syntax error
+│   ├── legacy_backup.py.bak       # Quarantined: backup file
+│   └── temp_scratch.tmp           # Quarantined: temporary scratch
+├── shared/                        # Layer 3 factory code
+│   ├── math_utils.py              # Atomic math utilities (7 lines)
+│   ├── solver_core.py             # Decomposed solver module 1 (35 lines)
+│   └── solver_step.py             # Decomposed solver module 2 (36 lines)
+├── stages/
+│   ├── 01-spec/
+│   │   ├── CONTEXT.md
+│   │   └── references/
+│   │       └── app_overview.md    # Migrated from factory documentation
+│   └── 04-verify/
+│       ├── CONTEXT.md
+│       └── test_solver.py         # Verification contract gate (8 lines)
+└── output/                        # Layer 4 run products
+    ├── dist/
+    │   └── bundle.js
+    └── run_log.txt
+```
+
+### D. Inside-Hermes Mode (In-Chat Slash Commands & Bot Routing)
 
 #### Option 1: Interactive Slash Command Sequence
-Execute this sequence inside Hermes chat:
 ```bash
 # 1. Clean session wipe for migration
 /new --yes repo-migration
 
 # 2. Attach verify-only AST quality gate
-/goal gate add python3 ~/.hermes/tools/icm/icm_repo_migrator.py . --verify-only
+/goal gate add python3 ~/.hermes/tools/icm/icm_repo_migrator.py .
 
 # 3. Launch migration goal
 /goal Run AST repository classifier, produce migration_map.json, and decompose scripts over 59 lines.
@@ -160,7 +388,6 @@ Execute this sequence inside Hermes chat:
 ```
 
 #### Option 2: Messaging Gateway Routing (`@bot` mentions)
-In messaging platforms:
 ```text
 @icm-migrator Analyze current repository. Classify files into the 5 ICM buckets and present migration_map.json.
 ```
@@ -169,47 +396,104 @@ After review:
 @icm-migrator Approved. Decompose all scripts over 59 lines into atomic modules under 60 lines.
 ```
 
-#### Option 3: Subagent Delegation via `delegate_task`
-If working inside a coordinator chat session, invoke the migrator through delegation:
-```python
-delegate_task(
-    goal="Classify legacy repository into 5 ICM buckets and produce migration_map.json",
-    context="Path: /var/home/imshubhamsocial/Projects/Workspace/Personal/hermes"
-)
-```
-
 ---
 
 ## 4. Task 3: Audit and Remediation (Fix Existing ICM Repositories)
 
 Use this workflow to detect and fix broken invariants, line-ceiling violations ($\ge 60$ lines), missing headers, or substrate contamination.
 
-### A. Direct CLI Mode (`hermes -p`)
+### A. Live Command Execution & Hermes Agent Output
 
-#### Step 1: Run Read-Only Deterministic Audits
-Execute the `icm-auditor` profile to scan context budgets, line ceilings, and substrate purity:
+#### Step 1: Query the `icm-auditor` Profile
 ```bash
-hermes -p icm-auditor chat -q "Execute bash ~/.hermes/tools/icm/audit_hermes_home.sh and python3 ~/.hermes/tools/icm/check_vram_limit.py."
+hermes -p icm-auditor chat -q "Explain how you audit a workspace and what blocking criteria you enforce." --oneshot -Q
 ```
 
-#### Step 2: Run Workspace Validation Audit
-Validate workspace structure and stage contracts:
-```bash
-hermes -p icm-auditor chat -q "Execute python3 ~/.hermes/tools/icm/hermes_icm_validator.py."
+Live Hermes Agent response:
+```text
+As the icm-auditor (Deterministic Read-Only Substrate Auditor), my function is strictly verification:
+1. Layer Token Budget Verification: Execute ~/.hermes/tools/icm/icm_context_auditor.py.
+2. Substrate Purity Check: Execute ~/.hermes/tools/icm/audit_hermes_home.sh to enforce Rule 9.
+3. Code Line Length Enforcement: Verify every script is strictly under 60 lines.
+4. Static Analysis: Run SkillEvaluator Tier 1 static checks across ~/.hermes/skills/icm/.
+Blocking Criteria: VRAM > 5800.0 MiB, dirty files in ~/.hermes/hermes-agent, or failed gates.
 ```
 
-#### Step 3: Trigger Targeted Remediation
-Run the `icm-migrator` to decompose flagged files:
+#### Step 2: Run Gate 1 — Substrate Hygiene & Upstream Purity
 ```bash
-hermes -p icm-migrator chat -q "Decompose all Python and Bash files flagged with line count >= 60 in audit output. Keep all modules under 60 lines."
+bash ~/.hermes/tools/icm/audit_hermes_home.sh
 ```
 
----
+Live audit execution trace:
+```text
+[AUDIT 1/4] Verifying Rule 9 Upstream Substrate Purity...
+[AUDIT 2/4] Verifying Isolated Profile Fleet (.no-bundled-skills)...
+[AUDIT 3/4] Enforcing <60 Line Atomic Ceiling on Custom ICM Scripts...
+[AUDIT 4/4] Running Custom ICM Skill Unit Tests...
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.001s
 
-### B. Inside-Hermes Mode (In-Chat Slash Commands & Bot Routing)
+OK
+```
 
-#### Option 1: Interactive Slash Command Sequence with Dual Quality Gates
-Bind multiple deterministic verification scripts as pre-judge gates:
+#### Step 3: Run Gate 2 — Hardware VRAM Ceiling Check
+```bash
+python3 ~/.hermes/tools/icm/check_vram_limit.py --mode active
+```
+
+Live VRAM telemetry JSON output:
+```json
+{
+  "mode": "active",
+  "vram_used_mib": 5074.0,
+  "vram_total_mib": 6144.0,
+  "ceiling_mib": 5800.0,
+  "headroom_mib": 726.0,
+  "temperature_c": 61.41,
+  "power_w": 15.81,
+  "passed": true
+}
+```
+
+#### Step 4: Run Gate 3 — Workspace Contracts and Walk Test
+```bash
+python3 ~/.hermes/tools/icm/hermes_icm_validator.py .
+```
+
+Live validator JSON output:
+```json
+{
+  "walk_test_passed": true,
+  "error_count": 0,
+  "errors": []
+}
+```
+
+### B. Directory State Before and After Remediation
+
+#### Before Remediation: Line Ceiling Violation ($\ge 60$ lines)
+A developer created a utility script exceeding the 59-line ceiling:
+```text
+tools/
+└── data_processor.py              # 74 lines (VIOLATION: Rule 6 requires < 60 lines)
+```
+
+#### Remediation Execution
+Run the `icm-migrator` profile to refactor the file:
+```bash
+hermes -p icm-migrator chat -q "Decompose tools/data_processor.py (74 lines) into atomic modules under 60 lines." --oneshot -Q
+```
+
+#### After Remediation: All Scripts Pass the Ceiling Gate
+```text
+tools/
+├── data_cleaner.py                # 36 lines (< 60 lines: PASS)
+└── data_transformer.py            # 38 lines (< 60 lines: PASS)
+```
+
+### C. Inside-Hermes Mode (In-Chat Slash Commands & Bot Routing)
+
 ```bash
 # 1. Clean session wipe for remediation
 /new --yes repo-remediation
@@ -218,10 +502,10 @@ Bind multiple deterministic verification scripts as pre-judge gates:
 /goal gate add bash ~/.hermes/tools/icm/audit_hermes_home.sh
 
 # 3. Gate 2: Check ICM workspace contracts and headers
-/goal gate add python3 ~/.hermes/tools/icm/hermes_icm_validator.py
+/goal gate add python3 ~/.hermes/tools/icm/hermes_icm_validator.py .
 
 # 4. Gate 3: Check VRAM ceiling (< 5,800.0 MiB)
-/goal gate add python3 ~/.hermes/tools/icm/check_vram_limit.py
+/goal gate add python3 ~/.hermes/tools/icm/check_vram_limit.py --mode active
 
 # 5. Launch remediation goal
 /goal Refactor all files violating line limits or missing headers until all quality gates pass.
@@ -230,46 +514,91 @@ Bind multiple deterministic verification scripts as pre-judge gates:
 /goal clear
 ```
 
-#### Option 2: Messaging Gateway Routing (`@bot` mentions)
-```text
-@icm-auditor Audit current workspace for Rule 6 (60-line ceiling) and Rule 9 (substrate purity) violations.
-```
-Then send remediation request:
-```text
-@icm-migrator Decompose the flagged files from icm-auditor's report. Ensure all scripts remain strictly under 60 lines.
-```
-
 ---
 
 ## 5. Task 4: End-to-End Multi-Stage Execution & Bot Handoff
 
 This workflow runs numbered stages sequentially while wiping the KV cache at every stage boundary.
 
-### A. Direct CLI Mode (`run_multi_stage.sh`)
+### A. Directory Structure Before Execution
 
-Run the automated headless runner. It executes each stage in a stateless subshell with `--no-session-persistence`:
-```bash
-bash ~/.hermes/tools/icm/run_multi_stage.sh .
+Before running the stage compiler, only stage contracts and inputs exist:
+
+```text
+stages/
+├── 01-spec/
+│   ├── CONTEXT.md                 # Stage 01 contract
+│   └── output/                    # (empty)
+├── 02-scaffold/
+│   ├── CONTEXT.md                 # Stage 02 contract
+│   └── output/                    # (empty)
+├── 03-implement/
+│   ├── CONTEXT.md                 # Stage 03 contract
+│   └── output/                    # (empty)
+└── 04-verify/
+    ├── CONTEXT.md                 # Stage 04 contract
+    ├── contract.sh                # Stage 04 verification gate
+    └── output/                    # (empty)
 ```
 
-To run individual stages manually via CLI:
+### B. Live Command Execution & Autonomous Runner Output
+
+#### Step 1: Run Multi-Stage Execution
+Run `run_multi_stage.sh` or the autonomous stage runner:
 ```bash
-# Execute Stage 01
-hermes -p icm-planner chat --no-session-persistence -q "Execute stage contract stages/01-spec/CONTEXT.md."
-
-# Execute Stage 02
-hermes -p icm-scaffolder chat --no-session-persistence -q "Execute stage contract stages/02-scaffold/CONTEXT.md."
-
-# Execute Stage 03
-hermes chat --no-session-persistence -q "Execute stage contract stages/03-implement/CONTEXT.md."
-
-# Audit Stage Outputs
-hermes -p icm-auditor chat --no-session-persistence -q "Audit outputs in stages/03-implement/output/."
+python3 ~/.hermes/tools/icm/hermes_stage_runner.py --stage-dir stages/01-spec --verify-only
 ```
 
----
+Stage runner telemetry output:
+```json
+{"stage": "01-spec", "verdict": "PASS", "checkpoint": "AUTO_APPROVED_BY_CONTRACT", "kv_erased": true}
+```
 
-### B. Inside-Hermes Mode (The Canonical 18-Line Interactive Progression)
+The runner:
+1. Erases the llama-server KV slot via `POST http://127.0.0.1:8138/slots/0?action=erase`.
+2. Executes the bounded stage prompt.
+3. Runs the stage `contract.sh`.
+4. Emits `output/check.md` and `output/checkpoint.md`.
+5. Wipes context again before advancing to Stage 02.
+
+### C. Directory Structure After Multi-Stage Execution
+
+After execution, all stage deliverables, check records, and production modules exist:
+
+```text
+stages/
+├── 01-spec/
+│   ├── CONTEXT.md
+│   └── output/
+│       ├── check.md               # Audit: PASS, contract_exit_code: 0
+│       ├── checkpoint.md          # Checkpoint: AUTO_APPROVED_BY_CONTRACT
+│       └── goldfish_review_report.json # EGM Goldfish review verdict
+├── 02-scaffold/
+│   ├── CONTEXT.md
+│   └── output/
+│       ├── check.md               # Audit: PASS
+│       ├── checkpoint.md          # Checkpoint: AUTO_APPROVED_BY_CONTRACT
+│       └── stage_manifest.json    # Scaffolded asset registry
+├── 03-implement/
+│   ├── CONTEXT.md
+│   └── output/
+│       ├── boids_fish.js          # Craig Reynolds 3D boids (49 lines)
+│       ├── caustics_shader.js     # WebGL2 caustics shader (37 lines)
+│       ├── check.md               # Audit: PASS
+│       ├── checkpoint.md          # Checkpoint: AUTO_APPROVED_BY_CONTRACT
+│       ├── main.js                # WebGL2 loop & telemetry (43 lines)
+│       ├── sphere_physics.js      # Archimedes buoyancy solver (35 lines)
+│       └── wave_pde.js            # 2D damped wave PDE solver (40 lines)
+└── 04-verify/
+    ├── CONTEXT.md
+    ├── contract.sh                # 4-point verification gate
+    └── output/
+        ├── cdp_telemetry.json     # Headless Chrome CDP verification trace
+        ├── check.md               # Audit: PASS
+        └── checkpoint.md          # Final pipeline certification
+```
+
+### D. Inside-Hermes Mode (The Canonical 18-Line Interactive Progression)
 
 Run this exact sequence in your interactive terminal session:
 
@@ -294,7 +623,7 @@ Run this exact sequence in your interactive terminal session:
 # Stage 03: Atomic Module Production & Layer 4 Contract Gate
 # -------------------------------------------------------------
 /new --yes stage-03-implement
-/goal gate add bash stages/03-implement/contract.sh
+/goal gate add bash benchmarks/gauntlet_c_aquarium/contract.sh
 /goal Read stages/03-implement/CONTEXT.md and synthesize all atomic modules (<60 lines).
 /goal status
 /goal clear
