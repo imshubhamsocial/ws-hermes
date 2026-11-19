@@ -28,6 +28,7 @@
 * Layer 2 (Stage Contracts): benchmarks/<suite>/stages/<nn>/CONTEXT.md (200–500 tokens)
 * Layer 3 (The Factory): .hermes/_config/, shared/, references/, and ~/.hermes/skills/
 * Layer 4 (Working Artifacts): benchmarks/ and benchmarks/<suite>/output/
+* System Documentation: docs/ (docs/bots/, docs/skills/, docs/tools/, docs/architecture/)
 
 ## 4. Cross-Agent Adapter Mapping
 
