@@ -3,6 +3,8 @@ name: gauntlet-b
 description: Run Gauntlet B splatbox with 3D ballistic compensation.
 ---
 
+# Gauntlet B
+
 ## Procedure: Autonomous Splatbox Execution (3-Stage ICM Pipeline)
 
 1.  **Initialization**: Start the 3-stage Interpetable Context Methodology (ICM).

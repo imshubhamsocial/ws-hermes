@@ -1,5 +1,5 @@
 ---
-name: gemini-deep-research
+name: phase32-gemini-deep-research
 description: Gemini-style autonomous deep research
 ---
 

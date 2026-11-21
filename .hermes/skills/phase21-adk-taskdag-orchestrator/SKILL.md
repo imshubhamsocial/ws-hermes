@@ -1,5 +1,5 @@
 ---
-name: adk-taskdag-orchestrator
+name: phase21-adk-taskdag-orchestrator
 description: "ADK 2.9 TaskDAG A2A subagent router"
 ---
 

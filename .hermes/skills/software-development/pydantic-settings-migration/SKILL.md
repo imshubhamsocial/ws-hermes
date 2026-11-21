@@ -5,6 +5,8 @@ version: 1.0.0
 author: Hermes Agent (Nous Research)
 ---
 
+# Pydantic Settings Migration
+
 ## Overview
 This skill encapsulates the common pattern for migrating Pydantic v1 applications to Pydantic v2 regarding configuration management.
 

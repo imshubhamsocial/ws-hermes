@@ -1,5 +1,5 @@
 ---
-name: proactive-sec-auditor
+name: phase32-proactive-sec-auditor
 description: AST taint, OSV & entropy security audit
 ---
 

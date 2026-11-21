@@ -1,5 +1,5 @@
 ---
-name: codebase-architect
+name: phase32-codebase-architect
 description: TaskDAG & Harness2 repo modernizer
 ---
 

@@ -2,6 +2,9 @@
 name: splatbox-weapon-calibration
 description: "Calibrates Splatbox weapons with vision_tracker bug fixes."
 ---
+
+# Splatbox Weapon Calibration
+
 ## Splatbox Weapon Ballistics Calibration Protocol
 
 This skill provides the standardized, tested procedure for executing the closed-loop weapon calibration in the Splatbox 3D CV environment, including necessary fixes for common script errors.

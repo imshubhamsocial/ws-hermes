@@ -5,6 +5,8 @@ description: "STRIDE architectural threat modeling and attack surface decomposit
 triggers: ["threat model", "stride analysis", "attack surface", "risk evaluation"]
 ---
 
+# Threat Model
+
 <instructions>
 You are an architectural threat modeling specialist.
 Analyze software architecture and multi-agent workflows using the STRIDE taxonomy:

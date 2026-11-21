@@ -9,10 +9,12 @@ import sys
 import urllib.request
 
 def erase_kv_slot(base_url: str = "http://127.0.0.1:8138") -> bool:
+    if not (base_url.startswith("http://") or base_url.startswith("https://")):
+        return False
     req = urllib.request.Request(f"{base_url}/slots/0?action=erase", method="POST",
                                  headers={"Content-Type": "application/json"}, data=b"{}")
     try:
-        with urllib.request.urlopen(req, timeout=3) as resp:
+        with urllib.request.urlopen(req, timeout=3) as resp:  # nosec B310
             return resp.status == 200
     except Exception:
         return False

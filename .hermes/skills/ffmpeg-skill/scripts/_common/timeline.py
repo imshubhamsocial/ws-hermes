@@ -498,7 +498,7 @@ def parse_error(path: str, fmt: str) -> Optional[str]:
         text = Path(path).read_text(encoding="utf-8")
         if fmt == "fcpxml":
             import xml.etree.ElementTree as ET
-            tag = ET.fromstring(text.encode("utf-8")).tag
+            tag = ET.fromstring(text.encode("utf-8")).tag  # nosec B314
             return None if tag == "fcpxml" else f"the root element is <{tag}>, not <fcpxml>"
         if fmt == "otio":
             doc = json.loads(text)

@@ -6,6 +6,8 @@ author: Hermes Agent
 license: MIT
 ---
 
+# Runtime Dispatch Optimization
+
 ## Overview
 This skill guides the process of transforming sequential tool request dispatch mechanisms into concurrent, batched execution models to eliminate serialization latency.
 

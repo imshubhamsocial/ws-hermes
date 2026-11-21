@@ -3,6 +3,8 @@ name: gauntlet-splatbox
 description: "Workflow for executing Gauntlet B (Splatbox 3D CV) missions."
 ---
 
+# Gauntlet Splatbox
+
 ## Mission Procedure
 1. **Browser Initialization**: Execute `launch_chrome.sh` to start the required remote debugging environment (CDP port 9222).
 2. **Agent Execution**: Run the agent script (`run_agent.sh`) within the active benchmark directory.
@@ -15,4 +17,4 @@ description: "Workflow for executing Gauntlet B (Splatbox 3D CV) missions."
 * **OpenCV ArcLength Error**: If `cv2.arcLength` fails with a missing argument error, explicitly pass `closed=True` as the second argument: `cv2.arcLength(cnt, True)`.
 
 ## References
-- [splatbox_cdp_protocol](references/splatbox_cdp.md)
+- `splatbox_cdp_protocol` (references/splatbox_cdp.md)

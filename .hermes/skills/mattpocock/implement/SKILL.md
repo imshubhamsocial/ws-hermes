@@ -4,6 +4,8 @@ description: Implement work from specs or tickets.
 disable-model-invocation: true
 ---
 
+# Implement
+
 Implement the work described by the user in the spec or tickets.
 
 Use /tdd where possible, at pre-agreed seams.

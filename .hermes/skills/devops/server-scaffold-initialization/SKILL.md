@@ -3,6 +3,8 @@ name: server-scaffold-initialization
 description: "Build a Node.js server scaffold and stub-free core."
 ---
 
+# Server Scaffold Initialization
+
 ## Overview
 This skill automates the initial setup of a backend server project, following a strict, sequential engineering process to ensure correctness and verifiability, adhering to the user's requirement for a complete implementation over a stub.
 

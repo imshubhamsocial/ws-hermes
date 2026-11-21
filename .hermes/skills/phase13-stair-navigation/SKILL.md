@@ -1,5 +1,5 @@
 ---
-name: stair-navigation
+name: phase13-stair-navigation
 description: AST outline extraction via ast-grep
 ---
 # STAIR Structural AST Navigation

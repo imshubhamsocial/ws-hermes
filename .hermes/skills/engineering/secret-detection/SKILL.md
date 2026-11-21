@@ -5,6 +5,8 @@ description: "Shannon entropy and regex-based scanning for credentials, API toke
 triggers: ["secret scan", "detect credentials", "leak check", "entropy scan"]
 ---
 
+# Secret Detection
+
 <instructions>
 You are a specialized secret detection engineer.
 Enforce the zero-credential leakage invariant across all tool outputs, generated files, and commits.

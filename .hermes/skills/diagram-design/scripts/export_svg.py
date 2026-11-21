@@ -1392,7 +1392,7 @@ def normalize_rgba_presentation_attrs(svg: str) -> str:
     # A parent's paint and opacity may be inherited independently. Converting
     # its color alpha into opacity would also change children overriding paint.
     try:
-        elements = list(ET.fromstring(svg).iter())
+        elements = list(ET.fromstring(svg).iter())  # nosec B314
         descendants = {
             index: list(element.iter())[1:]
             for index, element in enumerate(elements) if len(element)
@@ -1550,7 +1550,7 @@ def export_svg_document(html: str, source_path: Path, system_fonts: bool = False
     document = '<?xml version="1.0" encoding="UTF-8"?>\n' + svg + "\n"
     # Catch any remaining XML-breaking characters in carried content.
     try:
-        ET.fromstring(document)
+        ET.fromstring(document)  # nosec B314
     except ET.ParseError as exc:
         raise ValueError(f"exported SVG is not well-formed XML: {exc}") from exc
     return document

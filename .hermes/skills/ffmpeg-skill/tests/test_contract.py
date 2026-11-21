@@ -2599,7 +2599,7 @@ class ContractTests(unittest.TestCase):
         out-of-range --denoise-strength; render refuses speed 0; batch lists .ogg/.opus/.ts;
         report's 0 s is 0 s; ffmpeg_version has a probe timeout. (speed 0 was already "unset", not a
         division by zero as reported; a negative speed did reach fit.py.)"""
-        self.assertEqual(_common.concat_list_line("C:\\Users\\t\\part000.mp4"), "file 'C:/Users/t/part000.mp4'")
+        self.assertEqual(_common.concat_list_line("C:\\test_env\\t\\part000.mp4"), "file 'C:/test_env/t/part000.mp4'")
         self.assertEqual(_common.concat_list_line("/a/it's.mp4"), "file '/a/it'\\''s.mp4'")
         for tc in ("00:00:00:29", "00:00:01:00", "01:00:00:00", "00:59:56:12"):
             secs = _common.parse_time(tc, 29.97)

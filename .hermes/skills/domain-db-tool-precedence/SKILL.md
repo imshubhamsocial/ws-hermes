@@ -1,5 +1,6 @@
 ---
 name: domain-db-tool-precedence
+description: Enforce strict read-tool exhaustion and secondary-key lookup precedence before invoking terminal escalation or human transfer actions.
 version: 1.0.0
 category: procedural_tool_orchestration
 triggers:

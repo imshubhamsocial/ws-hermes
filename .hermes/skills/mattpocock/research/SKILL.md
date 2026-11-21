@@ -3,6 +3,8 @@ name: research
 description: Investigate topics and technical docs.
 ---
 
+# Research
+
 Spin up a **background agent** to do the research, so you keep working while it reads.
 
 Its job:

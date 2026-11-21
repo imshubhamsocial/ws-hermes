@@ -1,5 +1,5 @@
 ---
-name: sre-incident-triage
+name: phase32-sre-incident-triage
 description: Systemd, NVML & DevOps incident triage
 ---
 

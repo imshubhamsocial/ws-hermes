@@ -41,8 +41,8 @@ Create specific functions for each external operation instead of one generic fun
 ```typescript
 // GOOD: Each function is independently mockable
 const api = {
-  getUser: (id) => fetch(`/users/${id}`),
-  getOrders: (userId) => fetch(`/users/${userId}/orders`),
+  getUser: (id) => fetch(`/api/v1/accounts/${id}`),
+  getOrders: (userId) => fetch(`/api/v1/accounts/${userId}/orders`),
   createOrder: (data) => fetch('/orders', { method: 'POST', body: data }),
 };
 

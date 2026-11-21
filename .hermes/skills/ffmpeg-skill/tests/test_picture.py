@@ -3260,7 +3260,7 @@ class WindowsFontPathTests(unittest.TestCase):
                              "fontfile=" + self.dt.escape_filter_path(str(ascii_font), bind=False))
 
     def test_windows_non_ascii_path_uses_the_short_form(self):
-        short = "C:/Users/TARO~1/FONT~1/MYFONT~1.TTF"
+        short = "C:/test_env/TARO~1/FONT~1/MYFONT~1.TTF"
         with unittest.mock.patch.object(self.dt, "_on_windows", return_value=True), \
                 unittest.mock.patch.object(self.dt, "_windows_short_path", return_value=short):
             self.assertEqual(self.dt.drawtext_fontfile(str(self.font)),

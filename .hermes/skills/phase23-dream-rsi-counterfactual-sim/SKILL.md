@@ -1,5 +1,5 @@
 ---
-name: dream-rsi-counterfactual-sim
+name: phase23-dream-rsi-counterfactual-sim
 description: "Dream-RSI 2.0 counterfactual replay"
 ---
 

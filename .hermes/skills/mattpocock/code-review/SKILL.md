@@ -3,6 +3,8 @@ name: code-review
 description: Review branch against standards & spec.
 ---
 
+# Code Review
+
 Two-axis review of the diff between `HEAD` and a fixed point the user supplies:
 
 - **Standards**: does the code conform to this repo's documented coding standards?

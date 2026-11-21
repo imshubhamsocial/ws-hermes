@@ -2,6 +2,9 @@
 name: autonomous-splatbox-tuning
 description: "Tune Gauntlet B PD loops for max stability and hits."
 ---
+
+# Autonomous Splatbox Tuning
+
 ## Always-On Rules (Tuning Discipline)
 * When a Splatbox agent fails to reach the target score threshold, treat the PD loop stability as the primary hypothesis, not the target visibility.
 * Never attempt to fix a PD loop (aiming) without first ensuring the firing threshold is sufficiently relaxed to avoid oscillation on target acquisition.

@@ -1,5 +1,5 @@
 ---
-name: speckit-cluster-annealer
+name: phase22-speckit-cluster-annealer
 description: "Spec-Kit 2.0 AST failure annealing"
 ---
 
