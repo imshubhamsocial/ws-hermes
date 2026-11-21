@@ -60,11 +60,16 @@ display:
 # Desktop GUI Configuration (Native Wayland & Hardware Acceleration)
 desktop:
   ozone_platform_hint: wayland
-  disable_gpu: "1"
+  disable_gpu: "0"
   electron_flags:
-    - "--disable-gpu"
-    - "--disable-features=Vulkan"
-    - "--enable-features=TouchpadOverscrollHistoryNavigation,MiddleClickAutoscroll,WaylandWindowDecorations"
+    - "--use-gl=angle"
+    - "--use-angle=gl"
+    - "--enable-gpu-rasterization"
+    - "--enable-zero-copy"
+    - "--ignore-gpu-blocklist"
+    - "--render-node-override=/dev/dri/by-path/pci-0000:00:02.0-render"
+    - "--disable-features=Vulkan,VulkanFromANGLE,DefaultANGLEVulkan"
+    - "--enable-features=AcceleratedVideoEncoder,AcceleratedVideoDecodeLinuxGL,AcceleratedVideoDecodeLinuxZeroCopyGL,TouchpadOverscrollHistoryNavigation,MiddleClickAutoscroll,WaylandWindowDecorations"
 
 # Declarative Gateway & Zero-Code Stage Model Routing (Port 8642)
 gateway:
