@@ -716,10 +716,11 @@ Hermes Desktop provides a rich graphical interface built on Electron and React. 
 - **Initial Build**: Run `hermes desktop --build-only` to package the Electron application under [apps/desktop/release/linux-unpacked/Hermes](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/.hermes/hermes-agent/apps/desktop/release/linux-unpacked/Hermes).
 - **Automatic Updates**: When `hermes update` runs, it checks `had_desktop_app_before_update`. If a desktop build exists, the updater automatically rebuilds and refreshes the desktop package alongside backend code.
 
-### B. Native Wayland and Hardware Acceleration
+### B. Display Backend and Hardware Acceleration
 Declared in [.hermes/config.yaml](file:///var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/.hermes/config.yaml) under `desktop:`:
-- `ozone_platform_hint: wayland`: Runs native Wayland rendering without XWayland scaling blurriness.
-- `electron_flags`: Supplies hardware acceleration switches (`--use-gl=angle`, `--use-angle=gl`, VA-API GPU zero-copy decoding).
+- `electron_flags`: Uses `--ozone-platform=x11` (via XWayland) to eliminate Wayland Vulkan surface factory conflicts.
+- Hardware acceleration switches (`--use-gl=angle`, `--use-angle=gl`, `--render-node-override=/dev/dri/by-path/pci-0000:00:02.0-render`) bind to the Intel Iris Xe GPU.
+- NVIDIA discrete GPU remains 100% dedicated to LLM inference with 0 VRAM consumption.
 
 ### C. Distrobox Container & DBus Resolution
 - **System DBus Socket**: Linked from host at `/run/host/run/dbus` into `/run/dbus/system_bus_socket`, persisted via [/etc/profile.d/01-hermes-dbus.sh](file:///etc/profile.d/01-hermes-dbus.sh).
