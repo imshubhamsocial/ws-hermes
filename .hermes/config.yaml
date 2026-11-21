@@ -57,6 +57,16 @@ display:
   show_reasoning: true
   reasoning_full: false
 
+# Desktop GUI Configuration (Native Wayland & Hardware Acceleration)
+desktop:
+  ozone_platform_hint: wayland
+  electron_flags:
+    - "--use-gl=angle"
+    - "--use-angle=gl"
+    - "--enable-features=AcceleratedVideoEncoder,AcceleratedVideoDecodeLinuxGL,VaapiOnNvidiaGPUs,AcceleratedVideoDecodeLinuxZeroCopyGL,TouchpadOverscrollHistoryNavigation,MiddleClickAutoscroll,WaylandWindowDecorations"
+    - "--ignore-gpu-blocklist"
+    - "--disable-gpu-driver-bug-workaround"
+
 # Declarative Gateway & Zero-Code Stage Model Routing (Port 8642)
 gateway:
   host: 127.0.0.1
