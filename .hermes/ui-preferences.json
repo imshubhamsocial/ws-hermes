@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "generation": "ea01446f61bd9fbc",
+  "revision": 14,
+  "values": {
+    "hermes-desktop-mode-v1": "dark",
+    "hermes-desktop-theme-v2": "nous",
+    "hermes.desktop.showAllProfiles": "false"
+  }
+}

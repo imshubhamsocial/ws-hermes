@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "primary": "local",
+  "launchMode": "primary",
+  "lastUsed": "local",
+  "connections": [
+    {
+      "id": "local",
+      "kind": "local",
+      "label": "This device"
+    }
+  ],
+  "revision": 36,
+  "importedFrom": {
+    "/var/home/imshubhamsocial/Projects/Workspace/Personal/hermes/.config/Hermes": {
+      "at": 1795264869648
+    }
+  }
+}
