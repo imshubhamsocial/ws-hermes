@@ -49,8 +49,8 @@ The server loads two coordinated GGUF weight files from `~/.hermes/models/`:
 * **Drafter File**: [gemma-4-E4B-it-qat-assistant-q4_0-exact.gguf](file:///var/home/imshubhamsocial/.hermes/models/gemma-4-E4B-it-qat-assistant-q4_0-exact.gguf)
 * **Architecture**: Multi-Token Prediction (MTP) companion head (`Gemma4AssistantForCausalLM`).
 * **Disk and Memory Size**: 59.7 MB on disk; consumes only 84 MiB of GPU VRAM.
-* **Speculative Horizon**: Configured via `--spec-type draft-mtp --spec-draft-n-max 3 --spec-draft-p-min 0.08`.
-* **Verified Acceptance Rate**: Generates up to 3 candidate draft tokens per step, reaching a 64.05% acceptance rate.
+* **Speculative Horizon**: Configured via `--spec-type draft-mtp --spec-draft-n-max 2 --spec-draft-p-min 0.75`.
+* **Verified Acceptance Rate**: Proposes up to 2 candidate draft tokens per step with 75% confidence gating, reaching a 74.60% acceptance rate (Google MTP specification).
 
 ---
 
@@ -135,7 +135,7 @@ MAIN="${MDIR}/gemma-4-E4B-it-q4_0-exact.gguf"
 DRAFT="${MDIR}/gemma-4-E4B-it-qat-assistant-q4_0-exact.gguf"
 
 DRAFT_FLAGS=()
-[[ -f "$DRAFT" ]] && DRAFT_FLAGS=(--model-draft "$DRAFT" --n-gpu-layers-draft all --spec-type draft-mtp --spec-draft-n-max 3 --spec-draft-p-min 0.08)
+[[ -f "$DRAFT" ]] && DRAFT_FLAGS=(--model-draft "$DRAFT" --n-gpu-layers-draft all --spec-type draft-mtp --spec-draft-n-max 2 --spec-draft-p-min 0.75)
 
 export GGML_CUDA_GRAPH_OPT=1 GGML_CUDA_FORCE_MMQ=0
 exec taskset -c 0,2,4,6,8,10 "$BIN" \

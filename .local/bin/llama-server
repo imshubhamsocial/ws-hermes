@@ -24,7 +24,7 @@ MAIN="${MDIR}/gemma-4-E4B-it-q4_0-exact.gguf"
 DRAFT="${MDIR}/gemma-4-E4B-it-qat-assistant-q4_0-exact.gguf"
 
 DRAFT_FLAGS=()
-[[ -f "$DRAFT" ]] && DRAFT_FLAGS=(--model-draft "$DRAFT" --n-gpu-layers-draft all --spec-type draft-mtp --spec-draft-n-max 2)
+[[ -f "$DRAFT" ]] && DRAFT_FLAGS=(--model-draft "$DRAFT" --n-gpu-layers-draft all --spec-type draft-mtp --spec-draft-n-max 2 --spec-draft-p-min 0.75)
 
 export GGML_CUDA_GRAPH_OPT=1 GGML_CUDA_FORCE_MMQ=0
 exec taskset -c 0,2,4,6,8,10 "$BIN" \
@@ -34,4 +34,5 @@ exec taskset -c 0,2,4,6,8,10 "$BIN" \
     --ctx-size 131072 --cache-type-k q4_0 --cache-type-v q4_0 \
     --batch-size 2048 --ubatch-size 1024 --flash-attn on --jinja --n-gpu-layers 99 \
     --threads 6 --threads-batch 6 --parallel 1 --cont-batching \
-    --temp 0.2 --top-p 0.95 --top-k 64 --min-p 0.05 --repeat-penalty 1.05 --metrics
+    --cache-reuse 256 --reasoning auto \
+    --temp 1.0 --top-p 0.95 --top-k 64 --metrics

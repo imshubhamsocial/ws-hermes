@@ -1,0 +1,12 @@
+[Unit]
+Description=Set NVIDIA GPU Power Limit to 70W (Thermal & Efficiency Optimization)
+After=nvidia-persistenced.service multi-user.target
+Wants=nvidia-persistenced.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/nvidia-smi -pl 70
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
